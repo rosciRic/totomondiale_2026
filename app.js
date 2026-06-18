@@ -163,21 +163,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalJackpot = N * pricePerParticipant;
     rulesTotalJackpot.textContent = `${totalJackpot} €`;
 
-    // Determine percentages based on N
-    let p1 = 0, p2 = 0, p3 = 0;
-    if (N <= 10) {
-      p1 = 100; p2 = 0; p3 = 0;
-    } else if (N <= 15) {
-      p1 = 90; p2 = 10; p3 = 0;
-    } else if (N <= 20) {
-      p1 = 80; p2 = 20; p3 = 0;
-    } else if (N <= 30) {
-      p1 = 75; p2 = 20; p3 = 5;
-    } else if (N <= 40) {
-      p1 = 70; p2 = 20; p3 = 10;
-    } else {
-      p1 = 65; p2 = 25; p3 = 10;
-    }
+    // Fixed prizes as requested
+    const prize1 = 250;
+    const prize2 = 100;
+    const prize3 = 30;
+
+    // Calculate percentages
+    const p1 = totalJackpot > 0 ? (prize1 / totalJackpot * 100).toFixed(1) : 0;
+    const p2 = totalJackpot > 0 ? (prize2 / totalJackpot * 100).toFixed(1) : 0;
+    const p3 = totalJackpot > 0 ? (prize3 / totalJackpot * 100).toFixed(1) : 0;
 
     // Update percentages labels
     jackpot1Pct.textContent = `${p1}%`;
@@ -185,9 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
     jackpot3Pct.textContent = `${p3}%`;
 
     // Update cash values
-    jackpot1Amount.textContent = `${(totalJackpot * (p1 / 100)).toFixed(1).replace('.0', '')} €`;
-    jackpot2Amount.textContent = `${(totalJackpot * (p2 / 100)).toFixed(1).replace('.0', '')} €`;
-    jackpot3Amount.textContent = `${(totalJackpot * (p3 / 100)).toFixed(1).replace('.0', '')} €`;
+    jackpot1Amount.textContent = `${prize1} €`;
+    jackpot2Amount.textContent = `${prize2} €`;
+    jackpot3Amount.textContent = `${prize3} €`;
   }
 
   // Render Leaderboard
