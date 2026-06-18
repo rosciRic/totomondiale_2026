@@ -58,128 +58,192 @@ def normalize_team_name(name):
     name_clean = name.strip().lower()
     return TEAM_TRANSLATIONS.get(name_clean, name.strip())
 
-def fetch_risultati_real_api(api_key):
+def fetch_risultati_real_api():
     """
-    Fetches real matches status from API-Football.
-    League 1 is typically the FIFA World Cup, season 2026.
+    Fetches real matches status from openfootball's public World Cup 2026 JSON.
+    Does not require any API Key.
     """
     import urllib.request
     import urllib.error
     
-    print("Connessione all'API-Football in corso...")
-    # API-Sports direct host or RapidAPI can be used. This uses the direct API-Sports endpoint.
-    url = "https://v3.football.api-sports.io/fixtures?league=1&season=2026"
+    print("Connessione a openfootball/worldcup.json in corso...")
+    url = "https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json"
     
     req = urllib.request.Request(url)
-    req.add_header("x-apisports-key", api_key)
     req.add_header("User-Agent", "Mozilla/5.0")
     
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=15) as response:
             res_data = json.loads(response.read().decode("utf-8"))
-            if "errors" in res_data and res_data["errors"]:
-                print(f"Errore API-Sports: {res_data['errors']}")
-                return None
-            return res_data.get("response", [])
+            return res_data.get("matches", [])
     except urllib.error.URLError as e:
-        print(f"Impossibile contattare l'API: {e}")
+        print(f"Impossibile contattare l'API di openfootball: {e}")
         return None
 
-def simula_fetch_risultati():
-    """Fallback simulation function if no API key is provided."""
-    print("[MOCK] Nessuna API Key impostata. Avvio simulazione locale...")
-    if not os.path.exists(PARTITE_FILE):
-        return None
-        
-    with open(PARTITE_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
-        
-    updated = False
-    for match in data.get("partite", []):
-        if match.get("id") == 4 and not match.get("conclusa"):
-            match["home_score"] = 2
-            match["away_score"] = 0
-            match["conclusa"] = True
-            updated = True
-            print("Aggiornato Risultato Partita 4 (Simulato): Stati Uniti 2 - 0 Paraguay")
-        elif match.get("id") == 5 and not match.get("conclusa"):
-            match["home_score"] = 1
-            match["away_score"] = 2
-            match["conclusa"] = True
-            updated = True
-            print("Aggiornato Risultato Partita 5 (Simulato): Qatar 1 - 2 Svizzera")
-            
-    return data if updated else None
+def is_placeholder_team(name):
+    """Checks if a team name in openfootball is a placeholder (e.g. 1A, 2B, W73, L101, etc.)."""
+    if not name:
+        return True
+    name_clean = name.strip()
+    import re
+    # Match strings starting with digits followed by letters (e.g., 1A, 2B, 3A/B)
+    if re.match(r'^\d+[A-L]', name_clean):
+        return True
+    if '/' in name_clean:
+        return True
+    if name_clean.startswith('W') and name_clean[1:].isdigit():
+        return True
+    if name_clean.startswith('L') and name_clean[1:].isdigit():
+        return True
+    return False
 
 def aggiorna_risultati_partite():
     """
-    Orchestrates the update of matches. Checks for the API key in the environment.
-    If found, fetches live scores; otherwise falls back to local mock simulation.
+    Fetches match results from the openfootball API, updates group stage matches in
+    partite.json, and automatically extracts qualified teams for knockout rounds.
     """
-    api_key = os.environ.get("API_FOOTBALL_KEY")
+    openfootball_matches = fetch_risultati_real_api()
     
-    if api_key:
-        print(f"Rilevata chiave API_FOOTBALL_KEY. Download dei risultati live...")
-        api_fixtures = fetch_risultati_real_api(api_key)
+    if not openfootball_matches:
+        print("Download fallito o nessun dato ricevuto. Mantengo i dati correnti.")
+        return
         
-        if not api_fixtures:
-            print("Download fallito o nessun dato ricevuto. Mantengo i dati correnti.")
-            return
-            
-        if not os.path.exists(PARTITE_FILE):
-            print("Errore: file partite.json non trovato.")
-            return
+    if not os.path.exists(PARTITE_FILE):
+        print(f"Errore: {PARTITE_FILE} non trovato.")
+        return
 
-        with open(PARTITE_FILE, "r", encoding="utf-8") as f:
-            local_data = json.load(f)
+    with open(PARTITE_FILE, "r", encoding="utf-8") as f:
+        local_data = json.load(f)
 
-        updated = False
-        # Match API fixtures with local DB matches
-        for fixture in api_fixtures:
-            status = fixture.get("fixture", {}).get("status", {}).get("short")
-            # If match is finished
-            if status in ["FT", "AET", "PEN"]:
-                api_home = fixture.get("teams", {}).get("home", {}).get("name")
-                api_away = fixture.get("teams", {}).get("away", {}).get("name")
-                
-                norm_home = normalize_team_name(api_home)
-                norm_away = normalize_team_name(api_away)
-                
-                goals_home = fixture.get("goals", {}).get("home")
-                goals_away = fixture.get("goals", {}).get("away")
-                
-                # Search matching local match
-                for local_match in local_data.get("partite", []):
-                    if (normalize_team_name(local_match.get("home")) == norm_home and 
-                        normalize_team_name(local_match.get("away")) == norm_away):
-                        
-                        # Update if not already concluded or if scores differ
-                        if (not local_match.get("conclusa") or 
-                            local_match.get("home_score") != goals_home or 
-                            local_match.get("away_score") != goals_away):
-                            
-                            local_match["home_score"] = goals_home
-                            local_match["away_score"] = goals_away
-                            local_match["conclusa"] = True
-                            updated = True
-                            print(f"API Update - Partita {local_match['id']}: {local_match['home']} {goals_home} - {goals_away} {local_match['away']}")
+    updated = False
+    
+    # 1. Update Group Stage matches (ID 1-72) in local database
+    for match in openfootball_matches:
+        team1 = match.get("team1")
+        team2 = match.get("team2")
+        score = match.get("score")
         
-        if updated:
-            with open(PARTITE_FILE, "w", encoding="utf-8") as f:
-                json.dump(local_data, f, indent=2, ensure_ascii=False)
-            print("File partite.json aggiornato con i dati dell'API.")
-        else:
-            print("Nessun nuovo aggiornamento necessario dai dati API.")
+        if not team1 or not team2 or not score:
+            continue
             
+        ft_score = score.get("ft")
+        if not isinstance(ft_score, list) or len(ft_score) < 2:
+            continue
+            
+        norm_home = normalize_team_name(team1)
+        norm_away = normalize_team_name(team2)
+        goals_home = ft_score[0]
+        goals_away = ft_score[1]
+        
+        # Look for the matching local match in our 72 group stage matches
+        for local_match in local_data.get("partite", []):
+            loc_home = normalize_team_name(local_match.get("home"))
+            loc_away = normalize_team_name(local_match.get("away"))
+            
+            if (loc_home == norm_home and loc_away == norm_away) or (loc_home == norm_away and loc_away == norm_home):
+                # Align scores according to home/away orientation of the local DB
+                if loc_home == norm_home:
+                    local_goals_home = goals_home
+                    local_goals_away = goals_away
+                else:
+                    local_goals_home = goals_away
+                    local_goals_away = goals_home
+                
+                if (not local_match.get("conclusa") or 
+                    local_match.get("home_score") != local_goals_home or 
+                    local_match.get("away_score") != local_goals_away):
+                    
+                    local_match["home_score"] = local_goals_home
+                    local_match["away_score"] = local_goals_away
+                    local_match["conclusa"] = True
+                    updated = True
+                    print(f"Update Partita {local_match['id']}: {local_match['home']} {local_goals_home} - {local_goals_away} {local_match['away']}")
+
+    # 2. Extract qualified teams dynamically from bracket match schedules
+    # Initialize passaggio_turno fields if not present
+    if "passaggio_turno" not in local_data:
+        local_data["passaggio_turno"] = {}
+        
+    passaggio = local_data["passaggio_turno"]
+    for k in ["sedicesimi", "ottavi", "quarti", "semifinali", "finale"]:
+        if k not in passaggio:
+            passaggio[k] = []
+            
+    round_mapping = {
+        "Round of 32": "sedicesimi",
+        "Round of 16": "ottavi",
+        "Quarter-final": "quarti",
+        "Semi-final": "semifinali",
+        "Final": "finale"
+    }
+    
+    # Track qualifications found in the API data
+    qualificazioni_rilevate = {k: set() for k in round_mapping.values()}
+    winner_team = None
+    
+    for match in openfootball_matches:
+        round_name = match.get("round")
+        fase_key = round_mapping.get(round_name)
+        
+        if not fase_key:
+            continue
+            
+        team1 = match.get("team1")
+        team2 = match.get("team2")
+        
+        # If team names are real and not placeholder indicators, they qualified
+        if team1 and not is_placeholder_team(team1):
+            qualificazioni_rilevate[fase_key].add(normalize_team_name(team1))
+        if team2 and not is_placeholder_team(team2):
+            qualificazioni_rilevate[fase_key].add(normalize_team_name(team2))
+            
+        # Determine winner if it's the Final match
+        if round_name == "Final":
+            score = match.get("score")
+            if score:
+                home_g, away_g = 0, 0
+                for score_key in ["pen", "aet", "ft"]:
+                    if score_key in score:
+                        parts = score[score_key]
+                        if isinstance(parts, list) and len(parts) >= 2:
+                            home_g, away_g = parts[0], parts[1]
+                            break
+                if home_g != away_g:
+                    raw_winner = team1 if home_g > away_g else team2
+                    if raw_winner and not is_placeholder_team(raw_winner):
+                        winner_team = normalize_team_name(raw_winner)
+
+    # Apply qualifications to the local database if we found any new ones
+    for fase_key, teams_set in qualificazioni_rilevate.items():
+        current_list = passaggio.get(fase_key, [])
+        # Only overwrite if we found more qualified teams than currently saved, 
+        # or if they are different (safeguard against incomplete datasets)
+        if len(teams_set) > 0:
+            # We want to preserve team list but represent as unique sorted values
+            new_list = sorted(list(teams_set))
+            if sorted(current_list) != new_list:
+                passaggio[fase_key] = new_list
+                updated = True
+                print(f"Aggiornato Qualificate {fase_key}: {new_list}")
+                
+    if winner_team:
+        # Save to passaggio_turno and premi_finali
+        if passaggio.get("vincitore") != winner_team:
+            passaggio["vincitore"] = winner_team
+            updated = True
+            print(f"Aggiornato Vincitore Bracket: {winner_team}")
+        if "premi_finali" in local_data:
+            if local_data["premi_finali"].get("vincitore") != winner_team:
+                local_data["premi_finali"]["vincitore"] = winner_team
+                updated = True
+                print(f"Aggiornato Vincitore Premi Finali: {winner_team}")
+
+    if updated:
+        with open(PARTITE_FILE, "w", encoding="utf-8") as f:
+            json.dump(local_data, f, indent=2, ensure_ascii=False)
+        print("File partite.json aggiornato con successo.")
     else:
-        # Fallback to local simulation
-        mock_data = simula_fetch_risultati()
-        if mock_data:
-            with open(PARTITE_FILE, "w", encoding="utf-8") as f:
-                json.dump(mock_data, f, indent=2, ensure_ascii=False)
-            print("File partite.json aggiornato con i dati simulati.")
-        else:
-            print("Nessun aggiornamento necessario (nessun nuovo dato simulato).")
+        print("Nessun nuovo aggiornamento necessario dai dati di openfootball.")
 
 def calcola_classifica():
     """

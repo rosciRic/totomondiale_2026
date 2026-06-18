@@ -1,268 +1,268 @@
 [
   {
     "nome": "Pino De Giorgi",
-    "punti": 21,
+    "punti": 23,
     "risultati_esatti": 5,
-    "prono_esatti": 6,
-    "errori": 9
-  },
-  {
-    "nome": "Filippo Marchello",
-    "punti": 21,
-    "risultati_esatti": 4,
-    "prono_esatti": 9,
-    "errori": 7
-  },
-  {
-    "nome": "Tony Pindinello",
-    "punti": 19,
-    "risultati_esatti": 4,
-    "prono_esatti": 7,
-    "errori": 9
-  },
-  {
-    "nome": "Matteo Serafino",
-    "punti": 18,
-    "risultati_esatti": 4,
-    "prono_esatti": 6,
-    "errori": 10
-  },
-  {
-    "nome": "Jacopo De Giorgi",
-    "punti": 18,
-    "risultati_esatti": 3,
-    "prono_esatti": 9,
-    "errori": 8
+    "prono_esatti": 8,
+    "errori": 11
   },
   {
     "nome": "Francesco Pastore",
-    "punti": 17,
-    "risultati_esatti": 4,
-    "prono_esatti": 5,
-    "errori": 11
-  },
-  {
-    "nome": "Andrea Quarto",
-    "punti": 17,
-    "risultati_esatti": 3,
-    "prono_esatti": 8,
-    "errori": 9
-  },
-  {
-    "nome": "Matteo Birilli",
-    "punti": 16,
-    "risultati_esatti": 2,
-    "prono_esatti": 10,
-    "errori": 8
-  },
-  {
-    "nome": "Carlo Fantasia",
-    "punti": 15,
-    "risultati_esatti": 3,
-    "prono_esatti": 6,
-    "errori": 11
-  },
-  {
-    "nome": "Marco Pellè",
-    "punti": 15,
-    "risultati_esatti": 3,
-    "prono_esatti": 6,
-    "errori": 11
-  },
-  {
-    "nome": "Pino Bruno",
-    "punti": 15,
-    "risultati_esatti": 2,
-    "prono_esatti": 9,
-    "errori": 9
-  },
-  {
-    "nome": "Stefano De Giorgi",
-    "punti": 15,
-    "risultati_esatti": 2,
-    "prono_esatti": 9,
-    "errori": 9
-  },
-  {
-    "nome": "Daniele Sedile",
-    "punti": 14,
-    "risultati_esatti": 3,
-    "prono_esatti": 5,
+    "punti": 22,
+    "risultati_esatti": 5,
+    "prono_esatti": 7,
     "errori": 12
   },
   {
-    "nome": "Daniele Garzya",
-    "punti": 14,
-    "risultati_esatti": 2,
-    "prono_esatti": 8,
+    "nome": "Matteo Serafino",
+    "punti": 22,
+    "risultati_esatti": 5,
+    "prono_esatti": 7,
+    "errori": 12
+  },
+  {
+    "nome": "Filippo Marchello",
+    "punti": 22,
+    "risultati_esatti": 4,
+    "prono_esatti": 10,
     "errori": 10
   },
   {
-    "nome": "Fabio Baldacci",
-    "punti": 14,
-    "risultati_esatti": 2,
+    "nome": "Tony Pindinello",
+    "punti": 22,
+    "risultati_esatti": 4,
+    "prono_esatti": 10,
+    "errori": 10
+  },
+  {
+    "nome": "Carlo Fantasia",
+    "punti": 20,
+    "risultati_esatti": 4,
     "prono_esatti": 8,
+    "errori": 12
+  },
+  {
+    "nome": "Andrea Quarto",
+    "punti": 20,
+    "risultati_esatti": 3,
+    "prono_esatti": 11,
     "errori": 10
   },
   {
     "nome": "Gabriele Carrarini",
-    "punti": 14,
-    "risultati_esatti": 2,
-    "prono_esatti": 8,
-    "errori": 10
-  },
-  {
-    "nome": "Leonardo Piras",
-    "punti": 14,
-    "risultati_esatti": 2,
-    "prono_esatti": 8,
-    "errori": 10
-  },
-  {
-    "nome": "Andrea Sedile",
-    "punti": 13,
-    "risultati_esatti": 2,
-    "prono_esatti": 7,
+    "punti": 19,
+    "risultati_esatti": 3,
+    "prono_esatti": 10,
     "errori": 11
   },
   {
-    "nome": "Luigi Marchello",
-    "punti": 13,
+    "nome": "Jacopo De Giorgi",
+    "punti": 19,
+    "risultati_esatti": 3,
+    "prono_esatti": 10,
+    "errori": 11
+  },
+  {
+    "nome": "Matteo Birilli",
+    "punti": 18,
     "risultati_esatti": 2,
-    "prono_esatti": 7,
+    "prono_esatti": 12,
+    "errori": 10
+  },
+  {
+    "nome": "Daniele Sedile",
+    "punti": 17,
+    "risultati_esatti": 4,
+    "prono_esatti": 5,
+    "errori": 15
+  },
+  {
+    "nome": "Fabio Baldacci",
+    "punti": 17,
+    "risultati_esatti": 3,
+    "prono_esatti": 8,
+    "errori": 13
+  },
+  {
+    "nome": "Marco Pellè",
+    "punti": 17,
+    "risultati_esatti": 3,
+    "prono_esatti": 8,
+    "errori": 13
+  },
+  {
+    "nome": "Daniele Garzya",
+    "punti": 17,
+    "risultati_esatti": 2,
+    "prono_esatti": 11,
     "errori": 11
   },
   {
     "nome": "Luigi Miccoli",
-    "punti": 13,
-    "risultati_esatti": 1,
-    "prono_esatti": 10,
-    "errori": 9
-  },
-  {
-    "nome": "Mattia Pellè",
-    "punti": 13,
-    "risultati_esatti": 1,
-    "prono_esatti": 10,
-    "errori": 9
-  },
-  {
-    "nome": "Sergio Garzya",
-    "punti": 13,
-    "risultati_esatti": 1,
-    "prono_esatti": 10,
-    "errori": 9
-  },
-  {
-    "nome": "Andrea Pellè",
-    "punti": 12,
-    "risultati_esatti": 1,
-    "prono_esatti": 9,
-    "errori": 10
+    "punti": 17,
+    "risultati_esatti": 2,
+    "prono_esatti": 11,
+    "errori": 11
   },
   {
     "nome": "Marco Boellis",
-    "punti": 12,
-    "risultati_esatti": 1,
-    "prono_esatti": 9,
-    "errori": 10
-  },
-  {
-    "nome": "Raffaele Chiffi",
-    "punti": 12,
-    "risultati_esatti": 1,
-    "prono_esatti": 9,
-    "errori": 10
-  },
-  {
-    "nome": "Manuel Pellè",
-    "punti": 11,
-    "risultati_esatti": 1,
-    "prono_esatti": 8,
+    "punti": 17,
+    "risultati_esatti": 2,
+    "prono_esatti": 11,
     "errori": 11
   },
   {
-    "nome": "Marco D'Andrea",
-    "punti": 11,
-    "risultati_esatti": 1,
-    "prono_esatti": 8,
+    "nome": "Pino Bruno",
+    "punti": 17,
+    "risultati_esatti": 2,
+    "prono_esatti": 11,
     "errori": 11
   },
   {
-    "nome": "Simone Turturo",
-    "punti": 11,
-    "risultati_esatti": 1,
-    "prono_esatti": 8,
+    "nome": "Stefano De Giorgi",
+    "punti": 17,
+    "risultati_esatti": 2,
+    "prono_esatti": 11,
     "errori": 11
   },
   {
-    "nome": "Edoardo Roscica",
-    "punti": 10,
-    "risultati_esatti": 1,
-    "prono_esatti": 7,
+    "nome": "Leonardo Piras",
+    "punti": 16,
+    "risultati_esatti": 2,
+    "prono_esatti": 10,
     "errori": 12
+  },
+  {
+    "nome": "Luigi Marchello",
+    "punti": 16,
+    "risultati_esatti": 2,
+    "prono_esatti": 10,
+    "errori": 12
+  },
+  {
+    "nome": "Andrea Sedile",
+    "punti": 15,
+    "risultati_esatti": 2,
+    "prono_esatti": 9,
+    "errori": 13
   },
   {
     "nome": "Marco Ingrosso",
-    "punti": 10,
+    "punti": 15,
+    "risultati_esatti": 2,
+    "prono_esatti": 9,
+    "errori": 13
+  },
+  {
+    "nome": "Mattia Pellè",
+    "punti": 15,
     "risultati_esatti": 1,
-    "prono_esatti": 7,
+    "prono_esatti": 12,
+    "errori": 11
+  },
+  {
+    "nome": "Sergio Garzya",
+    "punti": 15,
+    "risultati_esatti": 1,
+    "prono_esatti": 12,
+    "errori": 11
+  },
+  {
+    "nome": "Andrea Pellè",
+    "punti": 14,
+    "risultati_esatti": 1,
+    "prono_esatti": 11,
     "errori": 12
   },
   {
-    "nome": "Giacomo Ingrosso",
-    "punti": 10,
-    "risultati_esatti": 0,
-    "prono_esatti": 10,
-    "errori": 10
+    "nome": "Daniele Bove",
+    "punti": 14,
+    "risultati_esatti": 1,
+    "prono_esatti": 11,
+    "errori": 12
   },
   {
-    "nome": "Leandro Micelli",
-    "punti": 9,
+    "nome": "Marco D'Andrea",
+    "punti": 14,
     "risultati_esatti": 1,
-    "prono_esatti": 6,
+    "prono_esatti": 11,
+    "errori": 12
+  },
+  {
+    "nome": "Simone Turturo",
+    "punti": 14,
+    "risultati_esatti": 1,
+    "prono_esatti": 11,
+    "errori": 12
+  },
+  {
+    "nome": "Manuel Pellè",
+    "punti": 13,
+    "risultati_esatti": 1,
+    "prono_esatti": 10,
+    "errori": 13
+  },
+  {
+    "nome": "Raffaele Chiffi",
+    "punti": 13,
+    "risultati_esatti": 1,
+    "prono_esatti": 10,
     "errori": 13
   },
   {
     "nome": "Carmine Apollonio",
-    "punti": 9,
+    "punti": 12,
     "risultati_esatti": 0,
-    "prono_esatti": 9,
-    "errori": 11
+    "prono_esatti": 12,
+    "errori": 12
   },
   {
-    "nome": "Daniele Bove",
-    "punti": 9,
+    "nome": "Giacomo Ingrosso",
+    "punti": 12,
     "risultati_esatti": 0,
-    "prono_esatti": 9,
-    "errori": 11
+    "prono_esatti": 12,
+    "errori": 12
   },
   {
     "nome": "Manuel Farlò",
-    "punti": 9,
+    "punti": 12,
     "risultati_esatti": 0,
-    "prono_esatti": 9,
-    "errori": 11
+    "prono_esatti": 12,
+    "errori": 12
+  },
+  {
+    "nome": "Edoardo Roscica",
+    "punti": 11,
+    "risultati_esatti": 1,
+    "prono_esatti": 8,
+    "errori": 15
+  },
+  {
+    "nome": "Leandro Micelli",
+    "punti": 11,
+    "risultati_esatti": 1,
+    "prono_esatti": 8,
+    "errori": 15
   },
   {
     "nome": "Marco Lala",
-    "punti": 9,
+    "punti": 11,
     "risultati_esatti": 0,
-    "prono_esatti": 9,
-    "errori": 11
+    "prono_esatti": 11,
+    "errori": 13
   },
   {
     "nome": "Mattia Tramacere",
-    "punti": 9,
+    "punti": 11,
     "risultati_esatti": 0,
-    "prono_esatti": 9,
-    "errori": 11
+    "prono_esatti": 11,
+    "errori": 13
   },
   {
     "nome": "Mattia Nicolau",
-    "punti": 7,
+    "punti": 10,
     "risultati_esatti": 0,
-    "prono_esatti": 7,
-    "errori": 13
+    "prono_esatti": 10,
+    "errori": 14
   }
 ]
