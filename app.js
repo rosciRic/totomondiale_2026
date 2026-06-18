@@ -36,6 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const userBracketList = document.getElementById("user-bracket-list");
   const userAwardsList = document.getElementById("user-awards-list");
 
+  // Home Tab Elements
+  const homeTodayDate = document.getElementById("home-today-date");
+  const homeTodayContainer = document.getElementById("home-today-container");
+
+  // Statistics Tab Elements
+  const statExactRatio = document.getElementById("stat-exact-ratio");
+  const statSignRatio = document.getElementById("stat-sign-ratio");
+  const favoriteWinnersList = document.getElementById("favorite-winners-list");
+  const favoriteMvpList = document.getElementById("favorite-mvp-list");
+  const favoriteScorersList = document.getElementById("favorite-scorers-list");
+  const hardestMatchesList = document.getElementById("hardest-matches-list");
+  const easiestMatchesList = document.getElementById("easiest-matches-list");
+
   // Initialize Tabs Navigation
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
@@ -97,6 +110,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 5. Render Montepremi Details
     renderMontepremi();
+
+    // 6. Render Home Matches of the Day
+    renderHome();
+
+    // 7. Render Statistics Tab
+    renderStatistiche();
 
     // Set last update timestamp based on local time (or static meta if available)
     const now = new Date();
@@ -658,7 +677,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="scores-comparison">
             <div class="score-box">
-              <span class="score-box-label">Prono</span>
+              <span class="score-box-label">Pron.</span>
               <span class="score-num">${predHomeScore} - ${predAwayScore}</span>
             </div>
             <div class="score-box">
@@ -839,6 +858,264 @@ document.addEventListener("DOMContentLoaded", () => {
 
       userAwardsList.innerHTML = awardsHtml;
     }
+  }
+
+  // Render Home Tab - Matches of the Day
+  function renderHome() {
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    if (homeTodayDate) {
+      homeTodayDate.textContent = today.toLocaleDateString('it-IT', options);
+    }
+
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    const todayMatches = globalPartiteData.partite.filter(match => match.data.startsWith(todayStr));
+
+    if (!homeTodayContainer) return;
+    homeTodayContainer.innerHTML = "";
+
+    if (todayMatches.length === 0) {
+      homeTodayContainer.innerHTML = `
+        <div class="col-span-2 home-empty-box" style="grid-column: 1 / -1;">
+          <i class="fa-solid fa-calendar-xmark"></i>
+          Nessuna partita in programma per oggi.
+        </div>
+      `;
+      return;
+    }
+
+    todayMatches.forEach(match => {
+      const card = document.createElement("div");
+      card.className = "match-card";
+
+      const badgeClass = match.conclusa ? "badge-finished" : "badge-pending";
+      const badgeText = match.conclusa ? "Conclusa" : "Da Giocare";
+      
+      const homeScore = match.home_score !== null ? match.home_score : "-";
+      const awayScore = match.away_score !== null ? match.away_score : "-";
+      
+      const detailsText = match.fase === "gironi" ? `Gruppo ${match.gruppo}` : match.fase.toUpperCase();
+
+      card.innerHTML = `
+        <div class="match-header">
+          <span class="match-stage">${detailsText}</span>
+          <span class="match-time"><i class="fa-regular fa-clock"></i> ${formatDate(match.data)}</span>
+        </div>
+        <div class="match-teams">
+          <div class="team-row">
+            <span class="team-name">
+              <span class="team-flag-mock">${getFlagEmoji(match.home)}</span>
+              ${match.home}
+            </span>
+            <span class="team-score">${homeScore}</span>
+          </div>
+          <div class="team-row">
+            <span class="team-name">
+              <span class="team-flag-mock">${getFlagEmoji(match.away)}</span>
+              ${match.away}
+            </span>
+            <span class="team-score">${awayScore}</span>
+          </div>
+        </div>
+        <div class="match-status-bar">
+          <span>ID Partita: <strong>${match.id}</strong></span>
+          <span class="badge ${badgeClass}">${badgeText}</span>
+        </div>
+      `;
+
+      card.addEventListener("click", () => openMatchModal(match));
+      homeTodayContainer.appendChild(card);
+    });
+  }
+
+  // Render Statistics Tab
+  function renderStatistiche() {
+    // 1. Calculate General Aggregates
+    let totalExact = 0;
+    let totalSign = 0;
+    let totalError = 0;
+    globalClassifica.forEach(player => {
+      totalExact += player.risultati_esatti || 0;
+      totalSign += player.prono_esatti || 0;
+      totalError += player.errori || 0;
+    });
+    const totalProno = totalExact + totalSign + totalError;
+    const exactRatio = totalProno > 0 ? (totalExact / totalProno * 100).toFixed(1) : 0;
+    const signRatio = totalProno > 0 ? (totalSign / totalProno * 100).toFixed(1) : 0;
+
+    if (statExactRatio) statExactRatio.innerHTML = `${totalExact} <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">(${exactRatio}%)</span>`;
+    if (statSignRatio) statSignRatio.innerHTML = `${totalSign} <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">(${signRatio}%)</span>`;
+
+    // 2. Aggregate & Render Tournament Favorites (Winner, MVP, Top Scorer)
+    function aggregateFavorite(category) {
+      const counts = {};
+      let totalVoters = 0;
+      Object.keys(globalPronostici.partecipanti).forEach(username => {
+        const userDati = globalPronostici.partecipanti[username];
+        if (userDati && userDati.premi_finali) {
+          const val = userDati.premi_finali[category];
+          if (val && val.trim() !== "" && val.trim() !== "-") {
+            const cleaned = val.trim();
+            counts[cleaned] = (counts[cleaned] || 0) + 1;
+            totalVoters++;
+          }
+        }
+      });
+
+      const sorted = Object.keys(counts).map(name => {
+        return {
+          name,
+          count: counts[name],
+          percentage: totalVoters > 0 ? (counts[name] / totalVoters * 100).toFixed(1) : 0
+        };
+      });
+      sorted.sort((a, b) => b.count - a.count);
+      return { list: sorted.slice(0, 5), total: totalVoters };
+    }
+
+    function renderFavoriteList(container, data, barBg) {
+      if (!container) return;
+      container.innerHTML = "";
+      if (data.list.length === 0) {
+        container.innerHTML = `<p style="font-size: 0.85rem; color: var(--color-text-muted); text-align: center; padding: 20px 0;">Nessun dato disponibile.</p>`;
+        return;
+      }
+
+      data.list.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "distribution-item";
+        row.innerHTML = `
+          <div class="dist-meta">
+            <span class="dist-name">${getFlagEmoji(item.name)} ${item.name}</span>
+            <span class="dist-count">${item.count} pron. (${item.percentage}%)</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: ${item.percentage}%; background: ${barBg};"></div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    const winnersData = aggregateFavorite("vincitore");
+    const mvpData = aggregateFavorite("mvp");
+    const scorersData = aggregateFavorite("capocannoniere");
+
+    renderFavoriteList(favoriteWinnersList, winnersData, "linear-gradient(90deg, #ffe259, #ffa751)");
+    renderFavoriteList(favoriteMvpList, mvpData, "linear-gradient(90deg, #00c6ff, #0072ff)");
+    renderFavoriteList(favoriteScorersList, scorersData, "linear-gradient(90deg, #f857a6, #ff5858)");
+
+    // 3. Analyze & Render Match Difficulty
+    const completedMatches = globalPartiteData.partite.filter(match => match.conclusa);
+    const matchStats = [];
+
+    completedMatches.forEach(match => {
+      let totalMatchPoints = 0;
+      let participantsCount = 0;
+
+      Object.keys(globalPronostici.partecipanti).forEach(username => {
+        const userDati = globalPronostici.partecipanti[username];
+        if (userDati) {
+          participantsCount++;
+          const userPartite = userDati.partite || {};
+          const pred = userPartite[match.id];
+          if (pred) {
+            if (match.home_score === pred.home_score && match.away_score === pred.away_score) {
+              totalMatchPoints += 3;
+            } else {
+              const realSign = getSign(match.home_score, match.away_score);
+              const predSign = getSign(pred.home_score, pred.away_score);
+              if (realSign === predSign) {
+                totalMatchPoints += 1;
+              }
+            }
+          }
+        }
+      });
+
+      const avgMatchPoints = participantsCount > 0 ? totalMatchPoints / participantsCount : 0;
+      matchStats.push({
+        match,
+        avgPoints: avgMatchPoints
+      });
+    });
+
+    const hardest = [...matchStats].sort((a, b) => a.avgPoints - b.avgPoints).slice(0, 3);
+    const easiest = [...matchStats].sort((a, b) => b.avgPoints - a.avgPoints).slice(0, 3);
+
+    function renderDifficultyList(container, matchesList, type) {
+      if (!container) return;
+      container.innerHTML = "";
+
+      if (matchesList.length === 0) {
+        container.innerHTML = `<p style="font-size: 0.85rem; color: var(--color-text-muted); padding: 10px 0; text-align: center;">Nessun dato disponibile (nessuna partita conclusa).</p>`;
+        return;
+      }
+
+      matchesList.forEach(item => {
+        const m = item.match;
+        const row = document.createElement("div");
+        row.className = "difficulty-match-row";
+        row.style.cursor = "pointer";
+        row.style.display = "block"; // override flex for vertical layout with colpaccio
+
+        const badgeClass = type === "hard" ? "diff-score-badge hard" : "diff-score-badge easy";
+        const stageLabel = m.fase === "gironi" ? `Gruppo ${m.gruppo}` : m.fase.toUpperCase();
+
+        // Calculate colpaccio for hard matches
+        let colpaccioHtml = "";
+        if (type === "hard") {
+          const exactGuesses = [];
+          Object.keys(globalPronostici.partecipanti).forEach(username => {
+            const userDati = globalPronostici.partecipanti[username];
+            if (userDati) {
+              const userPartite = userDati.partite || {};
+              const pred = userPartite[m.id];
+              if (pred && m.home_score === pred.home_score && m.away_score === pred.away_score) {
+                exactGuesses.push(username);
+              }
+            }
+          });
+          if (exactGuesses.length > 0) {
+            colpaccioHtml = `<div class="diff-match-colpaccio" style="font-size: 0.78rem; color: var(--accent-gold); margin-top: 8px; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-bullseye"></i> <strong>Colpaccio:</strong> ${exactGuesses.join(", ")}
+            </div>`;
+          } else {
+            colpaccioHtml = `<div class="diff-match-colpaccio" style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 8px; display: flex; align-items: center; gap: 6px; opacity: 0.6;">
+              <i class="fa-solid fa-face-frown-open"></i> Nessun ris. esatto indovinato
+            </div>`;
+          }
+        }
+
+        row.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="diff-match-info">
+              <div class="diff-match-teams">
+                ${getFlagEmoji(m.home)} ${m.home} ${m.home_score} - ${m.away_score} ${m.away} ${getFlagEmoji(m.away)}
+              </div>
+              <div class="diff-match-meta">
+                ${stageLabel} &bull; ID Partita: ${m.id}
+              </div>
+            </div>
+            <div class="${badgeClass}">
+              ${item.avgPoints.toFixed(2)} pt
+            </div>
+          </div>
+          ${colpaccioHtml}
+        `;
+
+        row.addEventListener("click", () => openMatchModal(m));
+        container.appendChild(row);
+      });
+    }
+
+    renderDifficultyList(hardestMatchesList, hardest, "hard");
+    renderDifficultyList(easiestMatchesList, easiest, "easy");
+
   }
 
   // Load database on start

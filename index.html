@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- FontAwesome for Premium Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="index.css?v=2.0.2">
+  <link rel="stylesheet" href="index.css?v=2.0.3">
 </head>
 <body>
   <div class="app-container">
@@ -48,7 +48,10 @@
 
     <!-- NAVIGATION TABS -->
     <nav class="navigation-tabs">
-      <button class="tab-button active" id="tab-btn-classifica" data-tab="tab-classifica">
+      <button class="tab-button active" id="tab-btn-home" data-tab="tab-home">
+        <i class="fa-solid fa-house"></i> Home
+      </button>
+      <button class="tab-button" id="tab-btn-classifica" data-tab="tab-classifica">
         <i class="fa-solid fa-ranking-star"></i> Classifica
       </button>
       <button class="tab-button" id="tab-btn-partite" data-tab="tab-partite">
@@ -56,6 +59,9 @@
       </button>
       <button class="tab-button" id="tab-btn-pronostici" data-tab="tab-pronostici">
         <i class="fa-solid fa-chart-pie"></i> Pronostici Utenti
+      </button>
+      <button class="tab-button" id="tab-btn-statistiche" data-tab="tab-statistiche">
+        <i class="fa-solid fa-chart-bar"></i> Statistiche
       </button>
       <button class="tab-button" id="tab-btn-regolamento" data-tab="tab-regolamento">
         <i class="fa-solid fa-circle-info"></i> Info & Regolamento
@@ -65,8 +71,21 @@
     <!-- MAIN VIEW AREAS -->
     <main class="content-area">
 
+      <!-- TAB: HOME -->
+      <section class="tab-content active" id="tab-home">
+        <div class="card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-calendar-day"></i> Partite di Oggi</h2>
+            <span class="badge badge-info" id="home-today-date">-</span>
+          </div>
+          <div class="matches-grid" id="home-today-container">
+            <!-- Dynamically injected -->
+          </div>
+        </div>
+      </section>
+
       <!-- TAB: CLASSIFICA -->
-      <section class="tab-content active" id="tab-classifica">
+      <section class="tab-content" id="tab-classifica">
         <div class="card">
           <div class="card-header">
             <h2><i class="fa-solid fa-list-ol"></i> Classifica Generale</h2>
@@ -83,7 +102,7 @@
                   <th>Nome Giocatore</th>
                   <th style="text-align: center;">Punti Totali</th>
                   <th style="text-align: center;" class="hide-mobile">Risultati Esatti (+3)</th>
-                  <th style="text-align: center;" class="hide-mobile">Prono Esatti (+1)</th>
+                  <th style="text-align: center;" class="hide-mobile">Pron. Esatti (+1)</th>
                   <th style="text-align: center;" class="hide-mobile">Errori</th>
                   <th style="width: 90px; text-align: center;">Dettaglio</th>
                 </tr>
@@ -288,6 +307,89 @@
         </div>
       </section>
 
+      <!-- TAB: STATISTICHE -->
+      <section class="tab-content" id="tab-statistiche">
+        <!-- Dashboard Metrics (2 Cards Grid) -->
+        <div class="stats-dashboard-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="stat-card">
+            <div class="stat-icon green-bg"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Risultati Esatti (+3)</span>
+              <h3 id="stat-exact-ratio">-</h3>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple-bg"><i class="fa-solid fa-right-left"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Pronostici Esatti (+1)</span>
+              <h3 id="stat-sign-ratio">-</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Favorites & Difficulties Grid -->
+        <div class="stats-main-grid">
+          <!-- Favorites World Cup Winner -->
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-trophy"></i> Favoriti Campione del Mondo</h2>
+            </div>
+            <hr class="divider">
+            <div class="distribution-list" id="favorite-winners-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Favorites MVP -->
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-star"></i> Favoriti MVP</h2>
+            </div>
+            <hr class="divider">
+            <div class="distribution-list" id="favorite-mvp-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Favorites Capocannoniere -->
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-shoe-prints"></i> Favoriti Capocannoniere</h2>
+            </div>
+            <hr class="divider">
+            <div class="distribution-list" id="favorite-scorers-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Match Difficulty Analyser -->
+          <div class="card col-span-3">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-chart-line"></i> Analisi Difficoltà Partite (Media Punti)</h2>
+              <span class="badge badge-info">Solo partite concluse</span>
+            </div>
+            <hr class="divider">
+            <div class="difficulty-split">
+              <!-- Hardest matches -->
+              <div class="difficulty-column">
+                <h4 class="diff-header hardest"><i class="fa-solid fa-temperature-arrow-up"></i> Partite Più Difficili (Minor Media Punti)</h4>
+                <div class="difficulty-list" id="hardest-matches-list">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+              <!-- Easiest matches -->
+              <div class="difficulty-column">
+                <h4 class="diff-header easiest"><i class="fa-solid fa-temperature-arrow-down"></i> Partite Più Facili (Maggior Media Punti)</h4>
+                <div class="difficulty-list" id="easiest-matches-list">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -318,6 +420,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=2.0.2"></script>
+  <script src="app.js?v=2.0.3"></script>
 </body>
 </html>
