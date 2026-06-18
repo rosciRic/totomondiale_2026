@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let globalClassifica = [];
   let globalPartiteData = { partite: [], passaggio_turno: {}, premi_finali: {} };
   let globalPronostici = { partecipanti: {} };
+  let currentSortMode = "cronologico";
 
   // DOM Elements
   const tabs = document.querySelectorAll(".tab-button");
@@ -43,9 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Statistics Tab Elements
   const statExactRatio = document.getElementById("stat-exact-ratio");
   const statSignRatio = document.getElementById("stat-sign-ratio");
-  const favoriteWinnersList = document.getElementById("favorite-winners-list");
-  const favoriteMvpList = document.getElementById("favorite-mvp-list");
-  const favoriteScorersList = document.getElementById("favorite-scorers-list");
   const hardestMatchesList = document.getElementById("hardest-matches-list");
   const easiestMatchesList = document.getElementById("easiest-matches-list");
 
@@ -126,6 +124,23 @@ document.addEventListener("DOMContentLoaded", () => {
     filterStage.addEventListener("change", renderMatches);
     filterStatus.addEventListener("change", renderMatches);
     userSelector.addEventListener("change", (e) => renderUserPredictions(e.target.value));
+    const btnToggleSort = document.getElementById("btn-toggle-sort");
+    if (btnToggleSort) {
+      btnToggleSort.addEventListener("click", () => {
+        if (currentSortMode === "cronologico") {
+          currentSortMode = "esito";
+          btnToggleSort.classList.add("active-esito");
+          document.getElementById("sort-label").textContent = "Esito";
+          document.getElementById("sort-icon").className = "fa-solid fa-arrow-down-wide-short";
+        } else {
+          currentSortMode = "cronologico";
+          btnToggleSort.classList.remove("active-esito");
+          document.getElementById("sort-label").textContent = "Cronologico";
+          document.getElementById("sort-icon").className = "fa-solid fa-calendar-days";
+        }
+        renderUserPredictions(userSelector.value);
+      });
+    }
 
     // Modal Close Events
     const matchModal = document.getElementById("match-modal");
@@ -307,24 +322,32 @@ document.addEventListener("DOMContentLoaded", () => {
     return date.toLocaleDateString('it-IT', options).replace(',', ' -');
   }
 
-  // Get flag representation or abbreviation fallback
+  // Get flag representation (img tag from Flagcdn or fallback emoji)
   function getFlagEmoji(teamName) {
-    // Basic mapping for major countries
-    const flags = {
-      "messico": "🇲🇽", "sudafrica": "🇿🇦", "corea del sud": "🇰🇷", "repubblica ceca": "🇨🇿",
-      "canada": "🇨🇦", "bosnia ed erzegovina": "🇧🇦", "stati uniti": "🇺🇸", "paraguay": "🇵🇾",
-      "qatar": "🇶🇦", "svizzera": "🇨🇭", "brasile": "🇧🇷", "marocco": "🇲🇦", "germania": "🇩🇪",
-      "curaçao": "🇨🇼", "giappone": "🇯🇵", "costa d'avorio": "🇨🇮", "ecuador": "🇪🇨",
-      "svezia": "🇸🇪", "tunisia": "🇹🇳", "spagna": "🇪🇸", "capo verde": "🇨🇻", "belgio": "🇧🇪",
-      "egitto": "🇪🇬", "arabia saudita": "🇸🇦", "uruguay": "🇺🇾", "iran": "🇮🇷",
-      "nuova zelanda": "🇳🇿", "francia": "🇫🇷", "senegal": "🇸🇳", "iraq": "🇮🇶",
-      "norvegia": "🇳🇴", "argentina": "🇦🇷", "algeria": "🇩🇿", "austria": "🇦🇹",
-      "giordan": "🇯🇴", "giordania": "🇯🇴", "portogallo": "🇵🇹", "rd congo": "🇨🇩",
-      "inghilterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "croazia": "🇭🇷", "ghana": "🇬🇭", "panama": "🇵🇦",
-      "uzbekistan": "🇺🇿", "colombia": "🇨🇴", "italia": "🇮🇹", "olanda": "🇳🇱"
+    if (!teamName) return "⚽";
+    const key = teamName.trim().toLowerCase();
+    
+    // Mapping for team names to ISO codes (lower case)
+    const flagCodes = {
+      "messico": "mx", "sudafrica": "za", "corea del sud": "kr", "repubblica ceca": "cz",
+      "canada": "ca", "bosnia ed erzegovina": "ba", "stati uniti": "us", "paraguay": "py",
+      "qatar": "qa", "svizzera": "ch", "brasile": "br", "marocco": "ma", "germania": "de",
+      "curaçao": "cw", "curacao": "cw", "giappone": "jp", "costa d'avorio": "ci", "ecuador": "ec",
+      "svezia": "se", "tunisia": "tn", "spagna": "es", "capo verde": "cv", "belgio": "be",
+      "egitto": "eg", "arabia saudita": "sa", "uruguay": "uy", "iran": "ir",
+      "nuova zelanda": "nz", "francia": "fr", "senegal": "sn", "iraq": "iq",
+      "norvegia": "no", "argentina": "ar", "algeria": "dz", "austria": "at",
+      "giordan": "jo", "giordania": "jo", "portogallo": "pt", "rd congo": "cd",
+      "inghilterra": "gb-eng", "croazia": "hr", "ghana": "gh", "panama": "pa",
+      "uzbekistan": "uz", "colombia": "co", "italia": "it", "olanda": "nl",
+      "australia": "au", "scozia": "gb-sct", "turchia": "tr", "haiti": "ht"
     };
-    const key = teamName ? teamName.trim().toLowerCase() : "";
-    return flags[key] || "⚽";
+
+    const code = flagCodes[key];
+    if (code) {
+      return `<img src="https://flagcdn.com/w40/${code}.png" class="flag-img" alt="${teamName}" loading="lazy">`;
+    }
+    return "⚽";
   }
 
   // Render Matches Grid based on filters
@@ -628,7 +651,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const userPartite = userDati.partite || {};
     let predictionRowsHtml = "";
 
-    globalPartiteData.partite.forEach(match => {
+    let matchesToRender = [...globalPartiteData.partite];
+
+    if (currentSortMode === "esito") {
+      const getOutcomeWeight = (match, pred) => {
+        if (!match.conclusa) return 0;
+        if (!pred) return 1;
+        if (match.home_score === pred.home_score && match.away_score === pred.away_score) {
+          return 3;
+        }
+        const realSign = getSign(match.home_score, match.away_score);
+        const predSign = getSign(pred.home_score, pred.away_score);
+        if (realSign === predSign) {
+          return 2;
+        }
+        return 1;
+      };
+
+      matchesToRender.sort((a, b) => {
+        const predA = userPartite[a.id];
+        const predB = userPartite[b.id];
+        const weightA = getOutcomeWeight(a, predA);
+        const weightB = getOutcomeWeight(b, predB);
+        
+        if (weightB !== weightA) {
+          return weightB - weightA;
+        }
+        return a.id - b.id;
+      });
+    }
+
+    matchesToRender.forEach(match => {
       const pred = userPartite[match.id];
       let rowHtml = "";
 
@@ -950,64 +1003,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (statExactRatio) statExactRatio.innerHTML = `${totalExact} <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">(${exactRatio}%)</span>`;
     if (statSignRatio) statSignRatio.innerHTML = `${totalSign} <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">(${signRatio}%)</span>`;
 
-    // 2. Aggregate & Render Tournament Favorites (Winner, MVP, Top Scorer)
-    function aggregateFavorite(category) {
-      const counts = {};
-      let totalVoters = 0;
-      Object.keys(globalPronostici.partecipanti).forEach(username => {
-        const userDati = globalPronostici.partecipanti[username];
-        if (userDati && userDati.premi_finali) {
-          const val = userDati.premi_finali[category];
-          if (val && val.trim() !== "" && val.trim() !== "-") {
-            const cleaned = val.trim();
-            counts[cleaned] = (counts[cleaned] || 0) + 1;
-            totalVoters++;
-          }
-        }
-      });
 
-      const sorted = Object.keys(counts).map(name => {
-        return {
-          name,
-          count: counts[name],
-          percentage: totalVoters > 0 ? (counts[name] / totalVoters * 100).toFixed(1) : 0
-        };
-      });
-      sorted.sort((a, b) => b.count - a.count);
-      return { list: sorted.slice(0, 5), total: totalVoters };
-    }
-
-    function renderFavoriteList(container, data, barBg) {
-      if (!container) return;
-      container.innerHTML = "";
-      if (data.list.length === 0) {
-        container.innerHTML = `<p style="font-size: 0.85rem; color: var(--color-text-muted); text-align: center; padding: 20px 0;">Nessun dato disponibile.</p>`;
-        return;
-      }
-
-      data.list.forEach(item => {
-        const row = document.createElement("div");
-        row.className = "distribution-item";
-        row.innerHTML = `
-          <div class="dist-meta">
-            <span class="dist-name">${getFlagEmoji(item.name)} ${item.name}</span>
-            <span class="dist-count">${item.count} pron. (${item.percentage}%)</span>
-          </div>
-          <div class="progress-bar-container">
-            <div class="progress-bar-fill" style="width: ${item.percentage}%; background: ${barBg};"></div>
-          </div>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    const winnersData = aggregateFavorite("vincitore");
-    const mvpData = aggregateFavorite("mvp");
-    const scorersData = aggregateFavorite("capocannoniere");
-
-    renderFavoriteList(favoriteWinnersList, winnersData, "linear-gradient(90deg, #ffe259, #ffa751)");
-    renderFavoriteList(favoriteMvpList, mvpData, "linear-gradient(90deg, #00c6ff, #0072ff)");
-    renderFavoriteList(favoriteScorersList, scorersData, "linear-gradient(90deg, #f857a6, #ff5858)");
 
     // 3. Analyze & Render Match Difficulty
     const completedMatches = globalPartiteData.partite.filter(match => match.conclusa);

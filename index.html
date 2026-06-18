@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- FontAwesome for Premium Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="index.css?v=2.0.3">
+  <link rel="stylesheet" href="index.css?v=2.0.6">
 </head>
 <body>
   <div class="app-container">
@@ -163,9 +163,12 @@
         <div class="user-detail-grid">
           <!-- Section 1: Matches Predictions -->
           <div class="card col-span-2">
-            <div class="card-header">
+            <div class="card-header user-prono-header">
               <h2><i class="fa-solid fa-soccer-ball"></i> Pronostici Risultati</h2>
-              <span class="badge badge-info">Confronto con esito reale</span>
+              <button id="btn-toggle-sort" class="premium-sort-btn" title="Cambia ordinamento (Cronologico / Esito)">
+                <i class="fa-solid fa-arrow-down-wide-short" id="sort-icon"></i>
+                <span id="sort-label">Cronologico</span>
+              </button>
             </div>
             <div class="user-matches-list" id="user-matches-list">
               <!-- Dynamically populated -->
@@ -327,43 +330,10 @@
           </div>
         </div>
 
-        <!-- Favorites & Difficulties Grid -->
-        <div class="stats-main-grid">
-          <!-- Favorites World Cup Winner -->
-          <div class="card">
-            <div class="card-header">
-              <h2><i class="fa-solid fa-trophy"></i> Favoriti Campione del Mondo</h2>
-            </div>
-            <hr class="divider">
-            <div class="distribution-list" id="favorite-winners-list">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
-          <!-- Favorites MVP -->
-          <div class="card">
-            <div class="card-header">
-              <h2><i class="fa-solid fa-star"></i> Favoriti MVP</h2>
-            </div>
-            <hr class="divider">
-            <div class="distribution-list" id="favorite-mvp-list">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
-          <!-- Favorites Capocannoniere -->
-          <div class="card">
-            <div class="card-header">
-              <h2><i class="fa-solid fa-shoe-prints"></i> Favoriti Capocannoniere</h2>
-            </div>
-            <hr class="divider">
-            <div class="distribution-list" id="favorite-scorers-list">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
+        <!-- Difficulties Card -->
+        <div style="margin-top: 10px;">
           <!-- Match Difficulty Analyser -->
-          <div class="card col-span-3">
+          <div class="card">
             <div class="card-header">
               <h2><i class="fa-solid fa-chart-line"></i> Analisi Difficoltà Partite (Media Punti)</h2>
               <span class="badge badge-info">Solo partite concluse</span>
@@ -420,6 +390,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=2.0.3"></script>
+  <script src="app.js?v=2.0.6"></script>
 </body>
 </html>
