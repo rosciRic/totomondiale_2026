@@ -71,10 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch all databases in parallel
   async function fetchDatabases() {
     try {
+      // Determine if we are running locally or in production
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
+      const basePath = isLocal ? "" : "https://raw.githubusercontent.com/rosciRic/totomondiale_2026/main/";
+
       const [classificaRes, partiteRes, pronosticiRes] = await Promise.all([
-        fetch("classifica.json?t=" + Date.now()),
-        fetch("partite.json?t=" + Date.now()),
-        fetch("pronostici.json?t=" + Date.now())
+        fetch(`${basePath}classifica.json?t=${Date.now()}`),
+        fetch(`${basePath}partite.json?t=${Date.now()}`),
+        fetch(`${basePath}pronostici.json?t=${Date.now()}`)
       ]);
 
       if (!classificaRes.ok || !partiteRes.ok || !pronosticiRes.ok) {
