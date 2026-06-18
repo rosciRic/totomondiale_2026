@@ -12,7 +12,7 @@ L'applicazione non richiede database tradizionali o server backend costosi:
 
 *   **Frontend:** HTML5, CSS3 (con design responsive mobile-first) e Vanilla JavaScript, ospitato gratuitamente su **GitHub Pages**.
 *   **Database:** I dati di classifica, partite e pronostici sono memorizzati direttamente all'interno della repository come file statici JSON (`classifica.json`, `partite.json`, `pronostici.json`).
-*   **Backend & Automazione (GitOps):** Uno script Python (`aggiorna_dati.py`) viene eseguito periodicamente tramite **GitHub Actions**. Lo script scarica i risultati dal vivo da un'API sportiva esterna (API-Football), ricalcola i punteggi degli utenti secondo il regolamento, aggiorna i database JSON ed effettua un `git commit & push` automatico aggiornando istantaneamente il sito.
+*   **Backend & Automazione (GitOps):** Uno script Python (`aggiorna_dati.py`) viene eseguito periodicamente tramite **GitHub Actions**. Lo script scarica i risultati dal vivo dall'API pubblica e gratuita di **OpenFootball**, ricalcola i punteggi degli utenti secondo il regolamento, aggiorna i database JSON ed effettua un `git commit & push` automatico aggiornando istantaneamente il sito.
 
 ---
 

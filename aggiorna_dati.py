@@ -19,7 +19,7 @@ def get_match_sign(home_score, away_score):
     else:
         return "X"
 
-# Translation dictionary to map API-Football English team names to Italian names in our DB
+# Translation dictionary to map OpenFootball English team names to Italian names in our DB
 # Covers all 48 teams in the FIFA World Cup 2026
 TEAM_TRANSLATIONS = {
     "mexico": "Messico", "south africa": "Sudafrica",
@@ -471,8 +471,73 @@ def calcola_classifica():
     for idx, row in enumerate(classifica, 1):
         print(f"{idx}. {row['nome']} - Punti: {row['punti']} (Esatti: {row['risultati_esatti']}, Segni: {row['prono_esatti']}, Errori: {row['errori']})")
 
+def check_if_update_needed():
+    """
+    Checks if there are any matches in the past (expected to have ended)
+    that are not yet marked as concluded in the database.
+    Returns True if an update is needed, False otherwise.
+    """
+    import datetime
+    
+    # Allow forcing update via command line argument or environment variable
+    if "--force" in sys.argv or os.environ.get("FORCE_UPDATE") == "true":
+        print("Aggiornamento forzato richiesto.")
+        return True
+        
+    if not os.path.exists(PARTITE_FILE):
+        return True
+        
+    try:
+        with open(PARTITE_FILE, "r", encoding="utf-8") as f:
+            local_data = json.load(f)
+    except Exception:
+        return True
+        
+    # Current CEST time (UTC + 2 hours for Italy in June/July)
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    now_cest = now_utc + datetime.timedelta(hours=2)
+    now_cest_naive = now_cest.replace(tzinfo=None)
+    
+    for match in local_data.get("partite", []):
+        if not match.get("conclusa"):
+            match_data_str = match.get("data")
+            if not match_data_str:
+                continue
+            try:
+                match_time = datetime.datetime.fromisoformat(match_data_str)
+                # Standard football match duration: 2 hours (120 minutes)
+                expected_end = match_time + datetime.timedelta(minutes=120)
+                if now_cest_naive >= expected_end:
+                    print(f"La partita {match.get('id')} ({match.get('home')} vs {match.get('away')}) dovrebbe essere terminata (fine prevista: {expected_end}), ma non è conclusa nel DB locale.")
+                    return True
+            except ValueError:
+                continue
+                
+    return False
+
 if __name__ == "__main__":
-    # Orchestrate match results update (via live API or local fallback simulation)
-    aggiorna_risultati_partite()
-    # Compute the new leaderboard
-    calcola_classifica()
+    force_run = "--force" in sys.argv or os.environ.get("FORCE_UPDATE") == "true"
+    
+    # Check if we need to fetch match results from OpenFootball
+    if force_run or check_if_update_needed():
+        # Orchestrate match results update (via live API or local fallback simulation)
+        aggiorna_risultati_partite()
+        # Compute the new leaderboard
+        calcola_classifica()
+    else:
+        # Check if classification file is outdated compared to predictions or matches
+        needs_recalc = False
+        if not os.path.exists(CLASSIFICA_FILE):
+            needs_recalc = True
+        else:
+            classifica_mtime = os.path.getmtime(CLASSIFICA_FILE)
+            prono_mtime = os.path.getmtime(PRONOSTICI_FILE) if os.path.exists(PRONOSTICI_FILE) else 0
+            partite_mtime = os.path.getmtime(PARTITE_FILE) if os.path.exists(PARTITE_FILE) else 0
+            if prono_mtime > classifica_mtime or partite_mtime > classifica_mtime:
+                needs_recalc = True
+                
+        if needs_recalc:
+            print("Ottimizzazione: Nessun nuovo match concluso da scaricare, ma ricalcolo la classifica per modifiche locali dei pronostici/partite.")
+            calcola_classifica()
+        else:
+            print("Ottimizzazione: Nessun match concluso da scaricare e classifica già aggiornata. Esco senza fare nulla.")

@@ -31,8 +31,6 @@ jobs:
           # (For now, aggiorna_dati.py only uses the built-in json, os, and sys modules)
 
       - name: Run calculation script
-        env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: python aggiorna_dati.py
 
       - name: Commit and push changes
