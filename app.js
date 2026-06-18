@@ -107,6 +107,21 @@ document.addEventListener("DOMContentLoaded", () => {
     filterStage.addEventListener("change", renderMatches);
     filterStatus.addEventListener("change", renderMatches);
     userSelector.addEventListener("change", (e) => renderUserPredictions(e.target.value));
+
+    // Modal Close Events
+    const matchModal = document.getElementById("match-modal");
+    const closeBtn = document.getElementById("modal-close-btn");
+    if (closeBtn && matchModal) {
+      closeBtn.addEventListener("click", () => matchModal.classList.remove("open"));
+      matchModal.addEventListener("click", (e) => {
+        if (e.target === matchModal) matchModal.classList.remove("open");
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && matchModal.classList.contains("open")) {
+          matchModal.classList.remove("open");
+        }
+      });
+    }
   }
 
   // Calculate and display top widgets metrics
@@ -367,8 +382,159 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
+      card.addEventListener("click", () => openMatchModal(match));
       matchesContainer.appendChild(card);
     });
+  }
+
+  // Open modal displaying all participants' predictions for a specific match
+  function openMatchModal(match) {
+    const matchModal = document.getElementById("match-modal");
+    const modalStage = document.getElementById("modal-match-stage");
+    const modalTitle = document.getElementById("modal-match-title");
+    const modalInfo = document.getElementById("modal-match-info");
+    const modalSummary = document.getElementById("modal-prono-summary");
+    const modalList = document.getElementById("modal-prono-list");
+
+    if (!matchModal || !modalList) return;
+
+    // Set header information
+    if (modalStage) {
+      modalStage.textContent = match.fase === "gironi" ? `Gruppo ${match.gruppo}` : match.fase.toUpperCase();
+    }
+    if (modalTitle) {
+      modalTitle.innerHTML = `${getFlagEmoji(match.home)} ${match.home} <span style="font-size: 0.9em; opacity: 0.5;">vs</span> ${match.away} ${getFlagEmoji(match.away)}`;
+    }
+    if (modalInfo) {
+      modalInfo.innerHTML = `<i class="fa-regular fa-clock"></i> ID Partita: <strong>${match.id}</strong> &bull; ${formatDate(match.data)}`;
+    }
+
+    // Populate predictions list
+    modalList.innerHTML = "";
+    
+    const userPronoDataList = [];
+    let count3 = 0, count1 = 0, count0 = 0, countPending = 0;
+
+    Object.keys(globalPronostici.partecipanti).forEach(username => {
+      const userDati = globalPronostici.partecipanti[username];
+      const userPartite = userDati.partite || {};
+      const pred = userPartite[match.id];
+
+      let predH = "-";
+      let predA = "-";
+      let ptsAwarded = -1; // -1 means pending / no outcome
+      let ptsText = "-";
+      let ptsClass = "pts-pending";
+
+      if (pred) {
+        predH = pred.home_score !== undefined ? pred.home_score : "-";
+        predA = pred.away_score !== undefined ? pred.away_score : "-";
+
+        if (match.conclusa) {
+          if (match.home_score === pred.home_score && match.away_score === pred.away_score) {
+            ptsAwarded = 3;
+            ptsText = "+3";
+            ptsClass = "pts-3";
+            count3++;
+          } else {
+            const realSign = getSign(match.home_score, match.away_score);
+            const predSign = getSign(pred.home_score, pred.away_score);
+            if (realSign === predSign) {
+              ptsAwarded = 1;
+              ptsText = "+1";
+              ptsClass = "pts-1";
+              count1++;
+            } else {
+              ptsAwarded = 0;
+              ptsText = "0";
+              ptsClass = "pts-0";
+              count0++;
+            }
+          }
+        } else {
+          countPending++;
+        }
+      } else if (match.conclusa) {
+        ptsAwarded = 0;
+        ptsText = "0";
+        ptsClass = "pts-0";
+        count0++;
+      } else {
+        countPending++;
+      }
+
+      // Fetch user rank from classification
+      const rankIndex = globalClassifica.findIndex(c => c.nome === username);
+      const userRank = rankIndex !== -1 ? rankIndex + 1 : "-";
+
+      userPronoDataList.push({
+        username,
+        rank: userRank,
+        predText: `${predH} - ${predA}`,
+        ptsAwarded,
+        ptsText,
+        ptsClass
+      });
+    });
+
+    // Sort: 
+    // 1. Decrescente per punti assegnati (3, poi 1, poi 0, poi -1)
+    // 2. Crescente per posizione in classifica (rank)
+    userPronoDataList.sort((a, b) => {
+      if (b.ptsAwarded !== a.ptsAwarded) {
+        return b.ptsAwarded - a.ptsAwarded;
+      }
+      return (a.rank === "-" ? 999 : a.rank) - (b.rank === "-" ? 999 : b.rank);
+    });
+
+    // Populate summary statistics
+    if (modalSummary) {
+      if (match.conclusa) {
+        modalSummary.innerHTML = `
+          <div class="summary-box" style="border-color: rgba(0, 219, 139, 0.2)">
+            Risultati Esatti (+3)
+            <strong style="color: var(--accent-green)">${count3}</strong>
+          </div>
+          <div class="summary-box" style="border-color: rgba(255, 183, 3, 0.2)">
+            Segni Esatti (+1)
+            <strong style="color: var(--accent-gold)">${count1}</strong>
+          </div>
+          <div class="summary-box" style="border-color: rgba(255, 65, 108, 0.2)">
+            Errati
+            <strong style="color: var(--accent-red)">${count0}</strong>
+          </div>
+        `;
+        modalSummary.style.display = "grid";
+      } else {
+        modalSummary.style.display = "none";
+      }
+    }
+
+    // Render sorted list in modal
+    userPronoDataList.forEach(data => {
+      const row = document.createElement("div");
+      row.className = "modal-prono-row";
+      row.style.cursor = "pointer";
+      row.innerHTML = `
+        <div class="modal-user-info">
+          <span class="modal-user-rank">#${data.rank}</span>
+          <span class="modal-user-name">${data.username}</span>
+        </div>
+        <div class="modal-prono-values">
+          <span class="modal-prono-val">${data.predText}</span>
+          <span class="modal-pts-badge ${data.ptsClass}">${data.ptsText}</span>
+        </div>
+      `;
+      // Clicking on user inside the modal goes to their user page details and closes the modal
+      row.addEventListener("click", () => {
+        matchModal.classList.remove("open");
+        navigateToUserPredictions(data.username);
+      });
+      modalList.appendChild(row);
+    });
+
+    // Show modal
+    matchModal.classList.add("open");
   }
 
   // Populate User dropdown list

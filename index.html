@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- FontAwesome for Premium Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="index.css?v=2.0.1">
+  <link rel="stylesheet" href="index.css?v=2.0.2">
 </head>
 <body>
   <div class="app-container">
@@ -298,6 +298,26 @@
 
   </div>
 
-  <script src="app.js?v=2.0.1"></script>
+  <!-- FINESTRA MODALE PRONOSTICI PARTITA -->
+  <div id="match-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <span id="modal-match-stage" class="modal-stage-label">-</span>
+        <h2 id="modal-match-title">- vs -</h2>
+        <span id="modal-match-info" class="modal-info-label"><i class="fa-regular fa-clock"></i> -</span>
+      </div>
+      <div class="modal-body">
+        <div class="modal-prono-summary" id="modal-prono-summary">
+          <!-- Summary of predictions stats -->
+        </div>
+        <div class="modal-prono-list" id="modal-prono-list">
+          <!-- Dinamically loaded list of predictions -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=2.0.2"></script>
 </body>
 </html>
