@@ -49,15 +49,17 @@ Puoi lanciare lo script di calcolo in locale tramite Python:
 ```bash
 python3 aggiorna_dati.py
 ```
-*Nota: In assenza di una chiave API configurata nelle variabili d'ambiente, lo script girerà in modalità simulazione locale (MOCK) aggiornando alcuni risultati campione a scopo dimostrativo.*
+Lo script si collegherà automaticamente al feed pubblico di openfootball per scaricare i risultati correnti.
 
 ---
 
-## 🔑 Configurazione GitHub Actions & API-Football
+## 🌍 Fonti di Dati & Ringraziamenti
 
-Per far sì che il backend si aggiorni da solo con i risultati del mondo reale:
+I dati delle partite, i risultati in tempo reale e il tabellone dei Mondiali 2026 vengono sincronizzati automaticamente grazie al progetto:
+- **[openfootball/worldcup.json](https://github.com/openfootball/worldcup.json)** (creato da Gerald Bauer e gestito dalla community di `football.db`).
 
-1.  Registrati su [API-Sports (API-Football)](https://dashboard.api-sports.io/) e ottieni la tua **API Key**.
-2.  Nel tuo repository GitHub, vai su **Settings** -> **Secrets and variables** -> **Actions**.
-3.  Crea un nuovo segreto chiamato `API_FOOTBALL_KEY` ed inserisci il valore del tuo token.
-4.  Il file di configurazione in `.github/workflows/update.yml` avvierà automaticamente lo script Python ogni giorno alle 03:00 UTC (o manualmente tramite la tab **Actions**) aggiornando il sito con i dati live.
+### Dettagli sulla sorgente dati:
+*   Il file JSON viene rigenerato via GitHub Actions a partire da un file sorgente in formato testuale (`cup.txt`).
+*   I dati sono rilasciati nel pubblico dominio (licenza **CC0**), consentendo l'uso libero senza chiavi API o limiti commerciali.
+*   L'applicazione interroga direttamente l'endpoint raw: `https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json`.
+*   I contributi ai punteggi sono aperti a tutti: chiunque può partecipare agli aggiornamenti inviando Pull Request al repository originale o richiedendo l'accesso in scrittura diretta.
