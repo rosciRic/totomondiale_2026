@@ -1,10 +1,7 @@
 name: Update Leaderboard and Results
 
 on:
-  schedule:
-    # Run every 10 minutes
-    - cron: '*/10 * * * *'
-  # Allow manual trigger from the Actions tab
+  # Allow manual trigger and external API triggers (e.g. from cron-job.org)
   workflow_dispatch:
 
 permissions:
