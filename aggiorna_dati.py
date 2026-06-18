@@ -505,10 +505,10 @@ def check_if_update_needed():
                 continue
             try:
                 match_time = datetime.datetime.fromisoformat(match_data_str)
-                # Standard football match duration: 2 hours (120 minutes)
-                expected_end = match_time + datetime.timedelta(minutes=120)
-                if now_cest_naive >= expected_end:
-                    print(f"La partita {match.get('id')} ({match.get('home')} vs {match.get('away')}) dovrebbe essere terminata (fine prevista: {expected_end}), ma non è conclusa nel DB locale.")
+                # Start checking from the 90th minute of the match (normal time end)
+                expected_check_start = match_time + datetime.timedelta(minutes=90)
+                if now_cest_naive >= expected_check_start:
+                    print(f"La partita {match.get('id')} ({match.get('home')} vs {match.get('away')}) è iniziata da almeno 90 minuti (inizio: {match_time}), ma non è conclusa nel DB locale. Controllo aggiornamenti...")
                     return True
             except ValueError:
                 continue

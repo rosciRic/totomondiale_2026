@@ -296,9 +296,9 @@
       "gruppo": "A",
       "home": "Repubblica Ceca",
       "away": "Sudafrica",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 26,
