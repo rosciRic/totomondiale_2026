@@ -358,10 +358,11 @@ body {
 
 .premium-table tbody tr {
   transition: var(--transition-smooth);
+  cursor: pointer;
 }
 
 .premium-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Positions styling */
@@ -411,6 +412,7 @@ body {
   background: var(--accent-purple);
   border-color: var(--accent-purple);
   box-shadow: 0 0 10px rgba(142, 45, 226, 0.4);
+  transform: scale(1.05);
 }
 
 /* Search Box */
@@ -1280,6 +1282,9 @@ body {
    SMARTPHONE EXTRA OPTIMIZATIONS (max-width: 480px)
    ========================================================================== */
 @media (max-width: 480px) {
+  .app-container {
+    padding: 10px 8px;
+  }
   .logo-area h1 {
     font-size: 1.7rem;
   }

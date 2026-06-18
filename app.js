@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (targetContent) {
         targetContent.classList.add("active");
       }
+
+      // Smooth scroll to content area on mobile devices
+      if (window.innerWidth <= 768) {
+        document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
+      }
     });
   });
 
@@ -211,7 +216,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Attach button click event to navigate to user predictions
       const btn = row.querySelector(".btn-details");
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navigateToUserPredictions(player.nome);
+      });
+
+      // Make the entire row clickable for better mobile and desktop UX
+      row.addEventListener("click", () => {
         navigateToUserPredictions(player.nome);
       });
 
@@ -251,6 +262,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set dropdown selection
     userSelector.value = username;
     renderUserPredictions(username);
+
+    // Smooth scroll to content area on mobile devices
+    if (window.innerWidth <= 768) {
+      document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   // Format datetime ISO string into readable format
