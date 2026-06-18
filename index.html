@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Totomondiale 2026 - Classifica, pronostici e statistiche in tempo reale.">
+  <title>Totomondiale 2026</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- HEADER -->
+    <header class="main-header">
+      <div class="header-overlay"></div>
+      <div class="header-content">
+        <div class="logo-area">
+          <i class="fa-solid fa-trophy trophy-glow"></i>
+          <h1>TOTOMONDIALE <span>2026</span></h1>
+        </div>
+        <p class="subtitle">La sfida definitiva sulle partite dei Mondiali USA-Messico-Canada</p>
+        <div class="last-update" id="last-update-text">
+          Caricamento dati in corso...
+        </div>
+      </div>
+    </header>
+
+    <!-- METRICS DASHBOARD -->
+    <section class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-icon purple-bg"><i class="fa-solid fa-users"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Partecipanti</span>
+          <h3 id="stat-participants">-</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon gold-bg"><i class="fa-solid fa-crown"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Leader Attuale</span>
+          <h3 id="stat-leader">-</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon cyan-bg"><i class="fa-solid fa-circle-play"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Partite Concluse</span>
+          <h3 id="stat-matches">-</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green-bg"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Punti Totali Assegnati</span>
+          <h3 id="stat-points">-</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="navigation-tabs">
+      <button class="tab-button active" id="tab-btn-classifica" data-tab="tab-classifica">
+        <i class="fa-solid fa-ranking-star"></i> Classifica
+      </button>
+      <button class="tab-button" id="tab-btn-partite" data-tab="tab-partite">
+        <i class="fa-solid fa-calendar-days"></i> Partite & Risultati
+      </button>
+      <button class="tab-button" id="tab-btn-pronostici" data-tab="tab-pronostici">
+        <i class="fa-solid fa-chart-pie"></i> Pronostici Utenti
+      </button>
+      <button class="tab-button" id="tab-btn-regolamento" data-tab="tab-regolamento">
+        <i class="fa-solid fa-circle-info"></i> Info & Regolamento
+      </button>
+    </nav>
+
+    <!-- MAIN VIEW AREAS -->
+    <main class="content-area">
+
+      <!-- TAB: CLASSIFICA -->
+      <section class="tab-content active" id="tab-classifica">
+        <div class="card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-list-ol"></i> Classifica Generale</h2>
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="classifica-search" placeholder="Cerca partecipante...">
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="premium-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px; text-align: center;">Pos</th>
+                  <th>Nome Giocatore</th>
+                  <th style="text-align: center;">Punti Totali</th>
+                  <th style="text-align: center;" class="hide-mobile">Risultati Esatti (+3)</th>
+                  <th style="text-align: center;" class="hide-mobile">Prono Esatti (+1)</th>
+                  <th style="text-align: center;" class="hide-mobile">Errori</th>
+                  <th style="width: 90px; text-align: center;">Dettaglio</th>
+                </tr>
+              </thead>
+              <tbody id="classifica-body">
+                <!-- Dynamically injected -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: PARTITE & RISULTATI -->
+      <section class="tab-content" id="tab-partite">
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label for="filter-stage"><i class="fa-solid fa-filter"></i> Filtra Fase:</label>
+            <select id="filter-stage">
+              <option value="all">Tutte le fasi</option>
+              <option value="gironi">Fase a Gironi</option>
+              <option value="eliminazione">Fase a Eliminazione Diretta</option>
+              <option value="sedicesimi">Sedicesimi di Finale</option>
+              <option value="ottavi">Ottavi di Finale</option>
+              <option value="quarti">Quarti di Finale</option>
+              <option value="semifinali">Semifinali</option>
+              <option value="finale">Finale</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-status"><i class="fa-solid fa-toggle-on"></i> Stato:</label>
+            <select id="filter-status">
+              <option value="all">Tutte</option>
+              <option value="conclusa">Concluse</option>
+              <option value="programmata">Da Giocare</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="matches-grid" id="matches-container">
+          <!-- Dynamically injected -->
+        </div>
+      </section>
+
+      <!-- TAB: PRONOSTICI UTENTI -->
+      <section class="tab-content" id="tab-pronostici">
+        <div class="user-select-bar card">
+          <div class="select-wrapper">
+            <label for="user-selector"><i class="fa-solid fa-user-gear"></i> Seleziona Partecipante:</label>
+            <select id="user-selector">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+          <div class="user-summary-stats" id="user-summary-stats">
+            <!-- Dynamically populated stats for chosen user -->
+          </div>
+        </div>
+
+        <div class="user-detail-grid">
+          <!-- Section 1: Matches Predictions -->
+          <div class="card col-span-2">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-soccer-ball"></i> Pronostici Risultati</h2>
+              <span class="badge badge-info">Confronto con esito reale</span>
+            </div>
+            <div class="user-matches-list" id="user-matches-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Section 2: Brackets & Final Prizes -->
+          <div class="user-extra-predictions">
+            <!-- Passage of round -->
+            <div class="card mb-20">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-sitemap"></i> Passaggio Turno</h2>
+              </div>
+              <div class="bracket-predictions-container" id="user-bracket-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Special Awards -->
+            <div class="card">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-award"></i> Premi Speciali</h2>
+              </div>
+              <div class="awards-predictions-container" id="user-awards-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: REGOLAMENTO -->
+      <section class="tab-content" id="tab-regolamento">
+        <div class="regolamento-grid">
+          <div class="card">
+            <h2><i class="fa-solid fa-book"></i> Regole di Calcolo Punteggi</h2>
+            <hr class="divider">
+            <div class="rule-item">
+              <div class="rule-badge badge-exact">+3</div>
+              <div class="rule-desc">
+                <h4>Risultato Esatto</h4>
+                <p>Punteggio azzeccato esattamente nel punteggio finale (es. pronostico 2-0, partita finisce 2-0).</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-badge badge-sign">+1</div>
+              <div class="rule-desc">
+                <h4>Pronostico Esatto (Segno 1X2)</h4>
+                <p>Risultato esatto errato ma pronostico 1X2 corretto (es. pronostico 2-0, partita finisce 2-1: la squadra di casa ha vinto comunque).</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-badge badge-knockout">+1</div>
+              <div class="rule-desc">
+                <h4>Passaggio Turno (Fasi Finali)</h4>
+                <p>Per ogni singola squadra inserita nel tabellone ad eliminazione diretta (sedicesimi, ottavi, quarti, semifinali, finale) che si qualifica effettivamente alla fase successiva.</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-badge badge-gold">+10</div>
+              <div class="rule-desc">
+                <h4>Vincitore del Torneo</h4>
+                <p>Squadra vincitrice finale del Mondiale 2026 indovinata all'inizio del torneo.</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-badge badge-gold">+5</div>
+              <div class="rule-desc">
+                <h4>Premi Finali Speciali</h4>
+                <p>Forniti per ognuno dei seguenti esiti azzeccati (inseriti all'inizio):</p>
+                <ul>
+                  <li>L'altra finalista del torneo</li>
+                  <li>Miglior marcatore (Capocannoniere)</li>
+                  <li>Miglior giocatore del torneo (MVP)</li>
+                  <li>Miglior portiere del torneo</li>
+                  <li>Miglior giovane del torneo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+          
+          <!-- SEZIONE QUOTE E MONTEPREMI (Aggiunta da Regolamento Ufficiale) -->
+          <div class="card col-span-2" style="grid-column: 1 / -1; margin-top: 10px;">
+            <h2><i class="fa-solid fa-sack-dollar"></i> Quote e Montepremi Dinamico</h2>
+            <hr class="divider">
+            <div class="montepremi-layout">
+              <div class="montepremi-stats-grid">
+                <div class="m-stat-card">
+                  <span class="m-label"><i class="fa-solid fa-ticket"></i> Quota di Partecipazione</span>
+                  <strong class="m-val">10 €</strong>
+                </div>
+                <div class="m-stat-card">
+                  <span class="m-label"><i class="fa-solid fa-users"></i> Partecipanti Totali</span>
+                  <strong class="m-val" id="rules-participants">-</strong>
+                </div>
+                <div class="m-stat-card">
+                  <span class="m-label"><i class="fa-solid fa-wallet"></i> Montepremi Totale</span>
+                  <strong class="m-val" id="rules-total-jackpot" style="color: var(--accent-green);">- €</strong>
+                </div>
+              </div>
+              
+              <div class="prize-distribution-container">
+                <h3>Ripartizione Premi</h3>
+                <p class="prize-disclaimer">Il montepremi totale viene ripartito in percentuale in base al numero finale di partecipanti.</p>
+                
+                <div class="prize-cards-container">
+                  <div class="prize-card rank-1st">
+                    <div class="prize-badge"><i class="fa-solid fa-trophy" style="color: var(--accent-gold);"></i> 1° Classificato</div>
+                    <div class="prize-pct" id="jackpot-1-pct">-</div>
+                    <div class="prize-cash" id="jackpot-1-amount">- €</div>
+                  </div>
+                  <div class="prize-card rank-2nd">
+                    <div class="prize-badge"><i class="fa-solid fa-medal" style="color: #b8c0d2;"></i> 2° Classificato</div>
+                    <div class="prize-pct" id="jackpot-2-pct">-</div>
+                    <div class="prize-cash" id="jackpot-2-amount">- €</div>
+                  </div>
+                  <div class="prize-card rank-3rd">
+                    <div class="prize-badge"><i class="fa-solid fa-award" style="color: #cf6a4c;"></i> 3° Classificato</div>
+                    <div class="prize-pct" id="jackpot-3-pct">-</div>
+                    <div class="prize-cash" id="jackpot-3-amount">- €</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="payment-details-box">
+                <h4><i class="fa-solid fa-circle-exclamation" style="color: var(--accent-gold);"></i> Info Pagamenti & Contatti</h4>
+                <p>La quota di iscrizione deve essere versata entro l'inizio della competizione tramite:</p>
+                <div class="payment-methods">
+                  <div class="pay-method"><i class="fa-brands fa-paypal"></i> <strong>Paypal:</strong> <a href="mailto:markodandrea@hotmail.it">markodandrea@hotmail.it</a></div>
+                  <div class="pay-method"><i class="fa-solid fa-mobile-screen"></i> <strong>Satispay / Bonifico:</strong> Contattare l'organizzatore</div>
+                </div>
+                <p class="rules-footer">Contatto Ufficiale: Gruppo Whatsapp <strong>"TotoMondiale"</strong> o email <a href="mailto:marko.dandrea@gmail.com">marko.dandrea@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+      <p>&copy; 2026 Totomondiale. Powered by GitHub Pages & Actions.</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
