@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       onDataReady();
     } catch (err) {
       console.error(err);
-      lastUpdateText.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-red)"></i> Errore nel caricamento dei dati.`;
+      if (lastUpdateText) lastUpdateText.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-red)"></i> Errore nel caricamento dei dati.`;
     }
   }
 
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Set last update timestamp based on local time (or static meta if available)
     const now = new Date();
-    lastUpdateText.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Aggiornato in tempo reale`;
+    if (lastUpdateText) lastUpdateText.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Aggiornato in tempo reale`;
 
     // Attach search and filter events
     classificaSearch.addEventListener("input", filterLeaderboard);
