@@ -308,9 +308,9 @@
       "gruppo": "B",
       "home": "Svizzera",
       "away": "Bosnia ed Erzegovina",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 4,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 27,
