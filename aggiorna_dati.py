@@ -159,7 +159,77 @@ def aggiorna_risultati_partite():
                     updated = True
                     print(f"Update Partita {local_match['id']}: {local_match['home']} {local_goals_home} - {local_goals_away} {local_match['away']}")
 
-    # 2. Extract qualified teams dynamically from bracket match schedules
+    # 2. Extract and update all Knockout Stage matches (ID 73-104) dynamically
+    local_match_ids = {m.get("id") for m in local_data.get("partite", [])}
+    fase_map = {
+        "Round of 32": "sedicesimi",
+        "Round of 16": "ottavi",
+        "Quarter-final": "quarti",
+        "Semi-final": "semifinali",
+        "Match for third place": "finale",
+        "Final": "finale"
+    }
+    
+    for match in openfootball_matches:
+        num = match.get("num")
+        if not num or num < 73:
+            continue
+            
+        team1 = match.get("team1")
+        team2 = match.get("team2")
+        score = match.get("score")
+        
+        home_team = normalize_team_name(team1) if not is_placeholder_team(team1) else team1
+        away_team = normalize_team_name(team2) if not is_placeholder_team(team2) else team2
+        
+        home_score = None
+        away_score = None
+        conclusa = False
+        
+        if score:
+            for score_key in ["pen", "aet", "ft"]:
+                if score_key in score:
+                    parts = score[score_key]
+                    if isinstance(parts, list) and len(parts) >= 2:
+                        home_score, away_score = parts[0], parts[1]
+                        conclusa = True
+                        break
+                        
+        if num not in local_match_ids:
+            new_match = {
+                "id": num,
+                "giorno": "",
+                "data": match.get("date") + "T" + match.get("time", "00:00").split(" ")[0] + ":00",
+                "fase": fase_map.get(match.get("round"), "eliminazione"),
+                "gruppo": None,
+                "home": home_team,
+                "away": away_team,
+                "home_score": home_score,
+                "away_score": away_score,
+                "conclusa": conclusa
+            }
+            local_data["partite"].append(new_match)
+            local_match_ids.add(num)
+            updated = True
+            print(f"Aggiunto Match ad Eliminazione Diretta {num}: {home_team} vs {away_team}")
+        else:
+            for local_match in local_data.get("partite", []):
+                if local_match.get("id") == num:
+                    if (local_match.get("home") != home_team or 
+                        local_match.get("away") != away_team or 
+                        local_match.get("home_score") != home_score or 
+                        local_match.get("away_score") != away_score or 
+                        local_match.get("conclusa") != conclusa):
+                        
+                        local_match["home"] = home_team
+                        local_match["away"] = away_team
+                        local_match["home_score"] = home_score
+                        local_match["away_score"] = away_score
+                        local_match["conclusa"] = conclusa
+                        updated = True
+                        print(f"Aggiornato Match ad Eliminazione Diretta {num}: {home_team} ({home_score}) vs ({away_score}) {away_team}")
+
+    # 3. Extract qualified teams dynamically from bracket match schedules
     # Initialize passaggio_turno fields if not present
     if "passaggio_turno" not in local_data:
         local_data["passaggio_turno"] = {}

@@ -2,7 +2,7 @@
 
 Una web application moderna, ecocompatibile e a **costo zero** costruita con un'architettura **GitOps / Serverless** per gestire ed elaborare i pronostici dei mondiali di calcio USA-Messico-Canada 2026.
 
-Il sistema gestisce **38 partecipanti**, la fase a gironi da **72 partite** (formato a 48 squadre) e l'intera fase a eliminazione diretta a partire dai **Sedicesimi di finale**.
+Il sistema gestisce **38 partecipanti**, l'intero mondiale da **104 partite** (formato a 48 squadre, incluse le 72 della fase a gironi e le 32 ad eliminazione diretta) e l'intera fase a eliminazione diretta a partire dai **Sedicesimi di finale**.
 
 ---
 

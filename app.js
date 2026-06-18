@@ -111,19 +111,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Calculate and display top widgets metrics
   function renderDashboardMetrics() {
-    statParticipants.textContent = globalClassifica.length;
+    if (statParticipants) statParticipants.textContent = globalClassifica.length;
     
-    if (globalClassifica.length > 0) {
-      statLeader.textContent = globalClassifica[0].nome;
-    } else {
-      statLeader.textContent = "Nessuno";
+    if (statLeader) {
+      if (globalClassifica.length > 0) {
+        statLeader.textContent = globalClassifica[0].nome;
+      } else {
+        statLeader.textContent = "Nessuno";
+      }
     }
 
     const completedCount = globalPartiteData.partite.filter(p => p.conclusa).length;
-    statMatches.textContent = `${completedCount} / ${globalPartiteData.partite.length}`;
+    if (statMatches) statMatches.textContent = `${completedCount} / ${globalPartiteData.partite.length}`;
 
     const totalPts = globalClassifica.reduce((sum, item) => sum + item.punti, 0);
-    statPoints.textContent = totalPts;
+    if (statPoints) statPoints.textContent = totalPts;
   }
 
   // Calculate and display Montepremi and Quote based on actual classification size
