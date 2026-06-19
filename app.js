@@ -1519,11 +1519,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
         
-        // Make matches clickable to view prediction detail in modal
-        matchNode.style.cursor = "pointer";
-        // Fetch raw match data for modal
-        const rawMatch = globalPartiteData.partite.find(pm => pm.id === m.id);
-        matchNode.addEventListener("click", () => openMatchModal(rawMatch));
+        // Make matches clickable to view prediction detail in modal (ONLY when displaying the REAL bracket)
+        if (userKey === "reale") {
+          matchNode.style.cursor = "pointer";
+          const rawMatch = globalPartiteData.partite.find(pm => pm.id === m.id);
+          matchNode.addEventListener("click", () => openMatchModal(rawMatch));
+        } else {
+          matchNode.style.cursor = "default";
+        }
 
         matchesDiv.appendChild(matchNode);
       });
