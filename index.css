@@ -604,6 +604,19 @@ body {
   color: rgba(255, 255, 255, 0.85);
 }
 
+.calendar-day-item .day-today {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-purple-light);
+  transition: var(--transition-smooth);
+}
+
+.calendar-day-item.active .day-today {
+  color: #ffffff;
+}
+
 .calendar-arrow {
   width: 38px;
   height: 38px;

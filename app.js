@@ -51,15 +51,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Tabs Navigation
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
+      const targetTabId = tab.getAttribute("data-tab");
+
       // Deactivate all tabs and contents
       tabs.forEach(t => t.classList.remove("active"));
       tabContents.forEach(c => c.classList.remove("active"));
 
       // Activate clicked tab and corresponding content
       tab.classList.add("active");
-      const targetContent = document.getElementById(tab.getAttribute("data-tab"));
+      const targetContent = document.getElementById(targetTabId);
       if (targetContent) {
         targetContent.classList.add("active");
+      }
+
+      // If returning to Home Tab, reset calendar to today/default
+      if (targetTabId === "tab-home") {
+        resetCalendarToToday();
       }
 
       // Smooth scroll to content area on mobile devices
@@ -824,6 +831,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Helper to get default calendar date
+  function getDefaultDate() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    if (matchDates.includes(todayStr)) {
+      return todayStr;
+    } else {
+      const futureDates = matchDates.filter(d => d >= todayStr);
+      if (futureDates.length > 0) {
+        return futureDates[0];
+      } else {
+        return matchDates[matchDates.length - 1];
+      }
+    }
+  }
+
+  // Reset horizontal calendar to today or default date and scroll to it
+  function resetCalendarToToday() {
+    if (matchDates.length === 0) return;
+    const defaultDate = getDefaultDate();
+    homeSelectedDate = defaultDate;
+
+    const daysScroll = document.getElementById("calendar-days-scroll");
+    if (!daysScroll) return;
+
+    const items = daysScroll.querySelectorAll(".calendar-day-item");
+    items.forEach(item => {
+      if (item.getAttribute("data-date") === homeSelectedDate) {
+        item.classList.add("active");
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        item.classList.remove("active");
+      }
+    });
+
+    renderHome();
+  }
+
   // Initialize the horizontal calendar slider
   function initCalendar() {
     // 1. Extract unique dates sorted in chronological order (YYYY-MM-DD)
@@ -842,16 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dd = String(today.getDate()).padStart(2, '0');
     const todayStr = `${yyyy}-${mm}-${dd}`;
 
-    if (matchDates.includes(todayStr)) {
-      homeSelectedDate = todayStr;
-    } else {
-      const futureDates = matchDates.filter(d => d >= todayStr);
-      if (futureDates.length > 0) {
-        homeSelectedDate = futureDates[0];
-      } else {
-        homeSelectedDate = matchDates[matchDates.length - 1];
-      }
-    }
+    homeSelectedDate = getDefaultDate();
 
     const daysScroll = document.getElementById("calendar-days-scroll");
     if (!daysScroll) return;
@@ -874,10 +914,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const dayItem = document.createElement("div");
       dayItem.className = `calendar-day-item${dateStr === homeSelectedDate ? " active" : ""}`;
       dayItem.setAttribute("data-date", dateStr);
-      dayItem.innerHTML = `
-        <span class="day-name">${dayName}</span>
-        <span class="day-num">${dayNum}</span>
-      `;
+      
+      const isToday = dateStr === todayStr;
+      if (isToday) {
+        dayItem.innerHTML = `
+          <span class="day-today">Oggi</span>
+        `;
+      } else {
+        dayItem.innerHTML = `
+          <span class="day-name">${dayName}</span>
+          <span class="day-num">${dayNum}</span>
+        `;
+      }
 
       dayItem.addEventListener("click", () => {
         // Remove active class from others
