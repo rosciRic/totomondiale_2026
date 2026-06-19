@@ -320,9 +320,9 @@
       "gruppo": "B",
       "home": "Canada",
       "away": "Qatar",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 6,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 28,
