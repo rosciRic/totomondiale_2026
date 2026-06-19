@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let globalPartiteData = { partite: [], passaggio_turno: {}, premi_finali: {} };
   let globalPronostici = { partecipanti: {} };
   let currentSortMode = "cronologico";
+  let homeSelectedDate = "";
+  let matchDates = [];
 
   // DOM Elements
   const tabs = document.querySelectorAll(".tab-button");
@@ -113,8 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Render Montepremi Details
     renderMontepremi();
 
-    // 6. Render Home Matches of the Day
-    renderHome();
+    // 6. Initialize and Render Calendar on Home Tab
+    initCalendar();
 
     // 7. Render Statistics Tab
     renderStatistiche();
@@ -917,37 +919,176 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render Home Tab - Matches of the Day
-  function renderHome() {
-    const today = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    if (homeTodayDate) {
-      homeTodayDate.textContent = today.toLocaleDateString('it-IT', options);
-    }
+  // Initialize the horizontal calendar slider
+  function initCalendar() {
+    // 1. Extract unique dates sorted in chronological order (YYYY-MM-DD)
+    matchDates = [...new Set(globalPartiteData.partite
+      .map(m => m.data)
+      .filter(d => d)
+      .map(d => d.split('T')[0]))
+    ].sort();
 
+    if (matchDates.length === 0) return;
+
+    // 2. Select initial date: today if tournament is active today, or closest future, or fallback
+    const today = new Date();
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
     const todayStr = `${yyyy}-${mm}-${dd}`;
 
-    const todayMatches = globalPartiteData.partite.filter(match => match.data.startsWith(todayStr));
+    if (matchDates.includes(todayStr)) {
+      homeSelectedDate = todayStr;
+    } else {
+      const futureDates = matchDates.filter(d => d >= todayStr);
+      if (futureDates.length > 0) {
+        homeSelectedDate = futureDates[0];
+      } else {
+        homeSelectedDate = matchDates[matchDates.length - 1];
+      }
+    }
+
+    const daysScroll = document.getElementById("calendar-days-scroll");
+    if (!daysScroll) return;
+    daysScroll.innerHTML = "";
+
+    // 3. Dynamically populate calendar items
+    matchDates.forEach(dateStr => {
+      const parsedDate = new Date(dateStr + "T00:00:00");
+      // Format day name (short) and day number
+      let dayName = parsedDate.toLocaleDateString('it-IT', { weekday: 'short' }).slice(0, 3).replace('.', '');
+      dayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+      const dayNum = parsedDate.getDate();
+
+      const dayItem = document.createElement("div");
+      dayItem.className = `calendar-day-item${dateStr === homeSelectedDate ? " active" : ""}`;
+      dayItem.setAttribute("data-date", dateStr);
+      dayItem.innerHTML = `
+        <span class="day-name">${dayName}</span>
+        <span class="day-num">${dayNum}</span>
+      `;
+
+      dayItem.addEventListener("click", () => {
+        // Remove active class from others
+        document.querySelectorAll(".calendar-day-item").forEach(item => item.classList.remove("active"));
+        dayItem.classList.add("active");
+        
+        homeSelectedDate = dateStr;
+        renderHome();
+        
+        // Scroll item to center smoothly
+        dayItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+
+      daysScroll.appendChild(dayItem);
+    });
+
+    // 4. Center active day initially after a short timeout to let CSS/rendering finish
+    setTimeout(() => {
+      const activeItem = daysScroll.querySelector(".calendar-day-item.active");
+      if (activeItem) {
+        activeItem.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+      }
+    }, 150);
+
+    // 5. Arrow controls click events
+    const prevBtn = document.getElementById("calendar-prev-btn");
+    const nextBtn = document.getElementById("calendar-next-btn");
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        const currentIndex = matchDates.indexOf(homeSelectedDate);
+        if (currentIndex > 0) {
+          const prevDate = matchDates[currentIndex - 1];
+          const prevItem = daysScroll.querySelector(`.calendar-day-item[data-date="${prevDate}"]`);
+          if (prevItem) prevItem.click();
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        const currentIndex = matchDates.indexOf(homeSelectedDate);
+        if (currentIndex < matchDates.length - 1) {
+          const nextDate = matchDates[currentIndex + 1];
+          const nextItem = daysScroll.querySelector(`.calendar-day-item[data-date="${nextDate}"]`);
+          if (nextItem) nextItem.click();
+        }
+      });
+    }
+
+    // 6. Touch swipe gestures on the matches grid container (#home-today-container)
+    if (homeTodayContainer) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      homeTodayContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      homeTodayContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipeGesture();
+      }, { passive: true });
+
+      function handleSwipeGesture() {
+        const threshold = 65; // minimum swipe distance in px
+        const deltaX = touchEndX - touchStartX;
+        const currentIndex = matchDates.indexOf(homeSelectedDate);
+
+        if (Math.abs(deltaX) > threshold && currentIndex !== -1) {
+          if (deltaX > 0 && currentIndex > 0) {
+            // Swipe right -> Go to previous day
+            const prevDate = matchDates[currentIndex - 1];
+            const prevItem = daysScroll.querySelector(`.calendar-day-item[data-date="${prevDate}"]`);
+            if (prevItem) prevItem.click();
+          } else if (deltaX < 0 && currentIndex < matchDates.length - 1) {
+            // Swipe left -> Go to next day
+            const nextDate = matchDates[currentIndex + 1];
+            const nextItem = daysScroll.querySelector(`.calendar-day-item[data-date="${nextDate}"]`);
+            if (nextItem) nextItem.click();
+          }
+        }
+      }
+    }
+
+    // Render matches for initial date
+    renderHome();
+  }
+
+  // Render Home Tab - Matches of the selected day
+  function renderHome() {
+    if (!homeSelectedDate) return;
+
+    // 1. Update the date header with full readable Italian date
+    const selectedParsedDate = new Date(homeSelectedDate + "T00:00:00");
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = selectedParsedDate.toLocaleDateString('it-IT', options);
+    if (homeTodayDate) {
+      homeTodayDate.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+    }
+
+    // 2. Filter matches for the selected date
+    const selectedMatches = globalPartiteData.partite.filter(match => match.data.startsWith(homeSelectedDate));
 
     if (!homeTodayContainer) return;
     homeTodayContainer.innerHTML = "";
 
-    if (todayMatches.length === 0) {
+    // 3. Handle empty schedule
+    if (selectedMatches.length === 0) {
       homeTodayContainer.innerHTML = `
         <div class="col-span-2 home-empty-box" style="grid-column: 1 / -1;">
           <i class="fa-solid fa-calendar-xmark"></i>
-          Nessuna partita in programma per oggi.
+          Nessuna partita in programma per questo giorno.
         </div>
       `;
       return;
     }
 
-    todayMatches.forEach(match => {
+    // 4. Render match cards
+    selectedMatches.forEach(match => {
       const card = document.createElement("div");
-      card.className = "match-card";
+      card.className = "match-card animate-fade-in"; // Premium micro-animation
 
       const badgeClass = match.conclusa ? "badge-finished" : "badge-pending";
       const badgeText = match.conclusa ? "Conclusa" : "Da Giocare";

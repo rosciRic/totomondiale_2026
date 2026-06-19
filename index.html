@@ -75,9 +75,23 @@
       <section class="tab-content active" id="tab-home">
         <div class="card">
           <div class="card-header">
-            <h2><i class="fa-solid fa-calendar-day"></i> Partite di Oggi</h2>
+            <h2><i class="fa-solid fa-calendar-day"></i> Calendario Partite</h2>
             <span class="badge badge-info" id="home-today-date">-</span>
           </div>
+          
+          <!-- Sezione Calendario a Scorrimento Orizzontale -->
+          <div class="calendar-slider-container">
+            <button class="calendar-arrow prev-day" id="calendar-prev-btn" aria-label="Giorno precedente">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="calendar-days-wrapper" id="calendar-days-scroll">
+              <!-- Popolato dinamicamente da app.js -->
+            </div>
+            <button class="calendar-arrow next-day" id="calendar-next-btn" aria-label="Giorno successivo">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
           <div class="matches-grid" id="home-today-container">
             <!-- Dynamically injected -->
           </div>
