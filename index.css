@@ -516,15 +516,40 @@ body {
   width: 100%;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.calendar-days-wrapper::-webkit-scrollbar {
-  display: none;
+/* Hide scrollbar for Chrome, Safari and Opera on Mobile */
+@media (max-width: 768px) {
+  .calendar-days-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .calendar-days-wrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.calendar-days-wrapper {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+/* Premium scrollbar for PC / Desktop horizontal navigation */
+@media (min-width: 769px) {
+  .calendar-days-wrapper {
+    padding-bottom: 8px; /* space for scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.02);
+  }
+  .calendar-days-wrapper::-webkit-scrollbar {
+    height: 5px;
+    display: block;
+  }
+  .calendar-days-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+  }
+  .calendar-days-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+  }
+  .calendar-days-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 
 .calendar-day-item {
@@ -1890,95 +1915,186 @@ body {
   transition: width 1s ease-out;
 }
 
-/* Match Difficulty Split */
-.difficulty-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
+/* Visual Tournament Bracket */
+.bracket-scroll-container {
+  overflow-x: auto;
+  padding: 10px 0;
+  margin-top: 15px;
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
 }
 
-.difficulty-column {
+.bracket-scroll-wrapper {
+  display: flex;
+  gap: 32px;
+  min-width: max-content;
+  padding-bottom: 15px;
+}
+
+.bracket-column {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  width: 230px;
+  flex-shrink: 0;
 }
 
-.diff-header {
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.bracket-column h3 {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--accent-gold);
+  margin-bottom: 24px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 10px;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.diff-header.hardest {
-  color: var(--accent-red);
-}
-
-.diff-header.easiest {
-  color: var(--accent-green);
-}
-
-.difficulty-list {
+.bracket-column-matches {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: space-around;
+  flex-grow: 1;
+  gap: 20px;
 }
 
-.difficulty-match-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.bracket-match-node {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 12px 16px;
-  border-radius: 10px;
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   transition: var(--transition-smooth);
 }
 
-.difficulty-match-row:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
+.bracket-match-node:hover {
+  border-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
-.diff-match-info {
+.bracket-node-header {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.bracket-node-teams {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+
+.bracket-node-team {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: var(--transition-smooth);
+}
+
+.bracket-node-team .team-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bracket-node-team .team-score {
+  font-weight: 800;
+  min-width: 15px;
+  text-align: right;
+}
+
+/* Prediction validation highlighting */
+.team-predicted-correct {
+  background: rgba(0, 219, 139, 0.08);
+  border-color: rgba(0, 219, 139, 0.3);
+  color: var(--accent-green) !important;
+  font-weight: 600;
+}
+
+.team-predicted-incorrect {
+  background: rgba(255, 65, 108, 0.07);
+  border-color: rgba(255, 65, 108, 0.25);
+  color: var(--accent-red) !important;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.team-predicted-pending {
+  background: rgba(255, 200, 55, 0.05);
+  border-color: rgba(255, 200, 55, 0.25);
+  color: var(--accent-gold) !important;
+}
+
+.team-not-predicted-qualified {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  opacity: 0.9;
+}
+
+.winner-highlight {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.loser-dimmed {
+  opacity: 0.4;
+}
+
+/* Winner node special styling */
+.winner-node {
+  background: rgba(255, 200, 55, 0.03) !important;
+  border-color: rgba(255, 200, 55, 0.2) !important;
+  box-shadow: 0 4px 20px rgba(255, 200, 55, 0.1) !important;
+}
+
+/* Eliminated predictions chip list */
+.bracket-eliminated-box {
+  margin-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-top: 8px;
+}
+
+.bracket-eliminated-title {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.bracket-eliminated-list {
+  display: flex;
+  flex-wrap: wrap;
   gap: 4px;
 }
 
-.diff-match-teams {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.diff-match-meta {
-  font-size: 0.75rem;
+.bracket-eliminated-chip {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 65, 108, 0.04);
+  border: 1px solid rgba(255, 65, 108, 0.15);
   color: var(--color-text-muted);
-}
-
-.diff-score-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  text-align: center;
-  min-width: 80px;
-}
-
-.diff-score-badge.hard {
-  background: rgba(255, 65, 108, 0.15);
-  color: #ff6b8b;
-  border: 1px solid rgba(255, 65, 108, 0.2);
-}
-
-.diff-score-badge.easy {
-  background: rgba(0, 219, 139, 0.15);
-  color: #33e4a3;
-  border: 1px solid rgba(0, 219, 139, 0.2);
+  text-decoration: line-through;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Home empty message styles */

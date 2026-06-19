@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const userSelector = document.getElementById("user-selector");
   const userSummaryStats = document.getElementById("user-summary-stats");
   const userMatchesList = document.getElementById("user-matches-list");
-  const userBracketList = document.getElementById("user-bracket-list");
   const userAwardsList = document.getElementById("user-awards-list");
 
   // Home Tab Elements
@@ -46,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Statistics Tab Elements
   const statExactRatio = document.getElementById("stat-exact-ratio");
   const statSignRatio = document.getElementById("stat-sign-ratio");
-  const hardestMatchesList = document.getElementById("hardest-matches-list");
-  const easiestMatchesList = document.getElementById("easiest-matches-list");
+  const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
+  const fasefinaleBracketContainer = document.getElementById("fasefinale-bracket-container");
 
   // Initialize Tabs Navigation
   tabs.forEach(tab => {
@@ -118,8 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 6. Initialize and Render Calendar on Home Tab
     initCalendar();
 
-    // 7. Render Statistics Tab
-    renderStatistiche();
+    // 7. Render Global standings stats and Fase Finale tabellone
+    renderGlobalStats();
+    initFaseFinale();
 
     // Set last update timestamp based on local time (or static meta if available)
     const now = new Date();
@@ -615,7 +615,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderUserPredictions(username) {
     userSummaryStats.innerHTML = "";
     userMatchesList.innerHTML = "";
-    userBracketList.innerHTML = "";
     userAwardsList.innerHTML = "";
 
     const userDati = globalPronostici.partecipanti[username];
@@ -752,101 +751,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     userMatchesList.innerHTML = predictionRowsHtml || `<p>Nessun pronostico inserito.</p>`;
 
-    // --- Render Bracket Qualified Teams ---
-    const userPassaggio = userDati.passaggio_turno;
-    const realPassaggio = globalPartiteData.passaggio_turno || {};
 
-    if (!userPassaggio) {
-      userBracketList.innerHTML = `
-        <div class="badge badge-pending" style="display: block; text-align: center; padding: 12px;">
-          <i class="fa-solid fa-triangle-exclamation"></i> Nessun pronostico fase finale inserito.
-        </div>
-      `;
-    } else {
-      let bracketHtml = "";
-      const phases = [
-        { key: "sedicesimi", label: "Sedicesimi di Finale (Passano agli Ottavi)" },
-        { key: "ottavi", label: "Ottavi di Finale (Passano ai Quarti)" },
-        { key: "quarti", label: "Quarti di Finale (Passano alle Semifinali)" },
-        { key: "semifinali", label: "Semifinali (Passano in Finale)" },
-        { key: "finale", label: "Finale (Vincitrice & Finalista)" }
-      ];
-
-      phases.forEach(phase => {
-        const userTeams = userPassaggio[phase.key] || [];
-        const realTeams = realPassaggio[phase.key] || [];
-        
-        let chipsHtml = "";
-        
-        if (userTeams.length === 0) {
-          chipsHtml = `<span style="font-size: 0.85rem; color: var(--color-text-muted);">Nessuna squadra pronosticata per questo turno.</span>`;
-        } else {
-          userTeams.forEach(team => {
-            let chipClass = "team-unchecked";
-            let iconHtml = `<i class="fa-regular fa-circle"></i>`;
-            
-            // Clean up to compare
-            const cleanTeam = team.trim().toLowerCase();
-            const cleanRealList = realTeams.map(t => t.trim().toLowerCase());
-            
-            if (realTeams && realTeams.length > 0) {
-              if (cleanRealList.includes(cleanTeam)) {
-                chipClass = "team-correct";
-                iconHtml = `<i class="fa-solid fa-circle-check"></i>`;
-              } else {
-                chipClass = "team-incorrect";
-                iconHtml = `<i class="fa-solid fa-circle-xmark"></i>`;
-              }
-            }
-            
-            chipsHtml += `
-              <span class="bracket-team-chip ${chipClass}">
-                ${iconHtml} ${getFlagEmoji(team)} ${team}
-              </span>
-            `;
-          });
-        }
-
-        bracketHtml += `
-          <div class="bracket-round-block">
-            <h4>${phase.label}</h4>
-            <div class="bracket-teams-flex">
-              ${chipsHtml}
-            </div>
-          </div>
-        `;
-      });
-
-      // Add Bracket Winner Check
-      const uWinner = userPassaggio.vincitore;
-      const rWinner = realPassaggio.vincitore;
-      let winnerChipClass = "team-unchecked";
-      let winnerIcon = `<i class="fa-regular fa-circle"></i>`;
-      
-      if (uWinner) {
-        if (rWinner) {
-          if (uWinner.trim().toLowerCase() === rWinner.trim().toLowerCase()) {
-            winnerChipClass = "team-correct";
-            winnerIcon = `<i class="fa-solid fa-circle-check"></i>`;
-          } else {
-            winnerChipClass = "team-incorrect";
-            winnerIcon = `<i class="fa-solid fa-circle-xmark"></i>`;
-          }
-        }
-        bracketHtml += `
-          <div class="bracket-round-block" style="margin-top: 15px;">
-            <h4>Vincitore Finale Tabellone (+1 pt)</h4>
-            <div class="bracket-teams-flex">
-              <span class="bracket-team-chip ${winnerChipClass}">
-                ${winnerIcon} ${getFlagEmoji(uWinner)} ${uWinner}
-              </span>
-            </div>
-          </div>
-        `;
-      }
-
-      userBracketList.innerHTML = bracketHtml;
-    }
 
     // --- Render Final Special Awards ---
     const userPremi = userDati.premi_finali;
@@ -951,6 +856,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const daysScroll = document.getElementById("calendar-days-scroll");
     if (!daysScroll) return;
     daysScroll.innerHTML = "";
+
+    // Wheel horizontal scroll for desktop mouse users
+    daysScroll.addEventListener("wheel", (evt) => {
+      evt.preventDefault();
+      daysScroll.scrollLeft += evt.deltaY;
+    });
 
     // 3. Dynamically populate calendar items
     matchDates.forEach(dateStr => {
@@ -1130,9 +1041,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Render Statistics Tab
-  function renderStatistiche() {
-    // 1. Calculate General Aggregates
+  // Render Global standings stats in leaderboard
+  function renderGlobalStats() {
     let totalExact = 0;
     let totalSign = 0;
     let totalError = 0;
@@ -1147,116 +1057,402 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (statExactRatio) statExactRatio.innerHTML = `${totalExact} <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">(${exactRatio}%)</span>`;
     if (statSignRatio) statSignRatio.innerHTML = `${totalSign} <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">(${signRatio}%)</span>`;
+  }
 
-
-
-    // 3. Analyze & Render Match Difficulty
-    const completedMatches = globalPartiteData.partite.filter(match => match.conclusa);
-    const matchStats = [];
-
-    completedMatches.forEach(match => {
-      let totalMatchPoints = 0;
-      let participantsCount = 0;
-
-      Object.keys(globalPronostici.partecipanti).forEach(username => {
-        const userDati = globalPronostici.partecipanti[username];
-        if (userDati) {
-          participantsCount++;
-          const userPartite = userDati.partite || {};
-          const pred = userPartite[match.id];
-          if (pred) {
-            if (match.home_score === pred.home_score && match.away_score === pred.away_score) {
-              totalMatchPoints += 3;
-            } else {
-              const realSign = getSign(match.home_score, match.away_score);
-              const predSign = getSign(pred.home_score, pred.away_score);
-              if (realSign === predSign) {
-                totalMatchPoints += 1;
-              }
-            }
-          }
-        }
-      });
-
-      const avgMatchPoints = participantsCount > 0 ? totalMatchPoints / participantsCount : 0;
-      matchStats.push({
-        match,
-        avgPoints: avgMatchPoints
-      });
+  // Populate drop-down list of participants for the Fase Finale tabellone
+  function initFaseFinale() {
+    if (!tabelloneUserSelector) return;
+    
+    // Clear and set real as default
+    tabelloneUserSelector.innerHTML = '<option value="reale">Reale (Mondiale 2026)</option>';
+    
+    // Sort participants by name
+    const partecipanti = Object.keys(globalPronostici.partecipanti).sort();
+    partecipanti.forEach(name => {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      tabelloneUserSelector.appendChild(opt);
     });
 
-    const hardest = [...matchStats].sort((a, b) => a.avgPoints - b.avgPoints).slice(0, 3);
-    const easiest = [...matchStats].sort((a, b) => b.avgPoints - a.avgPoints).slice(0, 3);
+    // Add event listener
+    tabelloneUserSelector.addEventListener("change", (e) => {
+      renderTabellone(e.target.value);
+    });
 
-    function renderDifficultyList(container, matchesList, type) {
-      if (!container) return;
-      container.innerHTML = "";
+    // Draw real bracket by default
+    renderTabellone("reale");
+  }
 
-      if (matchesList.length === 0) {
-        container.innerHTML = `<p style="font-size: 0.85rem; color: var(--color-text-muted); padding: 10px 0; text-align: center;">Nessun dato disponibile (nessuna partita conclusa).</p>`;
-        return;
+  // Helper to resolve placeholders like W74 and L101 dynamically
+  function resolveTeam(placeholder, resolvedMap, userKey, userPassaggio) {
+    if (!placeholder) return "-";
+    const cleanPlaceholder = placeholder.trim();
+    
+    if (cleanPlaceholder.startsWith("W")) {
+      const prevMatchId = parseInt(cleanPlaceholder.slice(1), 10);
+      if (resolvedMap[prevMatchId]) {
+        return resolvedMap[prevMatchId].winner || `Vinc. ${prevMatchId}`;
       }
+      return `Vinc. ${prevMatchId}`;
+    }
+    
+    if (cleanPlaceholder.startsWith("L")) {
+      const prevMatchId = parseInt(cleanPlaceholder.slice(1), 10);
+      if (resolvedMap[prevMatchId]) {
+        return resolvedMap[prevMatchId].loser || `Perd. ${prevMatchId}`;
+      }
+      return `Perd. ${prevMatchId}`;
+    }
+    
+    return cleanPlaceholder;
+  }
 
-      matchesList.forEach(item => {
-        const m = item.match;
-        const row = document.createElement("div");
-        row.className = "difficulty-match-row";
-        row.style.cursor = "pointer";
-        row.style.display = "block"; // override flex for vertical layout with colpaccio
-
-        const badgeClass = type === "hard" ? "diff-score-badge hard" : "diff-score-badge easy";
-        const stageLabel = m.fase === "gironi" ? `Gruppo ${m.gruppo}` : m.fase.toUpperCase();
-
-        // Calculate colpaccio for hard matches
-        let colpaccioHtml = "";
-        if (type === "hard") {
-          const exactGuesses = [];
-          Object.keys(globalPronostici.partecipanti).forEach(username => {
-            const userDati = globalPronostici.partecipanti[username];
-            if (userDati) {
-              const userPartite = userDati.partite || {};
-              const pred = userPartite[m.id];
-              if (pred && m.home_score === pred.home_score && m.away_score === pred.away_score) {
-                exactGuesses.push(username);
-              }
-            }
-          });
-          if (exactGuesses.length > 0) {
-            colpaccioHtml = `<div class="diff-match-colpaccio" style="font-size: 0.78rem; color: var(--accent-gold); margin-top: 8px; display: flex; align-items: center; gap: 6px;">
-              <i class="fa-solid fa-bullseye"></i> <strong>Colpaccio:</strong> ${exactGuesses.join(", ")}
-            </div>`;
-          } else {
-            colpaccioHtml = `<div class="diff-match-colpaccio" style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 8px; display: flex; align-items: center; gap: 6px; opacity: 0.6;">
-              <i class="fa-solid fa-face-frown-open"></i> Nessun ris. esatto indovinato
-            </div>`;
+  // Helper to determine the winner and loser of a match for the selected bracket view
+  function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati) {
+    const realConcluded = m.conclusa;
+    
+    if (userKey === "reale") {
+      if (realConcluded) {
+        if (m.home_score > m.away_score) return { winner: homeResolved, loser: awayResolved };
+        if (m.away_score > m.home_score) return { winner: awayResolved, loser: homeResolved };
+        
+        // Draw (penalties): check real passaggio_turno for who qualified
+        const realPassaggio = globalPartiteData.passaggio_turno || {};
+        const nextPhaseKey = m.fase;
+        if (nextPhaseKey && realPassaggio[nextPhaseKey]) {
+          const nextList = realPassaggio[nextPhaseKey].map(t => t.toLowerCase().trim());
+          if (nextList.includes(homeResolved.toLowerCase().trim())) {
+            return { winner: homeResolved, loser: awayResolved };
+          }
+          if (nextList.includes(awayResolved.toLowerCase().trim())) {
+            return { winner: awayResolved, loser: homeResolved };
           }
         }
+        return { winner: homeResolved, loser: awayResolved };
+      } else {
+        return { winner: `W${m.id}`, loser: `L${m.id}` };
+      }
+    }
+    
+    // User predictions
+    const userPassaggio = userDati?.passaggio_turno || {};
+    const nextPhaseKey = m.fase;
+    
+    let userWinner = null;
+    let userLoser = null;
 
-        row.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <div class="diff-match-info">
-              <div class="diff-match-teams">
-                ${getFlagEmoji(m.home)} ${m.home} ${m.home_score} - ${m.away_score} ${m.away} ${getFlagEmoji(m.away)}
-              </div>
-              <div class="diff-match-meta">
-                ${stageLabel} &bull; ID Partita: ${m.id}
-              </div>
-            </div>
-            <div class="${badgeClass}">
-              ${item.avgPoints.toFixed(2)} pt
-            </div>
-          </div>
-          ${colpaccioHtml}
-        `;
-
-        row.addEventListener("click", () => openMatchModal(m));
-        container.appendChild(row);
-      });
+    // 1. Try to find the winner from predicted score (if not a tie)
+    const userPartite = userDati?.partite || {};
+    const pred = userPartite[m.id];
+    if (pred && pred.home_score !== null && pred.away_score !== null) {
+      if (pred.home_score > pred.away_score) {
+        userWinner = homeResolved;
+        userLoser = awayResolved;
+      } else if (pred.away_score > pred.home_score) {
+        userWinner = awayResolved;
+        userLoser = homeResolved;
+      }
     }
 
-    renderDifficultyList(hardestMatchesList, hardest, "hard");
-    renderDifficultyList(easiestMatchesList, easiest, "easy");
+    // 2. Fall back to passaggio_turno list
+    if (!userWinner && nextPhaseKey) {
+      const uQualifiers = userPassaggio[nextPhaseKey] || [];
+      const cleanQualifiers = uQualifiers.map(t => t.toLowerCase().trim());
+      
+      if (cleanQualifiers.includes(homeResolved.toLowerCase().trim())) {
+        userWinner = homeResolved;
+        userLoser = awayResolved;
+      } else if (cleanQualifiers.includes(awayResolved.toLowerCase().trim())) {
+        userWinner = awayResolved;
+        userLoser = homeResolved;
+      }
+    }
 
+    // 3. Special check for Champion prediction in match 104
+    if (m.id === 104) {
+      const uChamp = userPassaggio.vincitore || userDati?.premi_finali?.vincitore;
+      if (uChamp) {
+        if (uChamp.toLowerCase().trim() === homeResolved.toLowerCase().trim()) {
+          userWinner = homeResolved;
+          userLoser = awayResolved;
+        } else if (uChamp.toLowerCase().trim() === awayResolved.toLowerCase().trim()) {
+          userWinner = awayResolved;
+          userLoser = homeResolved;
+        }
+      }
+    }
+
+    // Fallback: default to homeResolved or real winner
+    if (!userWinner) {
+      if (realConcluded) {
+        if (m.home_score > m.away_score) {
+          userWinner = homeResolved;
+          userLoser = awayResolved;
+        } else {
+          userWinner = awayResolved;
+          userLoser = homeResolved;
+        }
+      } else {
+        userWinner = homeResolved;
+        userLoser = awayResolved;
+      }
+    }
+
+    return { winner: userWinner, loser: userLoser };
+  }
+
+  // Render bracket tree and validate predictions
+  function renderTabellone(userKey) {
+    if (!fasefinaleBracketContainer) return;
+    fasefinaleBracketContainer.innerHTML = "";
+
+    const userDati = userKey !== "reale" ? globalPronostici.partecipanti[userKey] : null;
+    const userPassaggio = userDati ? (userDati.passaggio_turno || {}) : {};
+    const realPassaggio = globalPartiteData.passaggio_turno || {};
+
+    // 1. Resolve all matches chronologically
+    const resolved = {};
+    const knockoutMatches = globalPartiteData.partite.filter(p => p.fase !== 'gironi');
+    knockoutMatches.sort((a, b) => a.id - b.id);
+
+    knockoutMatches.forEach(m => {
+      const homeResolved = resolveTeam(m.home, resolved, userKey, userPassaggio);
+      const awayResolved = resolveTeam(m.away, resolved, userKey, userPassaggio);
+      const outcome = getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati);
+
+      resolved[m.id] = {
+        id: m.id,
+        fase: m.fase,
+        giorno: m.giorno,
+        data: m.data,
+        conclusa: m.conclusa,
+        home: homeResolved,
+        away: awayResolved,
+        home_score: userKey === "reale" ? m.home_score : (userDati?.partite?.[m.id]?.home_score ?? null),
+        away_score: userKey === "reale" ? m.away_score : (userDati?.partite?.[m.id]?.away_score ?? null),
+        real_home_score: m.home_score,
+        real_away_score: m.away_score,
+        winner: outcome.winner,
+        loser: outcome.loser
+      };
+    });
+
+    // Helper to determine if a name is a placeholder
+    function isPlaceholder(name) {
+      if (!name) return true;
+      const n = name.trim();
+      return n.startsWith("W") || n.startsWith("L") || n.startsWith("Vinc.") || n.startsWith("Perd.") || n.match(/^\d+[A-L]$/) || n.match(/^\d+$/);
+    }
+
+    // Helper to validate team predictions and return CSS class + status icon
+    function getTeamStatus(team, stage, m, isWinner) {
+      if (userKey === "reale") {
+        if (m.conclusa) {
+          const isRealWinner = (m.real_home_score > m.real_away_score && team === m.home) || 
+                               (m.real_away_score > m.real_home_score && team === m.away) ||
+                               (m.real_home_score === m.real_away_score && (realPassaggio[m.fase] || []).map(t=>t.toLowerCase().trim()).includes(team.toLowerCase().trim()));
+          return {
+            classes: isRealWinner ? "winner-highlight" : "loser-dimmed",
+            icon: isRealWinner ? '<i class="fa-solid fa-check" style="font-size: 0.75rem; margin-right: 4px;"></i>' : ""
+          };
+        }
+        return { classes: "", icon: "" };
+      }
+
+      if (isPlaceholder(team)) {
+        return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
+      }
+
+      // Check if team reached this stage in real life
+      let reachedReal = false;
+      let realList = [];
+      
+      if (stage === "sedicesimi") {
+        reachedReal = true; // Everybody starts matching Group stage outputs
+      } else if (stage === "ottavi") {
+        realList = realPassaggio.sedicesimi || [];
+      } else if (stage === "quarti") {
+        realList = realPassaggio.ottavi || [];
+      } else if (stage === "semifinali") {
+        realList = realPassaggio.quarti || [];
+      } else if (stage === "finale") {
+        realList = realPassaggio.semifinali || [];
+      }
+
+      if (stage !== "sedicesimi") {
+        if (realList.length === 0) {
+          return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
+        }
+        reachedReal = realList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
+      }
+
+      if (!reachedReal) {
+        return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
+      }
+
+      // If it reached real stage, and is not predicted winner, it's correct so far
+      if (!isWinner) {
+        return { classes: "team-predicted-correct", icon: '<i class="fa-solid fa-circle-check"></i>' };
+      }
+
+      // If it is predicted winner, verify next stage qualification
+      let nextRealList = [];
+      let isChamp = false;
+
+      if (stage === "sedicesimi") nextRealList = realPassaggio.sedicesimi || [];
+      else if (stage === "ottavi") nextRealList = realPassaggio.ottavi || [];
+      else if (stage === "quarti") nextRealList = realPassaggio.quarti || [];
+      else if (stage === "semifinali") nextRealList = realPassaggio.semifinali || [];
+      else if (stage === "finale") isChamp = true;
+
+      if (isChamp) {
+        const rChamp = realPassaggio.vincitore || globalPartiteData.premi_finali?.vincitore;
+        if (rChamp && rChamp.toLowerCase().trim() === team.toLowerCase().trim()) {
+          return { classes: "team-predicted-correct", icon: '<i class="fa-solid fa-circle-check"></i>' };
+        } else if (rChamp) {
+          return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
+        } else {
+          return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
+        }
+      }
+
+      if (nextRealList.length === 0) {
+        return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
+      }
+
+      const qualifiedNext = nextRealList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
+      if (qualifiedNext) {
+        return { classes: "team-predicted-correct", icon: '<i class="fa-solid fa-circle-check"></i>' };
+      } else {
+        return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
+      }
+    }
+
+    // Build the visual columns
+    const columns = [
+      { key: "sedicesimi", label: "Sedicesimi" },
+      { key: "ottavi", label: "Ottavi" },
+      { key: "quarti", label: "Quarti" },
+      { key: "semifinali", label: "Semifinali" },
+      { key: "finale", label: "Finale & Vincitrice" }
+    ];
+
+    const scrollWrapper = document.createElement("div");
+    scrollWrapper.className = "bracket-scroll-wrapper";
+
+    columns.forEach(col => {
+      const colDiv = document.createElement("div");
+      colDiv.className = "bracket-column";
+      colDiv.innerHTML = `<h3>${col.label}</h3>`;
+
+      const matchesDiv = document.createElement("div");
+      matchesDiv.className = "bracket-column-matches";
+
+      const colMatches = Object.values(resolved).filter(m => {
+        if (col.key === "finale") {
+          return m.fase === "finale";
+        }
+        return m.fase === col.key;
+      });
+
+      // Sort final matches: match 104 (final) then 103 (3rd place)
+      if (col.key === "finale") {
+        colMatches.sort((a, b) => b.id - a.id); // 104 first, 103 second
+      }
+
+      colMatches.forEach(m => {
+        const isHomeWinner = m.winner === m.home;
+        const isAwayWinner = m.winner === m.away;
+
+        const homeStatus = getTeamStatus(m.home, m.fase, m, isHomeWinner);
+        const awayStatus = getTeamStatus(m.away, m.fase, m, isAwayWinner);
+
+        const homeScore = m.home_score !== null ? m.home_score : "-";
+        const awayScore = m.away_score !== null ? m.away_score : "-";
+
+        let scoreDisplay = "";
+        if (m.home_score !== null && m.away_score !== null) {
+          scoreDisplay = `<span style="font-size:0.75rem; color:var(--accent-cyan); font-weight:600;">${homeScore} - ${awayScore}</span>`;
+        }
+
+        const matchNode = document.createElement("div");
+        matchNode.className = "bracket-match-node";
+        
+        let matchLabel = m.fase === "finale" ? (m.id === 104 ? "Finale 1° Posto" : "Finale 3° Posto") : `Match ID: ${m.id}`;
+
+        matchNode.innerHTML = `
+          <div class="bracket-node-header" style="display:flex; justify-content:space-between;">
+            <span>${matchLabel}</span>
+            <span>${scoreDisplay}</span>
+          </div>
+          <div class="bracket-node-teams">
+            <div class="bracket-node-team ${homeStatus.classes}">
+              <span class="team-name">
+                ${homeStatus.icon} ${getFlagEmoji(m.home)} ${m.home}
+              </span>
+            </div>
+            <div class="bracket-node-team ${awayStatus.classes}">
+              <span class="team-name">
+                ${awayStatus.icon} ${getFlagEmoji(m.away)} ${m.away}
+              </span>
+            </div>
+          </div>
+        `;
+        
+        // Make matches clickable to view prediction detail in modal
+        matchNode.style.cursor = "pointer";
+        // Fetch raw match data for modal
+        const rawMatch = globalPartiteData.partite.find(pm => pm.id === m.id);
+        matchNode.addEventListener("click", () => openMatchModal(rawMatch));
+
+        matchesDiv.appendChild(matchNode);
+      });
+
+      // If it's the final column, append the Campione del Mondo card!
+      if (col.key === "finale") {
+        const finalMatch = resolved[104];
+        const champion = finalMatch ? finalMatch.winner : null;
+
+        if (champion) {
+          const isChampWinner = true; // The champion is the winner of the final
+          const champStatus = getTeamStatus(champion, "campione", finalMatch, isChampWinner);
+
+          const champNode = document.createElement("div");
+          champNode.className = "bracket-match-node winner-node";
+          champNode.innerHTML = `
+            <div class="bracket-node-header" style="color: var(--accent-gold); font-weight: 800; text-align: center;">
+              <i class="fa-solid fa-crown"></i> Campione del Mondo
+            </div>
+            <div class="bracket-node-teams" style="margin-top: 5px;">
+              <div class="bracket-node-team ${champStatus.classes}" style="justify-content: center; text-align: center;">
+                <span class="team-name" style="font-weight: 700; font-size: 0.9rem;">
+                  ${champStatus.icon} ${getFlagEmoji(champion)} ${champion}
+                </span>
+              </div>
+            </div>
+          `;
+          matchesDiv.appendChild(champNode);
+        }
+      }
+
+      colDiv.appendChild(matchesDiv);
+      scrollWrapper.appendChild(colDiv);
+    });
+
+    fasefinaleBracketContainer.appendChild(scrollWrapper);
+    
+    // Warn if player has not filled bracket
+    if (userKey !== "reale" && (!userPassaggio || Object.keys(userPassaggio).length === 0)) {
+      const warning = document.createElement("div");
+      warning.className = "badge badge-pending";
+      warning.style.display = "block";
+      warning.style.textAlign = "center";
+      warning.style.padding = "10px";
+      warning.style.marginBottom = "15px";
+      warning.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Il partecipante non ha ancora compilato il tabellone fase finale (mostrato tabellone reale).`;
+      fasefinaleBracketContainer.insertBefore(warning, fasefinaleBracketContainer.firstChild);
+    }
   }
 
   // Load database on start

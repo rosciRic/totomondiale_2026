@@ -60,8 +60,8 @@
       <button class="tab-button" id="tab-btn-pronostici" data-tab="tab-pronostici">
         <i class="fa-solid fa-chart-pie"></i> Pronostici
       </button>
-      <button class="tab-button" id="tab-btn-statistiche" data-tab="tab-statistiche">
-        <i class="fa-solid fa-chart-bar"></i> Statistiche
+      <button class="tab-button" id="tab-btn-fasefinale" data-tab="tab-fasefinale">
+        <i class="fa-solid fa-sitemap"></i> Tabellone
       </button>
       <button class="tab-button" id="tab-btn-regolamento" data-tab="tab-regolamento">
         <i class="fa-solid fa-circle-info"></i> Regolamento
@@ -126,6 +126,23 @@
               </tbody>
             </table>
           </div>
+          
+          <!-- STATISTICHE GLOBALI DEL TORNEO (SPOSTATE) -->
+          <div class="classifica-stats-box" style="margin-top: 25px; border-top: 1px solid var(--border-glass); padding-top: 20px;">
+            <h4 style="font-family: var(--font-heading); color: var(--accent-gold); font-size: 1rem; margin-bottom: 12px;">
+              <i class="fa-solid fa-chart-simple"></i> Statistiche di accuratezza globali del torneo
+            </h4>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+              <div class="stat-mini-card" style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 10px; border: 1px solid var(--border-glass); display: flex; flex-direction: column; gap: 4px;">
+                <span style="font-size: 0.75rem; color: var(--color-text-muted);">Risultati Esatti Totali (+3)</span>
+                <strong id="stat-exact-ratio" style="font-size: 1.25rem; font-family: var(--font-heading); color: var(--color-text-main);">-</strong>
+              </div>
+              <div class="stat-mini-card" style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 10px; border: 1px solid var(--border-glass); display: flex; flex-direction: column; gap: 4px;">
+                <span style="font-size: 0.75rem; color: var(--color-text-muted);">Segni Indovinati Totali (+1)</span>
+                <strong id="stat-sign-ratio" style="font-size: 1.25rem; font-family: var(--font-heading); color: var(--color-text-main);">-</strong>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -189,18 +206,8 @@
             </div>
           </div>
 
-          <!-- Section 2: Brackets & Final Prizes -->
+          <!-- Section 2: Final Prizes -->
           <div class="user-extra-predictions">
-            <!-- Passage of round -->
-            <div class="card mb-20">
-              <div class="card-header">
-                <h2><i class="fa-solid fa-sitemap"></i> Passaggio Turno</h2>
-              </div>
-              <div class="bracket-predictions-container" id="user-bracket-list">
-                <!-- Dynamically populated -->
-              </div>
-            </div>
-
             <!-- Special Awards -->
             <div class="card">
               <div class="card-header">
@@ -324,53 +331,37 @@
         </div>
       </section>
 
-      <!-- TAB: STATISTICHE -->
-      <section class="tab-content" id="tab-statistiche">
-        <!-- Dashboard Metrics (2 Cards Grid) -->
-        <div class="stats-dashboard-grid" style="grid-template-columns: repeat(2, 1fr);">
-          <div class="stat-card">
-            <div class="stat-icon green-bg"><i class="fa-solid fa-circle-check"></i></div>
-            <div class="stat-info">
-              <span class="stat-label">Risultati Esatti (+3)</span>
-              <h3 id="stat-exact-ratio">-</h3>
-            </div>
+      <!-- TAB: FASE FINALE / TABELLONE -->
+      <section class="tab-content" id="tab-fasefinale">
+        <!-- REGOLAMENTO FASE FINALE -->
+        <div class="card mb-20">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-trophy"></i> Regolamento Fase Finale</h2>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon purple-bg"><i class="fa-solid fa-right-left"></i></div>
-            <div class="stat-info">
-              <span class="stat-label">Pronostici Esatti (+1)</span>
-              <h3 id="stat-sign-ratio">-</h3>
-            </div>
+          <div class="fasefinale-rules-content" style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-main);">
+            <p><strong>Compilazione del Tabellone:</strong> Al termine della fase a gironi (prima dell'inizio dei sedicesimi), ogni partecipante deve pronosticare l'intero tabellone ad eliminazione diretta fino alla vincitrice. Ciascun passaggio del turno indovinato vale <strong>1 punto</strong> (inclusa la vincitrice del tabellone). La vincitrice indicata come antepost a inizio torneo vale invece <strong>10 punti</strong>.</p>
+            <p style="margin-top: 12px; border-top: 1px solid var(--border-glass); padding-top: 12px;"><strong>Pronostico Risultati Esatti:</strong> 
+              Si consegnano i pronostici dei risultati esatti di volta in volta: i Sedicesimi tutti insieme (prima del loro inizio), poi Ottavi, Quarti, Semifinali e Finali di volta in volta man mano che si delineano i reali accoppiamenti. 
+              I punti seguono le regole standard: <strong>+3 punti</strong> per il risultato esatto al 120' minuto, <strong>+1 punto</strong> per il segno (1X2 al 120'), <strong>0 punti</strong> per l'errore.
+            </p>
           </div>
         </div>
 
-        <!-- Difficulties Card -->
-        <div style="margin-top: 10px;">
-          <!-- Match Difficulty Analyser -->
-          <div class="card">
-            <div class="card-header">
-              <h2><i class="fa-solid fa-chart-line"></i> Analisi Difficoltà Partite (Media Punti)</h2>
-              <span class="badge badge-info">Solo partite concluse</span>
-            </div>
-            <hr class="divider">
-            <div class="difficulty-split">
-              <!-- Hardest matches -->
-              <div class="difficulty-column">
-                <h4 class="diff-header hardest"><i class="fa-solid fa-temperature-arrow-up"></i> Partite Più Difficili (Minor Media Punti)</h4>
-                <div class="difficulty-list" id="hardest-matches-list">
-                  <!-- Dynamically populated -->
-                </div>
-              </div>
-              <!-- Easiest matches -->
-              <div class="difficulty-column">
-                <h4 class="diff-header easiest"><i class="fa-solid fa-temperature-arrow-down"></i> Partite Più Facili (Maggior Media Punti)</h4>
-                <div class="difficulty-list" id="easiest-matches-list">
-                  <!-- Dynamically populated -->
-                </div>
-              </div>
+        <!-- VISUAL TABELLONE BRACKET -->
+        <div class="card">
+          <div class="card-header tabellone-header" style="flex-wrap: wrap; gap: 15px;">
+            <h2><i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale</h2>
+            <div class="select-wrapper">
+              <label for="tabellone-user-selector"><i class="fa-solid fa-users-viewfinder"></i> Visualizza per:</label>
+              <select id="tabellone-user-selector" class="tabellone-select" style="background: rgba(255,255,255,0.05); color: var(--color-text-main); border: 1px solid var(--border-glass); padding: 6px 12px; border-radius: 8px; outline: none; font-family: var(--font-body); cursor: pointer;">
+                <option value="reale">Reale (Mondiale 2026)</option>
+                <!-- Inseriti dinamicamente da JS -->
+              </select>
             </div>
           </div>
-
+          <div class="bracket-scroll-container" id="fasefinale-bracket-container">
+            <!-- Inserito dinamicamente da JS -->
+          </div>
         </div>
       </section>
 
