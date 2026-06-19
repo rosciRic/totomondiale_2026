@@ -1080,6 +1080,50 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTabellone(e.target.value);
     });
 
+    // Setup Mobile Navigation Scroll-Sync for the Bracket
+    const mobileBtns = document.querySelectorAll(".bracket-nav-btn");
+    if (mobileBtns.length > 0 && fasefinaleBracketContainer) {
+      mobileBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const colIndex = parseInt(btn.getAttribute("data-col"), 10);
+          const columns = fasefinaleBracketContainer.querySelectorAll(".bracket-column");
+          if (columns[colIndex]) {
+            columns[colIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+          mobileBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+
+      // Synchronize scroll swipe with navigation buttons
+      fasefinaleBracketContainer.addEventListener("scroll", () => {
+        const columns = fasefinaleBracketContainer.querySelectorAll(".bracket-column");
+        if (columns.length === 0) return;
+        
+        let activeIndex = 0;
+        let minDiff = Infinity;
+        const containerCenter = fasefinaleBracketContainer.scrollLeft + (fasefinaleBracketContainer.clientWidth / 2);
+
+        columns.forEach((col, idx) => {
+          const colCenter = col.offsetLeft + (col.clientWidth / 2);
+          const diff = Math.abs(containerCenter - colCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            activeIndex = idx;
+          }
+        });
+
+        mobileBtns.forEach((btn, idx) => {
+          if (idx === activeIndex) {
+            btn.classList.add("active");
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            btn.classList.remove("active");
+          }
+        });
+      });
+    }
+
     // Draw real bracket by default
     renderTabellone("reale");
   }
@@ -1206,6 +1250,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderTabellone(userKey) {
     if (!fasefinaleBracketContainer) return;
     fasefinaleBracketContainer.innerHTML = "";
+
+    // Reset mobile navigation highlights and scroll position
+    fasefinaleBracketContainer.scrollLeft = 0;
+    const mobileBtns = document.querySelectorAll(".bracket-nav-btn");
+    mobileBtns.forEach((btn, idx) => {
+      if (idx === 0) btn.classList.add("active");
+      else btn.classList.remove("active");
+    });
 
     const userDati = userKey !== "reale" ? globalPronostici.partecipanti[userKey] : null;
     const userPassaggio = userDati ? (userDati.passaggio_turno || {}) : {};

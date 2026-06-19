@@ -2097,6 +2097,75 @@ body {
   gap: 4px;
 }
 
+/* Mobile Sub-Navigation for Bracket */
+.bracket-nav-mobile {
+  display: none;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 4px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  width: 100%;
+}
+.bracket-nav-mobile::-webkit-scrollbar {
+  display: none;
+}
+.bracket-nav-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+  outline: none;
+}
+.bracket-nav-btn.active {
+  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(142, 45, 226, 0.35);
+}
+
+/* Mobile responsive optimizations for the bracket scroll container and columns */
+@media (max-width: 768px) {
+  .bracket-nav-mobile {
+    display: flex;
+  }
+  .bracket-scroll-container {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 16px;
+    padding-bottom: 20px;
+  }
+  .bracket-scroll-wrapper {
+    gap: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .bracket-column {
+    width: 215px;
+    scroll-snap-align: center;
+  }
+  .bracket-column h3 {
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+  }
+  .bracket-match-node {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .bracket-node-team {
+    font-size: 0.78rem;
+    padding: 2px 4px;
+  }
+}
+
 /* Home empty message styles */
 .home-empty-box {
   text-align: center;
