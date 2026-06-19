@@ -117,10 +117,16 @@ body {
   margin-bottom: 15px;
 }
 
+.trophy-img {
+  height: 65px;
+  width: auto;
+  mix-blend-mode: screen;
+  display: block;
+  object-fit: contain;
+}
+
 .trophy-glow {
-  font-size: 3rem;
-  color: var(--accent-gold);
-  filter: drop-shadow(0 0 10px rgba(255, 200, 55, 0.6));
+  filter: drop-shadow(0 0 12px rgba(255, 200, 55, 0.5));
   animation: float 4s ease-in-out infinite;
 }
 
@@ -1366,6 +1372,9 @@ body {
   .logo-area {
     gap: 10px;
   }
+  .trophy-img {
+    height: 50px;
+  }
   .main-header {
     padding: 35px 15px;
     min-height: 160px;
@@ -1524,6 +1533,9 @@ body {
   .logo-area {
     gap: 8px;
     margin-bottom: 10px;
+  }
+  .trophy-img {
+    height: 40px;
   }
   .main-header {
     padding: 25px 10px;
