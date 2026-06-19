@@ -3,10 +3,12 @@ import json
 import os
 import sys
 
-# File paths
-PARTITE_FILE = "partite.json"
-PRONOSTICI_FILE = "pronostici.json"
-CLASSIFICA_FILE = "classifica.json"
+# File paths (resolved relative to project root directory)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+PARTITE_FILE = os.path.join(ROOT_DIR, "partite.json")
+PRONOSTICI_FILE = os.path.join(ROOT_DIR, "pronostici.json")
+CLASSIFICA_FILE = os.path.join(ROOT_DIR, "classifica.json")
 
 def get_match_sign(home_score, away_score):
     """Returns the sign of the match: '1' for home win, '2' for away win, 'X' for draw."""

@@ -28,7 +28,7 @@ jobs:
           # (For now, aggiorna_dati.py only uses the built-in json, os, and sys modules)
 
       - name: Run calculation script
-        run: python aggiorna_dati.py
+        run: python scripts/aggiorna_dati.py
 
       - name: Commit and push changes
         run: |

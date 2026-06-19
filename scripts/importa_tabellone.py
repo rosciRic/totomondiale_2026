@@ -21,8 +21,10 @@ import csv
 import os
 import sys
 
-PRONOSTICI_FILE = "pronostici.json"
-CSV_FILE = "risposte_tabellone.csv"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+PRONOSTICI_FILE = os.path.join(ROOT_DIR, "pronostici.json")
+CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
 
 # Nomi dei partecipanti per la validazione
 PARTICIPANTS = {

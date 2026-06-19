@@ -22,7 +22,9 @@ import os
 import sys
 import re
 
-PRONOSTICI_FILE = "pronostici.json"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+PRONOSTICI_FILE = os.path.join(ROOT_DIR, "pronostici.json")
 
 # Nomi dei partecipanti per la validazione
 PARTICIPANTS = {
@@ -59,8 +61,12 @@ def main():
         print("Errore: I parametri di inizio e fine ID partita devono essere numeri interi.")
         sys.exit(1)
 
-    if not os.path.exists(csv_filename):
-        print(f"Errore: File '{csv_filename}' non trovato nella cartella corrente.")
+    csv_path = csv_filename
+    if not os.path.exists(csv_path):
+        csv_path = os.path.join(ROOT_DIR, csv_filename)
+
+    if not os.path.exists(csv_path):
+        print(f"Errore: File '{csv_filename}' non trovato.")
         sys.exit(1)
 
     if not os.path.exists(PRONOSTICI_FILE):
@@ -72,7 +78,7 @@ def main():
         pronostici = json.load(f)
 
     # Leggi il file CSV delle risposte
-    with open(csv_filename, "r", encoding="utf-8-sig") as f:
+    with open(csv_path, "r", encoding="utf-8-sig") as f:
         reader = csv.reader(f)
         header = next(reader)
 
