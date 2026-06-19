@@ -250,12 +250,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (index === 0) {
         posClass = "pos-badge pos-1";
         posContent = `<i class="fa-solid fa-medal"></i>`;
+        row.classList.add("row-rank-1");
       } else if (index === 1) {
         posClass = "pos-badge pos-2";
         posContent = `<i class="fa-solid fa-medal"></i>`;
+        row.classList.add("row-rank-2");
       } else if (index === 2) {
         posClass = "pos-badge pos-3";
         posContent = `<i class="fa-solid fa-medal"></i>`;
+        row.classList.add("row-rank-3");
       }
 
       row.innerHTML = `
@@ -404,20 +407,28 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const detailsText = match.fase === "gironi" ? `Gruppo ${match.gruppo}` : match.fase.toUpperCase();
 
+      const isHomeWinner = match.conclusa && match.home_score > match.away_score;
+      const isAwayWinner = match.conclusa && match.away_score > match.home_score;
+      const isLoserHome = match.conclusa && match.home_score < match.away_score;
+      const isLoserAway = match.conclusa && match.away_score < match.home_score;
+
+      const homeRowClass = isHomeWinner ? "winner-row" : (isLoserHome ? "loser-row" : "");
+      const awayRowClass = isAwayWinner ? "winner-row" : (isLoserAway ? "loser-row" : "");
+
       card.innerHTML = `
         <div class="match-header">
           <span class="match-stage">${detailsText}</span>
           <span class="match-time"><i class="fa-regular fa-clock"></i> ${formatDate(match.data)}</span>
         </div>
         <div class="match-teams">
-          <div class="team-row">
+          <div class="team-row ${homeRowClass}">
             <span class="team-name">
               <span class="team-flag-mock">${getFlagEmoji(match.home)}</span>
               ${match.home}
             </span>
             <span class="team-score">${homeScore}</span>
           </div>
-          <div class="team-row">
+          <div class="team-row ${awayRowClass}">
             <span class="team-name">
               <span class="team-flag-mock">${getFlagEmoji(match.away)}</span>
               ${match.away}
@@ -1057,20 +1068,28 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const detailsText = match.fase === "gironi" ? `Gruppo ${match.gruppo}` : match.fase.toUpperCase();
 
+      const isHomeWinner = match.conclusa && match.home_score > match.away_score;
+      const isAwayWinner = match.conclusa && match.away_score > match.home_score;
+      const isLoserHome = match.conclusa && match.home_score < match.away_score;
+      const isLoserAway = match.conclusa && match.away_score < match.home_score;
+
+      const homeRowClass = isHomeWinner ? "winner-row" : (isLoserHome ? "loser-row" : "");
+      const awayRowClass = isAwayWinner ? "winner-row" : (isLoserAway ? "loser-row" : "");
+
       card.innerHTML = `
         <div class="match-header">
           <span class="match-stage">${detailsText}</span>
           <span class="match-time"><i class="fa-regular fa-clock"></i> ${formatDate(match.data)}</span>
         </div>
         <div class="match-teams">
-          <div class="team-row">
+          <div class="team-row ${homeRowClass}">
             <span class="team-name">
               <span class="team-flag-mock">${getFlagEmoji(match.home)}</span>
               ${match.home}
             </span>
             <span class="team-score">${homeScore}</span>
           </div>
-          <div class="team-row">
+          <div class="team-row ${awayRowClass}">
             <span class="team-name">
               <span class="team-flag-mock">${getFlagEmoji(match.away)}</span>
               ${match.away}

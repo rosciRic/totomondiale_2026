@@ -369,6 +369,33 @@ body {
   background: rgba(255, 255, 255, 0.04);
 }
 
+.premium-table tbody tr.row-rank-1 {
+  border-left: 4px solid var(--accent-gold);
+  background: linear-gradient(90deg, rgba(255, 200, 55, 0.04) 0%, rgba(255, 255, 255, 0) 100%) !important;
+}
+
+.premium-table tbody tr.row-rank-2 {
+  border-left: 4px solid #b8c0d2;
+  background: linear-gradient(90deg, rgba(184, 192, 210, 0.04) 0%, rgba(255, 255, 255, 0) 100%) !important;
+}
+
+.premium-table tbody tr.row-rank-3 {
+  border-left: 4px solid #cf6a4c;
+  background: linear-gradient(90deg, rgba(207, 106, 76, 0.04) 0%, rgba(255, 255, 255, 0) 100%) !important;
+}
+
+.premium-table tbody tr.row-rank-1:hover {
+  background: linear-gradient(90deg, rgba(255, 200, 55, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+}
+
+.premium-table tbody tr.row-rank-2:hover {
+  background: linear-gradient(90deg, rgba(184, 192, 210, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+}
+
+.premium-table tbody tr.row-rank-3:hover {
+  background: linear-gradient(90deg, rgba(207, 106, 76, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+}
+
 /* Positions styling */
 .pos-badge {
   display: inline-flex;
@@ -435,10 +462,10 @@ body {
 
 .search-box input {
   width: 100%;
-  background: rgba(10, 11, 22, 0.7);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass);
   padding: 10px 15px 10px 40px;
-  border-radius: 8px;
+  border-radius: 20px;
   color: var(--color-text-main);
   font-family: var(--font-body);
   transition: var(--transition-smooth);
@@ -446,8 +473,9 @@ body {
 
 .search-box input:focus {
   outline: none;
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 0 3px rgba(255, 200, 55, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-purple-light);
+  box-shadow: 0 0 12px rgba(171, 100, 245, 0.25);
 }
 
 /* ==========================================================================
@@ -722,6 +750,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: var(--transition-smooth);
+}
+
+.team-row.winner-row .team-name {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.team-row.winner-row .team-score {
+  font-weight: 800;
+  color: var(--accent-green);
+}
+
+.team-row.loser-row {
+  opacity: 0.45;
 }
 
 .team-name {
