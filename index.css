@@ -120,7 +120,6 @@ body {
 .trophy-img {
   height: 65px;
   width: auto;
-  mix-blend-mode: screen;
   display: block;
   object-fit: contain;
 }
