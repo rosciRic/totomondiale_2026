@@ -2,26 +2,26 @@
    DESIGN SYSTEM & VARIABLES
    ========================================================================== */
 :root {
-  --bg-main: #0a0b16;
-  --bg-gradient: linear-gradient(135deg, #0a0b16 0%, #12132a 50%, #080911 100%);
-  --bg-card: rgba(22, 24, 47, 0.55);
-  --border-glass: rgba(255, 255, 255, 0.07);
-  --border-focus: rgba(212, 175, 55, 0.5);
+  --bg-main: #060713;
+  --bg-gradient: linear-gradient(135deg, #060713 0%, #0d0f22 50%, #04050a 100%);
+  --bg-card: rgba(18, 20, 38, 0.6);
+  --border-glass: rgba(255, 255, 255, 0.06);
+  --border-focus: rgba(56, 189, 248, 0.5);
 
-  --color-text-main: #f0f2f5;
-  --color-text-muted: #9ba1b0;
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
   
-  /* Harmonious, tailored color palette */
-  --accent-gold: #ffc837;
-  --accent-gold-rgb: 255, 200, 55;
-  --accent-cyan: #00f2fe;
-  --accent-purple: #8e2de2;
-  --accent-purple-light: #ab64f5;
-  --accent-green: #00db8b;
-  --accent-red: #ff416c;
+  /* Harmonious, tailored color palette (World Cup 2026 Sports Blue & Red Theme) */
+  --accent-gold: #f59e0b;
+  --accent-gold-rgb: 245, 158, 11;
+  --accent-cyan: #38bdf8;
+  --accent-purple: #1e40af; /* Sports Royal Blue */
+  --accent-purple-light: #ef4444; /* Sports Red */
+  --accent-green: #22c55e;
+  --accent-red: #ef4444;
 
-  --shadow-main: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --shadow-glow: 0 0 15px rgba(255, 200, 55, 0.2);
+  --shadow-main: 0 10px 30px 0 rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 15px rgba(56, 189, 248, 0.25);
 
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -80,11 +80,15 @@ body {
   position: relative;
   border-radius: 20px;
   padding: 60px 40px;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 30px;
   overflow: hidden;
-  background-image: url('logo.jpg');
+  background-image: url('world_cup_header_banner.png');
   background-size: cover;
-  background-position: center;
+  background-position: center 25%;
   box-shadow: var(--shadow-main);
   border: 1px solid var(--border-glass);
 }
@@ -185,7 +189,16 @@ body {
 
 .stat-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.stat-card.card-leader:hover {
+  border-color: rgba(255, 200, 55, 0.35);
+  box-shadow: 0 8px 32px rgba(255, 200, 55, 0.08), 0 0 15px rgba(255, 200, 55, 0.15);
+}
+
+.stat-card.card-matches:hover {
+  border-color: rgba(0, 242, 254, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 242, 254, 0.08), 0 0 15px rgba(0, 242, 254, 0.15);
 }
 
 .stat-icon {
@@ -428,6 +441,7 @@ body {
 
 .badge-exact-col { color: var(--accent-green); font-weight: 600; }
 .badge-sign-col { color: var(--accent-gold); font-weight: 600; }
+.badge-error-col { color: var(--accent-red); font-weight: 600; }
 
 .btn-details {
   background: rgba(255, 255, 255, 0.06);
@@ -1353,7 +1367,9 @@ body {
     gap: 10px;
   }
   .main-header {
-    padding: 30px 15px;
+    padding: 35px 15px;
+    min-height: 160px;
+    background-position: center 25%;
   }
   .subtitle {
     font-size: 1rem;
@@ -1511,6 +1527,8 @@ body {
   }
   .main-header {
     padding: 25px 10px;
+    min-height: 140px;
+    background-position: center 25%;
   }
   .subtitle {
     font-size: 0.85rem;

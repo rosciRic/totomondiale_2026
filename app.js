@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td style="text-align: center;"><span class="points-val">${player.punti}</span></td>
         <td style="text-align: center;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
         <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
-        <td style="text-align: center;" class="hide-mobile" style="opacity: 0.8;">${player.errori}</td>
+        <td style="text-align: center;" class="hide-mobile badge-error-col">${player.errori}</td>
         <td style="text-align: center;">
           <button class="btn-details" data-user="${player.nome}">
             <i class="fa-solid fa-eye"></i>
