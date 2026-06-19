@@ -332,9 +332,9 @@
       "gruppo": "A",
       "home": "Messico",
       "away": "Corea del Sud",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 29,
