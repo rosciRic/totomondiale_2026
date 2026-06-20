@@ -303,14 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       row.innerHTML = `
         <td style="text-align: center;"><span class="${posClass}">${posContent}</span></td>
-        <td>
-          <span class="player-name">${player.nome}</span>
-          <div class="player-substats show-mobile-only">
-            <span>Esatti: <strong>${player.risultati_esatti}</strong></span> • 
-            <span>Segni: <strong>${player.prono_esatti}</strong></span> • 
-            <span style="color: var(--accent-purple); font-weight: 600;">Tabellone: <strong>${player.punti_tabellone ?? 0}</strong></span>
-          </div>
-        </td>
+        <td><span class="player-name">${player.nome}</span></td>
         <td style="text-align: center;"><span class="points-val">${player.punti}</span></td>
         <td style="text-align: center;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
         <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>

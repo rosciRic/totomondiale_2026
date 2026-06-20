@@ -437,21 +437,6 @@ body {
   font-size: 1rem;
 }
 
-.show-mobile-only {
-  display: none;
-}
-
-.player-substats {
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  margin-top: 4px;
-  line-height: 1.2;
-}
-
-.player-substats span strong {
-  color: var(--color-text-main);
-}
-
 .points-val {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -1400,9 +1385,6 @@ body {
   }
   .hide-mobile {
     display: none;
-  }
-  .show-mobile-only {
-    display: block;
   }
   
   /* Tabs */
@@ -2722,19 +2704,6 @@ body {
   border-color: var(--accent-cyan);
   transform: translateY(-2px);
   color: var(--color-text-main);
-}
-
-/* Centering match cards on Home tab when there are active matches */
-#home-today-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-#home-today-container .match-card {
-  width: 100%;
-  max-width: 450px;
-  flex-shrink: 0;
 }
 
 
