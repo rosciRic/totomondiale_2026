@@ -404,9 +404,9 @@
       "gruppo": "E",
       "home": "Germania",
       "away": "Costa d'Avorio",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 35,
