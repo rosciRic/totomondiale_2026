@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let matchDates = [];
   let drawBracketLinesRef = null;
   let currentTabelloneUserKey = "reale";
+  let currentResolvedData = null;
 
   // DOM Elements
   const tabs = document.querySelectorAll(".tab-button");
@@ -1550,7 +1551,7 @@ document.addEventListener("DOMContentLoaded", () => {
         matchNode.className = "bracket-match-node";
         matchNode.setAttribute("data-match-id", m.id);
         
-        let matchLabel = m.fase === "finale" ? (m.id === 104 ? "Finale 1° Posto" : "Finale 3° Posto") : `Match ID: ${m.id}`;
+        let matchLabel = m.fase === "finale" ? (m.id === 104 ? "Finale 1° Posto" : "Finale 3°/4° Posto") : `Match ID: ${m.id}`;
 
         matchNode.innerHTML = `
           <div class="bracket-node-header" style="display:flex; justify-content:space-between;">
@@ -1633,6 +1634,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Draw the dynamic SVG connector paths between parent and child nodes
     function drawBracketLines(resolvedData) {
+      const dataToUse = resolvedData || currentResolvedData;
+      if (!dataToUse) return;
+
       const oldSvg = document.getElementById("bracket-svg");
       if (oldSvg) oldSvg.remove();
 
@@ -1698,14 +1702,14 @@ document.addEventListener("DOMContentLoaded", () => {
           
           // Trace if the team that won the parent match is in the child match
           let isHighlighted = false;
-          const pMatch = resolvedData[pId];
+          const pMatch = dataToUse[pId];
           const pWinner = pMatch ? pMatch.winner : null;
 
           if (pWinner && !isPlaceholder(pWinner)) {
             if (cId === "champion") {
               isHighlighted = true;
             } else {
-              const cMatch = resolvedData[cId];
+              const cMatch = dataToUse[cId];
               if (cMatch && (cMatch.home === pWinner || cMatch.away === pWinner)) {
                 // Confirm the team isn't marked as incorrect prediction in the child match
                 const cTeamEl = cEl.querySelector(`[data-team-name="${pWinner}"]`);
@@ -1728,6 +1732,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Save active redraw function reference and call it
+    currentResolvedData = resolved;
     drawBracketLinesRef = drawBracketLines;
     drawBracketLines(resolved);
     

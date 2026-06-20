@@ -2703,4 +2703,17 @@ body {
   color: var(--color-text-main);
 }
 
+/* Centering match cards on Home tab when there are active matches */
+#home-today-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+#home-today-container .match-card {
+  width: 100%;
+  max-width: 450px;
+  flex-shrink: 0;
+}
+
 
