@@ -1275,9 +1275,16 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Draw (penalties): check real passaggio_turno for who qualified
         const realPassaggio = globalPartiteData.passaggio_turno || {};
-        const nextPhaseKey = m.fase;
+        const realNextPhaseMap = {
+          "sedicesimi": "ottavi",
+          "ottavi": "quarti",
+          "quarti": "semifinali",
+          "semifinali": "finale",
+          "finale": "vincitore"
+        };
+        const nextPhaseKey = realNextPhaseMap[m.fase];
         if (nextPhaseKey && realPassaggio[nextPhaseKey]) {
-          const nextList = realPassaggio[nextPhaseKey].map(t => t.toLowerCase().trim());
+          const nextList = (Array.isArray(realPassaggio[nextPhaseKey]) ? realPassaggio[nextPhaseKey] : [realPassaggio[nextPhaseKey]]).map(t => t.toLowerCase().trim());
           if (nextList.includes(homeResolved.toLowerCase().trim())) {
             return { winner: homeResolved, loser: awayResolved };
           }
