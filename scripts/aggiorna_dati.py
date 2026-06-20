@@ -392,11 +392,20 @@ def calcola_classifica():
         # --- 2. Calcolo Punteggio Passaggio Turno ---
         user_passaggio = dati.get("passaggio_turno")
         if user_passaggio and real_passaggio:
-            # We check the single phases: sedicesimi, ottavi, quarti, semifinali, finale, vincitore
-            # For lists (sedicesimi, ottavi, quarti, semifinali, finale), we add +1 point for each correct team
-            for fase in ["sedicesimi", "ottavi", "quarti", "semifinali", "finale"]:
-                user_teams = user_passaggio.get(fase, [])
-                real_teams = real_passaggio.get(fase, [])
+            # Map user's predicted phases to the actual stage qualification lists in real_passaggio:
+            # - user's 'sedicesimi' (predicted to reach Ottavi) -> compared with real 'ottavi' (16 teams)
+            # - user's 'ottavi' (predicted to reach Quarti) -> compared with real 'quarti' (8 teams)
+            # - user's 'quarti' (predicted to reach Semifinali) -> compared with real 'semifinali' (4 teams)
+            # - user's 'semifinali' (predicted to reach Finale) -> compared with real 'finale' (2 teams)
+            mapping = {
+                "sedicesimi": "ottavi",
+                "ottavi": "quarti",
+                "quarti": "semifinali",
+                "semifinali": "finale"
+            }
+            for user_key, real_key in mapping.items():
+                user_teams = user_passaggio.get(user_key, [])
+                real_teams = real_passaggio.get(real_key, [])
                 if user_teams and real_teams:
                     # Clean strings for match robustness
                     user_teams_clean = {t.strip().lower() for t in user_teams if t}

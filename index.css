@@ -2182,6 +2182,32 @@ body {
   gap: 4px;
 }
 
+/* Bracket SVG Connections */
+#bracket-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+#bracket-svg path {
+  fill: none;
+  transition: stroke var(--transition-smooth), stroke-width var(--transition-smooth), opacity var(--transition-smooth);
+}
+.bracket-path-inactive {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1.5px;
+  opacity: 0.35;
+}
+.bracket-path-active {
+  stroke: var(--accent-purple);
+  stroke-width: 2.5px;
+  opacity: 0.85;
+  filter: drop-shadow(0px 0px 4px rgba(142, 45, 226, 0.7));
+}
+
 /* Mobile Sub-Navigation for Bracket */
 .bracket-nav-mobile {
   display: none;

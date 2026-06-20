@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSortMode = "cronologico";
   let homeSelectedDate = "";
   let matchDates = [];
+  let drawBracketLinesRef = null;
+  let currentTabelloneUserKey = "reale";
 
   // DOM Elements
   const tabs = document.querySelectorAll(".tab-button");
@@ -73,6 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth <= 768) {
         document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
       }
+
+      // If switching to Tabellone, redraw bracket lines
+      if (targetTabId === "tab-fasefinale" && drawBracketLinesRef) {
+        setTimeout(() => {
+          drawBracketLinesRef();
+        }, 50);
+      }
     });
   });
 
@@ -96,6 +105,36 @@ document.addEventListener("DOMContentLoaded", () => {
       globalClassifica = await classificaRes.json();
       globalPartiteData = await partiteRes.json();
       globalPronostici = await pronosticiRes.json();
+
+      // Normalize knockout stage times to Rome timezone
+      const knockoutOffsets = {
+        73: -7, 74: -4, 75: -6, 76: -5, 77: -4, 78: -5, 79: -6, 80: -4,
+        81: -7, 82: -7, 83: -4, 84: -7, 85: -7, 86: -4, 87: -5, 88: -5,
+        89: -4, 90: -5, 91: -4, 92: -6, 93: -7, 94: -4, 95: -7, 96: -4,
+        97: -4, 98: -7, 99: -4, 100: -5, 101: -5, 102: -4, 103: -4, 104: -4
+      };
+
+      globalPartiteData.partite.forEach(m => {
+        if (m.fase !== 'gironi' && knockoutOffsets[m.id] !== undefined) {
+          const offsetVal = knockoutOffsets[m.id];
+          const sign = offsetVal >= 0 ? "+" : "-";
+          const absOffset = Math.abs(offsetVal);
+          const offsetString = `${sign}${String(absOffset).padStart(2, '0')}:00`;
+          
+          if (m.data && m.data.length === 19) {
+            try {
+              const localIso = `${m.data}${offsetString}`;
+              const date = new Date(localIso);
+              if (!isNaN(date.getTime())) {
+                const romeTimeStr = date.toLocaleString('sv-SE', { timeZone: 'Europe/Rome' }).replace(' ', 'T');
+                m.data = romeTimeStr;
+              }
+            } catch (e) {
+              console.error("Error normalizing date for match", m.id, e);
+            }
+          }
+        }
+      });
 
       onDataReady();
     } catch (err) {
@@ -1315,6 +1354,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Render bracket tree and validate predictions
   function renderTabellone(userKey) {
+    currentTabelloneUserKey = userKey;
     if (!fasefinaleBracketContainer) return;
     fasefinaleBracketContainer.innerHTML = "";
 
@@ -1388,23 +1428,23 @@ document.addEventListener("DOMContentLoaded", () => {
       let realList = [];
       
       if (stage === "sedicesimi") {
-        reachedReal = true; // Everybody starts matching Group stage outputs
-      } else if (stage === "ottavi") {
         realList = realPassaggio.sedicesimi || [];
-      } else if (stage === "quarti") {
+      } else if (stage === "ottavi") {
         realList = realPassaggio.ottavi || [];
-      } else if (stage === "semifinali") {
+      } else if (stage === "quarti") {
         realList = realPassaggio.quarti || [];
-      } else if (stage === "finale") {
+      } else if (stage === "semifinali") {
         realList = realPassaggio.semifinali || [];
+      } else if (stage === "finale") {
+        realList = realPassaggio.finale || [];
+      } else if (stage === "campione") {
+        realList = [realPassaggio.vincitore || ""];
       }
 
-      if (stage !== "sedicesimi") {
-        if (realList.length === 0) {
-          return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
-        }
-        reachedReal = realList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
+      if (realList.length === 0) {
+        return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
       }
+      reachedReal = realList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
 
       if (!reachedReal) {
         return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
@@ -1419,11 +1459,11 @@ document.addEventListener("DOMContentLoaded", () => {
       let nextRealList = [];
       let isChamp = false;
 
-      if (stage === "sedicesimi") nextRealList = realPassaggio.sedicesimi || [];
-      else if (stage === "ottavi") nextRealList = realPassaggio.ottavi || [];
-      else if (stage === "quarti") nextRealList = realPassaggio.quarti || [];
-      else if (stage === "semifinali") nextRealList = realPassaggio.semifinali || [];
-      else if (stage === "finale") isChamp = true;
+      if (stage === "sedicesimi") nextRealList = realPassaggio.ottavi || [];
+      else if (stage === "ottavi") nextRealList = realPassaggio.quarti || [];
+      else if (stage === "quarti") nextRealList = realPassaggio.semifinali || [];
+      else if (stage === "semifinali") nextRealList = realPassaggio.finale || [];
+      else if (stage === "finale" || stage === "campione") isChamp = true;
 
       if (isChamp) {
         const rChamp = realPassaggio.vincitore || globalPartiteData.premi_finali?.vincitore;
@@ -1454,8 +1494,18 @@ document.addEventListener("DOMContentLoaded", () => {
       { key: "ottavi", label: "Ottavi" },
       { key: "quarti", label: "Quarti" },
       { key: "semifinali", label: "Semifinali" },
-      { key: "finale", label: "Finale & Vincitrice" }
+      { key: "finale", label: "Finale" },
+      { key: "campione", label: "Vincitore" }
     ];
+
+    // Define correct vertical sequence of matches to ensure binary tree alignment
+    const bracketOrder = {
+      sedicesimi: [79, 80, 76, 78, 85, 87, 86, 88, 81, 82, 83, 84, 74, 77, 73, 75],
+      ottavi: [92, 91, 96, 95, 94, 93, 89, 90],
+      quarti: [99, 100, 98, 97],
+      semifinali: [102, 101],
+      finale: [104, 103]
+    };
 
     const scrollWrapper = document.createElement("div");
     scrollWrapper.className = "bracket-scroll-wrapper";
@@ -1475,9 +1525,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return m.fase === col.key;
       });
 
-      // Sort final matches: match 104 (final) then 103 (3rd place)
-      if (col.key === "finale") {
-        colMatches.sort((a, b) => b.id - a.id); // 104 first, 103 second
+      // Sort matches in each column according to the custom bracketOrder
+      const order = bracketOrder[col.key];
+      if (order) {
+        colMatches.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
       }
 
       colMatches.forEach(m => {
@@ -1497,6 +1548,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const matchNode = document.createElement("div");
         matchNode.className = "bracket-match-node";
+        matchNode.setAttribute("data-match-id", m.id);
         
         let matchLabel = m.fase === "finale" ? (m.id === 104 ? "Finale 1° Posto" : "Finale 3° Posto") : `Match ID: ${m.id}`;
 
@@ -1506,12 +1558,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <span>${scoreDisplay}</span>
           </div>
           <div class="bracket-node-teams">
-            <div class="bracket-node-team ${homeStatus.classes}">
+            <div class="bracket-node-team ${homeStatus.classes}" data-team-name="${m.home}">
               <span class="team-name">
                 ${homeStatus.icon} ${getFlagEmoji(m.home)} ${m.home}
               </span>
             </div>
-            <div class="bracket-node-team ${awayStatus.classes}">
+            <div class="bracket-node-team ${awayStatus.classes}" data-team-name="${m.away}">
               <span class="team-name">
                 ${awayStatus.icon} ${getFlagEmoji(m.away)} ${m.away}
               </span>
@@ -1531,31 +1583,46 @@ document.addEventListener("DOMContentLoaded", () => {
         matchesDiv.appendChild(matchNode);
       });
 
-      // If it's the final column, append the Campione del Mondo card!
-      if (col.key === "finale") {
+      // Render the Champion card in the dedicated 'campione' column
+      if (col.key === "campione") {
         const finalMatch = resolved[104];
         const champion = finalMatch ? finalMatch.winner : null;
 
-        if (champion) {
-          const isChampWinner = true; // The champion is the winner of the final
+        const champNode = document.createElement("div");
+        champNode.className = "bracket-match-node winner-node";
+        champNode.setAttribute("data-match-id", "champion");
+
+        if (champion && !isPlaceholder(champion)) {
+          const isChampWinner = true;
           const champStatus = getTeamStatus(champion, "campione", finalMatch, isChampWinner);
 
-          const champNode = document.createElement("div");
-          champNode.className = "bracket-match-node winner-node";
           champNode.innerHTML = `
             <div class="bracket-node-header" style="color: var(--accent-gold); font-weight: 800; text-align: center;">
               <i class="fa-solid fa-crown"></i> Campione del Mondo
             </div>
             <div class="bracket-node-teams" style="margin-top: 5px;">
-              <div class="bracket-node-team ${champStatus.classes}" style="justify-content: center; text-align: center;">
+              <div class="bracket-node-team ${champStatus.classes}" data-team-name="${champion}" style="justify-content: center; text-align: center;">
                 <span class="team-name" style="font-weight: 700; font-size: 0.9rem;">
                   ${champStatus.icon} ${getFlagEmoji(champion)} ${champion}
                 </span>
               </div>
             </div>
           `;
-          matchesDiv.appendChild(champNode);
+        } else {
+          champNode.innerHTML = `
+            <div class="bracket-node-header" style="color: var(--color-text-muted); font-weight: 700; text-align: center;">
+              <i class="fa-solid fa-crown"></i> Campione del Mondo
+            </div>
+            <div class="bracket-node-teams" style="margin-top: 5px;">
+              <div class="bracket-node-team team-predicted-pending" style="justify-content: center; text-align: center;">
+                <span class="team-name" style="font-weight: 500; font-size: 0.82rem;">
+                  <i class="fa-regular fa-clock"></i> In attesa della finale
+                </span>
+              </div>
+            </div>
+          `;
         }
+        matchesDiv.appendChild(champNode);
       }
 
       colDiv.appendChild(matchesDiv);
@@ -1563,6 +1630,106 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     fasefinaleBracketContainer.appendChild(scrollWrapper);
+
+    // Draw the dynamic SVG connector paths between parent and child nodes
+    function drawBracketLines(resolvedData) {
+      const oldSvg = document.getElementById("bracket-svg");
+      if (oldSvg) oldSvg.remove();
+
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("id", "bracket-svg");
+      
+      if (window.getComputedStyle(scrollWrapper).position === "static") {
+        scrollWrapper.style.position = "relative";
+      }
+      scrollWrapper.appendChild(svg);
+
+      const rectWrapper = scrollWrapper.getBoundingClientRect();
+
+      // Parent to child map [parentId, childId]
+      const connections = [
+        // Sedicesimi to Ottavi
+        [79, 92], [80, 92],
+        [76, 91], [78, 91],
+        [85, 96], [87, 96],
+        [86, 95], [88, 95],
+        [81, 94], [82, 94],
+        [83, 93], [84, 93],
+        [74, 89], [77, 89],
+        [73, 90], [75, 90],
+
+        // Ottavi to Quarti
+        [92, 99], [91, 99],
+        [96, 100], [95, 100],
+        [94, 98], [93, 98],
+        [89, 97], [90, 97],
+
+        // Quarti to Semifinali
+        [99, 102], [100, 102],
+        [98, 101], [97, 101],
+
+        // Semifinali to Finale
+        [102, 104], [101, 104],
+
+        // Finale to Champion
+        [104, "champion"]
+      ];
+
+      connections.forEach(([pId, cId]) => {
+        const pEl = document.querySelector(`[data-match-id="${pId}"]`);
+        const cEl = document.querySelector(`[data-match-id="${cId}"]`);
+
+        if (pEl && cEl) {
+          const pRect = pEl.getBoundingClientRect();
+          const cRect = cEl.getBoundingClientRect();
+
+          const xA = pRect.right - rectWrapper.left;
+          const yA = pRect.top + pRect.height / 2 - rectWrapper.top;
+
+          const xB = cRect.left - rectWrapper.left;
+          const yB = cRect.top + cRect.height / 2 - rectWrapper.top;
+
+          const xMid = (xA + xB) / 2;
+          const d = `M ${xA} ${yA} H ${xMid} V ${yB} H ${xB}`;
+
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute("d", d);
+          path.setAttribute("fill", "none");
+          
+          // Trace if the team that won the parent match is in the child match
+          let isHighlighted = false;
+          const pMatch = resolvedData[pId];
+          const pWinner = pMatch ? pMatch.winner : null;
+
+          if (pWinner && !isPlaceholder(pWinner)) {
+            if (cId === "champion") {
+              isHighlighted = true;
+            } else {
+              const cMatch = resolvedData[cId];
+              if (cMatch && (cMatch.home === pWinner || cMatch.away === pWinner)) {
+                // Confirm the team isn't marked as incorrect prediction in the child match
+                const cTeamEl = cEl.querySelector(`[data-team-name="${pWinner}"]`);
+                if (!cTeamEl || !cTeamEl.classList.contains("team-predicted-incorrect")) {
+                  isHighlighted = true;
+                }
+              }
+            }
+          }
+
+          if (isHighlighted) {
+            path.setAttribute("class", "bracket-path-active");
+          } else {
+            path.setAttribute("class", "bracket-path-inactive");
+          }
+
+          svg.appendChild(path);
+        }
+      });
+    }
+
+    // Save active redraw function reference and call it
+    drawBracketLinesRef = drawBracketLines;
+    drawBracketLines(resolved);
     
     // Warn if player has not filled bracket
     if (userKey !== "reale" && (!userPassaggio || Object.keys(userPassaggio).length === 0)) {
@@ -1576,6 +1743,14 @@ document.addEventListener("DOMContentLoaded", () => {
       fasefinaleBracketContainer.insertBefore(warning, fasefinaleBracketContainer.firstChild);
     }
   }
+
+  // Redraw SVG bracket lines on window resize
+  window.addEventListener("resize", () => {
+    const tabFaseFinale = document.getElementById("tab-fasefinale");
+    if (tabFaseFinale && tabFaseFinale.classList.contains("active") && drawBracketLinesRef) {
+      drawBracketLinesRef();
+    }
+  });
 
   // Load database on start
   fetchDatabases();
