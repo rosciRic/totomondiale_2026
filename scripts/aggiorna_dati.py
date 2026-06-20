@@ -353,6 +353,7 @@ def calcola_classifica():
         risultati_esatti = 0
         prono_esatti = 0
         errori = 0
+        punti_tabellone = 0
 
         # --- 1. Calcolo Punteggio Partite (Fase a gironi ed eliminazione diretta) ---
         user_partite = dati.get("partite", {})
@@ -396,7 +397,7 @@ def calcola_classifica():
             # - user's 'sedicesimi' (predicted to reach Ottavi) -> compared with real 'ottavi' (16 teams)
             # - user's 'ottavi' (predicted to reach Quarti) -> compared with real 'quarti' (8 teams)
             # - user's 'quarti' (predicted to reach Semifinali) -> compared with real 'semifinali' (4 teams)
-            # - user's 'semifinali' (predicted to reach Finale) -> compared with real 'finale' (2 teams)
+            # - user's 'semifinali' (predicted to reach Final) -> compared with real 'finale' (2 teams)
             mapping = {
                 "sedicesimi": "ottavi",
                 "ottavi": "quarti",
@@ -412,14 +413,17 @@ def calcola_classifica():
                     real_teams_clean = {t.strip().lower() for t in real_teams if t}
                     # Intersection gives qualified teams predicted correctly
                     correct_picks = user_teams_clean.intersection(real_teams_clean)
-                    punti += len(correct_picks)
+                    punti_tabellone += len(correct_picks)
 
             # Check predicted bracket winner (vincitore in passaggio_turno)
             user_bracket_winner = user_passaggio.get("vincitore")
             real_bracket_winner = real_passaggio.get("vincitore")
             if user_bracket_winner and real_bracket_winner:
                 if user_bracket_winner.strip().lower() == real_bracket_winner.strip().lower():
-                    punti += 1
+                    punti_tabellone += 1
+
+        # Add bracket points to total points
+        punti += punti_tabellone
 
         # --- 3. Calcolo Pronostici Finali (Premi Speciali) ---
         user_premi = dati.get("premi_finali")
@@ -463,6 +467,7 @@ def calcola_classifica():
             "punti": punti,
             "risultati_esatti": risultati_esatti,
             "prono_esatti": prono_esatti,
+            "punti_tabellone": punti_tabellone,
             "errori": errori
         })
 

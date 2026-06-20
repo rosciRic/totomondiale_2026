@@ -4,6 +4,7 @@
     "punti": 31,
     "risultati_esatti": 5,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 11
   },
   {
@@ -11,6 +12,7 @@
     "punti": 30,
     "risultati_esatti": 7,
     "prono_esatti": 9,
+    "punti_tabellone": 0,
     "errori": 16
   },
   {
@@ -18,6 +20,7 @@
     "punti": 30,
     "risultati_esatti": 6,
     "prono_esatti": 12,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -25,6 +28,7 @@
     "punti": 30,
     "risultati_esatti": 5,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 12
   },
   {
@@ -32,6 +36,7 @@
     "punti": 28,
     "risultati_esatti": 5,
     "prono_esatti": 13,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -39,6 +44,7 @@
     "punti": 27,
     "risultati_esatti": 5,
     "prono_esatti": 12,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -46,6 +52,7 @@
     "punti": 27,
     "risultati_esatti": 5,
     "prono_esatti": 12,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -53,6 +60,7 @@
     "punti": 27,
     "risultati_esatti": 4,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 13
   },
   {
@@ -60,6 +68,7 @@
     "punti": 26,
     "risultati_esatti": 5,
     "prono_esatti": 11,
+    "punti_tabellone": 0,
     "errori": 16
   },
   {
@@ -67,6 +76,7 @@
     "punti": 25,
     "risultati_esatti": 4,
     "prono_esatti": 13,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -74,6 +84,7 @@
     "punti": 25,
     "risultati_esatti": 4,
     "prono_esatti": 13,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -81,6 +92,7 @@
     "punti": 24,
     "risultati_esatti": 3,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -88,6 +100,7 @@
     "punti": 24,
     "risultati_esatti": 3,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -95,6 +108,7 @@
     "punti": 24,
     "risultati_esatti": 3,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -102,6 +116,7 @@
     "punti": 24,
     "risultati_esatti": 3,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -109,6 +124,7 @@
     "punti": 23,
     "risultati_esatti": 3,
     "prono_esatti": 14,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -116,6 +132,7 @@
     "punti": 23,
     "risultati_esatti": 2,
     "prono_esatti": 17,
+    "punti_tabellone": 0,
     "errori": 13
   },
   {
@@ -123,6 +140,7 @@
     "punti": 22,
     "risultati_esatti": 5,
     "prono_esatti": 7,
+    "punti_tabellone": 0,
     "errori": 20
   },
   {
@@ -130,6 +148,7 @@
     "punti": 22,
     "risultati_esatti": 3,
     "prono_esatti": 13,
+    "punti_tabellone": 0,
     "errori": 16
   },
   {
@@ -137,6 +156,7 @@
     "punti": 22,
     "risultati_esatti": 2,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -144,6 +164,7 @@
     "punti": 22,
     "risultati_esatti": 2,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -151,6 +172,7 @@
     "punti": 22,
     "risultati_esatti": 2,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 14
   },
   {
@@ -158,6 +180,7 @@
     "punti": 21,
     "risultati_esatti": 3,
     "prono_esatti": 12,
+    "punti_tabellone": 0,
     "errori": 17
   },
   {
@@ -165,6 +188,7 @@
     "punti": 21,
     "risultati_esatti": 3,
     "prono_esatti": 12,
+    "punti_tabellone": 0,
     "errori": 17
   },
   {
@@ -172,6 +196,7 @@
     "punti": 21,
     "risultati_esatti": 2,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -179,6 +204,7 @@
     "punti": 20,
     "risultati_esatti": 3,
     "prono_esatti": 11,
+    "punti_tabellone": 0,
     "errori": 18
   },
   {
@@ -186,6 +212,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -193,6 +220,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -200,6 +228,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -207,6 +236,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -214,6 +244,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -221,6 +252,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -228,6 +260,7 @@
     "punti": 19,
     "risultati_esatti": 1,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 15
   },
   {
@@ -235,6 +268,7 @@
     "punti": 18,
     "risultati_esatti": 1,
     "prono_esatti": 15,
+    "punti_tabellone": 0,
     "errori": 16
   },
   {
@@ -242,6 +276,7 @@
     "punti": 17,
     "risultati_esatti": 2,
     "prono_esatti": 11,
+    "punti_tabellone": 0,
     "errori": 19
   },
   {
@@ -249,6 +284,7 @@
     "punti": 16,
     "risultati_esatti": 0,
     "prono_esatti": 16,
+    "punti_tabellone": 0,
     "errori": 16
   },
   {
@@ -256,6 +292,7 @@
     "punti": 15,
     "risultati_esatti": 2,
     "prono_esatti": 9,
+    "punti_tabellone": 0,
     "errori": 21
   },
   {
@@ -263,6 +300,7 @@
     "punti": 12,
     "risultati_esatti": 0,
     "prono_esatti": 12,
+    "punti_tabellone": 0,
     "errori": 20
   }
 ]

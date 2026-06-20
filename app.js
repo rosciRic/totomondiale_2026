@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
     classificaBody.innerHTML = "";
     
     if (globalClassifica.length === 0) {
-      classificaBody.innerHTML = `<tr><td colspan="7" style="text-align: center;">Nessun partecipante in classifica.</td></tr>`;
+      classificaBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Nessun partecipante in classifica.</td></tr>`;
       return;
     }
 
@@ -307,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td style="text-align: center;"><span class="points-val">${player.punti}</span></td>
         <td style="text-align: center;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
         <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
+        <td style="text-align: center; color: var(--accent-purple); font-weight: 600;" class="hide-mobile badge-tabellone-col">${player.punti_tabellone ?? 0}</td>
         <td style="text-align: center;" class="hide-mobile badge-error-col">${player.errori}</td>
         <td style="text-align: center;">
           <button class="btn-details" data-user="${player.nome}">
