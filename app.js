@@ -303,7 +303,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       row.innerHTML = `
         <td style="text-align: center;"><span class="${posClass}">${posContent}</span></td>
-        <td><span class="player-name">${player.nome}</span></td>
+        <td>
+          <span class="player-name">${player.nome}</span>
+          <div class="player-substats show-mobile-only">
+            <span>Esatti: <strong>${player.risultati_esatti}</strong></span> • 
+            <span>Segni: <strong>${player.prono_esatti}</strong></span> • 
+            <span style="color: var(--accent-purple); font-weight: 600;">Tabellone: <strong>${player.punti_tabellone ?? 0}</strong></span>
+          </div>
+        </td>
         <td style="text-align: center;"><span class="points-val">${player.punti}</span></td>
         <td style="text-align: center;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
         <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
@@ -683,7 +690,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fetch user overall placement from classifica
-    const placement = globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, errori: 0 };
+    const placement = globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, punti_tabellone: 0, errori: 0 };
     
     // Display participant widgets summary
     userSummaryStats.innerHTML = `
@@ -698,6 +705,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="user-stat-badge">
         <span>Segni (+1)</span>
         <strong style="color: var(--accent-gold)">${placement.prono_esatti}</strong>
+      </div>
+      <div class="user-stat-badge">
+        <span>Tabellone (+1)</span>
+        <strong style="color: var(--accent-purple)">${placement.punti_tabellone ?? 0}</strong>
       </div>
       <div class="user-stat-badge">
         <span>Errori</span>

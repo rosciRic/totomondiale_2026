@@ -437,6 +437,21 @@ body {
   font-size: 1rem;
 }
 
+.show-mobile-only {
+  display: none;
+}
+
+.player-substats {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+.player-substats span strong {
+  color: var(--color-text-main);
+}
+
 .points-val {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -1386,6 +1401,9 @@ body {
   .hide-mobile {
     display: none;
   }
+  .show-mobile-only {
+    display: block;
+  }
   
   /* Tabs */
   .navigation-tabs {
@@ -1470,6 +1488,9 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     width: 100%;
+  }
+  .user-summary-stats .user-stat-badge:first-child {
+    grid-column: span 2;
   }
   
   /* User Prediction Details List - Optimized Compact Row */

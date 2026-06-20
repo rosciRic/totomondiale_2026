@@ -485,7 +485,7 @@ def calcola_classifica():
     print(f"File {CLASSIFICA_FILE} aggiornato con successo.")
     print("--- CLASSIFICA ---")
     for idx, row in enumerate(classifica, 1):
-        print(f"{idx}. {row['nome']} - Punti: {row['punti']} (Esatti: {row['risultati_esatti']}, Segni: {row['prono_esatti']}, Errori: {row['errori']})")
+        print(f"{idx}. {row['nome']} - Punti: {row['punti']} (Esatti: {row['risultati_esatti']}, Segni: {row['prono_esatti']}, Tabellone: {row['punti_tabellone']}, Errori: {row['errori']})")
 
 def check_if_update_needed():
     """
