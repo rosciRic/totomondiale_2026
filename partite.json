@@ -380,9 +380,9 @@
       "gruppo": "D",
       "home": "Turchia",
       "away": "Paraguay",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 33,
