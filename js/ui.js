@@ -986,7 +986,12 @@ export function initFaseFinale() {
         const colIndex = parseInt(btn.getAttribute("data-col"), 10);
         const columns = fasefinaleBracketContainer.querySelectorAll(".bracket-column");
         if (columns[colIndex]) {
-          columns[colIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          const firstCard = columns[colIndex].querySelector(".bracket-match-node");
+          if (firstCard) {
+            firstCard.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+          } else {
+            columns[colIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
         }
         mobileBtns.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
@@ -1014,7 +1019,14 @@ export function initFaseFinale() {
       mobileBtns.forEach((btn, idx) => {
         if (idx === activeIndex) {
           btn.classList.add("active");
-          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          const navContainer = document.getElementById("bracket-nav-mobile");
+          if (navContainer) {
+            const btnScrollLeft = btn.offsetLeft - (navContainer.clientWidth - btn.clientWidth) / 2;
+            navContainer.scrollTo({
+              left: btnScrollLeft,
+              behavior: 'smooth'
+            });
+          }
         } else {
           btn.classList.remove("active");
         }
