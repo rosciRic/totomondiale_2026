@@ -438,17 +438,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span>Errori</span>
                     <strong style="color: var(--accent-red)">${player.errori}</strong>
                   </div>
-                  <div class="detail-action-box">
-                    <button class="btn-view-prono">Vedi Pronostici di ${player.nome.split(' ')[0]}</button>
-                  </div>
                 </div>
               </td>
             `;
-
-            detailRow.querySelector(".btn-view-prono").addEventListener("click", (e) => {
-              e.stopPropagation();
-              navigateToUserPredictions(player.nome);
-            });
 
             detailRow.addEventListener("click", (e) => {
               e.stopPropagation();
