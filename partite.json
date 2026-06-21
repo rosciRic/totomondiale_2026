@@ -428,9 +428,9 @@
       "gruppo": "F",
       "home": "Tunisia",
       "away": "Giappone",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 4,
+      "conclusa": true
     },
     {
       "id": 37,
