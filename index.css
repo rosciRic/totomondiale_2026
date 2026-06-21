@@ -2706,4 +2706,174 @@ body {
   color: var(--color-text-main);
 }
 
+/* ==========================================================================
+   MOBILE-FIRST BOTTOM NAVIGATION & UX STYLING
+   ========================================================================== */
+
+/* Bottom Sticky Navigation Bar */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(6, 7, 19, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-glass);
+  display: none; /* Hidden on desktop */
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  gap: 4px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  flex-grow: 1;
+  height: 100%;
+  outline: none;
+}
+
+.mobile-nav-btn i {
+  font-size: 1.15rem;
+}
+
+.mobile-nav-btn.active {
+  color: var(--accent-cyan);
+}
+
+.mobile-nav-btn.active i {
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
+}
+
+/* Bottom Navigation "More" Slide-up Overlay Menu */
+.mobile-more-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(4, 5, 8, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-more-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-more-menu {
+  background: var(--bg-main);
+  background-image: var(--bg-gradient);
+  border-top: 1px solid var(--border-glass);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  padding: 24px 24px calc(24px + env(safe-area-inset-bottom)) 24px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.mobile-more-overlay.open .mobile-more-menu {
+  transform: translateY(0);
+}
+
+.mobile-more-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 10px;
+}
+
+.mobile-more-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+}
+
+.close-more-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-main);
+  font-size: 1.3rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.mobile-more-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.more-option-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-main);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.more-option-btn i {
+  font-size: 1.5rem;
+  color: var(--accent-cyan);
+}
+
+.more-option-btn:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+@media (max-width: 768px) {
+  /* Hide top navigation tabs completely on mobile to prevent clutter */
+  .navigation-tabs {
+    display: none !important;
+  }
+  
+  /* Show bottom navigation bar */
+  .mobile-bottom-nav {
+    display: flex;
+  }
+  
+  /* Adjust app container padding to prevent bottom navbar collision */
+  .app-container {
+    padding-bottom: 80px; /* Space for the bottom navbar */
+  }
+}
+
 

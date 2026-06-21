@@ -51,38 +51,102 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
   const fasefinaleBracketContainer = document.getElementById("fasefinale-bracket-container");
 
-  // Initialize Tabs Navigation
+  // Centralized Tab Switching Function
+  function switchTab(targetTabId) {
+    // Hide all tabs and contents
+    tabs.forEach(t => t.classList.remove("active"));
+    tabContents.forEach(c => c.classList.remove("active"));
+    
+    // Deactivate mobile nav buttons
+    document.querySelectorAll(".mobile-nav-btn, .more-option-btn").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    // Activate target tab content
+    const targetContent = document.getElementById(targetTabId);
+    if (targetContent) {
+      targetContent.classList.add("active");
+    }
+
+    // Highlight corresponding desktop tab button
+    const desktopBtn = document.querySelector(`.tab-button[data-tab="${targetTabId}"]`);
+    if (desktopBtn) {
+      desktopBtn.classList.add("active");
+    }
+
+    // Highlight corresponding mobile nav button (bottom nav)
+    const mobileBtn = document.querySelector(`.mobile-nav-btn[data-tab="${targetTabId}"]`);
+    if (mobileBtn) {
+      mobileBtn.classList.add("active");
+    } else {
+      // Highlight "Altro" if it's a sub-tab from the more menu
+      const moreBtn = document.getElementById("mobile-more-btn");
+      if (moreBtn && (targetTabId === "tab-partite" || targetTabId === "tab-regolamento")) {
+        moreBtn.classList.add("active");
+      }
+    }
+
+    // Special handlers per specific tab
+    if (targetTabId === "tab-home") {
+      resetCalendarToToday();
+    }
+
+    // Smooth scroll to content area on mobile devices
+    if (window.innerWidth <= 768) {
+      document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // If switching to Tabellone, redraw bracket lines
+    if (targetTabId === "tab-fasefinale" && drawBracketLinesRef) {
+      setTimeout(() => {
+        drawBracketLinesRef();
+      }, 50);
+    }
+  }
+
+  // Initialize Desktop Tabs Navigation
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
       const targetTabId = tab.getAttribute("data-tab");
+      switchTab(targetTabId);
+    });
+  });
 
-      // Deactivate all tabs and contents
-      tabs.forEach(t => t.classList.remove("active"));
-      tabContents.forEach(c => c.classList.remove("active"));
-
-      // Activate clicked tab and corresponding content
-      tab.classList.add("active");
-      const targetContent = document.getElementById(targetTabId);
-      if (targetContent) {
-        targetContent.classList.add("active");
+  // Initialize Mobile Bottom Tabs Navigation
+  document.querySelectorAll(".mobile-nav-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.id === "mobile-more-btn") {
+        const overlay = document.getElementById("mobile-more-overlay");
+        if (overlay) overlay.classList.add("open");
+        return;
       }
+      
+      const targetTabId = btn.getAttribute("data-tab");
+      switchTab(targetTabId);
+    });
+  });
 
-      // If returning to Home Tab, reset calendar to today/default
-      if (targetTabId === "tab-home") {
-        resetCalendarToToday();
+  // Close Mobile More Menu overlay and handle sub-tab selection
+  const moreOverlay = document.getElementById("mobile-more-overlay");
+  const closeMoreBtn = document.getElementById("close-more-btn");
+  
+  if (closeMoreBtn && moreOverlay) {
+    closeMoreBtn.addEventListener("click", () => {
+      moreOverlay.classList.remove("open");
+    });
+    
+    moreOverlay.addEventListener("click", (e) => {
+      if (e.target === moreOverlay) {
+        moreOverlay.classList.remove("open");
       }
+    });
+  }
 
-      // Smooth scroll to content area on mobile devices
-      if (window.innerWidth <= 768) {
-        document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
-      }
-
-      // If switching to Tabellone, redraw bracket lines
-      if (targetTabId === "tab-fasefinale" && drawBracketLinesRef) {
-        setTimeout(() => {
-          drawBracketLinesRef();
-        }, 50);
-      }
+  document.querySelectorAll(".more-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetTabId = btn.getAttribute("data-tab");
+      if (moreOverlay) moreOverlay.classList.remove("open");
+      switchTab(targetTabId);
     });
   });
 
@@ -349,26 +413,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Navigate to user prediction tab and auto select the user
   function navigateToUserPredictions(username) {
-    // Set active tab button
-    tabs.forEach(t => t.classList.remove("active"));
-    tabContents.forEach(c => c.classList.remove("active"));
-
-    const userTabBtn = document.getElementById("tab-btn-pronostici");
-    const userTabContent = document.getElementById("tab-pronostici");
-
-    if (userTabBtn && userTabContent) {
-      userTabBtn.classList.add("active");
-      userTabContent.classList.add("active");
-    }
-
+    switchTab("tab-pronostici");
     // Set dropdown selection
     userSelector.value = username;
     renderUserPredictions(username);
-
-    // Smooth scroll to content area on mobile devices
-    if (window.innerWidth <= 768) {
-      document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
-    }
   }
 
   // Format datetime ISO string into readable format

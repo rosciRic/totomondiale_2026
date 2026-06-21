@@ -394,6 +394,50 @@
 
   </div>
 
+  <!-- BARRA DI NAVIGAZIONE INFERIORE PER MOBILE -->
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-nav-btn active" data-tab="tab-home">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-classifica">
+      <i class="fa-solid fa-ranking-star"></i>
+      <span>Classifica</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-pronostici">
+      <i class="fa-solid fa-chart-pie"></i>
+      <span>Pronostici</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-fasefinale">
+      <i class="fa-solid fa-sitemap"></i>
+      <span>Tabellone</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobile-more-btn">
+      <i class="fa-solid fa-bars"></i>
+      <span>Altro</span>
+    </button>
+  </nav>
+
+  <!-- MENU A COMPARSA "ALTRO" PER MOBILE -->
+  <div class="mobile-more-overlay" id="mobile-more-overlay">
+    <div class="mobile-more-menu">
+      <div class="mobile-more-header">
+        <h3>Navigazione</h3>
+        <button class="close-more-btn" id="close-more-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="mobile-more-options">
+        <button class="more-option-btn" data-tab="tab-partite">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>Tutte le Partite</span>
+        </button>
+        <button class="more-option-btn" data-tab="tab-regolamento">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Regolamento</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- FINESTRA MODALE PRONOSTICI PARTITA -->
   <div id="match-modal" class="modal-overlay">
     <div class="modal-content">
