@@ -440,9 +440,9 @@
       "gruppo": "H",
       "home": "Spagna",
       "away": "Arabia Saudita",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 4,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 38,
