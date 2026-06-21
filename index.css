@@ -86,7 +86,7 @@ body {
   justify-content: center;
   margin-bottom: 30px;
   overflow: hidden;
-  background-image: url('world_cup_header_banner.png');
+  background-image: url('world_cup_header_banner.webp');
   background-size: cover;
   background-position: center 25%;
   box-shadow: var(--shadow-main);
@@ -2873,6 +2873,73 @@ body {
   /* Adjust app container padding to prevent bottom navbar collision */
   .app-container {
     padding-bottom: 80px; /* Space for the bottom navbar */
+  }
+
+  /* Leaderboard Details Accordion Toggles */
+  .player-detail-row {
+    background: rgba(10, 11, 22, 0.5) !important;
+  }
+
+  .player-detail-row td {
+    padding: 0 !important;
+  }
+
+  .player-detail-card {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    border-left: 4px solid var(--accent-cyan);
+    animation: slideDown 0.25s ease-out forwards;
+    overflow: hidden;
+  }
+
+  .detail-badge {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-glass);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-badge span {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .detail-badge strong {
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    font-family: var(--font-heading);
+  }
+
+  .detail-action-box {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+  }
+
+  .btn-view-prono {
+    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
+    border: none;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(30, 64, 175, 0.2);
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; max-height: 0; }
+    to { opacity: 1; max-height: 220px; }
   }
 }
 

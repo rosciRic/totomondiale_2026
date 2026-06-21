@@ -483,6 +483,17 @@ def calcola_classifica():
         json.dump(classifica, f, indent=2, ensure_ascii=False)
 
     print(f"File {CLASSIFICA_FILE} aggiornato con successo.")
+
+    # Aggiorna il file di versione per il caching del client
+    import time
+    version_file = os.path.join(ROOT_DIR, "version.json")
+    try:
+        with open(version_file, "w", encoding="utf-8") as f:
+            json.dump({"version": int(time.time())}, f)
+        print(f"File di versione {version_file} aggiornato con successo.")
+    except Exception as e:
+        print(f"Errore durante l'aggiornamento di {version_file}: {e}")
+
     print("--- CLASSIFICA ---")
     for idx, row in enumerate(classifica, 1):
         print(f"{idx}. {row['nome']} - Punti: {row['punti']} (Esatti: {row['risultati_esatti']}, Segni: {row['prono_esatti']}, Tabellone: {row['punti_tabellone']}, Errori: {row['errori']})")

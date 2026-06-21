@@ -330,6 +330,16 @@ def main():
     else:
         print(f"\n⚠️  {errors_found} punteggi non corrispondono. Verificare i dati.")
 
+    # Aggiorna il file di versione per il caching del client
+    import time
+    version_file = "version.json"
+    try:
+        with open(version_file, "w", encoding="utf-8") as f:
+            json.dump({"version": int(time.time())}, f)
+        print(f"File di versione {version_file} aggiornato con successo.")
+    except Exception as e:
+        print(f"Errore durante l'aggiornamento di {version_file}: {e}")
+
 
 if __name__ == "__main__":
     main()

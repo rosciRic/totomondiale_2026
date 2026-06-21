@@ -157,10 +157,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
       const basePath = isLocal ? "" : "https://raw.githubusercontent.com/rosciRic/totomondiale_2026/main/";
 
+      // Caching system: checks version.json first to prevent continuous downloading of large files
+      let version = Date.now();
+      try {
+        const versionRes = await fetch(`${basePath}version.json?t=${Date.now()}`);
+        if (versionRes.ok) {
+          const versionData = await versionRes.json();
+          if (versionData && versionData.version) {
+            version = versionData.version;
+          }
+        }
+      } catch (err) {
+        console.warn("Impossibile caricare version.json, uso fallback timestamp di sessione.", err);
+      }
+
       const [classificaRes, partiteRes, pronosticiRes] = await Promise.all([
-        fetch(`${basePath}classifica.json?t=${Date.now()}`),
-        fetch(`${basePath}partite.json?t=${Date.now()}`),
-        fetch(`${basePath}pronostici.json?t=${Date.now()}`)
+        fetch(`${basePath}classifica.json?v=${version}`),
+        fetch(`${basePath}partite.json?v=${version}`),
+        fetch(`${basePath}pronostici.json?v=${version}`)
       ]);
 
       if (!classificaRes.ok || !partiteRes.ok || !pronosticiRes.ok) {
@@ -387,9 +401,65 @@ document.addEventListener("DOMContentLoaded", () => {
         navigateToUserPredictions(player.nome);
       });
 
-      // Make the entire row clickable for better mobile and desktop UX
+      // Click behavior: Toggles accordion on mobile, navigates directly on desktop
       row.addEventListener("click", () => {
-        navigateToUserPredictions(player.nome);
+        if (window.innerWidth <= 768) {
+          const detailRowKey = player.nome.toLowerCase();
+          const existingDetailRow = classificaBody.querySelector(`.player-detail-row[data-for="${detailRowKey}"]`);
+
+          if (existingDetailRow) {
+            existingDetailRow.remove();
+            row.classList.remove("accordion-expanded");
+          } else {
+            // Close other open accordions
+            classificaBody.querySelectorAll(".player-detail-row").forEach(r => r.remove());
+            classificaBody.querySelectorAll("tr").forEach(r => r.classList.remove("accordion-expanded"));
+
+            // Create detail accordion row
+            const detailRow = document.createElement("tr");
+            detailRow.className = "player-detail-row";
+            detailRow.setAttribute("data-for", detailRowKey);
+            detailRow.innerHTML = `
+              <td colspan="4">
+                <div class="player-detail-card">
+                  <div class="detail-badge">
+                    <span>Risultati Esatti (+3)</span>
+                    <strong style="color: var(--accent-green)">${player.risultati_esatti}</strong>
+                  </div>
+                  <div class="detail-badge">
+                    <span>Esiti 1X2 (+1)</span>
+                    <strong style="color: var(--accent-gold)">${player.prono_esatti}</strong>
+                  </div>
+                  <div class="detail-badge">
+                    <span>Tabellone (+1)</span>
+                    <strong style="color: var(--accent-purple)">${player.punti_tabellone ?? 0}</strong>
+                  </div>
+                  <div class="detail-badge">
+                    <span>Errori</span>
+                    <strong style="color: var(--accent-red)">${player.errori}</strong>
+                  </div>
+                  <div class="detail-action-box">
+                    <button class="btn-view-prono">Vedi Pronostici di ${player.nome.split(' ')[0]}</button>
+                  </div>
+                </div>
+              </td>
+            `;
+
+            detailRow.querySelector(".btn-view-prono").addEventListener("click", (e) => {
+              e.stopPropagation();
+              navigateToUserPredictions(player.nome);
+            });
+
+            detailRow.addEventListener("click", (e) => {
+              e.stopPropagation();
+            });
+
+            row.classList.add("accordion-expanded");
+            row.after(detailRow);
+          }
+        } else {
+          navigateToUserPredictions(player.nome);
+        }
       });
 
       classificaBody.appendChild(row);
@@ -399,9 +469,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Filter Leaderboard on search query
   function filterLeaderboard() {
     const query = classificaSearch.value.trim().toLowerCase();
+
+    // Close accordion rows first
+    classificaBody.querySelectorAll(".player-detail-row").forEach(r => r.remove());
+    classificaBody.querySelectorAll("tr").forEach(r => r.classList.remove("accordion-expanded"));
+
     const rows = classificaBody.querySelectorAll("tr");
     
     rows.forEach(row => {
+      if (row.classList.contains("player-detail-row")) return;
       const playerName = row.getAttribute("data-player");
       if (playerName && playerName.includes(query)) {
         row.style.display = "";
