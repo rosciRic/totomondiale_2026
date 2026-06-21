@@ -416,9 +416,9 @@
       "gruppo": "E",
       "home": "Ecuador",
       "away": "Curaçao",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 36,
