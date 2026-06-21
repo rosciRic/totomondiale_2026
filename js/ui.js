@@ -857,6 +857,14 @@ export function initCalendar() {
 
   // Render matches for initial date
   renderHome();
+
+  // Scroll the active (today's or next upcoming) day item into view on load
+  const activeItem = daysScroll.querySelector('.calendar-day-item.active');
+  if (activeItem) {
+    setTimeout(() => {
+      activeItem.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+    }, 100);
+  }
 }
 
 // Render Home Tab - Matches of the selected day
