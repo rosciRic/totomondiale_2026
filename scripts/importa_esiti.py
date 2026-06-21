@@ -24,7 +24,7 @@ import re
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
-PRONOSTICI_FILE = os.path.join(ROOT_DIR, "pronostici.json")
+PRONOSTICI_FILE = os.path.join(ROOT_DIR, "data", "pronostici.json")
 
 # Nomi dei partecipanti per la validazione
 PARTICIPANTS = {

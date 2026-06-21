@@ -2,36 +2,36 @@
 .bracket-scroll-container {
   overflow-x: auto;
   padding: 10px 0;
-  margin-top: 15px;
+  margin-top: 16px;
   -ms-overflow-style: auto;
   scrollbar-width: thin;
 }
 
 .bracket-scroll-wrapper {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   min-width: max-content;
-  padding-bottom: 15px;
+  padding-bottom: 16px;
 }
 
 .bracket-column {
   display: flex;
   flex-direction: column;
-  width: 230px;
+  width: 220px;
   flex-shrink: 0;
 }
 
 .bracket-column h3 {
   text-align: center;
-  font-size: 0.95rem;
-  color: var(--accent-gold);
-  margin-bottom: 24px;
-  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  font-weight: 600;
   border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   font-family: var(--font-heading);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .bracket-column-matches {
@@ -45,7 +45,7 @@
 /* Custom alignment for the Finals and Champion columns to center them neatly */
 .bracket-column-finale .bracket-column-matches {
   justify-content: center;
-  gap: 120px;
+  gap: 100px;
 }
 
 .bracket-column-campione .bracket-column-matches {
@@ -53,28 +53,29 @@
 }
 
 .bracket-match-node {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 10px 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-subtle);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   transition: var(--transition-smooth);
 }
 
 .bracket-match-node:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-glass-active);
+  transform: translateY(-1px);
 }
 
 .bracket-node-header {
   font-size: 0.65rem;
   text-transform: uppercase;
-  color: var(--color-text-muted);
-  font-weight: 700;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--color-text-dimmed);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-glass);
   padding-bottom: 4px;
   letter-spacing: 0.5px;
 }
@@ -82,112 +83,111 @@
 .bracket-node-teams {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .bracket-node-team {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.82rem;
-  padding: 3px 6px;
-  border-radius: 6px;
+  font-size: 0.78rem;
+  padding: 2px 4px;
+  border-radius: 4px;
   border: 1px solid transparent;
   transition: var(--transition-smooth);
+  color: var(--color-text-main);
 }
 
 .bracket-node-team .team-name {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .bracket-node-team .team-score {
-  font-weight: 800;
+  font-weight: 600;
   min-width: 15px;
   text-align: right;
+  font-family: var(--font-heading);
 }
 
 /* Prediction validation highlighting */
 .team-predicted-correct {
-  background: rgba(0, 219, 139, 0.08);
-  border-color: rgba(0, 219, 139, 0.3);
-  color: var(--accent-green) !important;
-  font-weight: 600;
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.2);
+  color: var(--color-mexico) !important;
 }
 
 .team-predicted-incorrect {
-  background: rgba(255, 65, 108, 0.07);
-  border-color: rgba(255, 65, 108, 0.25);
-  color: var(--accent-red) !important;
+  background: rgba(225, 29, 72, 0.08);
+  border-color: rgba(225, 29, 72, 0.15);
+  color: var(--color-canada) !important;
   text-decoration: line-through;
   opacity: 0.8;
 }
 
 .team-predicted-pending {
-  background: rgba(255, 200, 55, 0.05);
-  border-color: rgba(255, 200, 55, 0.25);
-  color: var(--accent-gold) !important;
+  background: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.15);
+  color: var(--color-gold) !important;
 }
 
 .team-not-predicted-qualified {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.08);
-  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.01);
+  border-color: var(--border-glass);
 }
 
 .winner-highlight {
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff;
 }
 
 .loser-dimmed {
-  opacity: 0.4;
+  opacity: 0.45;
 }
 
 /* Winner node special styling */
 .winner-node {
-  background: rgba(255, 200, 55, 0.03) !important;
-  border-color: rgba(255, 200, 55, 0.2) !important;
-  box-shadow: 0 4px 20px rgba(255, 200, 55, 0.1) !important;
+  border-color: rgba(217, 119, 6, 0.25) !important;
+  background: linear-gradient(180deg, rgba(217, 119, 6, 0.04) 0%, rgba(13, 20, 35, 0.45) 100%) !important;
 }
 
 /* Eliminated predictions chip list */
 .bracket-eliminated-box {
-  margin-top: 10px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.08);
-  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 1px dashed var(--border-glass);
+  padding-top: 6px;
 }
 
 .bracket-eliminated-title {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
-  color: var(--accent-red);
-  font-weight: 700;
-  margin-bottom: 6px;
+  color: var(--color-canada);
+  font-weight: 600;
+  margin-bottom: 4px;
   letter-spacing: 0.5px;
 }
 
 .bracket-eliminated-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 3px;
 }
 
 .bracket-eliminated-chip {
-  font-size: 0.7rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: rgba(255, 65, 108, 0.04);
-  border: 1px solid rgba(255, 65, 108, 0.15);
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
   color: var(--color-text-muted);
   text-decoration: line-through;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 
 /* Bracket SVG Connections */
@@ -205,26 +205,25 @@
   transition: stroke var(--transition-smooth), stroke-width var(--transition-smooth), opacity var(--transition-smooth);
 }
 .bracket-path-inactive {
-  stroke: rgba(255, 255, 255, 0.08);
-  stroke-width: 1.5px;
-  opacity: 0.35;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 1px;
+  opacity: 0.4;
 }
 .bracket-path-active {
-  stroke: var(--accent-purple);
-  stroke-width: 2.5px;
-  opacity: 0.85;
-  filter: drop-shadow(0px 0px 4px rgba(142, 45, 226, 0.7));
+  stroke: var(--color-usa);
+  stroke-width: 2px;
+  opacity: 0.75;
 }
 
 /* Mobile Sub-Navigation for Bracket */
 .bracket-nav-mobile {
   display: none;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-card);
   border: 1px solid var(--border-glass);
   padding: 4px;
-  border-radius: 20px;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
   overflow-x: auto;
   scrollbar-width: none;
   width: 100%;
@@ -238,21 +237,21 @@
   border: none;
   color: var(--color-text-muted);
   font-size: 0.72rem;
-  font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 16px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
   transition: var(--transition-smooth);
   outline: none;
 }
 .bracket-nav-btn.active {
-  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
+  background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(142, 45, 226, 0.35);
+  border-bottom: 2px solid var(--color-usa);
 }
 
-/* Mobile responsive optimizations for the bracket scroll container and columns */
+/* Mobile responsive optimizations */
 @media (max-width: 768px) {
   .bracket-nav-mobile {
     display: flex;
@@ -260,31 +259,30 @@
   .bracket-scroll-container {
     scroll-snap-type: x mandatory;
     scroll-padding: 0 16px;
-    padding-bottom: 20px;
+    padding-bottom: 16px;
   }
   .bracket-scroll-wrapper {
-    gap: 16px;
+    gap: 12px;
     padding-left: 16px;
     padding-right: 16px;
   }
   .bracket-column {
-    width: 215px;
+    width: 210px;
     scroll-snap-align: center;
   }
   .bracket-column h3 {
-    margin-bottom: 16px;
-    font-size: 0.85rem;
+    margin-bottom: 12px;
+    font-size: 0.75rem;
   }
   .bracket-match-node {
     padding: 8px 10px;
-    gap: 6px;
+    gap: 4px;
   }
   .bracket-node-team {
-    font-size: 0.78rem;
-    padding: 2px 4px;
+    font-size: 0.75rem;
+    padding: 1px 3px;
   }
   .bracket-column-finale .bracket-column-matches {
     gap: 40px;
   }
 }
-

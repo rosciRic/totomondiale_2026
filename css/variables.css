@@ -1,30 +1,47 @@
 /* ==========================================================================
-   DESIGN SYSTEM & VARIABLES
+   MINIMAL ELEGANT TRI-NATION DESIGN SYSTEM
    ========================================================================== */
 :root {
-  --bg-main: #060713;
-  --bg-gradient: linear-gradient(135deg, #060713 0%, #0d0f22 50%, #04050a 100%);
-  --bg-card: rgba(18, 20, 38, 0.6);
-  --border-glass: rgba(255, 255, 255, 0.06);
-  --border-focus: rgba(56, 189, 248, 0.5);
-
-  --color-text-main: #f8fafc;
-  --color-text-muted: #94a3b8;
+  /* Obsidian/Slate Base Backgrounds */
+  --bg-main: #060913;
+  --bg-gradient: linear-gradient(180deg, #090e1a 0%, #05080f 100%);
+  --bg-card: rgba(13, 20, 35, 0.45);
+  --bg-card-hover: rgba(20, 30, 52, 0.6);
   
-  /* Harmonious, tailored color palette (World Cup 2026 Sports Blue & Red Theme) */
-  --accent-gold: #f59e0b;
-  --accent-gold-rgb: 245, 158, 11;
+  /* Borders */
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-glass-active: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(255, 255, 255, 0.25);
+  
+  /* Text colors */
+  --color-text-main: #f8fafc;
+  --color-text-muted: #64748b;
+  --color-text-dimmed: #475569;
+
+  /* Host Nations Colors (FIFA World Cup 2026 Theme) */
+  --color-usa: #2563eb;       /* USA Royal Blue */
+  --color-canada: #e11d48;    /* Canada Crimson/Rose */
+  --color-mexico: #059669;    /* Mexico Emerald Green */
+  --color-gold: #d97706;      /* Golden Trophy Gold */
+  
+  /* UI Semantic Aliases */
+  --accent-gold: var(--color-gold);
   --accent-cyan: #38bdf8;
-  --accent-purple: #1e40af; /* Sports Royal Blue */
-  --accent-purple-light: #ef4444; /* Sports Red */
-  --accent-green: #22c55e;
-  --accent-red: #ef4444;
+  --accent-purple: var(--color-usa);
+  --accent-purple-light: var(--color-canada);
+  --accent-green: var(--color-mexico);
+  --accent-red: var(--color-canada);
 
-  --shadow-main: 0 10px 30px 0 rgba(0, 0, 0, 0.45);
-  --shadow-glow: 0 0 15px rgba(56, 189, 248, 0.25);
+  /* Shadows and Glows */
+  --shadow-main: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --shadow-subtle: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.12);
 
+  /* Typography & Transitions */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
 }
-

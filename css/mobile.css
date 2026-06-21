@@ -3,22 +3,21 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .logo-area h1 {
-    font-size: 2.0rem;
+    font-size: 1.6rem;
   }
   .logo-area {
-    gap: 10px;
+    gap: 8px;
   }
   .trophy-img {
-    height: 50px;
+    height: 36px;
   }
   .main-header {
-    padding: 35px 15px;
-    min-height: 160px;
-    background-position: center 25%;
+    padding: 24px 16px;
+    min-height: auto;
   }
   .subtitle {
-    font-size: 1rem;
-    margin-bottom: 15px;
+    font-size: 0.85rem;
+    margin-top: 4px;
   }
   .hide-mobile {
     display: none;
@@ -26,47 +25,47 @@
   
   /* Tabs */
   .navigation-tabs {
-    padding: 4px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    gap: 4px;
+    padding: 3px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    gap: 2px;
   }
   .tab-button {
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    gap: 6px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    gap: 4px;
   }
 
-  /* Stats grid - 2 columns instead of 4 */
+  /* Stats grid */
   .dashboard-stats {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
   .stat-card {
     padding: 12px;
     gap: 10px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
   .stat-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
   .stat-info h3 {
-    font-size: 1.15rem;
+    font-size: 1rem;
   }
   .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   /* Filters */
   .filters-bar {
     flex-direction: column;
     align-items: stretch;
-    padding: 12px;
-    gap: 12px;
-    border-radius: 12px;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
   }
   .filter-group {
     justify-content: space-between;
@@ -74,88 +73,92 @@
   }
   .filter-group select {
     flex-grow: 1;
-    max-width: 65%;
-    padding: 6px 12px;
-    font-size: 0.85rem;
+    max-width: 60%;
+    padding: 5px 10px;
+    font-size: 0.78rem;
   }
   
   /* Matches grid */
   .matches-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 12px;
   }
   .match-card {
-    padding: 15px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 8px;
   }
   
   /* User Predictions Selector */
   .user-select-bar {
-    padding: 15px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 8px;
   }
   .select-wrapper {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 6px;
+    width: 100%;
   }
   .select-wrapper select {
     width: 100%;
+    font-size: 0.88rem;
+    padding: 8px 12px;
   }
   .user-summary-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 6px;
     width: 100%;
   }
   .user-summary-stats .user-stat-badge:first-child {
     grid-column: span 2;
   }
   
-  /* User Prediction Details List - Optimized Compact Row */
+  /* User Prediction Details List */
   .user-match-row {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    padding: 10px 12px;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
   }
   .match-info-meta {
     flex: 1;
     min-width: 0;
   }
   .match-info-teams {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .scores-comparison {
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
   }
   .score-num {
-    font-size: 0.95rem;
-    padding: 2px 6px;
+    font-size: 0.85rem;
+    padding: 2px 4px;
   }
   .score-punti-badge {
-    width: 34px;
-    height: 34px;
-    font-size: 0.9rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
     flex-shrink: 0;
   }
   
   /* Montepremi */
   .montepremi-stats-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
   }
   .prize-cards-container {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
   }
   .payment-details-box {
-    padding: 15px;
+    padding: 12px;
   }
 }
 
@@ -164,81 +167,78 @@
    ========================================================================== */
 @media (max-width: 480px) {
   .app-container {
-    padding: 10px 8px;
+    padding: 16px 12px;
   }
   .logo-area h1 {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
   }
   .logo-area {
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 6px;
+    margin-bottom: 6px;
   }
   .trophy-img {
-    height: 40px;
+    height: 30px;
   }
   .main-header {
-    padding: 25px 10px;
-    min-height: 140px;
-    background-position: center 25%;
+    padding: 16px 10px;
   }
   .subtitle {
-    font-size: 0.85rem;
-    margin-bottom: 12px;
+    font-size: 0.78rem;
   }
   
   /* Staged Tabs layout for Smartphone to fit all tabs */
   .navigation-tabs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 4px;
-    gap: 5px;
-    border-radius: 10px;
-    overflow-x: visible; /* no scroll needed */
+    padding: 3px;
+    gap: 4px;
+    border-radius: 8px;
+    overflow-x: visible;
   }
   .tab-button {
     flex-direction: column;
-    gap: 4px;
-    padding: 8px 4px;
-    font-size: 0.72rem;
+    gap: 2px;
+    padding: 6px 2px;
+    font-size: 0.68rem;
     text-align: center;
     justify-content: center;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 4px;
   }
   .tab-button i {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
   
   /* Small screens stats dashboard */
   .dashboard-stats {
-    gap: 8px;
+    gap: 6px;
   }
   .stat-card {
-    padding: 10px;
-    border-radius: 10px;
+    padding: 8px;
+    border-radius: 6px;
   }
   .stat-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 1rem;
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
   }
   .stat-info h3 {
-    font-size: 1rem;
+    font-size: 0.88rem;
   }
   
   /* Card headers */
   .card-header h2 {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   
   /* Leaderboard compact sizes */
   .premium-table th {
-    padding: 12px 8px;
-    font-size: 0.7rem;
+    padding: 10px 6px;
+    font-size: 0.65rem;
   }
   .premium-table td {
-    padding: 12px 8px;
-    font-size: 0.85rem;
+    padding: 10px 6px;
+    font-size: 0.78rem;
   }
   
   /* Search box */
@@ -248,117 +248,91 @@
   .card-header {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 10px;
   }
   
   /* Team Names truncation for matches */
   .team-name {
-    font-size: 0.9rem;
-    gap: 6px;
+    font-size: 0.82rem;
+    gap: 8px;
+  }
+  .flag-img {
+    width: 20px;
+    height: 14px;
   }
   .team-flag-mock {
-    width: 22px;
-    height: 16px;
-    font-size: 0.55rem;
+    width: 20px;
+    height: 14px;
+    font-size: 0.5rem;
   }
   .team-score {
-    font-size: 1.1rem;
-    width: 30px;
-    padding: 1px 4px;
+    font-size: 0.92rem;
+    width: 26px;
+    padding: 1px 3px;
   }
 
   /* Compact user prediction rows on mobile */
   .user-match-row {
     flex-direction: column;
     align-items: stretch;
-    padding: 10px 12px;
-    gap: 8px;
-    border-radius: 8px;
+    padding: 8px 10px;
+    gap: 6px;
+    border-radius: 6px;
   }
   .match-info-meta {
     width: 100%;
   }
   .match-info-meta h5 {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
   }
   .match-info-teams {
-    font-size: 0.88rem;
+    font-size: 0.8rem;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    margin-top: 2px;
+    margin-top: 1px;
   }
   .scores-comparison {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 8px;
-    gap: 8px;
+    border-top: 1px solid var(--border-glass);
+    padding-top: 6px;
+    gap: 6px;
   }
   .score-box {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
   }
   .score-box-label {
     margin-bottom: 0;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
   .score-num {
-    font-size: 0.85rem;
-    padding: 2px 6px;
+    font-size: 0.78rem;
+    padding: 1px 4px;
   }
   .score-punti-badge {
-    width: 28px;
-    height: 28px;
-    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    font-size: 0.72rem;
   }
 
   /* User summary stats mobile tweak */
   .user-stat-badge {
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
   }
   .user-stat-badge strong {
-    font-size: 1rem;
+    font-size: 0.88rem;
   }
   .user-stat-badge span {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 }
 
-/* Responsive Overrides */
-@media (max-width: 1024px) {
-  .stats-dashboard-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .stats-main-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .stats-main-grid .col-span-3 {
-    grid-column: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .difficulty-split {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-@media (max-width: 576px) {
-  .stats-dashboard-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-}
-
-
-/* Predictions Sorting Selector Styles */
 /* ==========================================================================
    MOBILE-FIRST BOTTOM NAVIGATION & UX STYLING
    ========================================================================== */
@@ -369,17 +343,17 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  background: rgba(6, 7, 19, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  height: 56px;
+  background: rgba(6, 9, 19, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--border-glass);
-  display: none; /* Hidden on desktop */
+  display: none;
   justify-content: space-around;
   align-items: center;
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .mobile-nav-btn {
@@ -390,10 +364,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-family: var(--font-heading);
-  font-weight: 600;
-  gap: 4px;
+  font-weight: 500;
+  gap: 2px;
   cursor: pointer;
   transition: var(--transition-smooth);
   flex-grow: 1;
@@ -402,16 +376,16 @@
 }
 
 .mobile-nav-btn i {
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 .mobile-nav-btn.active {
-  color: var(--accent-cyan);
+  color: #ffffff;
+  border-bottom: 2px solid var(--color-usa);
 }
 
 .mobile-nav-btn.active i {
-  color: var(--accent-cyan);
-  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
+  color: #ffffff;
 }
 
 /* Bottom Navigation "More" Slide-up Overlay Menu */
@@ -421,15 +395,15 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(4, 5, 8, 0.8);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(3, 4, 8, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 1100;
   display: flex;
   align-items: flex-end;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .mobile-more-overlay.open {
@@ -438,16 +412,15 @@
 }
 
 .mobile-more-menu {
-  background: var(--bg-main);
-  background-image: var(--bg-gradient);
-  border-top: 1px solid var(--border-glass);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  background: #0b101c;
+  border-top: 1px solid var(--border-glass-active);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   width: 100%;
-  padding: 24px 24px calc(24px + env(safe-area-inset-bottom)) 24px;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+  padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.5);
   transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-more-overlay.open .mobile-more-menu {
@@ -458,22 +431,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 .mobile-more-header h3 {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
-  color: var(--accent-gold);
+  font-size: 1rem;
+  color: var(--color-gold);
+  font-weight: 600;
 }
 
 .close-more-btn {
   background: transparent;
   border: none;
   color: var(--color-text-main);
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   cursor: pointer;
   outline: none;
 }
@@ -481,39 +455,39 @@
 .mobile-more-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 12px;
 }
 
 .more-option-btn {
   background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 8px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--color-text-main);
   font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-weight: 500;
+  font-size: 0.78rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   outline: none;
 }
 
 .more-option-btn i {
-  font-size: 1.5rem;
-  color: var(--accent-cyan);
+  font-size: 1.25rem;
+  color: #60a5fa;
 }
 
 .more-option-btn:hover {
-  border-color: var(--accent-cyan);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border-glass-active);
 }
 
 @media (max-width: 768px) {
-  /* Hide top navigation tabs completely on mobile to prevent clutter */
+  /* Hide top navigation tabs completely on mobile */
   .navigation-tabs {
     display: none !important;
   }
@@ -525,12 +499,12 @@
   
   /* Adjust app container padding to prevent bottom navbar collision */
   .app-container {
-    padding-bottom: 80px; /* Space for the bottom navbar */
+    padding-bottom: 72px;
   }
 
   /* Leaderboard Details Accordion Toggles */
   .player-detail-row {
-    background: rgba(10, 11, 22, 0.5) !important;
+    background: rgba(255, 255, 255, 0.01) !important;
   }
 
   .player-detail-row td {
@@ -538,70 +512,68 @@
   }
 
   .player-detail-card {
-    padding: 15px;
+    padding: 12px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    animation: slideDown 0.25s ease-out forwards;
+    gap: 8px;
+    animation: slideDown 0.2s ease-out forwards;
     overflow: hidden;
   }
 
   .detail-badge {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.01);
     border: 1px solid var(--border-glass);
-    border-radius: 8px;
-    padding: 8px 12px;
+    border-radius: 6px;
+    padding: 6px 10px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
   }
 
   .detail-badge span {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--color-text-muted);
     text-transform: uppercase;
   }
 
   .detail-badge strong {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     color: var(--color-text-main);
     font-family: var(--font-heading);
+    font-weight: 600;
   }
 
   .detail-action-box {
     grid-column: span 2;
     display: flex;
     justify-content: flex-end;
-    margin-top: 5px;
+    margin-top: 4px;
   }
 
   .btn-view-prono {
-    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
+    background: var(--color-usa);
     border: none;
     color: white !important;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 4px;
     font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.8rem;
+    font-weight: 600;
+    font-size: 0.75rem;
     cursor: pointer;
     outline: none;
-    box-shadow: 0 4px 10px rgba(30, 64, 175, 0.2);
   }
 
   @keyframes slideDown {
     from { opacity: 0; max-height: 0; }
-    to { opacity: 1; max-height: 220px; }
+    to { opacity: 1; max-height: 180px; }
   }
 
   .player-detail-card.slide-up {
-    animation: slideUp 0.25s ease-in forwards;
+    animation: slideUp 0.2s ease-in forwards;
   }
 
   @keyframes slideUp {
-    from { opacity: 1; max-height: 220px; }
+    from { opacity: 1; max-height: 180px; }
     to { opacity: 0; max-height: 0; }
   }
 }
-
-

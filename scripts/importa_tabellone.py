@@ -23,7 +23,7 @@ import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
-PRONOSTICI_FILE = os.path.join(ROOT_DIR, "pronostici.json")
+PRONOSTICI_FILE = os.path.join(ROOT_DIR, "data", "pronostici.json")
 CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
 
 # Nomi dei partecipanti per la validazione

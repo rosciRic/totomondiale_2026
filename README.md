@@ -25,9 +25,11 @@ La codebase è organizzata in moduli separati per isolare le responsabilità gra
 │   ├── api.js                  # Fetching asincrono dei dati reali con cache bust intelligente
 │   ├── navigation.js           # Gestione tab desktop e mobile bottom nav
 │   └── ui.js                   # Rendering dinamico del DOM (classifiche, partite, tabellone, modali)
-├── classifica.json             # DB Classifica calcolato automaticamente via Actions
-├── partite.json                # DB Partite reali e squadre qualificate
-├── pronostici.json             # DB Pronostici di tutti i 38 partecipanti
+├── data/                       # Database JSON dell'applicazione
+│   ├── classifica.json         # DB Classifica calcolato automaticamente via Actions
+│   ├── partite.json            # DB Partite reali e squadre qualificate
+│   ├── pronostici.json         # DB Pronostici di tutti i 38 partecipanti
+│   └── version.json            # Controllo versione cache client
 ├── scripts/                    # Script Python per calcoli e importazioni
 │   ├── aggiorna_dati.py        # Script GitOps di calcolo automatico della classifica
 │   ├── importa_tabellone.py    # Importazione tabelloni da Google Forms CSV

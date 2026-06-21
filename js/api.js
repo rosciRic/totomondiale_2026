@@ -10,7 +10,7 @@ export async function fetchDatabases() {
     // Caching system: checks version.json first to prevent continuous downloading of large files
     let version = Date.now();
     try {
-      const versionRes = await fetch(`${basePath}version.json?t=${Date.now()}`);
+      const versionRes = await fetch(`${basePath}data/version.json?t=${Date.now()}`);
       if (versionRes.ok) {
         const versionData = await versionRes.json();
         if (versionData && versionData.version) {
@@ -22,9 +22,9 @@ export async function fetchDatabases() {
     }
 
     const [classificaRes, partiteRes, pronosticiRes] = await Promise.all([
-      fetch(`${basePath}classifica.json?v=${version}`),
-      fetch(`${basePath}partite.json?v=${version}`),
-      fetch(`${basePath}pronostici.json?v=${version}`)
+      fetch(`${basePath}data/classifica.json?v=${version}`),
+      fetch(`${basePath}data/partite.json?v=${version}`),
+      fetch(`${basePath}data/pronostici.json?v=${version}`)
     ]);
 
     if (!classificaRes.ok || !partiteRes.ok || !pronosticiRes.ok) {

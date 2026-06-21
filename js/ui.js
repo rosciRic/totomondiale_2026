@@ -37,7 +37,14 @@ export function renderDashboardMetrics() {
   }
 
   const completedCount = state.globalPartiteData.partite.filter(p => p.conclusa).length;
-  if (statMatches) statMatches.textContent = `${completedCount} / ${state.globalPartiteData.partite.length}`;
+  const totalMatches = state.globalPartiteData.partite.length;
+  if (statMatches) statMatches.textContent = `${completedCount} / ${totalMatches}`;
+
+  const progressBar = document.getElementById("stat-matches-progress");
+  if (progressBar && totalMatches > 0) {
+    const percentage = (completedCount / totalMatches) * 100;
+    progressBar.style.width = `${percentage}%`;
+  }
 
   const totalPts = state.globalClassifica.reduce((sum, item) => sum + item.punti, 0);
   if (statPoints) statPoints.textContent = totalPts;

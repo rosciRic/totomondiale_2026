@@ -6,9 +6,9 @@ import sys
 # File paths (resolved relative to project root directory)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
-PARTITE_FILE = os.path.join(ROOT_DIR, "partite.json")
-PRONOSTICI_FILE = os.path.join(ROOT_DIR, "pronostici.json")
-CLASSIFICA_FILE = os.path.join(ROOT_DIR, "classifica.json")
+PARTITE_FILE = os.path.join(ROOT_DIR, "data", "partite.json")
+PRONOSTICI_FILE = os.path.join(ROOT_DIR, "data", "pronostici.json")
+CLASSIFICA_FILE = os.path.join(ROOT_DIR, "data", "classifica.json")
 
 def get_match_sign(home_score, away_score):
     """Returns the sign of the match: '1' for home win, '2' for away win, 'X' for draw."""
@@ -486,7 +486,7 @@ def calcola_classifica():
 
     # Aggiorna il file di versione per il caching del client
     import time
-    version_file = os.path.join(ROOT_DIR, "version.json")
+    version_file = os.path.join(ROOT_DIR, "data", "version.json")
     try:
         with open(version_file, "w", encoding="utf-8") as f:
             json.dump({"version": int(time.time())}, f)
