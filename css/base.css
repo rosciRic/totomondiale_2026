@@ -108,7 +108,7 @@ body {
 
 .logo-area h1 span {
   font-weight: 300;
-  color: var(--color-text-muted);
+  color: var(--color-text-main);
   margin-left: 4px;
 }
 
