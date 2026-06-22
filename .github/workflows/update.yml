@@ -1,7 +1,9 @@
 name: Update Leaderboard and Results
 
 on:
-  # Allow manual trigger and external API triggers (e.g. from cron-job.org)
+  schedule:
+    - cron: '15 0-6,18-23 * * *'
+    - cron: '45 1-3,22 * * *'
   workflow_dispatch:
 
 permissions:
