@@ -549,28 +549,40 @@ export function renderUserPredictions(username) {
         <div class="score-formula-container">
           <div class="formula-term term-risultati">
             <div class="term-value">${placement.risultati_esatti || 0}</div>
-            <div class="term-label">Risultati Esatti</div>
+            <div class="term-label">
+              <span class="desktop-only-text">Risultati Esatti</span>
+              <span class="mobile-only-text">Risultati Esatti: <strong>${placement.risultati_esatti || 0}</strong> <span class="term-multiplier-inline">(&times; 3 pt)</span></span>
+            </div>
             <div class="term-multiplier">&times; 3 Punti</div>
             <div class="term-calc-value">+${puntiRisultati} PT</div>
           </div>
           <div class="formula-operator">+</div>
           <div class="formula-term term-segni">
             <div class="term-value">${placement.prono_esatti || 0}</div>
-            <div class="term-label">Esiti 1X2 (Segni)</div>
+            <div class="term-label">
+              <span class="desktop-only-text">Esiti 1X2 (Segni)</span>
+              <span class="mobile-only-text">Esiti 1X2 (Segni): <strong>${placement.prono_esatti || 0}</strong> <span class="term-multiplier-inline">(&times; 1 pt)</span></span>
+            </div>
             <div class="term-multiplier">&times; 1 Punto</div>
             <div class="term-calc-value">+${puntiSegni} PT</div>
           </div>
           <div class="formula-operator">+</div>
           <div class="formula-term term-tabellone">
             <div class="term-value">${placement.punti_tabellone || 0}</div>
-            <div class="term-label">Punti Tabellone</div>
+            <div class="term-label">
+              <span class="desktop-only-text">Punti Tabellone</span>
+              <span class="mobile-only-text">Punti Tabellone: <strong>${placement.punti_tabellone || 0}</strong> <span class="term-multiplier-inline">(&times; 1 pt)</span></span>
+            </div>
             <div class="term-multiplier">&times; 1 Punto</div>
             <div class="term-calc-value">+${puntiTabellone} PT</div>
           </div>
           <div class="formula-operator">+</div>
           <div class="formula-term term-premi">
             <div class="term-value">${puntiPremi}</div>
-            <div class="term-label">Premi Speciali</div>
+            <div class="term-label">
+              <span class="desktop-only-text">Premi Speciali</span>
+              <span class="mobile-only-text">Premi Speciali</span>
+            </div>
             <div class="term-multiplier">Vincitore/Capoc./etc.</div>
             <div class="term-calc-value">+${puntiPremi} PT</div>
           </div>
@@ -1254,6 +1266,18 @@ export function renderTabellone(userKey) {
   state.currentTabelloneUserKey = userKey;
   if (!fasefinaleBracketContainer) return;
   fasefinaleBracketContainer.innerHTML = "";
+
+  // Update bracket points badge for the selected player
+  const tabelloneScoreBadge = document.getElementById("tabellone-score-badge");
+  if (tabelloneScoreBadge) {
+    if (userKey === "reale") {
+      tabelloneScoreBadge.style.display = "none";
+    } else {
+      const placement = state.globalClassifica.find(c => c.nome === userKey) || { punti_tabellone: 0 };
+      tabelloneScoreBadge.style.display = "inline-flex";
+      tabelloneScoreBadge.innerHTML = `<i class="fa-solid fa-star"></i> Punti Tabellone: ${placement.punti_tabellone ?? 0} PT`;
+    }
+  }
 
   const userDati = userKey !== "reale" ? state.globalPronostici.partecipanti[userKey] : null;
   const userPassaggio = userDati ? (userDati.passaggio_turno || {}) : {};

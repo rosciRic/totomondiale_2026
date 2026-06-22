@@ -1480,63 +1480,23 @@
 /* Mobile scoring calculation */
 @media (max-width: 768px) {
   .score-formula-card {
-    padding: 12px 16px;
-    margin-top: 12px;
+    display: none !important;
   }
-  .score-formula-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-  .score-formula-container {
-    flex-direction: column;
-    gap: 6px;
-    align-items: stretch;
-  }
-  .formula-operator {
-    text-align: center;
-    font-size: 1.1rem;
-    margin: -2px 0;
-    color: var(--color-text-muted);
-  }
-  .formula-term, .formula-total {
-    flex: none;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    padding: 8px 12px;
-  }
-  .formula-term:hover {
-    transform: none;
-  }
-  .term-value, .total-value {
-    order: 2;
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-  .term-label, .total-label {
-    order: 1;
-    font-size: 0.78rem;
-    margin-top: 0;
-  }
-  .term-multiplier {
+}
+
+/* Helper utilities for toggling text visibility between desktop and mobile */
+.desktop-only-text {
+  display: inline;
+}
+.mobile-only-text {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only-text {
     display: none;
   }
-  .term-calc-value {
-    order: 3;
-    margin-top: 0;
-    font-size: 0.85rem;
-    min-width: 65px;
-    text-align: center;
-  }
-  .total-value {
-    font-size: 1.25rem;
-  }
-  .formula-total {
-    margin-top: 6px;
-    padding: 10px 12px;
-    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.15);
+  .mobile-only-text {
+    display: inline;
   }
 }
