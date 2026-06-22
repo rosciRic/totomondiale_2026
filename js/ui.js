@@ -477,11 +477,22 @@ export function openMatchModal(match) {
   matchModal.classList.add("open");
 }
 
+// Helper to get surname (everything after the first name)
+function getSurname(fullName) {
+  const parts = fullName.trim().split(/\s+/);
+  if (parts.length <= 1) return fullName;
+  return parts.slice(1).join(" ");
+}
+
 // Populate User dropdown list
 export function populateUserSelector() {
   if (!userSelector) return;
   userSelector.innerHTML = "";
-  const partecipanti = Object.keys(state.globalPronostici.partecipanti);
+  const partecipanti = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
+    const surnameA = getSurname(a).toLowerCase();
+    const surnameB = getSurname(b).toLowerCase();
+    return surnameA.localeCompare(surnameB) || a.localeCompare(b);
+  });
   
   if (partecipanti.length === 0) {
     userSelector.innerHTML = `<option value="">Nessun utente</option>`;
@@ -979,8 +990,12 @@ export function initFaseFinale() {
   optReal.textContent = "Torneo Reale";
   tabelloneUserSelector.appendChild(optReal);
 
-  // 2. Add all participants alphabetically
-  const names = Object.keys(state.globalPronostici.partecipanti).sort();
+  // 2. Add all participants alphabetically by surname
+  const names = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
+    const surnameA = getSurname(a).toLowerCase();
+    const surnameB = getSurname(b).toLowerCase();
+    return surnameA.localeCompare(surnameB) || a.localeCompare(b);
+  });
   names.forEach(name => {
     const opt = document.createElement("option");
     opt.value = name;
