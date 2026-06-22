@@ -122,6 +122,11 @@ export function renderLeaderboard() {
       row.classList.add("row-rank-3");
     }
 
+    const puntiRisultati = (player.risultati_esatti || 0) * 3;
+    const puntiSegni = (player.prono_esatti || 0) * 1;
+    const puntiTabellone = (player.punti_tabellone || 0);
+    const puntiPremi = (player.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
+
     row.innerHTML = `
       <td style="text-align: center;"><span class="${posClass}">${posContent}</span></td>
       <td><span class="player-name">${player.nome}</span></td>
@@ -129,7 +134,7 @@ export function renderLeaderboard() {
       <td style="text-align: center;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
       <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
       <td style="text-align: center; color: var(--accent-purple); font-weight: 600;" class="hide-mobile badge-tabellone-col">${player.punti_tabellone ?? 0}</td>
-      <td style="text-align: center;" class="hide-mobile badge-error-col">${player.errori}</td>
+      <td style="text-align: center; color: var(--accent-cyan); font-weight: 600;" class="hide-mobile badge-premi-col">${puntiPremi}</td>
       <td style="text-align: center;">
         <button class="btn-details" data-user="${player.nome}">
           <i class="fa-solid fa-eye"></i>
@@ -191,8 +196,8 @@ export function renderLeaderboard() {
                   <strong style="color: var(--accent-purple)">${player.punti_tabellone ?? 0}</strong>
                 </div>
                 <div class="detail-badge">
-                  <span>Errori</span>
-                  <strong style="color: var(--accent-red)">${player.errori}</strong>
+                  <span>Premi Spec. (+5/10)</span>
+                  <strong style="color: var(--accent-cyan)">${puntiPremi}</strong>
                 </div>
               </div>
             </td>
@@ -529,6 +534,11 @@ export function renderUserPredictions(username) {
   const placement = state.globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, punti_tabellone: 0, errori: 0 };
   
   // Display participant widgets summary
+  const puntiRisultati = (placement.risultati_esatti || 0) * 3;
+  const puntiSegni = (placement.prono_esatti || 0) * 1;
+  const puntiTabellone = (placement.punti_tabellone || 0);
+  const puntiPremi = (placement.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
+
   userSummaryStats.innerHTML = `
     <div class="user-stat-badge">
       <span>Punteggio</span>
@@ -547,10 +557,16 @@ export function renderUserPredictions(username) {
       <strong style="color: var(--accent-purple)">${placement.punti_tabellone ?? 0}</strong>
     </div>
     <div class="user-stat-badge">
-      <span>Errori</span>
-      <strong style="color: var(--accent-red)">${placement.errori}</strong>
+      <span>Premi Spec.</span>
+      <strong style="color: var(--accent-cyan)">${puntiPremi}</strong>
     </div>
   `;
+
+  // Initialize collapsible matches once
+  if (!state.matchesToggleInitialized) {
+    state.matchesToggleInitialized = true;
+    initCollapsibleMatches();
+  }
 
   // Map matches map
   const partiteMap = {};
@@ -1220,9 +1236,35 @@ export function renderTabellone(userKey) {
   const knockoutMatches = state.globalPartiteData.partite.filter(p => p.fase !== 'gironi');
   knockoutMatches.sort((a, b) => a.id - b.id);
 
+  const parentMatches = {
+    89: { home: "W74", away: "W77" },
+    90: { home: "W73", away: "W75" },
+    91: { home: "W76", away: "W78" },
+    92: { home: "W79", away: "W80" },
+    93: { home: "W83", away: "W84" },
+    94: { home: "W81", away: "W82" },
+    95: { home: "W86", away: "W88" },
+    96: { home: "W85", away: "W87" },
+    97: { home: "W89", away: "W90" },
+    98: { home: "W94", away: "W93" },
+    99: { home: "W92", away: "W91" },
+    100: { home: "W96", away: "W95" },
+    101: { home: "W98", away: "W97" },
+    102: { home: "W99", away: "W100" },
+    103: { home: "L102", away: "L101" },
+    104: { home: "W102", away: "W101" }
+  };
+
   knockoutMatches.forEach(m => {
-    const homeResolved = resolveTeam(m.home, resolved, userKey, userPassaggio);
-    const awayResolved = resolveTeam(m.away, resolved, userKey, userPassaggio);
+    let homeSource = m.home;
+    let awaySource = m.away;
+    if (userKey !== "reale" && parentMatches[m.id]) {
+      homeSource = parentMatches[m.id].home;
+      awaySource = parentMatches[m.id].away;
+    }
+
+    const homeResolved = resolveTeam(homeSource, resolved, userKey, userPassaggio);
+    const awayResolved = resolveTeam(awaySource, resolved, userKey, userPassaggio);
     const outcome = getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati);
 
     resolved[m.id] = {
@@ -1464,3 +1506,31 @@ export function renderTabellone(userKey) {
   }
 
 }
+
+// Bind click event to matches section header to collapse/expand on mobile
+function initCollapsibleMatches() {
+  const pronoHeader = document.getElementById("user-prono-header");
+  const matchesList = document.getElementById("user-matches-list");
+  const toggleIcon = document.getElementById("matches-toggle-icon");
+  
+  if (pronoHeader && matchesList && toggleIcon) {
+    pronoHeader.addEventListener("click", (e) => {
+      const sortBtn = document.getElementById("btn-toggle-sort");
+      if (sortBtn && (sortBtn.contains(e.target) || e.target.id === "btn-toggle-sort")) {
+        return;
+      }
+      
+      const isCollapsed = matchesList.style.display === "none";
+      if (isCollapsed) {
+        matchesList.style.display = "";
+        toggleIcon.classList.remove("fa-chevron-down");
+        toggleIcon.classList.add("fa-chevron-up");
+      } else {
+        matchesList.style.display = "none";
+        toggleIcon.classList.remove("fa-chevron-up");
+        toggleIcon.classList.add("fa-chevron-down");
+      }
+    });
+  }
+}
+
