@@ -16,7 +16,6 @@ const userSelector = document.getElementById("user-selector");
 const userSummaryStats = document.getElementById("user-summary-stats");
 const userMatchesList = document.getElementById("user-matches-list");
 const userAwardsList = document.getElementById("user-awards-list");
-const scoreCalculationContainer = document.getElementById("score-calculation-container");
 const homeTodayDate = document.getElementById("home-today-date");
 const homeTodayContainer = document.getElementById("home-today-container");
 const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
@@ -519,9 +518,6 @@ export function renderUserPredictions(username) {
   userSummaryStats.innerHTML = "";
   userMatchesList.innerHTML = "";
   userAwardsList.innerHTML = "";
-  if (scoreCalculationContainer) {
-    scoreCalculationContainer.innerHTML = "";
-  }
 
   const userDati = state.globalPronostici.partecipanti[username];
   if (!userDati) {
@@ -532,70 +528,6 @@ export function renderUserPredictions(username) {
   // Fetch user overall placement from classifica
   const placement = state.globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, punti_tabellone: 0, errori: 0 };
   
-  // Calculate mathematical breakdown terms
-  const puntiRisultati = (placement.risultati_esatti || 0) * 3;
-  const puntiSegni = (placement.prono_esatti || 0) * 1;
-  const puntiTabellone = (placement.punti_tabellone || 0);
-  const puntiPremi = (placement.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
-
-  // Render mathematical points breakdown card
-  if (scoreCalculationContainer) {
-    scoreCalculationContainer.innerHTML = `
-      <div class="score-formula-card card">
-        <div class="score-formula-header">
-          <h3><i class="fa-solid fa-calculator"></i> Calcolo Punteggio Finale</h3>
-          <span class="formula-subtitle">Dettaglio matematico dei punti accumulati</span>
-        </div>
-        <div class="score-formula-container">
-          <div class="formula-term term-risultati">
-            <div class="term-value">${placement.risultati_esatti || 0}</div>
-            <div class="term-label">
-              <span class="desktop-only-text">Risultati Esatti</span>
-              <span class="mobile-only-text">Risultati Esatti: <strong>${placement.risultati_esatti || 0}</strong> <span class="term-multiplier-inline">(&times; 3 pt)</span></span>
-            </div>
-            <div class="term-multiplier">&times; 3 Punti</div>
-            <div class="term-calc-value">+${puntiRisultati} PT</div>
-          </div>
-          <div class="formula-operator">+</div>
-          <div class="formula-term term-segni">
-            <div class="term-value">${placement.prono_esatti || 0}</div>
-            <div class="term-label">
-              <span class="desktop-only-text">Esiti 1X2 (Segni)</span>
-              <span class="mobile-only-text">Esiti 1X2 (Segni): <strong>${placement.prono_esatti || 0}</strong> <span class="term-multiplier-inline">(&times; 1 pt)</span></span>
-            </div>
-            <div class="term-multiplier">&times; 1 Punto</div>
-            <div class="term-calc-value">+${puntiSegni} PT</div>
-          </div>
-          <div class="formula-operator">+</div>
-          <div class="formula-term term-tabellone">
-            <div class="term-value">${placement.punti_tabellone || 0}</div>
-            <div class="term-label">
-              <span class="desktop-only-text">Punti Tabellone</span>
-              <span class="mobile-only-text">Punti Tabellone: <strong>${placement.punti_tabellone || 0}</strong> <span class="term-multiplier-inline">(&times; 1 pt)</span></span>
-            </div>
-            <div class="term-multiplier">&times; 1 Punto</div>
-            <div class="term-calc-value">+${puntiTabellone} PT</div>
-          </div>
-          <div class="formula-operator">+</div>
-          <div class="formula-term term-premi">
-            <div class="term-value">${puntiPremi}</div>
-            <div class="term-label">
-              <span class="desktop-only-text">Premi Speciali</span>
-              <span class="mobile-only-text">Premi Speciali</span>
-            </div>
-            <div class="term-multiplier">Vincitore/Capoc./etc.</div>
-            <div class="term-calc-value">+${puntiPremi} PT</div>
-          </div>
-          <div class="formula-operator">=</div>
-          <div class="formula-total">
-            <div class="total-value">${placement.punti || 0}</div>
-            <div class="total-label">Punti Totali</div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
   // Display participant widgets summary
   userSummaryStats.innerHTML = `
     <div class="user-stat-badge">
