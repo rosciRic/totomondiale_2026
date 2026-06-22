@@ -452,9 +452,9 @@
       "gruppo": "G",
       "home": "Belgio",
       "away": "Iran",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 39,
@@ -464,9 +464,9 @@
       "gruppo": "H",
       "home": "Uruguay",
       "away": "Capo Verde",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 40,
@@ -476,9 +476,9 @@
       "gruppo": "G",
       "home": "Nuova Zelanda",
       "away": "Egitto",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 41,
