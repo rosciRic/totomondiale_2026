@@ -16,6 +16,7 @@ const userSelector = document.getElementById("user-selector");
 const userSummaryStats = document.getElementById("user-summary-stats");
 const userMatchesList = document.getElementById("user-matches-list");
 const userAwardsList = document.getElementById("user-awards-list");
+const scoreCalculationContainer = document.getElementById("score-calculation-container");
 const homeTodayDate = document.getElementById("home-today-date");
 const homeTodayContainer = document.getElementById("home-today-container");
 const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
@@ -518,6 +519,9 @@ export function renderUserPredictions(username) {
   userSummaryStats.innerHTML = "";
   userMatchesList.innerHTML = "";
   userAwardsList.innerHTML = "";
+  if (scoreCalculationContainer) {
+    scoreCalculationContainer.innerHTML = "";
+  }
 
   const userDati = state.globalPronostici.partecipanti[username];
   if (!userDati) {
@@ -528,6 +532,58 @@ export function renderUserPredictions(username) {
   // Fetch user overall placement from classifica
   const placement = state.globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, punti_tabellone: 0, errori: 0 };
   
+  // Calculate mathematical breakdown terms
+  const puntiRisultati = (placement.risultati_esatti || 0) * 3;
+  const puntiSegni = (placement.prono_esatti || 0) * 1;
+  const puntiTabellone = (placement.punti_tabellone || 0);
+  const puntiPremi = (placement.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
+
+  // Render mathematical points breakdown card
+  if (scoreCalculationContainer) {
+    scoreCalculationContainer.innerHTML = `
+      <div class="score-formula-card card">
+        <div class="score-formula-header">
+          <h3><i class="fa-solid fa-calculator"></i> Calcolo Punteggio Finale</h3>
+          <span class="formula-subtitle">Dettaglio matematico dei punti accumulati</span>
+        </div>
+        <div class="score-formula-container">
+          <div class="formula-term term-risultati">
+            <div class="term-value">${placement.risultati_esatti || 0}</div>
+            <div class="term-label">Risultati Esatti</div>
+            <div class="term-multiplier">&times; 3 Punti</div>
+            <div class="term-calc-value">+${puntiRisultati} PT</div>
+          </div>
+          <div class="formula-operator">+</div>
+          <div class="formula-term term-segni">
+            <div class="term-value">${placement.prono_esatti || 0}</div>
+            <div class="term-label">Esiti 1X2 (Segni)</div>
+            <div class="term-multiplier">&times; 1 Punto</div>
+            <div class="term-calc-value">+${puntiSegni} PT</div>
+          </div>
+          <div class="formula-operator">+</div>
+          <div class="formula-term term-tabellone">
+            <div class="term-value">${placement.punti_tabellone || 0}</div>
+            <div class="term-label">Punti Tabellone</div>
+            <div class="term-multiplier">&times; 1 Punto</div>
+            <div class="term-calc-value">+${puntiTabellone} PT</div>
+          </div>
+          <div class="formula-operator">+</div>
+          <div class="formula-term term-premi">
+            <div class="term-value">${puntiPremi}</div>
+            <div class="term-label">Premi Speciali</div>
+            <div class="term-multiplier">Vincitore/Capoc./etc.</div>
+            <div class="term-calc-value">+${puntiPremi} PT</div>
+          </div>
+          <div class="formula-operator">=</div>
+          <div class="formula-total">
+            <div class="total-value">${placement.punti || 0}</div>
+            <div class="total-label">Punti Totali</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   // Display participant widgets summary
   userSummaryStats.innerHTML = `
     <div class="user-stat-badge">
@@ -666,7 +722,7 @@ export function renderUserPredictions(username) {
     const awards = [
       { key: "vincitore", label: "Vincitore Mondiale (+10 pt)", icon: "fa-trophy" },
       { key: "capocannoniere", label: "Capocannoniere (+5 pt)", icon: "fa-shoe-prints" },
-      { key: "mvp", label: "Miglior Giocatore MVP (+5 pt)", icon: "fa-star" },
+      { key: "mvp", label: "Miglior Giocatore (+5 pt)", icon: "fa-star" },
       { key: "portiere", label: "Miglior Portiere (+5 pt)", icon: "fa-hands-gloves" },
       { key: "giovane", label: "Miglior Giovane (+5 pt)", icon: "fa-child" }
     ];
@@ -1239,6 +1295,10 @@ export function renderTabellone(userKey) {
 
   // Helper to validate team predictions and return CSS class + status icon
   function getTeamStatus(team, stage, m, isWinner) {
+    if (userKey !== "reale" && m && m.id === 103) {
+      return { classes: "", icon: "" };
+    }
+
     if (userKey === "reale") {
       if (m.conclusa) {
         const isRealWinner = (m.real_home_score > m.real_away_score && team === m.home) || 
@@ -1252,73 +1312,44 @@ export function renderTabellone(userKey) {
       return { classes: "", icon: "" };
     }
 
-    if (isPlaceholder(team)) {
-      return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
+    if (stage === "sedicesimi" || isPlaceholder(team)) {
+      return { classes: "", icon: "" };
     }
 
-    // Check if team reached this stage in real life
-    let reachedReal = false;
-    let realList = [];
-    
-    if (stage === "sedicesimi") {
-      realList = realPassaggio.sedicesimi || [];
-    } else if (stage === "ottavi") {
-      realList = realPassaggio.ottavi || [];
-    } else if (stage === "quarti") {
-      realList = realPassaggio.quarti || [];
-    } else if (stage === "semifinali") {
-      realList = realPassaggio.semifinali || [];
-    } else if (stage === "finale") {
-      realList = realPassaggio.finale || [];
-    } else if (stage === "campione") {
-      realList = [realPassaggio.vincitore || ""];
+    const realListMap = {
+      "ottavi": realPassaggio.ottavi || [],
+      "quarti": realPassaggio.quarti || [],
+      "semifinali": realPassaggio.semifinali || [],
+      "finale": realPassaggio.finale || [],
+      "campione": realPassaggio.vincitore ? [realPassaggio.vincitore] : []
+    };
+
+    const realList = realListMap[stage] || [];
+    const hasPassedReal = realList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
+
+    if (hasPassedReal) {
+      return {
+        classes: "team-predicted-correct",
+        icon: '<i class="fa-solid fa-circle-check" style="color: var(--color-mexico); margin-right: 4px;"></i>'
+      };
     }
 
-    if (realList.length === 0) {
-      return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
-    }
-    reachedReal = realList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
+    const maxSizes = {
+      "ottavi": 16,
+      "quarti": 8,
+      "semifinali": 4,
+      "finale": 2,
+      "campione": 1
+    };
 
-    if (!reachedReal) {
-      return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
-    }
-
-    // If it reached real stage, and is not predicted winner, it's correct so far
-    if (!isWinner) {
-      return { classes: "team-predicted-correct", icon: '<i class="fa-solid fa-circle-check"></i>' };
-    }
-
-    // If it is predicted winner, verify next stage qualification
-    let nextRealList = [];
-    let isChamp = false;
-
-    if (stage === "sedicesimi") nextRealList = realPassaggio.ottavi || [];
-    else if (stage === "ottavi") nextRealList = realPassaggio.quarti || [];
-    else if (stage === "quarti") nextRealList = realPassaggio.semifinali || [];
-    else if (stage === "semifinali") nextRealList = realPassaggio.finale || [];
-    else if (stage === "finale" || stage === "campione") isChamp = true;
-
-    if (isChamp) {
-      const rChamp = realPassaggio.vincitore || state.globalPartiteData.premi_finali?.vincitore;
-      if (rChamp && rChamp.toLowerCase().trim() === team.toLowerCase().trim()) {
-        return { classes: "team-predicted-correct", icon: '<i class="fa-solid fa-circle-check"></i>' };
-      } else if (rChamp) {
-        return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
-      } else {
-        return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
-      }
+    if (realList.length === maxSizes[stage] && !hasPassedReal) {
+      return {
+        classes: "team-predicted-incorrect",
+        icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+      };
     }
 
-    if (nextRealList.length === 0) {
-      return { classes: "team-predicted-pending", icon: '<i class="fa-regular fa-clock"></i>' };
-    }
-
-    const qualifiedNext = nextRealList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
-    if (qualifiedNext) {
-      return { classes: "team-predicted-correct", icon: '<i class="fa-solid fa-circle-check"></i>' };
-    } else {
-      return { classes: "team-predicted-incorrect", icon: '<i class="fa-solid fa-circle-xmark"></i>' };
-    }
+    return { classes: "", icon: "" };
   }
 
   // Build the visual columns
@@ -1375,7 +1406,7 @@ export function renderTabellone(userKey) {
       const awayScore = m.away_score !== null ? m.away_score : "-";
 
       let scoreDisplay = "";
-      if (m.home_score !== null && m.away_score !== null) {
+      if (userKey === "reale" && m.home_score !== null && m.away_score !== null) {
         scoreDisplay = `<span style="font-size:0.75rem; color:var(--accent-cyan); font-weight:600;">${homeScore} - ${awayScore}</span>`;
       }
 
@@ -1475,4 +1506,5 @@ export function renderTabellone(userKey) {
     warning.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Il partecipante non ha ancora compilato il tabellone fase finale (mostrato tabellone reale).`;
     fasefinaleBracketContainer.insertBefore(warning, fasefinaleBracketContainer.firstChild);
   }
+
 }

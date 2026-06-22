@@ -1330,3 +1330,213 @@
     font-size: 0.65rem;
   }
 }
+
+/* Score Formula Container for end of tournament explanation */
+.score-formula-card {
+  margin-top: 16px;
+  background: linear-gradient(135deg, rgba(20, 30, 55, 0.6) 0%, rgba(10, 15, 30, 0.8) 100%);
+  border: 1px solid var(--border-glass-active);
+  padding: 18px 24px;
+}
+
+.score-formula-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.score-formula-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--accent-gold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-formula-header .formula-subtitle {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.score-formula-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.formula-term {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  flex: 1;
+  min-width: 100px;
+  transition: var(--transition-smooth);
+}
+
+.formula-term:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.term-value {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.2;
+}
+
+.term-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.term-multiplier {
+  font-size: 0.65rem;
+  color: var(--color-text-dimmed);
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.term-calc-value {
+  margin-top: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Specific Term Colors */
+.term-risultati .term-value { color: var(--accent-green); }
+.term-risultati .term-calc-value { color: var(--accent-green); background: rgba(0, 219, 139, 0.08); }
+
+.term-segni .term-value { color: var(--accent-gold); }
+.term-segni .term-calc-value { color: var(--accent-gold); background: rgba(245, 158, 11, 0.08); }
+
+.term-tabellone .term-value { color: var(--accent-purple); }
+.term-tabellone .term-calc-value { color: var(--accent-purple); background: rgba(168, 85, 247, 0.08); }
+
+.term-premi .term-value { color: var(--accent-cyan); }
+.term-premi .term-calc-value { color: var(--accent-cyan); background: rgba(6, 182, 212, 0.08); }
+
+.formula-operator {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-text-dimmed);
+  user-select: none;
+}
+
+.formula-total {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.05) 100%);
+  border: 2px solid var(--color-usa);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+  flex: 1.2;
+  min-width: 120px;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
+  animation: pulse-total 3s infinite ease-in-out;
+}
+
+@keyframes pulse-total {
+  0% { box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); }
+  50% { box-shadow: 0 4px 25px rgba(37, 99, 235, 0.35); border-color: var(--accent-cyan); }
+  100% { box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); }
+}
+
+.total-value {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  line-height: 1.2;
+}
+
+.total-label {
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Mobile scoring calculation */
+@media (max-width: 768px) {
+  .score-formula-card {
+    padding: 12px 16px;
+    margin-top: 12px;
+  }
+  .score-formula-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .score-formula-container {
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+  }
+  .formula-operator {
+    text-align: center;
+    font-size: 1.1rem;
+    margin: -2px 0;
+    color: var(--color-text-muted);
+  }
+  .formula-term, .formula-total {
+    flex: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 8px 12px;
+  }
+  .formula-term:hover {
+    transform: none;
+  }
+  .term-value, .total-value {
+    order: 2;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .term-label, .total-label {
+    order: 1;
+    font-size: 0.78rem;
+    margin-top: 0;
+  }
+  .term-multiplier {
+    display: none;
+  }
+  .term-calc-value {
+    order: 3;
+    margin-top: 0;
+    font-size: 0.85rem;
+    min-width: 65px;
+    text-align: center;
+  }
+  .total-value {
+    font-size: 1.25rem;
+  }
+  .formula-total {
+    margin-top: 6px;
+    padding: 10px 12px;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.15);
+  }
+}
