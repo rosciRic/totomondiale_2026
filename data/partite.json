@@ -488,9 +488,9 @@
       "gruppo": "J",
       "home": "Argentina",
       "away": "Austria",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 42,
@@ -882,7 +882,7 @@
       "data": "2026-06-29T16:30:00",
       "fase": "sedicesimi",
       "gruppo": null,
-      "home": "1E",
+      "home": "Germania",
       "away": "3A/B/C/D/F",
       "home_score": null,
       "away_score": null,
@@ -942,7 +942,7 @@
       "data": "2026-06-30T19:00:00",
       "fase": "sedicesimi",
       "gruppo": null,
-      "home": "1A",
+      "home": "Messico",
       "away": "3C/E/F/H/I",
       "home_score": null,
       "away_score": null,
@@ -966,7 +966,7 @@
       "data": "2026-07-01T17:00:00",
       "fase": "sedicesimi",
       "gruppo": null,
-      "home": "1D",
+      "home": "Stati Uniti",
       "away": "3B/E/F/I/J",
       "home_score": null,
       "away_score": null,
@@ -1250,7 +1250,11 @@
     }
   ],
   "passaggio_turno": {
-    "sedicesimi": [],
+    "sedicesimi": [
+      "Germania",
+      "Messico",
+      "Stati Uniti"
+    ],
     "ottavi": [],
     "quarti": [],
     "semifinali": [],
