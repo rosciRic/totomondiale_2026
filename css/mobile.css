@@ -186,28 +186,7 @@
     font-size: 0.78rem;
   }
   
-  /* Staged Tabs layout for Smartphone to fit all tabs */
-  .navigation-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 3px;
-    gap: 4px;
-    border-radius: 8px;
-    overflow-x: visible;
-  }
-  .tab-button {
-    flex-direction: column;
-    gap: 2px;
-    padding: 6px 2px;
-    font-size: 0.68rem;
-    text-align: center;
-    justify-content: center;
-    white-space: nowrap;
-    border-radius: 4px;
-  }
-  .tab-button i {
-    font-size: 0.95rem;
-  }
+
   
   /* Small screens stats dashboard */
   .dashboard-stats {

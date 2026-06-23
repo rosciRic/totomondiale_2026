@@ -25,8 +25,9 @@ Object.freeze(flagCodes);
 
 // Get flag representation (img tag from Flagcdn or fallback emoji)
 export function getFlagEmoji(teamName) {
-  if (!teamName) return "⚽";
+  if (!teamName) return "";
   const key = teamName.trim().toLowerCase();
+  if (key === "-" || key === "") return "";
   
   const code = flagCodes[key];
   if (code) {

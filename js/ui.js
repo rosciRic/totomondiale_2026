@@ -135,19 +135,7 @@ export function renderLeaderboard() {
       <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
       <td style="text-align: center; color: var(--accent-purple); font-weight: 600;" class="hide-mobile badge-tabellone-col">${player.punti_tabellone ?? 0}</td>
       <td style="text-align: center; color: var(--accent-cyan); font-weight: 600;" class="hide-mobile badge-premi-col">${puntiPremi}</td>
-      <td style="text-align: center;">
-        <button class="btn-details" data-user="${player.nome}">
-          <i class="fa-solid fa-eye"></i>
-        </button>
-      </td>
     `;
-
-    // Attach button click event to navigate to user predictions
-    const btn = row.querySelector(".btn-details");
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      navigateToUserPredictions(player.nome);
-    });
 
     // Click behavior: Toggles accordion on mobile, navigates directly on desktop
     row.addEventListener("click", () => {
@@ -181,7 +169,7 @@ export function renderLeaderboard() {
           detailRow.className = "player-detail-row";
           detailRow.setAttribute("data-for", detailRowKey);
           detailRow.innerHTML = `
-            <td colspan="4">
+            <td colspan="3">
               <div class="player-detail-card">
                 <div class="detail-badge">
                   <span>Risultati Esatti (+3)</span>
@@ -578,7 +566,53 @@ export function renderUserPredictions(username) {
   const userPartite = userDati.partite || {};
   let predictionRowsHtml = "";
 
+  const pronoStageFilter = document.getElementById("filter-prono-stage");
+  const pronoOutcomeFilter = document.getElementById("filter-prono-outcome");
+  
+  const stageVal = pronoStageFilter ? pronoStageFilter.value : "all";
+  const outcomeVal = pronoOutcomeFilter ? pronoOutcomeFilter.value : "all";
+
   let matchesToRender = [...state.globalPartiteData.partite];
+
+  // Filter by Stage
+  if (stageVal === "gironi") {
+    matchesToRender = matchesToRender.filter(m => m.fase === "gironi");
+  } else if (stageVal === "eliminazione") {
+    matchesToRender = matchesToRender.filter(m => m.fase !== "gironi");
+  }
+
+  // Filter by Outcome
+  if (outcomeVal !== "all") {
+    matchesToRender = matchesToRender.filter(m => {
+      const pred = userPartite[m.id];
+      if (outcomeVal === "programmati") {
+        return !m.conclusa;
+      }
+      if (!m.conclusa) return false;
+      
+      const hasPred = pred && pred.home_score !== null && pred.away_score !== null;
+      
+      if (outcomeVal === "esatti") {
+        return hasPred && m.home_score === pred.home_score && m.away_score === pred.away_score;
+      }
+      
+      if (outcomeVal === "segni") {
+        if (!hasPred) return false;
+        const realSign = getSign(m.home_score, m.away_score);
+        const predSign = getSign(pred.home_score, pred.away_score);
+        return realSign === predSign && !(m.home_score === pred.home_score && m.away_score === pred.away_score);
+      }
+      
+      if (outcomeVal === "errati") {
+        if (!hasPred) return true;
+        const realSign = getSign(m.home_score, m.away_score);
+        const predSign = getSign(pred.home_score, pred.away_score);
+        return realSign !== predSign;
+      }
+      
+      return true;
+    });
+  }
 
   if (state.currentSortMode === "esito") {
     const getOutcomeWeight = (match, pred) => {
@@ -1263,9 +1297,11 @@ export function renderTabellone(userKey) {
       awaySource = parentMatches[m.id].away;
     }
 
-    const homeResolved = resolveTeam(homeSource, resolved, userKey, userPassaggio);
-    const awayResolved = resolveTeam(awaySource, resolved, userKey, userPassaggio);
-    const outcome = getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati);
+    const isUserEmptyBracketMatch = (userKey !== "reale" && m.id >= 89);
+
+    const homeResolved = isUserEmptyBracketMatch ? "" : resolveTeam(homeSource, resolved, userKey, userPassaggio);
+    const awayResolved = isUserEmptyBracketMatch ? "" : resolveTeam(awaySource, resolved, userKey, userPassaggio);
+    const outcome = isUserEmptyBracketMatch ? { winner: "", loser: "" } : getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati);
 
     resolved[m.id] = {
       id: m.id,
@@ -1275,8 +1311,8 @@ export function renderTabellone(userKey) {
       conclusa: m.conclusa,
       home: homeResolved,
       away: awayResolved,
-      home_score: userKey === "reale" ? m.home_score : (userDati?.partite?.[m.id]?.home_score ?? null),
-      away_score: userKey === "reale" ? m.away_score : (userDati?.partite?.[m.id]?.away_score ?? null),
+      home_score: isUserEmptyBracketMatch ? null : (userKey === "reale" ? m.home_score : (userDati?.partite?.[m.id]?.home_score ?? null)),
+      away_score: isUserEmptyBracketMatch ? null : (userKey === "reale" ? m.away_score : (userDati?.partite?.[m.id]?.away_score ?? null)),
       real_home_score: m.home_score,
       real_away_score: m.away_score,
       winner: outcome.winner,
@@ -1510,23 +1546,23 @@ export function renderTabellone(userKey) {
 // Bind click event to matches section header to collapse/expand on mobile
 function initCollapsibleMatches() {
   const pronoHeader = document.getElementById("user-prono-header");
-  const matchesList = document.getElementById("user-matches-list");
+  const matchesWrapper = document.getElementById("user-matches-collapse-wrapper");
   const toggleIcon = document.getElementById("matches-toggle-icon");
   
-  if (pronoHeader && matchesList && toggleIcon) {
+  if (pronoHeader && matchesWrapper && toggleIcon) {
     pronoHeader.addEventListener("click", (e) => {
       const sortBtn = document.getElementById("btn-toggle-sort");
       if (sortBtn && (sortBtn.contains(e.target) || e.target.id === "btn-toggle-sort")) {
         return;
       }
       
-      const isCollapsed = matchesList.style.display === "none";
+      const isCollapsed = matchesWrapper.style.display === "none";
       if (isCollapsed) {
-        matchesList.style.display = "";
+        matchesWrapper.style.display = "";
         toggleIcon.classList.remove("fa-chevron-down");
         toggleIcon.classList.add("fa-chevron-up");
       } else {
-        matchesList.style.display = "none";
+        matchesWrapper.style.display = "none";
         toggleIcon.classList.remove("fa-chevron-up");
         toggleIcon.classList.add("fa-chevron-down");
       }

@@ -95,6 +95,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       userSelector.addEventListener("change", (e) => renderUserPredictions(e.target.value));
     }
 
+    const filterPronoStage = document.getElementById("filter-prono-stage");
+    const filterPronoOutcome = document.getElementById("filter-prono-outcome");
+    if (filterPronoStage && userSelector) {
+      filterPronoStage.addEventListener("change", () => renderUserPredictions(userSelector.value));
+    }
+    if (filterPronoOutcome && userSelector) {
+      filterPronoOutcome.addEventListener("change", () => renderUserPredictions(userSelector.value));
+    }
+
     const btnToggleSort = document.getElementById("btn-toggle-sort");
     if (btnToggleSort) {
       btnToggleSort.addEventListener("click", () => {
@@ -135,6 +144,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (lastUpdateText) {
       lastUpdateText.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-red)"></i> Errore nel caricamento dei dati.`;
     }
+  }
+
+  // Floating Back-to-Top Button Logic
+  const btnBackToTop = document.getElementById("btn-back-to-top");
+  if (btnBackToTop) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        btnBackToTop.classList.add("visible");
+      } else {
+        btnBackToTop.classList.remove("visible");
+      }
+    });
+
+    btnBackToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 });
 
