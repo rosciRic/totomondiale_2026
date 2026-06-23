@@ -104,25 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       filterPronoOutcome.addEventListener("change", () => renderUserPredictions(userSelector.value));
     }
 
-    const btnToggleSort = document.getElementById("btn-toggle-sort");
-    if (btnToggleSort) {
-      btnToggleSort.addEventListener("click", () => {
-        if (state.currentSortMode === "cronologico") {
-          state.currentSortMode = "esito";
-          btnToggleSort.classList.add("active-esito");
-          document.getElementById("sort-label").textContent = "Esito";
-          document.getElementById("sort-icon").className = "fa-solid fa-arrow-down-wide-short";
-        } else {
-          state.currentSortMode = "cronologico";
-          btnToggleSort.classList.remove("active-esito");
-          document.getElementById("sort-label").textContent = "Cronologico";
-          document.getElementById("sort-icon").className = "fa-solid fa-calendar-days";
-        }
-        if (userSelector) {
-          renderUserPredictions(userSelector.value);
-        }
-      });
-    }
+
 
     // Modal Close Events
     const matchModal = document.getElementById("match-modal");

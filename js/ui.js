@@ -1551,11 +1551,6 @@ function initCollapsibleMatches() {
   
   if (pronoHeader && matchesWrapper && toggleIcon) {
     pronoHeader.addEventListener("click", (e) => {
-      const sortBtn = document.getElementById("btn-toggle-sort");
-      if (sortBtn && (sortBtn.contains(e.target) || e.target.id === "btn-toggle-sort")) {
-        return;
-      }
-      
       const isCollapsed = matchesWrapper.style.display === "none";
       if (isCollapsed) {
         matchesWrapper.style.display = "";
