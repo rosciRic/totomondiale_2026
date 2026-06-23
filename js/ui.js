@@ -1541,6 +1541,107 @@ export function renderTabellone(userKey) {
     fasefinaleBracketContainer.insertBefore(warning, fasefinaleBracketContainer.firstChild);
   }
 
+  // Store resolved data in state for the draw function to check active/inactive paths
+  state.currentResolvedData = resolved;
+  state.drawBracketLinesRef = drawBracketLines;
+
+  // Trigger drawing the bracket lines
+  setTimeout(() => drawBracketLines(), 50);
+}
+
+// Draw SVG connection lines between bracket matches
+export function drawBracketLines() {
+  const container = fasefinaleBracketContainer;
+  if (!container) return;
+
+  // Clean old SVG overlays
+  container.querySelectorAll("svg.bracket-svg-overlay, svg#bracket-svg").forEach(svg => svg.remove());
+
+  const scrollWrapper = container.querySelector(".bracket-scroll-wrapper");
+  if (!scrollWrapper) return;
+
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("id", "bracket-svg");
+  svg.setAttribute("class", "bracket-svg-overlay");
+  svg.setAttribute("width", `${scrollWrapper.scrollWidth}px`);
+  svg.setAttribute("height", `${scrollWrapper.scrollHeight}px`);
+  svg.style.position = "absolute";
+  svg.style.top = "0";
+  svg.style.left = "0";
+  svg.style.width = `${scrollWrapper.scrollWidth}px`;
+  svg.style.height = `${scrollWrapper.scrollHeight}px`;
+  svg.style.pointerEvents = "none";
+  svg.style.zIndex = "0";
+
+  const parentMatches = {
+    89: { home: 74, away: 77 },
+    90: { home: 73, away: 75 },
+    91: { home: 76, away: 78 },
+    92: { home: 79, away: 80 },
+    93: { home: 83, away: 84 },
+    94: { home: 81, away: 82 },
+    95: { home: 86, away: 88 },
+    96: { home: 85, away: 87 },
+    97: { home: 89, away: 90 },
+    98: { home: 94, away: 93 },
+    99: { home: 92, away: 91 },
+    100: { home: 96, away: 95 },
+    101: { home: 98, away: 97 },
+    102: { home: 99, away: 100 },
+    104: { home: 102, away: 101 }
+  };
+
+  const rectContainer = scrollWrapper.getBoundingClientRect();
+  const resolved = state.currentResolvedData || {};
+
+  Object.entries(parentMatches).forEach(([childId, parents]) => {
+    const childNode = scrollWrapper.querySelector(`.bracket-match-node[data-match-id="${childId}"]`);
+    const homeNode = scrollWrapper.querySelector(`.bracket-match-node[data-match-id="${parents.home}"]`);
+    const awayNode = scrollWrapper.querySelector(`.bracket-match-node[data-match-id="${parents.away}"]`);
+
+    if (!childNode || !homeNode || !awayNode) return;
+
+    const rChild = childNode.getBoundingClientRect();
+    const rHome = homeNode.getBoundingClientRect();
+    const rAway = awayNode.getBoundingClientRect();
+
+    const xChildLeft = rChild.left - rectContainer.left;
+    const yChildMid = (rChild.top + rChild.bottom) / 2 - rectContainer.top;
+
+    const xHomeRight = rHome.right - rectContainer.left;
+    const yHomeMid = (rHome.top + rHome.bottom) / 2 - rectContainer.top;
+
+    const xAwayRight = rAway.right - rectContainer.left;
+    const yAwayMid = (rAway.top + rAway.bottom) / 2 - rectContainer.top;
+
+    const midX = (xHomeRight + xChildLeft) / 2;
+
+    const childMatch = resolved[childId];
+    const parentHomeMatch = resolved[parents.home];
+    const parentAwayMatch = resolved[parents.away];
+
+    const isHomeActive = childMatch && parentHomeMatch && childMatch.home && parentHomeMatch.winner && 
+                         (childMatch.home.toLowerCase().trim() === parentHomeMatch.winner.toLowerCase().trim());
+    
+    const isAwayActive = childMatch && parentAwayMatch && childMatch.away && parentAwayMatch.winner && 
+                         (childMatch.away.toLowerCase().trim() === parentAwayMatch.winner.toLowerCase().trim());
+
+    // Home Connection
+    const pathHome = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const dHome = `M ${xHomeRight} ${yHomeMid} H ${midX} V ${yChildMid - 5} H ${xChildLeft}`;
+    pathHome.setAttribute("d", dHome);
+    pathHome.setAttribute("class", isHomeActive ? "bracket-path-active" : "bracket-path-inactive");
+    svg.appendChild(pathHome);
+
+    // Away Connection
+    const pathAway = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const dAway = `M ${xAwayRight} ${yAwayMid} H ${midX} V ${yChildMid + 5} H ${xChildLeft}`;
+    pathAway.setAttribute("d", dAway);
+    pathAway.setAttribute("class", isAwayActive ? "bracket-path-active" : "bracket-path-inactive");
+    svg.appendChild(pathAway);
+  });
+
+  scrollWrapper.appendChild(svg);
 }
 
 // Bind click event to matches section header to collapse/expand on mobile
