@@ -117,22 +117,24 @@
 
 /* Prediction validation highlighting */
 .team-predicted-correct {
-  background: rgba(5, 150, 105, 0.1);
-  border-color: rgba(5, 150, 105, 0.2);
+  background: rgba(5, 150, 105, 0.15);
+  border-color: rgba(5, 150, 105, 0.4);
   color: var(--color-mexico) !important;
+  box-shadow: inset 0 0 6px rgba(5, 150, 105, 0.15);
+  font-weight: 600;
 }
 
 .team-predicted-incorrect {
   background: rgba(225, 29, 72, 0.08);
-  border-color: rgba(225, 29, 72, 0.15);
+  border-color: rgba(225, 29, 72, 0.25);
   color: var(--color-canada) !important;
   text-decoration: line-through;
-  opacity: 0.8;
+  opacity: 0.65;
 }
 
 .team-predicted-pending {
   background: rgba(217, 119, 6, 0.08);
-  border-color: rgba(217, 119, 6, 0.15);
+  border-color: rgba(217, 119, 6, 0.25);
   color: var(--color-gold) !important;
 }
 
