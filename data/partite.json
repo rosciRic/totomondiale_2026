@@ -584,9 +584,9 @@
       "gruppo": "B",
       "home": "Svizzera",
       "away": "Canada",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 50,
@@ -596,9 +596,9 @@
       "gruppo": "B",
       "home": "Bosnia ed Erzegovina",
       "away": "Qatar",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 3,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 51,
