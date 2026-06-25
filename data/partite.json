@@ -608,9 +608,9 @@
       "gruppo": "C",
       "home": "Scozia",
       "away": "Brasile",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 52,
@@ -620,9 +620,9 @@
       "gruppo": "C",
       "home": "Marocco",
       "away": "Haiti",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 4,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 53,
@@ -632,9 +632,9 @@
       "gruppo": "A",
       "home": "Repubblica Ceca",
       "away": "Messico",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 54,
@@ -644,9 +644,9 @@
       "gruppo": "A",
       "home": "Sudafrica",
       "away": "Corea del Sud",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 55,
