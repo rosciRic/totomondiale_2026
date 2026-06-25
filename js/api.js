@@ -35,20 +35,7 @@ export async function fetchDatabases() {
     state.globalPartiteData = await partiteRes.json();
     state.globalPronostici = await pronosticiRes.json();
 
-    // Normalize knockout stage times to Rome timezone
-    state.globalPartiteData.partite.forEach(p => {
-      if (p.fase !== "gironi") {
-        // Parse original date in UTC and force it to match tournament's Local Time (UTC-5 / UTC-6)
-        // Then shift it to Rome (UTC+2) to display the correct Italian kickoff time
-        const utcDate = new Date(p.data);
-        
-        // Let's assume tournament timezone offset is -5 (Eastern Standard Time)
-        // We shift hours accordingly: UTC + Offset Rome (2) - Offset USA (-5) = +7 hours
-        const shiftHours = 2 - (-5); 
-        utcDate.setHours(utcDate.getHours() + shiftHours);
-        p.data = utcDate.toISOString();
-      }
-    });
+
 
   } catch (error) {
     console.error("Errore durante il caricamento dei database:", error);

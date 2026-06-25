@@ -524,7 +524,7 @@ export function renderUserPredictions(username) {
   }
 
   // Fetch user overall placement from classifica
-  const placement = state.globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, punti_tabellone: 0, errori: 0 };
+  const placement = state.globalClassifica.find(c => c.nome === username) || { punti: 0, risultati_esatti: 0, prono_esatti: 0, punti_tabellone: 0 };
   
   // Display participant widgets summary
   const puntiRisultati = (placement.risultati_esatti || 0) * 3;

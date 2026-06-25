@@ -99,6 +99,46 @@ def is_placeholder_team(name):
         return True
     return False
 
+def parse_to_rome_time(date_str, time_str):
+    """
+    Parses date (e.g. '2026-06-28') and time (e.g. '12:00 UTC-7') from openfootball
+    and returns a naive ISO string representing Rome time (CEST = UTC+2 in June/July).
+    """
+    import datetime
+    import re
+    
+    hour, minute = 0, 0
+    offset_hours = -5 # default fallback
+    
+    time_clean = time_str.strip()
+    # Extract HH:MM
+    time_match = re.match(r'^(\d{2}):(\d{2})', time_clean)
+    if time_match:
+        hour = int(time_match.group(1))
+        minute = int(time_match.group(2))
+        
+    # Extract UTC offset (e.g., UTC-7, UTC-4) or explicit offset (+/-HH:MM)
+    offset_match = re.search(r'UTC([-+]\d+)', time_clean)
+    if offset_match:
+        offset_hours = int(offset_match.group(1))
+    else:
+        offset_match_alt = re.search(r'([-+]\d{2}):?(\d{2})?', time_clean)
+        if offset_match_alt:
+            offset_hours = int(offset_match_alt.group(1))
+            
+    # Create datetime object
+    try:
+        dt = datetime.datetime.strptime(date_str.strip(), "%Y-%m-%d")
+        dt = dt.replace(hour=hour, minute=minute)
+        # Convert to UTC: subtract the offset
+        dt_utc = dt - datetime.timedelta(hours=offset_hours)
+        # Convert to Rome time (CEST is UTC+2)
+        dt_rome = dt_utc + datetime.timedelta(hours=2)
+        return dt_rome.strftime("%Y-%m-%dT%H:%M:%S")
+    except Exception as e:
+        print(f"Errore parsing data/ora '{date_str} {time_str}': {e}")
+        return date_str + "T" + time_str.split(" ")[0] + ":00"
+
 def aggiorna_risultati_partite():
     """
     Fetches match results from the openfootball API, updates group stage matches in
@@ -197,11 +237,16 @@ def aggiorna_risultati_partite():
                         conclusa = True
                         break
                         
+        # Calculate Rome time
+        match_date = match.get("date")
+        match_time_str = match.get("time", "00:00")
+        rome_date_str = parse_to_rome_time(match_date, match_time_str)
+
         if num not in local_match_ids:
             new_match = {
                 "id": num,
                 "giorno": "",
-                "data": match.get("date") + "T" + match.get("time", "00:00").split(" ")[0] + ":00",
+                "data": rome_date_str,
                 "fase": fase_map.get(match.get("round"), "eliminazione"),
                 "gruppo": None,
                 "home": home_team,
@@ -213,7 +258,7 @@ def aggiorna_risultati_partite():
             local_data["partite"].append(new_match)
             local_match_ids.add(num)
             updated = True
-            print(f"Aggiunto Match ad Eliminazione Diretta {num}: {home_team} vs {away_team}")
+            print(f"Aggiunto Match ad Eliminazione Diretta {num}: {home_team} vs {away_team} - Ora Roma: {rome_date_str}")
         else:
             for local_match in local_data.get("partite", []):
                 if local_match.get("id") == num:
@@ -228,17 +273,19 @@ def aggiorna_risultati_partite():
                         
                     if (local_match.get("home") != new_home or 
                         local_match.get("away") != new_away or 
+                        local_match.get("data") != rome_date_str or
                         local_match.get("home_score") != home_score or 
                         local_match.get("away_score") != away_score or 
                         local_match.get("conclusa") != conclusa):
                         
                         local_match["home"] = new_home
                         local_match["away"] = new_away
+                        local_match["data"] = rome_date_str
                         local_match["home_score"] = home_score
                         local_match["away_score"] = away_score
                         local_match["conclusa"] = conclusa
                         updated = True
-                        print(f"Aggiornato Match ad Eliminazione Diretta {num}: {new_home} ({home_score}) vs ({away_score}) {new_away}")
+                        print(f"Aggiornato Match ad Eliminazione Diretta {num}: {new_home} ({home_score}) vs ({away_score}) {new_away} - Ora Roma: {rome_date_str}")
 
     # 3. Extract qualified teams dynamically from bracket match schedules
     # Initialize passaggio_turno fields if not present
@@ -363,7 +410,6 @@ def calcola_classifica():
         punti = 0
         risultati_esatti = 0
         prono_esatti = 0
-        errori = 0
         punti_tabellone = 0
 
         # --- 1. Calcolo Punteggio Partite (Fase a gironi ed eliminazione diretta) ---
@@ -398,8 +444,6 @@ def calcola_classifica():
                 if real_sign == pred_sign:
                     punti += 1
                     prono_esatti += 1
-                else:
-                    errori += 1
 
         # --- 2. Calcolo Punteggio Passaggio Turno ---
         user_passaggio = dati.get("passaggio_turno")
@@ -482,8 +526,7 @@ def calcola_classifica():
             "risultati_esatti": risultati_esatti,
             "prono_esatti": prono_esatti,
             "punti_tabellone": punti_tabellone,
-            "punti_speciali": punti_speciali,
-            "errori": errori
+            "punti_speciali": punti_speciali
         })
 
     # Sort classification:
@@ -511,7 +554,7 @@ def calcola_classifica():
 
     print("--- CLASSIFICA ---")
     for idx, row in enumerate(classifica, 1):
-        print(f"{idx}. {row['nome']} - Punti: {row['punti']} (Esatti: {row['risultati_esatti']}, Segni: {row['prono_esatti']}, Tabellone: {row['punti_tabellone']}, Errori: {row['errori']})")
+        print(f"{idx}. {row['nome']} - Punti: {row['punti']} (Esatti: {row['risultati_esatti']}, Segni: {row['prono_esatti']}, Tabellone: {row['punti_tabellone']}, Speciali: {row['punti_speciali']})")
 
 def check_if_update_needed():
     """
