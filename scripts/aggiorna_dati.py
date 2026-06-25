@@ -217,19 +217,28 @@ def aggiorna_risultati_partite():
         else:
             for local_match in local_data.get("partite", []):
                 if local_match.get("id") == num:
-                    if (local_match.get("home") != home_team or 
-                        local_match.get("away") != away_team or 
+                    # Prevent overwriting manually entered real team names with placeholders
+                    new_home = local_match.get("home")
+                    new_away = local_match.get("away")
+                    
+                    if not is_placeholder_team(home_team) or is_placeholder_team(local_match.get("home")):
+                        new_home = home_team
+                    if not is_placeholder_team(away_team) or is_placeholder_team(local_match.get("away")):
+                        new_away = away_team
+                        
+                    if (local_match.get("home") != new_home or 
+                        local_match.get("away") != new_away or 
                         local_match.get("home_score") != home_score or 
                         local_match.get("away_score") != away_score or 
                         local_match.get("conclusa") != conclusa):
                         
-                        local_match["home"] = home_team
-                        local_match["away"] = away_team
+                        local_match["home"] = new_home
+                        local_match["away"] = new_away
                         local_match["home_score"] = home_score
                         local_match["away_score"] = away_score
                         local_match["conclusa"] = conclusa
                         updated = True
-                        print(f"Aggiornato Match ad Eliminazione Diretta {num}: {home_team} ({home_score}) vs ({away_score}) {away_team}")
+                        print(f"Aggiornato Match ad Eliminazione Diretta {num}: {new_home} ({home_score}) vs ({away_score}) {new_away}")
 
     # 3. Extract qualified teams dynamically from bracket match schedules
     # Initialize passaggio_turno fields if not present
@@ -343,6 +352,17 @@ def calcola_classifica():
         sys.exit(1)
     with open(PRONOSTICI_FILE, "r", encoding="utf-8") as f:
         pronostici_data = json.load(f)
+
+    # Load previous classification to compute rank trends
+    prev_ranks = {}
+    if os.path.exists(CLASSIFICA_FILE):
+        try:
+            with open(CLASSIFICA_FILE, "r", encoding="utf-8") as f:
+                prev_classifica = json.load(f)
+                for idx, row in enumerate(prev_classifica, 1):
+                    prev_ranks[row["nome"]] = idx
+        except Exception as e:
+            print(f"Non è stato possibile leggere la classifica precedente: {e}")
 
     classifica = []
 
@@ -477,6 +497,11 @@ def calcola_classifica():
     # 3. Prono esatti (descending)
     # 4. Nome (ascending)
     classifica.sort(key=lambda x: (-x["punti"], -x["risultati_esatti"], -x["prono_esatti"], x["nome"]))
+
+    # Add rank trends based on previous positions
+    for idx, row in enumerate(classifica, 1):
+        prev_pos = prev_ranks.get(row["nome"])
+        row["posizione_precedente"] = prev_pos
 
     # Write out classification
     with open(CLASSIFICA_FILE, "w", encoding="utf-8") as f:

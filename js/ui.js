@@ -244,8 +244,13 @@ export function renderMatches() {
   matchesContainer.innerHTML = "";
   const stageFilter = filterStage.value;
   const statusFilter = filterStatus.value;
-
-  let filteredMatches = state.globalPartiteData.partite;
+  let filteredMatches = [...state.globalPartiteData.partite];
+  filteredMatches.sort((a, b) => {
+    if (a.data !== b.data) {
+      return a.data.localeCompare(b.data);
+    }
+    return a.id - b.id;
+  });
 
   // Filtra per fase del torneo
   if (stageFilter === "gironi") {
@@ -637,6 +642,17 @@ export function renderUserPredictions(username) {
       
       if (weightB !== weightA) {
         return weightB - weightA;
+      }
+      if (a.data !== b.data) {
+        return a.data.localeCompare(b.data);
+      }
+      return a.id - b.id;
+    });
+  } else {
+    // Sort chronologically by default
+    matchesToRender.sort((a, b) => {
+      if (a.data !== b.data) {
+        return a.data.localeCompare(b.data);
       }
       return a.id - b.id;
     });
@@ -1297,7 +1313,8 @@ export function renderTabellone(userKey) {
       awaySource = parentMatches[m.id].away;
     }
 
-    const isUserEmptyBracketMatch = (userKey !== "reale" && m.id >= 89);
+    const hasPassaggio = userPassaggio && Object.keys(userPassaggio).length > 0;
+    const isUserEmptyBracketMatch = (userKey !== "reale" && m.id >= 89 && !hasPassaggio);
 
     const homeResolved = isUserEmptyBracketMatch ? "" : resolveTeam(homeSource, resolved, userKey, userPassaggio);
     const awayResolved = isUserEmptyBracketMatch ? "" : resolveTeam(awaySource, resolved, userKey, userPassaggio);
