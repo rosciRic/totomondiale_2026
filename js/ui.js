@@ -731,6 +731,7 @@ export function renderUserPredictions(username) {
     let awardsHtml = "";
     const awards = [
       { key: "vincitore", label: "Vincitore Mondiale (+10 pt)", icon: "fa-trophy" },
+      { key: "finalista", label: "Altra Finalista (+5 pt)", icon: "fa-medal" },
       { key: "capocannoniere", label: "Capocannoniere (+5 pt)", icon: "fa-shoe-prints" },
       { key: "mvp", label: "Miglior Giocatore (+5 pt)", icon: "fa-star" },
       { key: "portiere", label: "Miglior Portiere (+5 pt)", icon: "fa-hands-gloves" },

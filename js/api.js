@@ -36,14 +36,6 @@ export async function fetchDatabases() {
     state.globalPronostici = await pronosticiRes.json();
 
     // Normalize knockout stage times to Rome timezone
-    const knockoutOffsets = {
-      "sedicesimi": 2, // UTC+2 (Central European Summer Time)
-      "ottavi": 2,
-      "quarti": 2,
-      "semifinali": 2,
-      "finale": 2
-    };
-
     state.globalPartiteData.partite.forEach(p => {
       if (p.fase !== "gironi") {
         // Parse original date in UTC and force it to match tournament's Local Time (UTC-5 / UTC-6)
