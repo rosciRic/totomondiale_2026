@@ -314,8 +314,7 @@ export function renderMatches() {
           <span class="team-score">${awayScore}</span>
         </div>
       </div>
-      <div class="match-status-bar">
-        <span>ID Partita: <strong>${match.id}</strong></span>
+      <div class="match-status-bar" style="justify-content: flex-end;">
         <span class="badge ${badgeClass}">${badgeText}</span>
       </div>
     `;
@@ -957,8 +956,15 @@ export function renderHome() {
     homeTodayDate.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   }
 
-  // 2. Filter matches for the selected date
-  const selectedMatches = state.globalPartiteData.partite.filter(match => match.data.startsWith(state.homeSelectedDate));
+  // 2. Filter matches for the selected date and sort chronologically by time
+  const selectedMatches = state.globalPartiteData.partite
+    .filter(match => match.data.startsWith(state.homeSelectedDate))
+    .sort((a, b) => {
+      if (a.data !== b.data) {
+        return a.data.localeCompare(b.data);
+      }
+      return a.id - b.id;
+    });
 
   if (!homeTodayContainer) return;
   homeTodayContainer.innerHTML = "";
@@ -1016,8 +1022,7 @@ export function renderHome() {
           <span class="team-score">${awayScore}</span>
         </div>
       </div>
-      <div class="match-status-bar">
-        <span>ID Partita: <strong>${match.id}</strong></span>
+      <div class="match-status-bar" style="justify-content: flex-end;">
         <span class="badge ${badgeClass}">${badgeText}</span>
       </div>
     `;
