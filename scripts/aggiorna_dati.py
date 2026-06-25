@@ -353,16 +353,7 @@ def calcola_classifica():
     with open(PRONOSTICI_FILE, "r", encoding="utf-8") as f:
         pronostici_data = json.load(f)
 
-    # Load previous classification to compute rank trends
-    prev_ranks = {}
-    if os.path.exists(CLASSIFICA_FILE):
-        try:
-            with open(CLASSIFICA_FILE, "r", encoding="utf-8") as f:
-                prev_classifica = json.load(f)
-                for idx, row in enumerate(prev_classifica, 1):
-                    prev_ranks[row["nome"]] = idx
-        except Exception as e:
-            print(f"Non è stato possibile leggere la classifica precedente: {e}")
+    # Previous classification rank trends logic removed
 
     classifica = []
 
@@ -447,6 +438,7 @@ def calcola_classifica():
 
         # --- 3. Calcolo Pronostici Finali (Premi Speciali) ---
         user_premi = dati.get("premi_finali")
+        punti_speciali = 0
         if user_premi and real_premi:
             # Helper to check matching with support for list/strings
             def check_award(key, reward_points):
@@ -469,17 +461,19 @@ def calcola_classifica():
                 return 0
 
             # Vincitrice: +10 punti
-            punti += check_award("vincitore", 10)
+            punti_speciali += check_award("vincitore", 10)
             # Altra finalista: +5 punti
-            punti += check_award("finalista", 5)
+            punti_speciali += check_award("finalista", 5)
             # Capocannoniere: +5 punti
-            punti += check_award("capocannoniere", 5)
+            punti_speciali += check_award("capocannoniere", 5)
             # MVP: +5 punti
-            punti += check_award("mvp", 5)
+            punti_speciali += check_award("mvp", 5)
             # Miglior Portiere: +5 punti
-            punti += check_award("portiere", 5)
+            punti_speciali += check_award("portiere", 5)
             # Miglior Giovane: +5 punti
-            punti += check_award("giovane", 5)
+            punti_speciali += check_award("giovane", 5)
+
+        punti += punti_speciali
 
         # Append to classification
         classifica.append({
@@ -488,6 +482,7 @@ def calcola_classifica():
             "risultati_esatti": risultati_esatti,
             "prono_esatti": prono_esatti,
             "punti_tabellone": punti_tabellone,
+            "punti_speciali": punti_speciali,
             "errori": errori
         })
 
@@ -497,11 +492,6 @@ def calcola_classifica():
     # 3. Prono esatti (descending)
     # 4. Nome (ascending)
     classifica.sort(key=lambda x: (-x["punti"], -x["risultati_esatti"], -x["prono_esatti"], x["nome"]))
-
-    # Add rank trends based on previous positions
-    for idx, row in enumerate(classifica, 1):
-        prev_pos = prev_ranks.get(row["nome"])
-        row["posizione_precedente"] = prev_pos
 
     # Write out classification
     with open(CLASSIFICA_FILE, "w", encoding="utf-8") as f:
@@ -552,6 +542,11 @@ def check_if_update_needed():
     
     for match in local_data.get("partite", []):
         if not match.get("conclusa"):
+            # If the unconcluded match still has placeholder team names, update needed to resolve them
+            if is_placeholder_team(match.get("home")) or is_placeholder_team(match.get("away")):
+                print(f"La partita {match.get('id')} contiene segnaposto ({match.get('home')} vs {match.get('away')}). Controllo aggiornamenti per risolvere le squadre qualificate...")
+                return True
+                
             match_data_str = match.get("data")
             if not match_data_str:
                 continue

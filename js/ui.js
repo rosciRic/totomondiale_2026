@@ -125,7 +125,7 @@ export function renderLeaderboard() {
     const puntiRisultati = (player.risultati_esatti || 0) * 3;
     const puntiSegni = (player.prono_esatti || 0) * 1;
     const puntiTabellone = (player.punti_tabellone || 0);
-    const puntiPremi = (player.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
+    const puntiPremi = player.punti_speciali !== undefined ? player.punti_speciali : (player.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
 
     row.innerHTML = `
       <td style="text-align: center;"><span class="${posClass}">${posContent}</span></td>

@@ -870,8 +870,8 @@
       "data": "2026-06-28T12:00:00",
       "fase": "sedicesimi",
       "gruppo": null,
-      "home": "2A",
-      "away": "2B",
+      "home": "Sudafrica",
+      "away": "Canada",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -895,7 +895,7 @@
       "fase": "sedicesimi",
       "gruppo": null,
       "home": "1F",
-      "away": "2C",
+      "away": "Marocco",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -906,7 +906,7 @@
       "data": "2026-06-29T12:00:00",
       "fase": "sedicesimi",
       "gruppo": null,
-      "home": "1C",
+      "home": "Brasile",
       "away": "2F",
       "home_score": null,
       "away_score": null,
@@ -1014,7 +1014,7 @@
       "data": "2026-07-02T20:00:00",
       "fase": "sedicesimi",
       "gruppo": null,
-      "home": "1B",
+      "home": "Svizzera",
       "away": "3E/F/G/I/J",
       "home_score": null,
       "away_score": null,
@@ -1251,9 +1251,14 @@
   ],
   "passaggio_turno": {
     "sedicesimi": [
+      "Brasile",
+      "Canada",
       "Germania",
+      "Marocco",
       "Messico",
-      "Stati Uniti"
+      "Stati Uniti",
+      "Sudafrica",
+      "Svizzera"
     ],
     "ottavi": [],
     "quarti": [],
