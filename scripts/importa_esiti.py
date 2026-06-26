@@ -77,6 +77,17 @@ def main():
     with open(PRONOSTICI_FILE, "r", encoding="utf-8") as f:
         pronostici = json.load(f)
 
+    # Carica database partite per mappare le colonne tramite i nomi delle squadre
+    PARTITE_FILE = os.path.join(ROOT_DIR, "data", "partite.json")
+    partite_map = {}
+    if os.path.exists(PARTITE_FILE):
+        try:
+            with open(PARTITE_FILE, "r", encoding="utf-8") as f:
+                partite_data = json.load(f)
+                partite_map = {m["id"]: m for m in partite_data.get("partite", [])}
+        except Exception as e:
+            print(f"[AVVISO] Impossibile caricare {PARTITE_FILE}: {e}")
+
     # Leggi il file CSV delle risposte
     with open(csv_path, "r", encoding="utf-8-sig") as f:
         reader = csv.reader(f)
@@ -99,34 +110,54 @@ def main():
         match_cols = {}
         
         for match_id in range(start_id, end_id + 1):
-            cols_found = []
+            match_info = partite_map.get(match_id)
+            home_idx = -1
+            away_idx = -1
             
-            # Cerca l'ID nel testo delle colonne
-            for idx, col in enumerate(header):
-                # Cerchiamo l'ID come numero isolato o preceduto da ID (es. [ID: 73], (73), Partita 73)
-                # Usiamo espressioni regolari per evitare falsi positivi (es. 73 non deve matchare 173 o 730)
-                pattern = r'\b' + str(match_id) + r'\b'
-                if re.search(pattern, col):
-                    cols_found.append((idx, col))
-            
-            if len(cols_found) == 2:
-                # Assumiamo che la prima colonna trovata per quel match sia la squadra in casa
-                # e la seconda sia la squadra in trasferta
+            # Se abbiamo le info del match da partite.json, proviamo a mappare per nome squadra (senza ID nella domanda)
+            if match_info:
+                home_team = match_info.get("home", "")
+                away_team = match_info.get("away", "")
+                
+                # Cerca le colonne corrispondenti alle squadre
+                for idx, col in enumerate(header):
+                    col_lower = col.lower()
+                    # Confronto case-insensitive
+                    if home_team.lower() in col_lower:
+                        home_idx = idx
+                    elif away_team.lower() in col_lower:
+                        away_idx = idx
+
+            # Se la mappatura per nome squadra è riuscita, registrala
+            if home_idx != -1 and away_idx != -1:
                 match_cols[match_id] = {
-                    "home_idx": cols_found[0][0],
-                    "away_idx": cols_found[1][0]
-                }
-            elif len(cols_found) == 1:
-                # Se è presente una sola colonna per partita, forse hanno inserito il punteggio in formato testo "2-0"
-                # Supportiamo anche questo formato
-                match_cols[match_id] = {
-                    "single_idx": cols_found[0][0]
+                    "home_idx": home_idx,
+                    "away_idx": away_idx
                 }
             else:
-                print(f"[AVVISO] Trovate {len(cols_found)} colonne per la Partita ID {match_id}. Impossibile mappare questo match.")
+                # Fallback: prova con il vecchio metodo cercando l'ID partita nelle domande
+                cols_found = []
+                for idx, col in enumerate(header):
+                    pattern = r'\b' + str(match_id) + r'\b'
+                    if re.search(pattern, col):
+                        cols_found.append((idx, col))
+                
+                if len(cols_found) == 2:
+                    match_cols[match_id] = {
+                        "home_idx": cols_found[0][0],
+                        "away_idx": cols_found[1][0]
+                    }
+                elif len(cols_found) == 1:
+                    match_cols[match_id] = {
+                        "single_idx": cols_found[0][0]
+                    }
+                else:
+                    home_team_name = match_info.get("home", "Casa") if match_info else "Casa"
+                    away_team_name = match_info.get("away", "Trasferta") if match_info else "Trasferta"
+                    print(f"[AVVISO] Impossibile mappare la Partita ID {match_id} ({home_team_name} vs {away_team_name}) nel CSV.")
 
         if not match_cols:
-            print("Errore: Impossibile trovare colonne corrispondenti agli ID partita nel CSV.")
+            print("Errore: Impossibile trovare colonne corrispondenti alle partite nel CSV.")
             sys.exit(1)
 
         print(f"Mappatura completata. Trovati campi per {len(match_cols)} partite nel range {start_id}-{end_id}.")
