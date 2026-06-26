@@ -82,15 +82,26 @@ def main():
             col_lower = col.lower()
             if "nome" in col_lower or "giocatore" in col_lower:
                 idx_nome = idx
-            elif "ottavi" in col_lower:
+            elif "[t16]" in col_lower:
                 idx_ottavi = idx
-            elif "quarti" in col_lower:
+            elif "[t8]" in col_lower:
                 idx_quarti = idx
-            elif "semifinali" in col_lower or "semi" in col_lower:
+            elif "[t4]" in col_lower:
                 idx_semi = idx
-            elif "finale" in col_lower or "finalista" in col_lower:
+            elif "[t2]" in col_lower:
                 idx_finale = idx
-            elif "vincitrice" in col_lower or "vincitore" in col_lower or "campione" in col_lower:
+            elif "[t1]" in col_lower:
+                idx_vincitore = idx
+            # Fallback basati su parole chiave per vecchi moduli
+            elif idx_ottavi == -1 and "ottavi" in col_lower:
+                idx_ottavi = idx
+            elif idx_quarti == -1 and "quarti" in col_lower:
+                idx_quarti = idx
+            elif idx_semi == -1 and ("semifinali" in col_lower or "semi" in col_lower):
+                idx_semi = idx
+            elif idx_finale == -1 and ("finale" in col_lower or "finalista" in col_lower):
+                idx_finale = idx
+            elif idx_vincitore == -1 and ("vincitrice" in col_lower or "vincitore" in col_lower or "campione" in col_lower or "vincerà" in col_lower or "coppa" in col_lower or "mondo" in col_lower):
                 idx_vincitore = idx
 
         # Validazione colonne

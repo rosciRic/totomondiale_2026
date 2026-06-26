@@ -110,25 +110,33 @@ def main():
         match_cols = {}
         
         for match_id in range(start_id, end_id + 1):
-            match_info = partite_map.get(match_id)
             home_idx = -1
             away_idx = -1
             
-            # Se abbiamo le info del match da partite.json, proviamo a mappare per nome squadra (senza ID nella domanda)
-            if match_info:
-                home_team = match_info.get("home", "")
-                away_team = match_info.get("away", "")
-                
-                # Cerca le colonne corrispondenti alle squadre
-                for idx, col in enumerate(header):
-                    col_lower = col.lower()
-                    # Confronto case-insensitive
-                    if home_team.lower() in col_lower:
-                        home_idx = idx
-                    elif away_team.lower() in col_lower:
-                        away_idx = idx
+            # 1. Prova prima a mappare tramite le chiavi esplicite H{match_id} e A{match_id} (es. [H73] e [A73])
+            for idx, col in enumerate(header):
+                if f"H{match_id}" in col:
+                    home_idx = idx
+                elif f"A{match_id}" in col:
+                    away_idx = idx
+            
+            # 2. Se non li trova, prova a mappare per nome squadra (se abbiamo le info del match da partite.json)
+            if home_idx == -1 or away_idx == -1:
+                match_info = partite_map.get(match_id)
+                if match_info:
+                    home_team = match_info.get("home", "")
+                    away_team = match_info.get("away", "")
+                    
+                    # Cerca le colonne corrispondenti alle squadre
+                    for idx, col in enumerate(header):
+                        col_lower = col.lower()
+                        # Confronto case-insensitive
+                        if home_team.lower() in col_lower:
+                            home_idx = idx
+                        elif away_team.lower() in col_lower:
+                            away_idx = idx
 
-            # Se la mappatura per nome squadra è riuscita, registrala
+            # Se la mappatura è riuscita (con codici o con nomi), registrala
             if home_idx != -1 and away_idx != -1:
                 match_cols[match_id] = {
                     "home_idx": home_idx,
@@ -152,9 +160,31 @@ def main():
                         "single_idx": cols_found[0][0]
                     }
                 else:
+                    match_info = partite_map.get(match_id)
                     home_team_name = match_info.get("home", "Casa") if match_info else "Casa"
                     away_team_name = match_info.get("away", "Trasferta") if match_info else "Trasferta"
                     print(f"[AVVISO] Impossibile mappare la Partita ID {match_id} ({home_team_name} vs {away_team_name}) nel CSV.")
+
+        # 3. Allineamento sequenziale per i match con segnaposto non mappati per nome
+        if len(match_cols) < (end_id - start_id + 1):
+            print("[INFO] Alcune partite non sono state mappate per nome. Avvio l'allineamento sequenziale...")
+            
+            # Sequenza del tabellone per mappare le colonne in ordine
+            bracket_order = [79, 80, 76, 78, 85, 87, 86, 88, 81, 82, 83, 84, 74, 77, 73, 75]
+            active_order = [mid for mid in bracket_order if start_id <= mid <= end_id]
+            
+            # Le colonne delle risposte delle partite partono subito dopo l'indice del nome giocatore
+            current_col_idx = idx_nome + 1
+            for mid in active_order:
+                # Se questo match non è ancora stato mappato, lo associamo alle prossime due colonne disponibili
+                if mid not in match_cols:
+                    if current_col_idx + 1 < len(header):
+                        match_cols[mid] = {
+                            "home_idx": current_col_idx,
+                            "away_idx": current_col_idx + 1
+                        }
+                # Avanziamo sempre di 2 colonne (1 per i gol di casa, 1 per i gol di trasferta)
+                current_col_idx += 2
 
         if not match_cols:
             print("Errore: Impossibile trovare colonne corrispondenti alle partite nel CSV.")
