@@ -1569,6 +1569,49 @@ export function renderTabellone(userKey) {
         `;
       }
       matchesDiv.appendChild(champNode);
+
+      // Render the 3° Posto card in the same column
+      const thirdMatch = resolved[103];
+      const thirdWinner = thirdMatch ? thirdMatch.winner : null;
+
+      const thirdNode = document.createElement("div");
+      thirdNode.className = "bracket-match-node";
+      thirdNode.setAttribute("data-match-id", "third_place");
+      thirdNode.style.border = "1px solid rgba(168, 85, 247, 0.25)";
+      thirdNode.style.background = "linear-gradient(180deg, rgba(168, 85, 247, 0.04) 0%, rgba(13, 20, 35, 0.45) 100%)";
+      thirdNode.style.marginTop = "20px";
+
+      if (thirdWinner && !isPlaceholder(thirdWinner)) {
+        const isThirdWinner = true;
+        const thirdStatus = getTeamStatus(thirdWinner, "campione", thirdMatch, isThirdWinner);
+
+        thirdNode.innerHTML = `
+          <div class="bracket-node-header" style="color: var(--accent-purple); font-weight: 800; text-align: center;">
+            <i class="fa-solid fa-medal" style="color: #cf6a4c;"></i> Terzo Posto
+          </div>
+          <div class="bracket-node-teams" style="margin-top: 5px;">
+            <div class="bracket-node-team ${thirdStatus.classes}" data-team-name="${thirdWinner}" style="justify-content: center; text-align: center;">
+              <span class="team-name" style="font-weight: 700; font-size: 0.9rem;">
+                ${thirdStatus.icon} ${getFlagEmoji(thirdWinner)} ${thirdWinner}
+              </span>
+            </div>
+          </div>
+        `;
+      } else {
+        thirdNode.innerHTML = `
+          <div class="bracket-node-header" style="color: var(--color-text-muted); font-weight: 700; text-align: center;">
+            <i class="fa-solid fa-medal"></i> Terzo Posto
+          </div>
+          <div class="bracket-node-teams" style="margin-top: 5px;">
+            <div class="bracket-node-team team-predicted-pending" style="justify-content: center; text-align: center;">
+              <span class="team-name" style="font-weight: 500; font-size: 0.82rem;">
+                <i class="fa-regular fa-clock"></i> In attesa della finalina
+              </span>
+            </div>
+          </div>
+        `;
+      }
+      matchesDiv.appendChild(thirdNode);
     }
 
     colDiv.appendChild(matchesDiv);
