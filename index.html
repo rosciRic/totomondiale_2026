@@ -40,14 +40,14 @@
       <button class="tab-button" id="tab-btn-classifica" data-tab="tab-classifica">
         <i class="fa-solid fa-ranking-star"></i> Classifica
       </button>
+      <button class="tab-button" id="tab-btn-fasefinale" data-tab="tab-fasefinale">
+        <i class="fa-solid fa-sitemap"></i> Tabellone
+      </button>
       <button class="tab-button" id="tab-btn-partite" data-tab="tab-partite">
         <i class="fa-solid fa-calendar-days"></i> Partite
       </button>
       <button class="tab-button" id="tab-btn-pronostici" data-tab="tab-pronostici">
         <i class="fa-solid fa-chart-pie"></i> Pronostici
-      </button>
-      <button class="tab-button" id="tab-btn-fasefinale" data-tab="tab-fasefinale">
-        <i class="fa-solid fa-sitemap"></i> Tabellone
       </button>
       <button class="tab-button" id="tab-btn-regolamento" data-tab="tab-regolamento">
         <i class="fa-solid fa-circle-info"></i> Regolamento
@@ -299,7 +299,24 @@
             </div>
           </div>
 
-
+          <div class="card" style="margin-top: 10px;">
+            <h2><i class="fa-solid fa-trophy"></i> Regolamento Fase Finale (Tabellone & Risultati)</h2>
+            <hr class="divider">
+            <div class="rule-item">
+              <div class="rule-badge badge-knockout"><i class="fa-solid fa-sitemap"></i></div>
+              <div class="rule-desc">
+                <h4>Compilazione del Tabellone</h4>
+                <p>Compila l'intero tabellone prima dei Sedicesimi. Ogni passaggio turno indovinato vale <strong>+1 punto</strong> (inclusi il 3° posto e la vincitrice del mondiale).</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-badge badge-exact"><i class="fa-solid fa-futbol"></i></div>
+              <div class="rule-desc">
+                <h4>Risultati Esatti Fase Finale</h4>
+                <p>Pronostici dei risultati fase per fase (Sedicesimi, Ottavi, ecc.). Calcolo basato sui <strong>90 minuti regolamentari</strong> (esclusi supplementari e rigori): <strong>+3 punti</strong> per il risultato esatto, <strong>+1 punto</strong> per il segno (1X2), <strong>0 punti</strong> per l'errore.</p>
+              </div>
+            </div>
+          </div>
           
           <!-- SEZIONE QUOTE E MONTEPREMI (Aggiunta da Regolamento Ufficiale) -->
           <div class="card col-span-2" style="grid-column: 1 / -1; margin-top: 10px;">
@@ -361,27 +378,6 @@
 
       <!-- TAB: FASE FINALE / TABELLONE -->
       <section class="tab-content" id="tab-fasefinale">
-        <!-- REGOLAMENTO FASE FINALE -->
-        <div class="card mb-20">
-          <div class="card-header">
-            <h2><i class="fa-solid fa-trophy"></i> Regolamento Fase Finale</h2>
-          </div>
-          <div class="fasefinale-rules-content" style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-main);">
-            <p><strong>Compilazione del Tabellone:</strong> Al termine della fase a gironi (prima dell'inizio dei sedicesimi), ogni partecipante deve pronosticare l'intero tabellone ad eliminazione diretta fino alla vincitrice. Ciascun passaggio del turno indovinato vale <strong>1 punto</strong> (inclusa la vincitrice del tabellone). La vincitrice indicata come antepost a inizio torneo vale invece <strong>10 punti</strong>.</p>
-            <p style="margin-top: 12px; border-top: 1px solid var(--border-glass); padding-top: 12px;"><strong>Pronostico Risultati Esatti:</strong> 
-              Si consegnano i pronostici dei risultati esatti di volta in volta: i Sedicesimi tutti insieme (prima del loro inizio), poi Ottavi, Quarti, Semifinali e Finali di volta in volta man mano che si delineano i reali accoppiamenti. 
-              I punti seguono le regole standard: <strong>+3 punti</strong> per il risultato esatto al 90' minuto (esclusi supplementari e rigori), <strong>+1 punto</strong> per il segno (1X2 al 90'), <strong>0 punti</strong> per l'errore.
-            </p>
-            <div class="fasefinale-cta-box" style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; border-top: 1px solid var(--border-glass); padding-top: 18px;">
-              <a href="#" target="_blank" class="btn-cta-primary">
-                <i class="fa-solid fa-pen-to-square"></i> Compila Tabellone Completo
-              </a>
-              <a href="#" target="_blank" class="btn-cta-secondary">
-                <i class="fa-solid fa-futbol"></i> Invia Risultati Esatti
-              </a>
-            </div>
-          </div>
-        </div>
 
         <!-- VISUAL TABELLONE BRACKET -->
         <div class="card">
@@ -432,13 +428,13 @@
       <i class="fa-solid fa-ranking-star"></i>
       <span>Classifica</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-pronostici">
-      <i class="fa-solid fa-chart-pie"></i>
-      <span>Pronostici</span>
-    </button>
     <button class="mobile-nav-btn" data-tab="tab-fasefinale">
       <i class="fa-solid fa-sitemap"></i>
       <span>Tabellone</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-pronostici">
+      <i class="fa-solid fa-chart-pie"></i>
+      <span>Pronostici</span>
     </button>
     <button class="mobile-nav-btn" id="mobile-more-btn">
       <i class="fa-solid fa-bars"></i>
