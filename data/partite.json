@@ -752,9 +752,9 @@
       "gruppo": "H",
       "home": "Capo Verde",
       "away": "Arabia Saudita",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 64,
@@ -764,9 +764,9 @@
       "gruppo": "H",
       "home": "Uruguay",
       "away": "Spagna",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 65,
