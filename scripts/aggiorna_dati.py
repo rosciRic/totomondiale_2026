@@ -229,7 +229,7 @@ def aggiorna_risultati_partite():
         conclusa = False
         
         if score:
-            for score_key in ["aet", "et", "ft"]:
+            for score_key in ["ft", "aet", "et"]:
                 if score_key in score:
                     parts = score[score_key]
                     if isinstance(parts, list) and len(parts) >= 2:

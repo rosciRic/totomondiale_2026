@@ -42,8 +42,8 @@ La codebase è organizzata in moduli separati per isolare le responsabilità gra
 
 ## 🏆 Regolamento del Gioco e Punteggi
 
-*   **Risultato Esatto (+3 Punti):** Punteggio esatto del match indovinato al 120' minuto (supplementari inclusi, rigori esclusi).
-*   **Segno Esatto 1X2 (+1 Punto):** Risultato esatto errato ma esito 1X2 corretto al 120'.
+*   **Risultato Esatto (+3 Punti):** Punteggio esatto del match indovinato al 90' minuto (tempi regolamentari, esclusi supplementari e rigori).
+*   **Segno Esatto 1X2 (+1 Punto):** Risultato esatto errato ma esito 1X2 corretto al 90' (tempi regolamentari).
 *   **Passaggio Turno (+1 Punto):** Per ogni singola squadra indovinata che si qualifica alla fase successiva nel tabellone (Sedicesimi, Ottavi, Quarti, Semifinali, Finale).
 *   **Vincitore Antepost (+10 Punti):** Vincitore assoluto del mondiale indovinato prima dell'inizio del torneo.
 *   **Premi Speciali (+5 Punti ciascuno):** Altra finalista, capocannoniere, MVP, miglior portiere, miglior giovane.
