@@ -229,7 +229,7 @@ def aggiorna_risultati_partite():
         conclusa = False
         
         if score:
-            for score_key in ["aet", "ft"]:
+            for score_key in ["aet", "et", "ft"]:
                 if score_key in score:
                     parts = score[score_key]
                     if isinstance(parts, list) and len(parts) >= 2:
@@ -330,7 +330,7 @@ def aggiorna_risultati_partite():
             score = match.get("score")
             if score:
                 home_g, away_g = 0, 0
-                for score_key in ["pen", "aet", "ft"]:
+                for score_key in ["p", "pen", "aet", "et", "ft"]:
                     if score_key in score:
                         parts = score[score_key]
                         if isinstance(parts, list) and len(parts) >= 2:
