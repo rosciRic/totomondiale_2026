@@ -308,6 +308,7 @@ def aggiorna_risultati_partite():
     # Track qualifications found in the API data
     qualificazioni_rilevate = {k: set() for k in round_mapping.values()}
     winner_team = None
+    terzo_posto_winner = None
     
     for match in openfootball_matches:
         round_name = match.get("round")
@@ -325,8 +326,8 @@ def aggiorna_risultati_partite():
         if team2 and not is_placeholder_team(team2):
             qualificazioni_rilevate[fase_key].add(normalize_team_name(team2))
             
-        # Determine winner if it's the Final match
-        if round_name == "Final":
+        # Determine winner if it's the Final match or Match for third place
+        if round_name in ["Final", "Match for third place"]:
             score = match.get("score")
             if score:
                 home_g, away_g = 0, 0
@@ -339,7 +340,10 @@ def aggiorna_risultati_partite():
                 if home_g != away_g:
                     raw_winner = team1 if home_g > away_g else team2
                     if raw_winner and not is_placeholder_team(raw_winner):
-                        winner_team = normalize_team_name(raw_winner)
+                        if round_name == "Final":
+                            winner_team = normalize_team_name(raw_winner)
+                        else:
+                            terzo_posto_winner = normalize_team_name(raw_winner)
 
     # Apply qualifications to the local database if we found any new ones
     for fase_key, teams_set in qualificazioni_rilevate.items():
@@ -365,6 +369,12 @@ def aggiorna_risultati_partite():
                 local_data["premi_finali"]["vincitore"] = winner_team
                 updated = True
                 print(f"Aggiornato Vincitore Premi Finali: {winner_team}")
+
+    if terzo_posto_winner:
+        if passaggio.get("terzo_posto") != terzo_posto_winner:
+            passaggio["terzo_posto"] = terzo_posto_winner
+            updated = True
+            print(f"Aggiornato Terzo Posto: {terzo_posto_winner}")
 
     if updated:
         with open(PARTITE_FILE, "w", encoding="utf-8") as f:
@@ -475,6 +485,13 @@ def calcola_classifica():
             real_bracket_winner = real_passaggio.get("vincitore")
             if user_bracket_winner and real_bracket_winner:
                 if user_bracket_winner.strip().lower() == real_bracket_winner.strip().lower():
+                    punti_tabellone += 1
+
+            # Check predicted 3rd place winner (terzo_posto in passaggio_turno)
+            user_third_place = user_passaggio.get("terzo_posto")
+            real_third_place = real_passaggio.get("terzo_posto")
+            if user_third_place and real_third_place:
+                if user_third_place.strip().lower() == real_third_place.strip().lower():
                     punti_tabellone += 1
 
         # Add bracket points to total points

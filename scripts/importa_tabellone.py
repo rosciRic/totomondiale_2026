@@ -77,6 +77,7 @@ def main():
         idx_semi = -1
         idx_finale = -1
         idx_vincitore = -1
+        idx_terzo = -1
 
         for idx, col in enumerate(header):
             col_lower = col.lower()
@@ -92,6 +93,8 @@ def main():
                 idx_finale = idx
             elif "[t1]" in col_lower:
                 idx_vincitore = idx
+            elif "[t3]" in col_lower:
+                idx_terzo = idx
             # Fallback basati su parole chiave per vecchi moduli
             elif idx_ottavi == -1 and "ottavi" in col_lower:
                 idx_ottavi = idx
@@ -103,6 +106,8 @@ def main():
                 idx_finale = idx
             elif idx_vincitore == -1 and ("vincitrice" in col_lower or "vincitore" in col_lower or "campione" in col_lower or "vincerà" in col_lower or "coppa" in col_lower or "mondo" in col_lower):
                 idx_vincitore = idx
+            elif idx_terzo == -1 and ("terzo" in col_lower or "3°" in col_lower or "3" in col_lower) and "posto" in col_lower:
+                idx_terzo = idx
 
         # Validazione colonne
         if idx_nome == -1 or idx_ottavi == -1 or idx_quarti == -1 or idx_semi == -1 or idx_finale == -1 or idx_vincitore == -1:
@@ -118,10 +123,13 @@ def main():
         print(f" - Passano alle Semifinali: Colonna {idx_semi} ('{header[idx_semi]}')")
         print(f" - Passano in Finale: Colonna {idx_finale} ('{header[idx_finale]}')")
         print(f" - Vincitore: Colonna {idx_vincitore} ('{header[idx_vincitore]}')")
+        if idx_terzo != -1:
+            print(f" - Vincitore 3° Posto: Colonna {idx_terzo} ('{header[idx_terzo]}')")
         print("-" * 60)
 
         for row in reader:
-            if not row or len(row) <= max(idx_nome, idx_ottavi, idx_quarti, idx_semi, idx_finale, idx_vincitore):
+            max_idx = max(idx_nome, idx_ottavi, idx_quarti, idx_semi, idx_finale, idx_vincitore, idx_terzo)
+            if not row or len(row) <= max_idx:
                 continue
 
             nome = row[idx_nome].strip()
@@ -144,6 +152,7 @@ def main():
             semi_teams = clean_list(row[idx_semi])
             finale_teams = clean_list(row[idx_finale])
             vincitore_team = row[idx_vincitore].strip()
+            terzo_posto_team = row[idx_terzo].strip() if idx_terzo != -1 else None
 
             # Mappa nel formato json di passaggio_turno
             passaggio_turno = {
@@ -153,6 +162,8 @@ def main():
                 "semifinali": finale_teams,  # passano alla finale (2 squadre)
                 "vincitore": vincitore_team
             }
+            if terzo_posto_team:
+                passaggio_turno["terzo_posto"] = terzo_posto_team
 
             # Associa all'utente
             if nome in pronostici["partecipanti"]:

@@ -1246,6 +1246,20 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
     }
   }
 
+  // 3b. Special check for 3rd place winner prediction in match 103
+  if (m.id === 103) {
+    const uThird = userPassaggio.terzo_posto;
+    if (uThird) {
+      if (uThird.toLowerCase().trim() === homeResolved.toLowerCase().trim()) {
+        userWinner = homeResolved;
+        userLoser = awayResolved;
+      } else if (uThird.toLowerCase().trim() === awayResolved.toLowerCase().trim()) {
+        userWinner = awayResolved;
+        userLoser = homeResolved;
+      }
+    }
+  }
+
   // Fallback: default to homeResolved or real winner
   if (!userWinner) {
     if (realConcluded) {
@@ -1353,6 +1367,17 @@ export function renderTabellone(userKey) {
   // Helper to validate team predictions and return CSS class + status icon
   function getTeamStatus(team, stage, m, isWinner) {
     if (userKey !== "reale" && m && m.id === 103) {
+      const uThird = userPassaggio.terzo_posto;
+      const rThird = realPassaggio.terzo_posto;
+      if (uThird && team.toLowerCase().trim() === uThird.toLowerCase().trim()) {
+        if (rThird) {
+          const isCorrect = uThird.toLowerCase().trim() === rThird.toLowerCase().trim();
+          return {
+            classes: isCorrect ? "team-predicted-correct" : "team-predicted-incorrect",
+            icon: isCorrect ? '<i class="fa-solid fa-circle-check" style="color: var(--color-mexico); margin-right: 4px;"></i>' : '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+          };
+        }
+      }
       return { classes: "", icon: "" };
     }
 
