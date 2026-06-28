@@ -824,9 +824,9 @@
       "gruppo": "K",
       "home": "Colombia",
       "away": "Portogallo",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 70,
@@ -836,9 +836,9 @@
       "gruppo": "K",
       "home": "RD Congo",
       "away": "Uzbekistan",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 3,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 71,
@@ -848,9 +848,9 @@
       "gruppo": "J",
       "home": "Algeria",
       "away": "Austria",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 3,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 72,
@@ -860,9 +860,9 @@
       "gruppo": "J",
       "home": "Giordania",
       "away": "Argentina",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 73,
