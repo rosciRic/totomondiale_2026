@@ -170,7 +170,7 @@ def main():
             print("[INFO] Alcune partite non sono state mappate per nome. Avvio l'allineamento sequenziale...")
             
             # Sequenza del tabellone per mappare le colonne in ordine
-            bracket_order = [79, 80, 76, 78, 85, 87, 86, 88, 81, 82, 83, 84, 74, 77, 73, 75]
+            bracket_order = [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]
             active_order = [mid for mid in bracket_order if start_id <= mid <= end_id]
             
             # Le colonne delle risposte delle partite partono subito dopo l'indice del nome giocatore

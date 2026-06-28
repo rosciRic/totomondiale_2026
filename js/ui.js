@@ -1307,14 +1307,14 @@ export function renderTabellone(userKey) {
   knockoutMatches.sort((a, b) => a.id - b.id);
 
   const parentMatches = {
-    89: { home: "W74", away: "W77" },
-    90: { home: "W73", away: "W75" },
-    91: { home: "W76", away: "W78" },
-    92: { home: "W79", away: "W80" },
-    93: { home: "W83", away: "W84" },
-    94: { home: "W81", away: "W82" },
-    95: { home: "W86", away: "W88" },
-    96: { home: "W85", away: "W87" },
+    89: { home: "W86", away: "W88" },
+    90: { home: "W85", away: "W87" },
+    91: { home: "W73", away: "W75" },
+    92: { home: "W74", away: "W77" },
+    93: { home: "W79", away: "W80" },
+    94: { home: "W76", away: "W78" },
+    95: { home: "W81", away: "W82" },
+    96: { home: "W83", away: "W84" },
     97: { home: "W89", away: "W90" },
     98: { home: "W94", away: "W93" },
     99: { home: "W92", away: "W91" },
@@ -1446,7 +1446,7 @@ export function renderTabellone(userKey) {
 
   // Define correct vertical sequence of matches to ensure binary tree alignment
   const bracketOrder = {
-    sedicesimi: [79, 80, 76, 78, 85, 87, 86, 88, 81, 82, 83, 84, 74, 77, 73, 75],
+    sedicesimi: [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87],
     ottavi: [92, 91, 96, 95, 94, 93, 89, 90],
     quarti: [99, 100, 98, 97],
     semifinali: [102, 101],
@@ -1665,14 +1665,14 @@ export function drawBracketLines() {
   svg.style.zIndex = "0";
 
   const parentMatches = {
-    89: { home: 74, away: 77 },
-    90: { home: 73, away: 75 },
-    91: { home: 76, away: 78 },
-    92: { home: 79, away: 80 },
-    93: { home: 83, away: 84 },
-    94: { home: 81, away: 82 },
-    95: { home: 86, away: 88 },
-    96: { home: 85, away: 87 },
+    89: { home: 86, away: 88 },
+    90: { home: 85, away: 87 },
+    91: { home: 73, away: 75 },
+    92: { home: 74, away: 77 },
+    93: { home: 79, away: 80 },
+    94: { home: 76, away: 78 },
+    95: { home: 81, away: 82 },
+    96: { home: 83, away: 84 },
     97: { home: 89, away: 90 },
     98: { home: 94, away: 93 },
     99: { home: 92, away: 91 },

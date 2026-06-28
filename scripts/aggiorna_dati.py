@@ -346,17 +346,24 @@ def aggiorna_risultati_partite():
                             terzo_posto_winner = normalize_team_name(raw_winner)
 
     # Apply qualifications to the local database if we found any new ones
+    max_sizes = {
+        "sedicesimi": 32,
+        "ottavi": 16,
+        "quarti": 8,
+        "semifinali": 4,
+        "finale": 2
+    }
     for fase_key, teams_set in qualificazioni_rilevate.items():
         current_list = passaggio.get(fase_key, [])
-        # Only overwrite if we found more qualified teams than currently saved, 
-        # or if they are different (safeguard against incomplete datasets)
+        max_size = max_sizes.get(fase_key, 32)
         if len(teams_set) > 0:
-            # We want to preserve team list but represent as unique sorted values
-            new_list = sorted(list(teams_set))
-            if sorted(current_list) != new_list:
-                passaggio[fase_key] = new_list
-                updated = True
-                print(f"Aggiornato Qualificate {fase_key}: {new_list}")
+            # Only overwrite if we have more complete data or if the current list is incomplete
+            if len(teams_set) >= len(current_list) or len(current_list) < max_size:
+                new_list = sorted(list(teams_set))
+                if sorted(current_list) != new_list:
+                    passaggio[fase_key] = new_list
+                    updated = True
+                    print(f"Aggiornato Qualificate {fase_key}: {new_list}")
                 
     if winner_team:
         # Save to passaggio_turno and premi_finali

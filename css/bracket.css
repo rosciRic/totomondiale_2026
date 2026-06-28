@@ -18,7 +18,7 @@
 .bracket-column {
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 230px;
   flex-shrink: 0;
 }
 
@@ -91,7 +91,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.78rem;
+  font-size: 0.73rem;
   padding: 2px 4px;
   border-radius: 4px;
   border: 1px solid transparent;
