@@ -186,7 +186,7 @@
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 1rem;
-  color: var(--accent-cyan);
+  color: var(--accent-purple);
 }
 
 .badge-exact-col { color: var(--color-mexico); font-weight: 600; }
@@ -709,15 +709,18 @@
 }
 
 .score-punti-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  padding: 4px 8px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  gap: 4px;
+  height: 24px;
+  min-width: 46px;
+  box-sizing: border-box;
 }
 
 /* Points badges colors */
@@ -1380,37 +1383,219 @@
   transform: translateY(1px);
 }
 
-/* Custom Searchable Dropdown Component */
-.search-results-dropdown {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+/* Bracket Ranking Grid Layout */
+.ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
 }
-.search-results-dropdown::-webkit-scrollbar {
-  width: 6px;
-}
-.search-results-dropdown::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-.search-item {
-  padding: 10px 14px;
+
+.ranking-grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
   color: var(--color-text-main);
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   cursor: pointer;
-  transition: background 0.15s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  transition: all 0.15s ease;
+  gap: 10px;
 }
-.search-item:last-child {
-  border-bottom: none;
+
+.ranking-grid-item:hover {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: rgba(96, 165, 250, 0.4);
+  color: #60a5fa;
+  transform: translateY(-1px);
 }
-.search-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--accent-cyan);
-}
-.search-item.selected {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--accent-cyan);
+
+.ranking-grid-item.active {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
   font-weight: 600;
-  border-left: 3px solid var(--accent-cyan);
+}
+
+.ranking-grid-item.reale-row {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-glass);
+}
+
+.ranking-grid-item.reale-row.active {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.ranking-row-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ranking-pos {
+  font-weight: 700;
+  color: var(--color-text-dimmed);
+  width: 22px;
+  font-size: 0.8rem;
+}
+
+.ranking-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ranking-pts {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--accent-purple);
+}
+
+.ranking-grid-item.reale-row.active .ranking-pts {
+  color: var(--color-gold);
+}
+
+.bracket-main-content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+/* Sidebar Search Box Tweak */
+.sidebar-search-box input {
+  font-size: 0.82rem !important;
+  padding: 8px 12px 8px 32px !important;
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--border-glass) !important;
+  height: 34px !important;
+  box-sizing: border-box;
+}
+
+.sidebar-search-box i {
+  font-size: 0.82rem !important;
+  left: 11px !important;
+}
+
+/* Premium stats badges colors and glows */
+.user-stat-badge.stat-punti {
+  border-color: rgba(168, 85, 247, 0.4) !important;
+  background: rgba(168, 85, 247, 0.05) !important;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.05);
+}
+.user-stat-badge.stat-punti strong {
+  color: var(--accent-purple) !important;
+}
+
+.user-stat-badge.stat-esatti {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  background: rgba(16, 185, 129, 0.05) !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.05);
+}
+.user-stat-badge.stat-esatti strong {
+  color: var(--accent-green) !important;
+}
+
+.user-stat-badge.stat-segni {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  background: rgba(245, 158, 11, 0.05) !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.05);
+}
+.user-stat-badge.stat-segni strong {
+  color: var(--accent-gold) !important;
+}
+
+.user-stat-badge.stat-tabellone {
+  border-color: rgba(236, 72, 153, 0.4) !important;
+  background: rgba(236, 72, 153, 0.05) !important;
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.05);
+}
+.user-stat-badge.stat-tabellone strong {
+  color: #ec4899 !important;
+}
+
+.user-stat-badge.stat-premi {
+  border-color: rgba(6, 182, 212, 0.4) !important;
+  background: rgba(6, 182, 212, 0.05) !important;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.05);
+}
+.user-stat-badge.stat-premi strong {
+  color: var(--accent-cyan) !important;
+}
+
+/* Bracket Hub Navigation Buttons */
+.bracket-hub-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--color-text-main);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bracket-hub-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.bracket-hub-btn.active {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.15);
+}
+
+/* Bracket Stats Progress Bars */
+.progress-winner-bar {
+  background: linear-gradient(90deg, var(--color-gold), #fbbf24);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+.progress-finalist-bar {
+  background: linear-gradient(90deg, var(--accent-purple), #c084fc);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+}
+.progress-semifinalist-bar {
+  background: linear-gradient(90deg, var(--accent-cyan), #22d3ee);
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+}
+
+/* Premium Table Sorting Headers styling */
+.premium-table th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.premium-table th[data-sort]:hover {
+  color: var(--accent-gold) !important;
+}
+
+.premium-table th[data-sort].active-sort {
+  color: var(--accent-gold) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Mobile responsive selector styles */
+.show-mobile {
+  display: none !important;
+}
+
+.classifica-mobile-metric {
+  display: none !important;
 }

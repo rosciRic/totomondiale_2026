@@ -108,24 +108,36 @@
       <!-- TAB: CLASSIFICA -->
       <section class="tab-content" id="tab-classifica">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" style="flex-wrap: wrap; gap: 15px;">
             <h2><i class="fa-solid fa-list-ol"></i> Classifica Generale</h2>
-            <div class="search-box">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="classifica-search" placeholder="Cerca partecipante...">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <div class="classifica-mobile-metric" style="display: none; align-items: center; gap: 8px;">
+                <select id="mobile-sort-selector" style="background: #0d1423; border: 1px solid var(--border-glass); color: var(--color-text-main); padding: 6px 12px; border-radius: 6px; font-size: 0.82rem; height: 34px; box-sizing: border-box; font-family: var(--font-heading); font-weight: 500;">
+                  <option value="punti">Punti Totali</option>
+                  <option value="esatti">Risultati Esatti</option>
+                  <option value="segni">Pron. Esatti</option>
+                  <option value="tabellone">Punti Tabellone</option>
+                  <option value="speciali">Premi Speciali</option>
+                </select>
+              </div>
+              <div class="search-box" style="margin: 0;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="classifica-search" placeholder="Cerca partecipante...">
+              </div>
             </div>
           </div>
           <div class="table-container">
             <table class="premium-table">
               <thead>
                 <tr>
-                  <th style="width: 70px; text-align: center;">Pos</th>
-                  <th>Nome Giocatore</th>
-                  <th style="text-align: center;">Punti Totali</th>
-                  <th style="text-align: center;" class="hide-mobile">Risultati Esatti (+3)</th>
-                  <th style="text-align: center;" class="hide-mobile">Pron. Esatti (+1)</th>
-                  <th style="text-align: center;" class="hide-mobile">Punti Tabellone (+1)</th>
-                  <th style="text-align: center; color: var(--accent-cyan);" class="hide-mobile">Premi Speciali</th>
+                  <th style="width: 70px; text-align: center; cursor: pointer;" data-sort="punti">Pos</th>
+                  <th style="cursor: pointer;" data-sort="nome">Nome Giocatore</th>
+                  <th style="text-align: center; color: var(--accent-purple); cursor: pointer;" data-sort="punti" class="active-sort hide-mobile">Punti Totali</th>
+                  <th style="text-align: center; color: var(--accent-green); cursor: pointer;" class="hide-mobile" data-sort="esatti">Risultati Esatti (+3)</th>
+                  <th style="text-align: center; color: var(--accent-gold); cursor: pointer;" class="hide-mobile" data-sort="segni">Pron. Esatti (+1)</th>
+                  <th style="text-align: center; color: #ec4899; cursor: pointer;" class="hide-mobile" data-sort="tabellone">Punti Tabellone (+1)</th>
+                  <th style="text-align: center; color: var(--accent-cyan); cursor: pointer;" class="hide-mobile" data-sort="speciali">Premi Speciali</th>
+                  <th style="text-align: center; display: none;" class="show-mobile" id="leaderboard-mobile-header">Punti Totali</th>
                 </tr>
               </thead>
               <tbody id="classifica-body">
@@ -186,12 +198,12 @@
 
       <!-- TAB: PRONOSTICI UTENTI -->
       <section class="tab-content" id="tab-pronostici">
-        <div class="user-select-bar card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-          <div class="search-box" style="position: relative; margin: 0;">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="user-search" list="user-search-list" placeholder="Cerca partecipante...">
-            <datalist id="user-search-list"></datalist>
-            <input type="hidden" id="user-selector">
+        <div class="user-select-bar card">
+          <div class="select-wrapper">
+            <label for="user-selector"><i class="fa-solid fa-user-gear"></i> Seleziona Partecipante:</label>
+            <select id="user-selector">
+              <!-- Populated dynamically -->
+            </select>
           </div>
           <div class="user-summary-stats" id="user-summary-stats">
             <!-- Dynamically populated stats for chosen user -->
@@ -379,20 +391,15 @@
       <!-- TAB: FASE FINALE / TABELLONE -->
       <section class="tab-content" id="tab-fasefinale">
 
-        <!-- CONTROLS BAR FOR BRACKET -->
-        <div class="user-select-bar card" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 15px 20px;">
-          <div class="search-box" style="position: relative; margin: 0; min-width: 220px; flex-grow: 1;">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="tabellone-user-search" list="tabellone-user-search-list" placeholder="Cerca partecipante...">
-            <datalist id="tabellone-user-search-list"></datalist>
-            <input type="hidden" id="tabellone-user-selector">
+        <!-- SELECTOR BAR FOR BRACKET -->
+        <div class="user-select-bar card" style="margin-bottom: 20px;">
+          <div class="select-wrapper">
+            <label for="tabellone-user-selector"><i class="fa-solid fa-user-gear"></i> Seleziona Partecipante:</label>
+            <select id="tabellone-user-selector">
+              <!-- Populated dynamically alphabetically by surname -->
+            </select>
           </div>
-          <div class="tabellone-actions-row" style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;">
-            <button id="tabellone-reale-btn" class="btn-details" style="padding: 8px 16px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); color: var(--color-text-main); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; white-space: nowrap; height: 38px; box-sizing: border-box;" title="Mostra il tabellone con i risultati reali del Mondiale">
-              <i class="fa-solid fa-trophy" style="color: var(--color-gold);"></i> Tabellone Reale
-            </button>
-            <div id="tabellone-score-badge" style="display: none; align-items: center; font-weight: 700; border-radius: 8px; font-size: 0.82rem; padding: 6px 12px; font-family: var(--font-heading); background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); border: 1px solid rgba(168, 85, 247, 0.3); gap: 6px; white-space: nowrap; height: 38px; box-sizing: border-box;"></div>
-          </div>
+          <div id="tabellone-score-badge" style="display: none; align-items: center; font-weight: 700; border-radius: 8px; font-size: 0.82rem; padding: 6px 12px; font-family: var(--font-heading); background: rgba(236, 72, 153, 0.15); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.3); gap: 6px; white-space: nowrap; height: 34px; box-sizing: border-box;"></div>
         </div>
 
         <!-- VISUAL TABELLONE BRACKET -->
@@ -489,6 +496,8 @@
       </div>
     </div>
   </div>
+
+
 
   <!-- FLOATING BACK-TO-TOP BUTTON -->
   <button id="btn-back-to-top" class="back-to-top-btn" title="Torna all'inizio">

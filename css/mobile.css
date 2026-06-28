@@ -555,4 +555,17 @@
     from { opacity: 1; max-height: 180px; }
     to { opacity: 0; max-height: 0; }
   }
+
+  /* Mobile Bracket Ranking Tweak */
+  .ranking-pos {
+    display: none;
+  }
+
+  /* Mobile Standings sorting optimization */
+  .show-mobile {
+    display: table-cell !important;
+  }
+  .classifica-mobile-metric {
+    display: flex !important;
+  }
 }

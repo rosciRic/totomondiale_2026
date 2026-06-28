@@ -21,6 +21,8 @@ const homeTodayContainer = document.getElementById("home-today-container");
 const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
 const fasefinaleBracketContainer = document.getElementById("fasefinale-bracket-container");
 
+let leaderboardSortKey = 'punti';
+
 // Register callbacks in state to prevent circular dependencies
 state.resetCalendarToTodayRef = resetCalendarToToday;
 
@@ -101,25 +103,83 @@ export function renderLeaderboard() {
     return;
   }
 
-  state.globalClassifica.forEach((player, index) => {
+  // Clone and sort the standings array based on active leaderboardSortKey
+  const sortedClassifica = [...state.globalClassifica].sort((a, b) => {
+    if (leaderboardSortKey === 'punti') {
+      return (b.punti || 0) - (a.punti || 0) || a.nome.localeCompare(b.nome);
+    }
+    if (leaderboardSortKey === 'nome') {
+      return a.nome.localeCompare(b.nome);
+    }
+    if (leaderboardSortKey === 'esatti') {
+      return (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || (b.punti || 0) - (a.punti || 0);
+    }
+    if (leaderboardSortKey === 'segni') {
+      return (b.prono_esatti || 0) - (a.prono_esatti || 0) || (b.punti || 0) - (a.punti || 0);
+    }
+    if (leaderboardSortKey === 'tabellone') {
+      return (b.punti_tabellone || 0) - (a.punti_tabellone || 0) || (b.punti || 0) - (a.punti || 0);
+    }
+    if (leaderboardSortKey === 'speciali') {
+      const getPuntiPremi = (player) => {
+        const puntiRisultati = (player.risultati_esatti || 0) * 3;
+        const puntiSegni = (player.prono_esatti || 0) * 1;
+        const puntiTabellone = (player.punti_tabellone || 0);
+        return player.punti_speciali !== undefined ? player.punti_speciali : (player.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
+      };
+      return getPuntiPremi(b) - getPuntiPremi(a) || (b.punti || 0) - (a.punti || 0);
+    }
+    return 0;
+  });
+
+  // Update mobile header text and color based on active metric
+  const mobileHeader = document.getElementById("leaderboard-mobile-header");
+  if (mobileHeader) {
+    if (leaderboardSortKey === 'punti') {
+      mobileHeader.textContent = "Punti Totali";
+      mobileHeader.style.color = "var(--accent-purple)";
+    } else if (leaderboardSortKey === 'esatti') {
+      mobileHeader.textContent = "Risultati Esatti";
+      mobileHeader.style.color = "var(--accent-green)";
+    } else if (leaderboardSortKey === 'segni') {
+      mobileHeader.textContent = "Pron. Esatti";
+      mobileHeader.style.color = "var(--accent-gold)";
+    } else if (leaderboardSortKey === 'tabellone') {
+      mobileHeader.textContent = "Punti Tabellone";
+      mobileHeader.style.color = "#ec4899";
+    } else if (leaderboardSortKey === 'speciali') {
+      mobileHeader.textContent = "Premi Speciali";
+      mobileHeader.style.color = "var(--accent-cyan)";
+    }
+  }
+
+  // Update mobile selector if present
+  const mobileSortSelector = document.getElementById("mobile-sort-selector");
+  if (mobileSortSelector) {
+    mobileSortSelector.value = leaderboardSortKey;
+  }
+
+  sortedClassifica.forEach((player, index) => {
     const row = document.createElement("tr");
     row.setAttribute("data-player", player.nome.toLowerCase());
     
     let posClass = "pos-badge pos-other";
     let posContent = index + 1;
     
-    if (index === 0) {
-      posClass = "pos-badge pos-1";
-      posContent = `<i class="fa-solid fa-medal"></i>`;
-      row.classList.add("row-rank-1");
-    } else if (index === 1) {
-      posClass = "pos-badge pos-2";
-      posContent = `<i class="fa-solid fa-medal"></i>`;
-      row.classList.add("row-rank-2");
-    } else if (index === 2) {
-      posClass = "pos-badge pos-3";
-      posContent = `<i class="fa-solid fa-medal"></i>`;
-      row.classList.add("row-rank-3");
+    if (leaderboardSortKey === 'punti') {
+      if (index === 0) {
+        posClass = "pos-badge pos-1";
+        posContent = `<i class="fa-solid fa-medal"></i>`;
+        row.classList.add("row-rank-1");
+      } else if (index === 1) {
+        posClass = "pos-badge pos-2";
+        posContent = `<i class="fa-solid fa-medal"></i>`;
+        row.classList.add("row-rank-2");
+      } else if (index === 2) {
+        posClass = "pos-badge pos-3";
+        posContent = `<i class="fa-solid fa-medal"></i>`;
+        row.classList.add("row-rank-3");
+      }
     }
 
     const puntiRisultati = (player.risultati_esatti || 0) * 3;
@@ -127,14 +187,36 @@ export function renderLeaderboard() {
     const puntiTabellone = (player.punti_tabellone || 0);
     const puntiPremi = player.punti_speciali !== undefined ? player.punti_speciali : (player.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
 
+    let mobileVal = "";
+    let mobileColor = "";
+    if (leaderboardSortKey === 'punti') {
+      mobileVal = `${player.punti} PT`;
+      mobileColor = "color: var(--accent-purple);";
+    } else if (leaderboardSortKey === 'esatti') {
+      mobileVal = `${player.risultati_esatti} (${puntiRisultati} PT)`;
+      mobileColor = "color: var(--accent-green);";
+    } else if (leaderboardSortKey === 'segni') {
+      mobileVal = `${player.prono_esatti} (${puntiSegni} PT)`;
+      mobileColor = "color: var(--accent-gold);";
+    } else if (leaderboardSortKey === 'tabellone') {
+      mobileVal = `${puntiTabellone} PT`;
+      mobileColor = "color: #ec4899;";
+    } else if (leaderboardSortKey === 'speciali') {
+      mobileVal = `${puntiPremi} PT`;
+      mobileColor = "color: var(--accent-cyan);";
+    } else {
+      mobileVal = `${player.punti} PT`;
+    }
+
     row.innerHTML = `
       <td style="text-align: center;"><span class="${posClass}">${posContent}</span></td>
       <td><span class="player-name">${player.nome}</span></td>
-      <td style="text-align: center;"><span class="points-val">${player.punti}</span></td>
-      <td style="text-align: center;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
-      <td style="text-align: center;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
-      <td style="text-align: center; color: var(--accent-purple); font-weight: 600;" class="hide-mobile badge-tabellone-col">${player.punti_tabellone ?? 0}</td>
+      <td style="text-align: center;" class="hide-mobile"><span class="points-val">${player.punti}</span></td>
+      <td style="text-align: center; color: var(--accent-green); font-weight: 600;" class="hide-mobile badge-exact-col">${player.risultati_esatti}</td>
+      <td style="text-align: center; color: var(--accent-gold); font-weight: 600;" class="hide-mobile badge-sign-col">${player.prono_esatti}</td>
+      <td style="text-align: center; color: #ec4899; font-weight: 600;" class="hide-mobile badge-tabellone-col">${puntiTabellone}</td>
       <td style="text-align: center; color: var(--accent-cyan); font-weight: 600;" class="hide-mobile badge-premi-col">${puntiPremi}</td>
+      <td style="text-align: center; display: none; font-weight: 600; ${mobileColor}" class="show-mobile points-val">${mobileVal}</td>
     `;
 
     // Click behavior: Toggles accordion on mobile, navigates directly on desktop
@@ -245,14 +327,7 @@ export function navigateToUserPredictions(username) {
 // Navigate to user tabellone tab and auto select the user
 export function navigateToUserTabellone(username) {
   switchTab("tab-fasefinale");
-  const tabelloneUserSearch = document.getElementById("tabellone-user-search");
-  if (tabelloneUserSearch) {
-    tabelloneUserSearch.value = username;
-  }
-  if (tabelloneUserSelector) {
-    tabelloneUserSelector.value = username;
-  }
-  renderTabellone(username);
+  selectBracketPlayer(username);
 }
 
 // Render Matches Grid based on filters
@@ -500,9 +575,8 @@ function getSurname(fullName) {
 
 // Populate User dropdown list
 export function populateUserSelector() {
-  const userSearchInput = document.getElementById("user-search");
-  const userSearchList = document.getElementById("user-search-list");
-  if (!userSearchInput || !userSearchList || !userSelector) return;
+  if (!userSelector) return;
+  userSelector.innerHTML = "";
 
   const partecipanti = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
     const surnameA = getSurname(a).toLowerCase();
@@ -510,33 +584,25 @@ export function populateUserSelector() {
     return surnameA.localeCompare(surnameB) || a.localeCompare(b);
   });
 
-  if (partecipanti.length === 0) return;
+  if (partecipanti.length === 0) {
+    userSelector.innerHTML = `<option value="">Nessun utente</option>`;
+    return;
+  }
 
-  // Clear datalist and populate
-  userSearchList.innerHTML = "";
   partecipanti.forEach(name => {
-    const option = document.createElement("option");
-    option.value = name;
-    userSearchList.appendChild(option);
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    userSelector.appendChild(opt);
   });
 
   const defaultUser = state.globalClassifica.length > 0 ? state.globalClassifica[0].nome : partecipanti[0];
-  userSearchInput.value = defaultUser;
   userSelector.value = defaultUser;
-
-  // Event listener for native datalist autocomplete selection
-  userSearchInput.addEventListener("input", (e) => {
-    const val = e.target.value;
-    const match = partecipanti.find(p => p.toLowerCase() === val.toLowerCase());
-    if (match) {
-      userSelector.value = match;
-      userSelector.dispatchEvent(new Event("change"));
-      renderUserPredictions(match);
-    }
-  });
 
   renderUserPredictions(defaultUser);
 }
+
+
 
 // Render user predictions detailed breakdown
 export function renderUserPredictions(username) {
@@ -561,25 +627,25 @@ export function renderUserPredictions(username) {
   const puntiPremi = (placement.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
 
   userSummaryStats.innerHTML = `
-    <div class="user-stat-badge">
+    <div class="user-stat-badge stat-punti">
       <span>Punteggio</span>
-      <strong>${placement.punti} Punti</strong>
+      <strong>${placement.punti} PT</strong>
     </div>
-    <div class="user-stat-badge">
+    <div class="user-stat-badge stat-esatti">
       <span>Esatti (+3)</span>
-      <strong style="color: var(--accent-green)">${placement.risultati_esatti}</strong>
+      <strong>${placement.risultati_esatti}</strong>
     </div>
-    <div class="user-stat-badge">
+    <div class="user-stat-badge stat-segni">
       <span>Segni (+1)</span>
-      <strong style="color: var(--accent-gold)">${placement.prono_esatti}</strong>
+      <strong>${placement.prono_esatti}</strong>
     </div>
-    <div class="user-stat-badge">
-      <span>Tabellone (+1)</span>
-      <strong style="color: var(--accent-purple)">${placement.punti_tabellone ?? 0}</strong>
+    <div class="user-stat-badge stat-tabellone">
+      <span>Tabellone</span>
+      <strong>${placement.punti_tabellone ?? 0}</strong>
     </div>
-    <div class="user-stat-badge">
-      <span>Premi Spec.</span>
-      <strong style="color: var(--accent-cyan)">${puntiPremi}</strong>
+    <div class="user-stat-badge stat-premi">
+      <span>Speciali</span>
+      <strong>${puntiPremi}</strong>
     </div>
   `;
 
@@ -725,6 +791,19 @@ export function renderUserPredictions(username) {
       ptsClass = "pts-0";
     }
 
+    let ptsIcon = "";
+    if (match.conclusa) {
+      if (ptsClass === "pts-3") {
+        ptsIcon = `<i class="fa-solid fa-trophy" style="color: var(--accent-gold); font-size: 0.72rem;"></i>`;
+      } else if (ptsClass === "pts-1") {
+        ptsIcon = `<i class="fa-solid fa-check" style="font-size: 0.75rem;"></i>`;
+      } else if (ptsClass === "pts-0") {
+        ptsIcon = `<i class="fa-solid fa-xmark" style="font-size: 0.75rem; opacity: 0.6;"></i>`;
+      }
+    } else {
+      ptsIcon = `<i class="fa-regular fa-clock" style="font-size: 0.75rem; opacity: 0.5;"></i>`;
+    }
+
     rowHtml = `
       <div class="user-match-row">
         <div class="match-info-meta">
@@ -742,7 +821,10 @@ export function renderUserPredictions(username) {
             <span class="score-box-label">Reale</span>
             <span class="score-num">${realHomeScore} - ${realAwayScore}</span>
           </div>
-          <div class="score-punti-badge ${ptsClass}">${ptsText}</div>
+          <div class="score-punti-badge ${ptsClass}" style="display: flex; align-items: center; justify-content: center; gap: 4px;">
+            ${ptsIcon}
+            <span>${ptsText}</span>
+          </div>
         </div>
       </div>
     `;
@@ -1082,45 +1164,39 @@ export function renderGlobalStats() {
 
 // Initialize bracket view elements
 export function initFaseFinale() {
-  const tabelloneUserSearchInput = document.getElementById("tabellone-user-search");
-  const tabelloneUserSearchList = document.getElementById("tabellone-user-search-list");
-  if (!tabelloneUserSearchInput || !tabelloneUserSearchList || !tabelloneUserSelector) return;
+  if (!tabelloneUserSelector) return;
 
-  const names = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
+  tabelloneUserSelector.innerHTML = "";
+
+  // Add Torneo Reale option
+  const optReal = document.createElement("option");
+  optReal.value = "reale";
+  optReal.textContent = "🏆 Torneo Reale";
+  tabelloneUserSelector.appendChild(optReal);
+
+  // Add players sorted alphabetically by surname
+  const partecipanti = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
     const surnameA = getSurname(a).toLowerCase();
     const surnameB = getSurname(b).toLowerCase();
     return surnameA.localeCompare(surnameB) || a.localeCompare(b);
   });
 
-  // Populate datalist
-  tabelloneUserSearchList.innerHTML = "";
-  names.forEach(name => {
-    const option = document.createElement("option");
-    option.value = name;
-    tabelloneUserSearchList.appendChild(option);
+  partecipanti.forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    tabelloneUserSelector.appendChild(opt);
   });
 
-  // Event listener for native datalist autocomplete selection
-  tabelloneUserSearchInput.addEventListener("input", (e) => {
+  tabelloneUserSelector.value = "reale";
+
+  // Set change listener
+  tabelloneUserSelector.addEventListener("change", (e) => {
     const val = e.target.value;
-    const match = names.find(p => p.toLowerCase() === val.toLowerCase());
-    if (match) {
-      tabelloneUserSelector.value = match;
-      tabelloneUserSelector.dispatchEvent(new Event("change"));
-      renderTabellone(match);
-    }
+    renderTabellone(val);
   });
 
-  // Bind click event to dedicated Tabellone Reale button
-  const btnReale = document.getElementById("tabellone-reale-btn");
-  if (btnReale) {
-    btnReale.addEventListener("click", () => {
-      tabelloneUserSearchInput.value = "";
-      tabelloneUserSelector.value = "reale";
-      tabelloneUserSelector.dispatchEvent(new Event("change"));
-      renderTabellone("reale");
-    });
-  }
+  renderTabellone("reale");
 
   // Setup Mobile Navigation Scroll-Sync for the Bracket
   const mobileBtns = document.querySelectorAll(".bracket-nav-btn");
@@ -1332,34 +1408,13 @@ export function renderTabellone(userKey) {
   // Update bracket title
   const tabelloneTitle = document.getElementById("tabellone-title");
   if (tabelloneTitle) {
-    if (userKey === "reale") {
-      tabelloneTitle.innerHTML = `<i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale Reale`;
-    } else {
-      tabelloneTitle.innerHTML = `<i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale di ${userKey}`;
-    }
+    tabelloneTitle.innerHTML = `<i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale`;
   }
 
   if (!fasefinaleBracketContainer) return;
   fasefinaleBracketContainer.innerHTML = "";
 
-  // Update dedicated button styling based on selection
-  const btnReale = document.getElementById("tabellone-reale-btn");
-  if (btnReale) {
-    if (userKey === "reale") {
-      btnReale.style.background = "rgba(168, 85, 247, 0.15)";
-      btnReale.style.borderColor = "var(--accent-purple)";
-      btnReale.style.color = "var(--accent-purple)";
-      
-      const tabelloneUserSearchInput = document.getElementById("tabellone-user-search");
-      if (tabelloneUserSearchInput) {
-        tabelloneUserSearchInput.value = "";
-      }
-    } else {
-      btnReale.style.background = "rgba(255, 255, 255, 0.03)";
-      btnReale.style.borderColor = "var(--border-glass)";
-      btnReale.style.color = "var(--color-text-main)";
-    }
-  }
+
 
   // Update bracket points badge for the selected player
   const tabelloneScoreBadge = document.getElementById("tabellone-score-badge");
@@ -1850,5 +1905,30 @@ function initCollapsibleMatches() {
       }
     });
   }
+}
+
+// Bracket Sidebar Selection Logic
+export function selectBracketPlayer(username) {
+  if (tabelloneUserSelector) {
+    tabelloneUserSelector.value = username;
+  }
+  renderTabellone(username);
+}
+
+// Set leaderboard sort key and update table headers styling
+export function setLeaderboardSort(sortKey) {
+  leaderboardSortKey = sortKey;
+  
+  const headers = document.querySelectorAll(".premium-table th[data-sort]");
+  headers.forEach(h => {
+    const k = h.getAttribute("data-sort");
+    if (k === sortKey) {
+      h.classList.add("active-sort");
+    } else {
+      h.classList.remove("active-sort");
+    }
+  });
+
+  renderLeaderboard();
 }
 

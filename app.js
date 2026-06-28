@@ -11,7 +11,8 @@ import {
   initCalendar,
   renderGlobalStats,
   initFaseFinale,
-  renderUserPredictions
+  renderUserPredictions,
+  setLeaderboardSort
 } from './js/ui.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -93,6 +94,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (filterStatus) filterStatus.addEventListener("change", renderMatches);
     if (userSelector) {
       userSelector.addEventListener("change", (e) => renderUserPredictions(e.target.value));
+    }
+
+    // Attach leaderboard header sorting click events
+    const headers = document.querySelectorAll(".premium-table th[data-sort]");
+    headers.forEach(h => {
+      h.addEventListener("click", () => {
+        const sortKey = h.getAttribute("data-sort");
+        setLeaderboardSort(sortKey);
+      });
+    });
+
+    const mobileSortSelector = document.getElementById("mobile-sort-selector");
+    if (mobileSortSelector) {
+      mobileSortSelector.addEventListener("change", (e) => {
+        setLeaderboardSort(e.target.value);
+      });
     }
 
     const filterPronoStage = document.getElementById("filter-prono-stage");
