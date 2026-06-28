@@ -120,6 +120,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Carmine Apollonio",
+    "punti": 56,
+    "risultati_esatti": 7,
+    "prono_esatti": 35,
+    "punti_tabellone": 0,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Sergio Garzya",
     "punti": 56,
     "risultati_esatti": 7,
@@ -140,14 +148,6 @@
     "punti": 55,
     "risultati_esatti": 8,
     "prono_esatti": 31,
-    "punti_tabellone": 0,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Carmine Apollonio",
-    "punti": 55,
-    "risultati_esatti": 7,
-    "prono_esatti": 34,
     "punti_tabellone": 0,
     "punti_speciali": 0
   },
