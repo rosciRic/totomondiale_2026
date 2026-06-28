@@ -1641,7 +1641,7 @@ export function renderTabellone(userKey) {
     warning.style.textAlign = "center";
     warning.style.padding = "10px";
     warning.style.marginBottom = "15px";
-    warning.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Il partecipante non ha ancora compilato il tabellone fase finale (mostrato tabellone reale).`;
+    warning.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Il partecipante non ha ancora compilato il tabellone fase finale.`;
     fasefinaleBracketContainer.insertBefore(warning, fasefinaleBracketContainer.firstChild);
   }
 
