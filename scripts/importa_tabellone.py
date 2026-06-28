@@ -24,7 +24,9 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 PRONOSTICI_FILE = os.path.join(ROOT_DIR, "data", "pronostici.json")
-CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
+CSV_FILE = os.path.join(ROOT_DIR, "🏆 MODULO 1_ Pronostici Tabellone Mondiale 2026 (Risposte) - Risposte del modulo 1.csv")
+if not os.path.exists(CSV_FILE):
+    CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
 
 # Nomi dei partecipanti per la validazione
 PARTICIPANTS = {
@@ -47,6 +49,10 @@ def clean_team_name(name):
         return ""
     # Rimuove emoji delle bandiere (Regional Indicator Symbols)
     name = re.sub(r'[\U0001F1E6-\U0001F1FF]', '', name)
+    # Rimuove bandiere speciali (come Inghilterra 🏴󠁧󠁢󠁥󠁮󠁧󠁿)
+    name = re.sub(r'\U0001F3F4', '', name)
+    # Rimuove caratteri tag di suddivisione invisibili
+    name = re.sub(r'[\U000E0000-\U000E007F]', '', name)
     # Rimuove emoji del pallone da calcio e altri simboli comuni
     name = re.sub(r'[⚽\u2600-\u27BF\U0001f300-\U0001f64f\U0001f680-\U0001f6ff]', '', name)
     return name.strip()

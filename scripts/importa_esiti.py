@@ -45,21 +45,49 @@ def main():
     print("TOTOMONDIALE 2026 - Importazione Risultati Esatti da Google Forms")
     print("=" * 60)
 
-    # Controlla argomenti passati da riga di comando
-    if len(sys.argv) < 4:
-        print("Uso corretto dello script:")
-        print("  python3 importa_esiti.py <nome_file.csv> <id_partitata_inizio> <id_partita_fine>")
-        print("\nEsempio per i Sedicesimi (dalla partita 73 alla 88):")
-        print("  python3 importa_esiti.py risposte_sedicesimi.csv 73 88")
-        sys.exit(1)
+    # Cerca file CSV idonei in base agli ID delle partite
+    def find_default_csv(start, end):
+        keyword = "sedicesimi"
+        if start == 89 and end == 96:
+            keyword = "ottavi"
+        elif start == 97 and end == 100:
+            keyword = "quarti"
+        elif start == 101 and end == 102:
+            keyword = "semifinali"
+        elif start >= 103:
+            keyword = "finale"
 
-    csv_filename = sys.argv[1]
-    try:
-        start_id = int(sys.argv[2])
-        end_id = int(sys.argv[3])
-    except ValueError:
-        print("Errore: I parametri di inizio e fine ID partita devono essere numeri interi.")
-        sys.exit(1)
+        # Cerca file con la parola chiave specifica
+        matching_files = [f for f in os.listdir(ROOT_DIR) if f.lower().endswith('.csv') and (keyword in f.lower() or (keyword == "semifinali" and "semi" in f.lower()) or (keyword == "finale" and "finali" in f.lower()))]
+        if matching_files:
+            return matching_files[0]
+
+        # Fallback generico
+        generic_files = [f for f in os.listdir(ROOT_DIR) if f.lower().endswith('.csv') and ('modulo' in f.lower() or 'risultati esatti' in f.lower() or 'esiti' in f.lower())]
+        if generic_files:
+            return generic_files[0]
+        return "risposte_sedicesimi.csv"
+
+    if len(sys.argv) >= 4:
+        csv_filename = sys.argv[1]
+        try:
+            start_id = int(sys.argv[2])
+            end_id = int(sys.argv[3])
+        except ValueError:
+            print("Errore: I parametri di inizio e fine ID partita devono essere numeri interi.")
+            sys.exit(1)
+    elif len(sys.argv) == 3:
+        try:
+            start_id = int(sys.argv[1])
+            end_id = int(sys.argv[2])
+            csv_filename = find_default_csv(start_id, end_id)
+        except ValueError:
+            print("Errore: I parametri di inizio e fine ID partita devono essere numeri interi.")
+            sys.exit(1)
+    elif len(sys.argv) == 2:
+        csv_filename = sys.argv[1]
+    else:
+        csv_filename = find_default_csv(start_id, end_id)
 
     csv_path = csv_filename
     if not os.path.exists(csv_path):
