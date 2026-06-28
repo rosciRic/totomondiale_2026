@@ -12875,6 +12875,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 0,
+          "away_score": 0
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -12884,6 +12948,48 @@
         "mvp": "Vitinha",
         "portiere": "Alisson",
         "giovane": "Nico Paz"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Giappone",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Belgio",
+          "Giappone",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Mattia Nicolau": {
