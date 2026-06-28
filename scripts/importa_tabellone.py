@@ -40,11 +40,22 @@ PARTICIPANTS = {
     "Andrea Sedile", "Carmine Apollonio",
 }
 
+import re
+
+def clean_team_name(name):
+    if not name:
+        return ""
+    # Rimuove emoji delle bandiere (Regional Indicator Symbols)
+    name = re.sub(r'[\U0001F1E6-\U0001F1FF]', '', name)
+    # Rimuove emoji del pallone da calcio e altri simboli comuni
+    name = re.sub(r'[⚽\u2600-\u27BF\U0001f300-\U0001f64f\U0001f680-\U0001f6ff]', '', name)
+    return name.strip()
+
 def clean_list(text):
     """Pulisce le risposte multiscelta (es. 'Italia, Spagna' -> ['Italia', 'Spagna'])"""
     if not text:
         return []
-    return [t.strip() for t in text.split(",") if t.strip()]
+    return [clean_team_name(t) for t in text.split(",") if t.strip()]
 
 def main():
     print("=" * 60)
@@ -151,8 +162,8 @@ def main():
             quarti_teams = clean_list(row[idx_quarti])
             semi_teams = clean_list(row[idx_semi])
             finale_teams = clean_list(row[idx_finale])
-            vincitore_team = row[idx_vincitore].strip()
-            terzo_posto_team = row[idx_terzo].strip() if idx_terzo != -1 else None
+            vincitore_team = clean_team_name(row[idx_vincitore])
+            terzo_posto_team = clean_team_name(row[idx_terzo]) if idx_terzo != -1 else None
 
             # Mappa nel formato json di passaggio_turno
             passaggio_turno = {
