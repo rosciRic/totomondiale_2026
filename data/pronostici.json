@@ -289,6 +289,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 4,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -298,6 +362,48 @@
         "mvp": "Olise",
         "portiere": "Alisson",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Ecuador",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Andrea Pellè": {
@@ -589,6 +695,70 @@
         "72": {
           "home_score": 0,
           "away_score": 1
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -598,6 +768,48 @@
         "mvp": "Yamal",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Portogallo",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Portogallo",
+          "Argentina"
+        ],
+        "vincitore": "Portogallo",
+        "terzo_posto": "Brasile"
       }
     },
     "Edoardo Roscica": {
@@ -889,6 +1101,70 @@
         "72": {
           "home_score": 0,
           "away_score": 2
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 4
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -898,6 +1174,48 @@
         "mvp": "Vitinha",
         "portiere": "Simon",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Argentina"
+        ],
+        "vincitore": "Spagna",
+        "terzo_posto": "Brasile"
       }
     },
     "Leonardo Piras": {
@@ -1189,6 +1507,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -1198,6 +1580,48 @@
         "mvp": "Mbappe",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Brasile"
       }
     },
     "Marco Lala": {
@@ -1489,6 +1913,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -1498,6 +1986,48 @@
         "mvp": "Kane",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Norvegia",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Inghilterra"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Raffaele Chiffi": {
@@ -1789,6 +2319,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 0,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -1798,6 +2392,48 @@
         "mvp": "Yamal",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Andrea Quarto": {
@@ -2089,6 +2725,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -2098,6 +2798,48 @@
         "mvp": "Mbappe",
         "portiere": "Simon",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Brasile",
+        "terzo_posto": "Spagna"
       }
     },
     "Marco Boellis": {
@@ -2389,6 +3131,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -2398,6 +3204,48 @@
         "mvp": "Vinicius",
         "portiere": "Alisson",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Argentina"
       }
     },
     "Tony Pindinello": {
@@ -2689,6 +3537,70 @@
         "72": {
           "home_score": 0,
           "away_score": 5
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 0,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -2698,6 +3610,48 @@
         "mvp": "Yamal",
         "portiere": "Martinez",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Germania",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Norvegia",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Germania",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Germania",
+          "Inghilterra"
+        ],
+        "vincitore": "Inghilterra",
+        "terzo_posto": "Argentina"
       }
     },
     "Carlo Fantasia": {
@@ -2989,6 +3943,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -2998,6 +4016,48 @@
         "mvp": "Kane",
         "portiere": "Simon",
         "giovane": "Doue"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Ghana"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Ghana"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Brasile"
+        ],
+        "vincitore": "Spagna",
+        "terzo_posto": "Francia"
       }
     },
     "Matteo Birilli": {
@@ -3289,6 +4349,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -3298,6 +4422,48 @@
         "mvp": "Kane",
         "portiere": "Joan Garcia",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Norvegia",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Inghilterra"
+        ],
+        "vincitore": "Inghilterra",
+        "terzo_posto": "Argentina"
       }
     },
     "Gabriele Carrarini": {
@@ -3589,6 +4755,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -3598,6 +4828,48 @@
         "mvp": "Mbappe",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Luigi Marchello": {
@@ -3889,6 +5161,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 3
         }
       },
       "premi_finali": {
@@ -3898,6 +5234,48 @@
         "mvp": "Yamal",
         "portiere": "Courtois",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Costa d'Avorio",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Messico",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Messico",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Filippo Marchello": {
@@ -4189,6 +5567,70 @@
         "72": {
           "home_score": 1,
           "away_score": 5
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -4198,6 +5640,48 @@
         "mvp": "Ronaldo",
         "portiere": "Martinez",
         "giovane": "Endrick"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Germania",
+          "Canada",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Germania",
+          "Portogallo",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Portogallo",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Brasile"
       }
     },
     "Matteo Serafino": {
@@ -4489,6 +5973,70 @@
         "72": {
           "home_score": 3,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "86": {
+          "home_score": 6,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 2,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -4498,6 +6046,48 @@
         "mvp": "Van Dijk",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Olanda",
+          "Portogallo",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Olanda",
+          "Inghilterra"
+        ],
+        "vincitore": "Olanda",
+        "terzo_posto": "Portogallo"
       }
     },
     "Leandro Micelli": {
@@ -4789,6 +6379,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 7,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -4798,6 +6452,48 @@
         "mvp": "De Bruyne",
         "portiere": "Maignan",
         "giovane": "Estevao"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Portogallo",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Brasile"
       }
     },
     "Pino Bruno": {
@@ -5089,6 +6785,70 @@
         "72": {
           "home_score": 1,
           "away_score": 2
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 4
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -5098,6 +6858,48 @@
         "mvp": "Mbappe",
         "portiere": "Maignan",
         "giovane": "Doue"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Sudafrica",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Bosnia ed Erzegovina",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Brasile"
       }
     },
     "Manuel Farlò": {
@@ -5389,6 +7191,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "86": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 2,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -5398,6 +7264,48 @@
         "mvp": "Kane",
         "portiere": "Verbruggen",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Sudafrica",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Costa d'Avorio",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Olanda",
+          "Portogallo",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Olanda",
+          "Argentina"
+        ],
+        "vincitore": "Olanda",
+        "terzo_posto": "Inghilterra"
       }
     },
     "Simone Turturo": {
@@ -5689,6 +7597,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 2,
+          "away_score": 4
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -5698,6 +7670,48 @@
         "mvp": "Messi",
         "portiere": "Maignan",
         "giovane": "Doue"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Mattia Tramacere": {
@@ -5989,6 +8003,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -5998,6 +8076,48 @@
         "mvp": "Mbappe",
         "portiere": "Alisson",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Argentina"
       }
     },
     "Daniele Garzya": {
@@ -6289,6 +8409,70 @@
         "72": {
           "home_score": 1,
           "away_score": 2
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 4,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 4
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 3
         }
       },
       "premi_finali": {
@@ -6298,6 +8482,48 @@
         "mvp": "Vinicius",
         "portiere": "Simon",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Algeria",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Argentina"
       }
     },
     "Sergio Garzya": {
@@ -6589,6 +8815,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 4,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 5,
+          "away_score": 1
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -6598,6 +8888,48 @@
         "mvp": "Vinicius",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Portogallo",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Portogallo"
       }
     },
     "Daniele Bove": {
@@ -6889,6 +9221,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "86": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -6898,6 +9294,48 @@
         "mvp": "Yamal",
         "portiere": "Maignan",
         "giovane": "Nusa"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Marco Pellè": {
@@ -7189,6 +9627,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -7198,6 +9700,48 @@
         "mvp": "Vinicius",
         "portiere": "Martinez",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Sudafrica",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Ecuador",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Ghana"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Ghana"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Spagna"
       }
     },
     "Manuel Pellè": {
@@ -7489,6 +10033,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 5,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -7498,6 +10106,48 @@
         "mvp": "Kane",
         "portiere": "Simon",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Spagna"
       }
     },
     "Mattia Pellè": {
@@ -7789,6 +10439,70 @@
         "72": {
           "home_score": 0,
           "away_score": 2
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -7798,6 +10512,48 @@
         "mvp": "Olise",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Inghilterra",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Inghilterra"
       }
     },
     "Francesco Pastore": {
@@ -8089,6 +10845,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -8098,6 +10918,48 @@
         "mvp": "Pedri",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Algeria",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Brasile"
+        ],
+        "vincitore": "Spagna",
+        "terzo_posto": "Francia"
       }
     },
     "Fabio Baldacci": {
@@ -8389,6 +11251,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -8398,6 +11324,48 @@
         "mvp": "Yamal",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Croazia",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Ecuador",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Brasile"
       }
     },
     "Stefano De Giorgi": {
@@ -8689,6 +11657,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 1
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -8698,6 +11730,48 @@
         "mvp": "Yamal",
         "portiere": "Neuer",
         "giovane": "Emery"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Sudafrica",
+          "Olanda",
+          "Croazia",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Giappone",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Norvegia",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Norvegia",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Norvegia"
+        ],
+        "vincitore": "Norvegia",
+        "terzo_posto": "Argentina"
       }
     },
     "Jacopo De Giorgi": {
@@ -8989,6 +12063,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -8998,6 +12136,48 @@
         "mvp": "Yamal",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Croazia",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Ghana"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Messico",
+          "Argentina",
+          "Ghana"
+        ],
+        "quarti": [
+          "Olanda",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Olanda"
       }
     },
     "Pino De Giorgi": {
@@ -9289,6 +12469,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 2,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -9298,6 +12542,48 @@
         "mvp": "Lautaro",
         "portiere": "Alisson",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Sudafrica",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Brasile"
+        ],
+        "vincitore": "Brasile",
+        "terzo_posto": "Argentina"
       }
     },
     "Luigi Miccoli": {
@@ -9889,6 +13175,70 @@
         "72": {
           "home_score": 0,
           "away_score": 0
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 3
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 3
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 5,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 0,
+          "away_score": 4
+        },
+        "79": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "86": {
+          "home_score": 7,
+          "away_score": 1
+        },
+        "87": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -9898,6 +13248,48 @@
         "mvp": "Williams",
         "portiere": "Diogo Costa",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Bosnia ed Erzegovina",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Svizzera",
+          "Ghana"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Bosnia ed Erzegovina",
+          "Norvegia",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Norvegia",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Argentina"
+        ],
+        "vincitore": "Spagna",
+        "terzo_posto": "Norvegia"
       }
     },
     "Giacomo Ingrosso": {
@@ -10189,6 +13581,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -10198,6 +13654,48 @@
         "mvp": "Olise",
         "portiere": "Simon",
         "giovane": "Doue"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Spagna"
       }
     },
     "Marco Ingrosso": {
@@ -10489,6 +13987,70 @@
         "72": {
           "home_score": 0,
           "away_score": 4
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "76": {
+          "home_score": 4,
+          "away_score": 2
+        },
+        "77": {
+          "home_score": 4,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "80": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 4,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -10498,6 +14060,48 @@
         "mvp": "Kane",
         "portiere": "Alisson",
         "giovane": "Doue"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Messico",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Portogallo",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Portogallo",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Argentina"
+        ],
+        "vincitore": "Argentina",
+        "terzo_posto": "Brasile"
       }
     },
     "Daniele Sedile": {
@@ -10789,6 +14393,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 0,
+          "away_score": 0
+        },
+        "76": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 1,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -10798,6 +14466,48 @@
         "mvp": "Olise",
         "portiere": "Alisson",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Croazia",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Ecuador",
+          "Inghilterra",
+          "Argentina",
+          "Australia",
+          "Algeria",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Canada",
+          "Spagna",
+          "Stati Uniti",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Spagna",
+          "Brasile"
+        ],
+        "vincitore": "Brasile",
+        "terzo_posto": "Argentina"
       }
     },
     "Andrea Sedile": {
@@ -11089,6 +14799,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "74": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "76": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "78": {
+          "home_score": 0,
+          "away_score": 2
+        },
+        "79": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "82": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "83": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "86": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -11098,6 +14872,48 @@
         "mvp": "Rapinha",
         "portiere": "Alisson",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Olanda",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Belgio",
+          "Brasile",
+          "Norvegia",
+          "Ecuador",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Olanda",
+          "Spagna",
+          "Belgio",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Svizzera"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Francia",
+        "terzo_posto": "Argentina"
       }
     },
     "Carmine Apollonio": {
@@ -11389,6 +15205,70 @@
         "72": {
           "home_score": 0,
           "away_score": 3
+        },
+        "73": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "74": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "75": {
+          "home_score": 2,
+          "away_score": 3
+        },
+        "76": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "77": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "78": {
+          "home_score": 1,
+          "away_score": 3
+        },
+        "79": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "80": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "81": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "82": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "83": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "84": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "85": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "86": {
+          "home_score": 4,
+          "away_score": 0
+        },
+        "87": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "88": {
+          "home_score": 0,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -11398,6 +15278,48 @@
         "mvp": "Olise",
         "portiere": "Maignan",
         "giovane": "Yamal"
+      },
+      "passaggio_turno": {
+        "sedicesimi": [
+          "Germania",
+          "Francia",
+          "Canada",
+          "Marocco",
+          "Portogallo",
+          "Spagna",
+          "Stati Uniti",
+          "Senegal",
+          "Brasile",
+          "Norvegia",
+          "Ecuador",
+          "Inghilterra",
+          "Argentina",
+          "Egitto",
+          "Svizzera",
+          "Colombia"
+        ],
+        "ottavi": [
+          "Francia",
+          "Marocco",
+          "Spagna",
+          "Senegal",
+          "Brasile",
+          "Inghilterra",
+          "Argentina",
+          "Colombia"
+        ],
+        "quarti": [
+          "Francia",
+          "Spagna",
+          "Brasile",
+          "Argentina"
+        ],
+        "semifinali": [
+          "Francia",
+          "Brasile"
+        ],
+        "vincitore": "Brasile",
+        "terzo_posto": "Argentina"
       }
     }
   }
