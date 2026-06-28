@@ -186,12 +186,12 @@
 
       <!-- TAB: PRONOSTICI UTENTI -->
       <section class="tab-content" id="tab-pronostici">
-        <div class="user-select-bar card">
-          <div class="select-wrapper">
-            <label for="user-selector"><i class="fa-solid fa-user-gear"></i> Seleziona Partecipante:</label>
-            <select id="user-selector">
-              <!-- Dynamically populated -->
-            </select>
+        <div class="user-select-bar card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <div class="search-box" style="position: relative; margin: 0;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="user-search" list="user-search-list" placeholder="Cerca partecipante...">
+            <datalist id="user-search-list"></datalist>
+            <input type="hidden" id="user-selector">
           </div>
           <div class="user-summary-stats" id="user-summary-stats">
             <!-- Dynamically populated stats for chosen user -->
@@ -379,18 +379,26 @@
       <!-- TAB: FASE FINALE / TABELLONE -->
       <section class="tab-content" id="tab-fasefinale">
 
+        <!-- CONTROLS BAR FOR BRACKET -->
+        <div class="user-select-bar card" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 15px 20px;">
+          <div class="search-box" style="position: relative; margin: 0; min-width: 220px; flex-grow: 1;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="tabellone-user-search" list="tabellone-user-search-list" placeholder="Cerca partecipante...">
+            <datalist id="tabellone-user-search-list"></datalist>
+            <input type="hidden" id="tabellone-user-selector">
+          </div>
+          <div class="tabellone-actions-row" style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;">
+            <button id="tabellone-reale-btn" class="btn-details" style="padding: 8px 16px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); color: var(--color-text-main); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; white-space: nowrap; height: 38px; box-sizing: border-box;" title="Mostra il tabellone con i risultati reali del Mondiale">
+              <i class="fa-solid fa-trophy" style="color: var(--color-gold);"></i> Tabellone Reale
+            </button>
+            <div id="tabellone-score-badge" style="display: none; align-items: center; font-weight: 700; border-radius: 8px; font-size: 0.82rem; padding: 6px 12px; font-family: var(--font-heading); background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); border: 1px solid rgba(168, 85, 247, 0.3); gap: 6px; white-space: nowrap; height: 38px; box-sizing: border-box;"></div>
+          </div>
+        </div>
+
         <!-- VISUAL TABELLONE BRACKET -->
         <div class="card">
-          <div class="card-header tabellone-header" style="flex-wrap: wrap; gap: 15px;">
+          <div class="card-header tabellone-header">
             <h2><i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale</h2>
-            <div class="select-wrapper">
-              <label for="tabellone-user-selector"><i class="fa-solid fa-users-viewfinder"></i> Visualizza per:</label>
-              <select id="tabellone-user-selector" class="tabellone-select" style="background: rgba(255,255,255,0.05); color: var(--color-text-main); border: 1px solid var(--border-glass); padding: 6px 12px; border-radius: 8px; outline: none; font-family: var(--font-body); cursor: pointer;">
-                <option value="reale">Reale (Mondiale 2026)</option>
-                <!-- Inseriti dinamicamente da JS -->
-              </select>
-              <div id="tabellone-score-badge" style="display: none; align-items: center; font-weight: 700; border-radius: 8px; font-size: 0.82rem; padding: 6px 12px; font-family: var(--font-heading); background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); border: 1px solid rgba(168, 85, 247, 0.3); gap: 6px; white-space: nowrap;"></div>
-            </div>
           </div>
           <!-- Selettore rapido dei turni per mobile -->
           <div class="bracket-nav-mobile" id="bracket-nav-mobile">

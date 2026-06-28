@@ -1379,3 +1379,38 @@
 .back-to-top-btn:active {
   transform: translateY(1px);
 }
+
+/* Custom Searchable Dropdown Component */
+.search-results-dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+.search-results-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+.search-results-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.search-item {
+  padding: 10px 14px;
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+.search-item:last-child {
+  border-bottom: none;
+}
+.search-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-cyan);
+}
+.search-item.selected {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent-cyan);
+  font-weight: 600;
+  border-left: 3px solid var(--accent-cyan);
+}

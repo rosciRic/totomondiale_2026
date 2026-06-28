@@ -232,10 +232,27 @@ export function filterLeaderboard() {
 // Navigate to user prediction tab and auto select the user
 export function navigateToUserPredictions(username) {
   switchTab("tab-pronostici");
+  const userSearch = document.getElementById("user-search");
+  if (userSearch) {
+    userSearch.value = username;
+  }
   if (userSelector) {
     userSelector.value = username;
   }
   renderUserPredictions(username);
+}
+
+// Navigate to user tabellone tab and auto select the user
+export function navigateToUserTabellone(username) {
+  switchTab("tab-fasefinale");
+  const tabelloneUserSearch = document.getElementById("tabellone-user-search");
+  if (tabelloneUserSearch) {
+    tabelloneUserSearch.value = username;
+  }
+  if (tabelloneUserSelector) {
+    tabelloneUserSelector.value = username;
+  }
+  renderTabellone(username);
 }
 
 // Render Matches Grid based on filters
@@ -483,29 +500,41 @@ function getSurname(fullName) {
 
 // Populate User dropdown list
 export function populateUserSelector() {
-  if (!userSelector) return;
-  userSelector.innerHTML = "";
+  const userSearchInput = document.getElementById("user-search");
+  const userSearchList = document.getElementById("user-search-list");
+  if (!userSearchInput || !userSearchList || !userSelector) return;
+
   const partecipanti = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
     const surnameA = getSurname(a).toLowerCase();
     const surnameB = getSurname(b).toLowerCase();
     return surnameA.localeCompare(surnameB) || a.localeCompare(b);
   });
-  
-  if (partecipanti.length === 0) {
-    userSelector.innerHTML = `<option value="">Nessun utente</option>`;
-    return;
-  }
 
+  if (partecipanti.length === 0) return;
+
+  // Clear datalist and populate
+  userSearchList.innerHTML = "";
   partecipanti.forEach(name => {
-    const opt = document.createElement("option");
-    opt.value = name;
-    opt.textContent = name;
-    userSelector.appendChild(opt);
+    const option = document.createElement("option");
+    option.value = name;
+    userSearchList.appendChild(option);
   });
 
-  // Default to the leader or first player
   const defaultUser = state.globalClassifica.length > 0 ? state.globalClassifica[0].nome : partecipanti[0];
+  userSearchInput.value = defaultUser;
   userSelector.value = defaultUser;
+
+  // Event listener for native datalist autocomplete selection
+  userSearchInput.addEventListener("input", (e) => {
+    const val = e.target.value;
+    const match = partecipanti.find(p => p.toLowerCase() === val.toLowerCase());
+    if (match) {
+      userSelector.value = match;
+      userSelector.dispatchEvent(new Event("change"));
+      renderUserPredictions(match);
+    }
+  });
+
   renderUserPredictions(defaultUser);
 }
 
@@ -1053,32 +1082,45 @@ export function renderGlobalStats() {
 
 // Initialize bracket view elements
 export function initFaseFinale() {
-  if (!tabelloneUserSelector) return;
-  tabelloneUserSelector.innerHTML = "";
+  const tabelloneUserSearchInput = document.getElementById("tabellone-user-search");
+  const tabelloneUserSearchList = document.getElementById("tabellone-user-search-list");
+  if (!tabelloneUserSearchInput || !tabelloneUserSearchList || !tabelloneUserSelector) return;
 
-  // 1. Add real tournament view option
-  const optReal = document.createElement("option");
-  optReal.value = "reale";
-  optReal.textContent = "Torneo Reale";
-  tabelloneUserSelector.appendChild(optReal);
-
-  // 2. Add all participants alphabetically by surname
   const names = Object.keys(state.globalPronostici.partecipanti).sort((a, b) => {
     const surnameA = getSurname(a).toLowerCase();
     const surnameB = getSurname(b).toLowerCase();
     return surnameA.localeCompare(surnameB) || a.localeCompare(b);
   });
+
+  // Populate datalist
+  tabelloneUserSearchList.innerHTML = "";
   names.forEach(name => {
-    const opt = document.createElement("option");
-    opt.value = name;
-    opt.textContent = name;
-    tabelloneUserSelector.appendChild(opt);
+    const option = document.createElement("option");
+    option.value = name;
+    tabelloneUserSearchList.appendChild(option);
   });
 
-  // Add event listener
-  tabelloneUserSelector.addEventListener("change", (e) => {
-    renderTabellone(e.target.value);
+  // Event listener for native datalist autocomplete selection
+  tabelloneUserSearchInput.addEventListener("input", (e) => {
+    const val = e.target.value;
+    const match = names.find(p => p.toLowerCase() === val.toLowerCase());
+    if (match) {
+      tabelloneUserSelector.value = match;
+      tabelloneUserSelector.dispatchEvent(new Event("change"));
+      renderTabellone(match);
+    }
   });
+
+  // Bind click event to dedicated Tabellone Reale button
+  const btnReale = document.getElementById("tabellone-reale-btn");
+  if (btnReale) {
+    btnReale.addEventListener("click", () => {
+      tabelloneUserSearchInput.value = "";
+      tabelloneUserSelector.value = "reale";
+      tabelloneUserSelector.dispatchEvent(new Event("change"));
+      renderTabellone("reale");
+    });
+  }
 
   // Setup Mobile Navigation Scroll-Sync for the Bracket
   const mobileBtns = document.querySelectorAll(".bracket-nav-btn");
@@ -1288,6 +1330,25 @@ export function renderTabellone(userKey) {
   state.currentTabelloneUserKey = userKey;
   if (!fasefinaleBracketContainer) return;
   fasefinaleBracketContainer.innerHTML = "";
+
+  // Update dedicated button styling based on selection
+  const btnReale = document.getElementById("tabellone-reale-btn");
+  if (btnReale) {
+    if (userKey === "reale") {
+      btnReale.style.background = "rgba(168, 85, 247, 0.15)";
+      btnReale.style.borderColor = "var(--accent-purple)";
+      btnReale.style.color = "var(--accent-purple)";
+      
+      const tabelloneUserSearchInput = document.getElementById("tabellone-user-search");
+      if (tabelloneUserSearchInput) {
+        tabelloneUserSearchInput.value = "";
+      }
+    } else {
+      btnReale.style.background = "rgba(255, 255, 255, 0.03)";
+      btnReale.style.borderColor = "var(--border-glass)";
+      btnReale.style.color = "var(--color-text-main)";
+    }
+  }
 
   // Update bracket points badge for the selected player
   const tabelloneScoreBadge = document.getElementById("tabellone-score-badge");
@@ -1759,7 +1820,6 @@ export function drawBracketLines() {
   scrollWrapper.appendChild(svg);
 }
 
-// Bind click event to matches section header to collapse/expand on mobile
 function initCollapsibleMatches() {
   const pronoHeader = document.getElementById("user-prono-header");
   const matchesWrapper = document.getElementById("user-matches-collapse-wrapper");
