@@ -57,15 +57,20 @@ def main():
         elif start >= 103:
             keyword = "finale"
 
-        # Cerca file con la parola chiave specifica
-        matching_files = [f for f in os.listdir(ROOT_DIR) if f.lower().endswith('.csv') and (keyword in f.lower() or (keyword == "semifinali" and "semi" in f.lower()) or (keyword == "finale" and "finali" in f.lower()))]
-        if matching_files:
-            return matching_files[0]
+        # Cerca file con la parola chiave specifica sia in ROOT_DIR che in ROOT_DIR/csv
+        search_dirs = [ROOT_DIR, os.path.join(ROOT_DIR, "csv")]
+        for s_dir in search_dirs:
+            if os.path.exists(s_dir):
+                matching_files = [f for f in os.listdir(s_dir) if f.lower().endswith('.csv') and (keyword in f.lower() or (keyword == "semifinali" and "semi" in f.lower()) or (keyword == "finale" and "finali" in f.lower()))]
+                if matching_files:
+                    return os.path.join(s_dir, matching_files[0])
 
         # Fallback generico
-        generic_files = [f for f in os.listdir(ROOT_DIR) if f.lower().endswith('.csv') and ('modulo' in f.lower() or 'risultati esatti' in f.lower() or 'esiti' in f.lower())]
-        if generic_files:
-            return generic_files[0]
+        for s_dir in search_dirs:
+            if os.path.exists(s_dir):
+                generic_files = [f for f in os.listdir(s_dir) if f.lower().endswith('.csv') and ('modulo' in f.lower() or 'risultati esatti' in f.lower() or 'esiti' in f.lower())]
+                if generic_files:
+                    return os.path.join(s_dir, generic_files[0])
         return "risposte_sedicesimi.csv"
 
     if len(sys.argv) >= 4:

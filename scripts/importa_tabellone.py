@@ -26,7 +26,11 @@ ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 PRONOSTICI_FILE = os.path.join(ROOT_DIR, "data", "pronostici.json")
 CSV_FILE = os.path.join(ROOT_DIR, "🏆 MODULO 1_ Pronostici Tabellone Mondiale 2026 (Risposte) - Risposte del modulo 1.csv")
 if not os.path.exists(CSV_FILE):
+    CSV_FILE = os.path.join(ROOT_DIR, "csv", "🏆 MODULO 1_ Pronostici Tabellone Mondiale 2026 (Risposte) - Risposte del modulo 1.csv")
+if not os.path.exists(CSV_FILE):
     CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
+if not os.path.exists(CSV_FILE):
+    CSV_FILE = os.path.join(ROOT_DIR, "csv", "risposte_tabellone.csv")
 
 # Nomi dei partecipanti per la validazione
 PARTICIPANTS = {
