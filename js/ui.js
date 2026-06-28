@@ -1311,19 +1311,19 @@ export function renderTabellone(userKey) {
   knockoutMatches.sort((a, b) => a.id - b.id);
 
   const parentMatches = {
-    89: { home: "W73", away: "W74" },
-    90: { home: "W75", away: "W76" },
-    91: { home: "W77", away: "W78" },
+    89: { home: "W74", away: "W77" },
+    90: { home: "W73", away: "W75" },
+    91: { home: "W76", away: "W78" },
     92: { home: "W79", away: "W80" },
-    93: { home: "W81", away: "W82" },
-    94: { home: "W83", away: "W84" },
-    95: { home: "W85", away: "W86" },
-    96: { home: "W87", away: "W88" },
+    93: { home: "W83", away: "W84" },
+    94: { home: "W81", away: "W82" },
+    95: { home: "W86", away: "W88" },
+    96: { home: "W85", away: "W87" },
     97: { home: "W89", away: "W90" },
-    98: { home: "W94", away: "W93" },
-    99: { home: "W92", away: "W91" },
-    100: { home: "W96", away: "W95" },
-    101: { home: "W98", away: "W97" },
+    98: { home: "W93", away: "W94" },
+    99: { home: "W91", away: "W92" },
+    100: { home: "W95", away: "W96" },
+    101: { home: "W97", away: "W98" },
     102: { home: "W99", away: "W100" },
     103: { home: "L102", away: "L101" },
     104: { home: "W102", away: "W101" }
@@ -1450,8 +1450,8 @@ export function renderTabellone(userKey) {
 
   const bracketOrder = {
     sedicesimi: [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87],
-    ottavi: [89, 94, 91, 90, 93, 92, 95, 96],
-    quarti: [97, 99, 98, 100],
+    ottavi: [89, 90, 93, 94, 91, 92, 95, 96],
+    quarti: [97, 98, 99, 100],
     semifinali: [101, 102],
     finale: [104, 103]
   };
@@ -1499,13 +1499,23 @@ export function renderTabellone(userKey) {
       matchNode.className = "bracket-match-node";
       matchNode.setAttribute("data-match-id", m.id);
       
-      let matchLabel = m.fase === "finale" ? (m.id === 104 ? "Finale 1° Posto" : "Finale 3°/4° Posto") : `Match ID: ${m.id}`;
+      let matchLabel = "";
+      if (m.fase === "finale") {
+        matchLabel = m.id === 104 ? "Finale 1° Posto" : "Finale 3°/4° Posto";
+      } else if (userKey === "reale") {
+        matchLabel = `Match ID: ${m.id}`;
+      }
 
-      matchNode.innerHTML = `
-        <div class="bracket-node-header" style="display:flex; justify-content:space-between;">
+      const hasHeader = matchLabel || scoreDisplay;
+      const headerHtml = hasHeader ? `
+        <div class="bracket-node-header" style="display:flex; justify-content:space-between; margin-bottom: 4px;">
           <span>${matchLabel}</span>
           <span>${scoreDisplay}</span>
         </div>
+      ` : "";
+
+      matchNode.innerHTML = `
+        ${headerHtml}
         <div class="bracket-node-teams">
           <div class="bracket-node-team ${homeStatus.classes}" data-team-name="${m.home}">
             <span class="team-name">
@@ -1679,19 +1689,19 @@ export function drawBracketLines() {
   svg.style.zIndex = "0";
 
   const parentMatches = {
-    89: { home: 73, away: 74 },
-    90: { home: 75, away: 76 },
-    91: { home: 77, away: 78 },
+    89: { home: 74, away: 77 },
+    90: { home: 73, away: 75 },
+    91: { home: 76, away: 78 },
     92: { home: 79, away: 80 },
-    93: { home: 81, away: 82 },
-    94: { home: 83, away: 84 },
-    95: { home: 85, away: 86 },
-    96: { home: 87, away: 88 },
+    93: { home: 83, away: 84 },
+    94: { home: 81, away: 82 },
+    95: { home: 86, away: 88 },
+    96: { home: 85, away: 87 },
     97: { home: 89, away: 90 },
-    98: { home: 94, away: 93 },
-    99: { home: 92, away: 91 },
-    100: { home: 96, away: 95 },
-    101: { home: 98, away: 97 },
+    98: { home: 93, away: 94 },
+    99: { home: 91, away: 92 },
+    100: { home: 95, away: 96 },
+    101: { home: 97, away: 98 },
     102: { home: 99, away: 100 },
     104: { home: 102, away: 101 }
   };
