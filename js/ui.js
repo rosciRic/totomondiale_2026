@@ -1328,6 +1328,17 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
 // Render bracket tree and validate predictions
 export function renderTabellone(userKey) {
   state.currentTabelloneUserKey = userKey;
+
+  // Update bracket title
+  const tabelloneTitle = document.getElementById("tabellone-title");
+  if (tabelloneTitle) {
+    if (userKey === "reale") {
+      tabelloneTitle.innerHTML = `<i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale Reale`;
+    } else {
+      tabelloneTitle.innerHTML = `<i class="fa-solid fa-sitemap"></i> Il Tabellone del Totomondiale di ${userKey}`;
+    }
+  }
+
   if (!fasefinaleBracketContainer) return;
   fasefinaleBracketContainer.innerHTML = "";
 
