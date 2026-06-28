@@ -1101,6 +1101,7 @@ export function initFaseFinale() {
     });
 
     // Synchronize scroll swipe with navigation buttons
+    let lastActiveIndex = -1;
     fasefinaleBracketContainer.addEventListener("scroll", () => {
       const columns = fasefinaleBracketContainer.querySelectorAll(".bracket-column");
       if (columns.length === 0) return;
@@ -1118,21 +1119,24 @@ export function initFaseFinale() {
         }
       });
 
-      mobileBtns.forEach((btn, idx) => {
-        if (idx === activeIndex) {
-          btn.classList.add("active");
-          const navContainer = document.getElementById("bracket-nav-mobile");
-          if (navContainer) {
-            const btnScrollLeft = btn.offsetLeft - (navContainer.clientWidth - btn.clientWidth) / 2;
-            navContainer.scrollTo({
-              left: btnScrollLeft,
-              behavior: 'smooth'
-            });
+      if (activeIndex !== lastActiveIndex) {
+        lastActiveIndex = activeIndex;
+        mobileBtns.forEach((btn, idx) => {
+          if (idx === activeIndex) {
+            btn.classList.add("active");
+            const navContainer = document.getElementById("bracket-nav-mobile");
+            if (navContainer) {
+              const btnScrollLeft = btn.offsetLeft - (navContainer.clientWidth - btn.clientWidth) / 2;
+              navContainer.scrollTo({
+                left: btnScrollLeft,
+                behavior: 'smooth'
+              });
+            }
+          } else {
+            btn.classList.remove("active");
           }
-        } else {
-          btn.classList.remove("active");
-        }
-      });
+        });
+      }
     });
   }
 
@@ -1636,7 +1640,18 @@ export function renderTabellone(userKey) {
   state.currentResolvedData = resolved;
   state.drawBracketLinesRef = drawBracketLines;
 
-  // Trigger drawing the bracket lines
+  // Set up ResizeObserver to redraw lines dynamically on size changes (mobile zoom, rotation, tab switch, resize)
+  if (window.ResizeObserver) {
+    if (state.bracketResizeObserver) {
+      state.bracketResizeObserver.disconnect();
+    }
+    state.bracketResizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(() => drawBracketLines());
+    });
+    state.bracketResizeObserver.observe(scrollWrapper);
+  }
+
+  // Trigger drawing the bracket lines initially
   setTimeout(() => drawBracketLines(), 50);
 }
 
