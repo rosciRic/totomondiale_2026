@@ -908,9 +908,9 @@
       "gruppo": null,
       "home": "Brasile",
       "away": "Giappone",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 77,
@@ -1086,7 +1086,7 @@
       "data": "2026-07-05T22:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W76",
+      "home": "Brasile",
       "away": "W78",
       "home_score": null,
       "away_score": null,
@@ -1285,6 +1285,7 @@
       "Svizzera"
     ],
     "ottavi": [
+      "Brasile",
       "Canada"
     ],
     "quarti": [],
