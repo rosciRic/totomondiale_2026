@@ -13,7 +13,14 @@ import json
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
-CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
+CSV_FILE = os.path.join(ROOT_DIR, "🏆 MODULO 1_ Pronostici Tabellone Mondiale 2026 (Risposte) - Risposte del modulo 1.csv")
+if not os.path.exists(CSV_FILE):
+    CSV_FILE = os.path.join(ROOT_DIR, "csv", "🏆 MODULO 1_ Pronostici Tabellone Mondiale 2026 (Risposte) - Risposte del modulo 1.csv")
+if not os.path.exists(CSV_FILE):
+    CSV_FILE = os.path.join(ROOT_DIR, "risposte_tabellone.csv")
+if not os.path.exists(CSV_FILE):
+    CSV_FILE = os.path.join(ROOT_DIR, "csv", "risposte_tabellone.csv")
+
 PARTITE_FILE = os.path.join(ROOT_DIR, "data", "partite.json")
 
 def clean_team_name(name):

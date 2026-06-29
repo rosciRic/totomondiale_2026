@@ -1074,7 +1074,7 @@
       "data": "2026-07-04T19:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W73",
+      "home": "Canada",
       "away": "W75",
       "home_score": null,
       "away_score": null,
@@ -1284,7 +1284,9 @@
       "Svezia",
       "Svizzera"
     ],
-    "ottavi": [],
+    "ottavi": [
+      "Canada"
+    ],
     "quarti": [],
     "semifinali": [],
     "finale": []

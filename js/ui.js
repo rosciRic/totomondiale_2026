@@ -1320,28 +1320,15 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
     }
   }
   
-  // User predictions
+  // User predictions: resolved SOLELY by passaggio_turno (Module 1 CSV)
   const userPassaggio = userDati?.passaggio_turno || {};
   const nextPhaseKey = m.fase;
   
   let userWinner = null;
   let userLoser = null;
 
-  // 1. Try to find the winner from predicted score (if not a tie)
-  const userPartite = userDati?.partite || {};
-  const pred = userPartite[m.id];
-  if (pred && pred.home_score !== null && pred.away_score !== null) {
-    if (pred.home_score > pred.away_score) {
-      userWinner = homeResolved;
-      userLoser = awayResolved;
-    } else if (pred.away_score > pred.home_score) {
-      userWinner = awayResolved;
-      userLoser = homeResolved;
-    }
-  }
-
-  // 2. Fall back to passaggio_turno list
-  if (!userWinner && nextPhaseKey) {
+  // 1. Resolve winner from passaggio_turno list
+  if (nextPhaseKey) {
     const uQualifiers = userPassaggio[nextPhaseKey] || [];
     const cleanQualifiers = uQualifiers.map(t => t.toLowerCase().trim());
     
@@ -1354,8 +1341,8 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
     }
   }
 
-  // 3. Special check for Champion prediction in match 104
-  if (m.id === 104) {
+  // 2. Special check for Champion prediction in match 104
+  if (!userWinner && m.id === 104) {
     const uChamp = userPassaggio.vincitore || userDati?.premi_finali?.vincitore;
     if (uChamp) {
       if (uChamp.toLowerCase().trim() === homeResolved.toLowerCase().trim()) {
@@ -1368,8 +1355,8 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
     }
   }
 
-  // 3b. Special check for 3rd place winner prediction in match 103
-  if (m.id === 103) {
+  // 3. Special check for 3rd place winner prediction in match 103
+  if (!userWinner && m.id === 103) {
     const uThird = userPassaggio.terzo_posto;
     if (uThird) {
       if (uThird.toLowerCase().trim() === homeResolved.toLowerCase().trim()) {
@@ -1382,20 +1369,10 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
     }
   }
 
-  // Fallback: default to homeResolved or real winner
+  // Fallback: default to homeResolved
   if (!userWinner) {
-    if (realConcluded) {
-      if (m.home_score > m.away_score) {
-        userWinner = homeResolved;
-        userLoser = awayResolved;
-      } else {
-        userWinner = awayResolved;
-        userLoser = homeResolved;
-      }
-    } else {
-      userWinner = homeResolved;
-      userLoser = awayResolved;
-    }
+    userWinner = homeResolved;
+    userLoser = awayResolved;
   }
 
   return { winner: userWinner, loser: userLoser };
@@ -1431,6 +1408,43 @@ export function renderTabellone(userKey) {
   const userDati = userKey !== "reale" ? state.globalPronostici.partecipanti[userKey] : null;
   const userPassaggio = userDati ? (userDati.passaggio_turno || {}) : {};
   const realPassaggio = state.globalPartiteData.passaggio_turno || {};
+
+  // Build the set of eliminated teams in real life dynamically to highlight bracket prediction errors in real-time
+  const eliminatedTeams = new Set();
+  if (state.globalPartiteData && state.globalPartiteData.partite) {
+    state.globalPartiteData.partite.forEach(pm => {
+      if (pm.fase !== 'gironi' && pm.conclusa) {
+        const homeScore = pm.home_score;
+        const awayScore = pm.away_score;
+        if (homeScore !== null && awayScore !== null) {
+          if (homeScore > awayScore) {
+            eliminatedTeams.add(pm.away.toLowerCase().trim());
+          } else if (awayScore > homeScore) {
+            eliminatedTeams.add(pm.home.toLowerCase().trim());
+          } else {
+            // Draw (penalties): check real passaggio_turno for who qualified
+            const realPassaggioVal = state.globalPartiteData.passaggio_turno || {};
+            const realNextPhaseMap = {
+              "sedicesimi": "ottavi",
+              "ottavi": "quarti",
+              "quarti": "semifinali",
+              "semifinali": "finale",
+              "finale": "vincitore"
+            };
+            const nextKey = realNextPhaseMap[pm.fase];
+            if (nextKey && realPassaggioVal[nextKey]) {
+              const nextList = (Array.isArray(realPassaggioVal[nextKey]) ? realPassaggioVal[nextKey] : [realPassaggioVal[nextKey]]).map(t => t.toLowerCase().trim());
+              if (nextList.includes(pm.home.toLowerCase().trim())) {
+                eliminatedTeams.add(pm.away.toLowerCase().trim());
+              } else if (nextList.includes(pm.away.toLowerCase().trim())) {
+                eliminatedTeams.add(pm.home.toLowerCase().trim());
+              }
+            }
+          }
+        }
+      }
+    });
+  }
 
   // 1. Resolve all matches chronologically
   const resolved = {};
@@ -1539,6 +1553,7 @@ export function renderTabellone(userKey) {
 
     const realList = realListMap[stage] || [];
     const hasPassedReal = realList.map(t => t.toLowerCase().trim()).includes(team.toLowerCase().trim());
+    const isEliminated = eliminatedTeams.has(team.toLowerCase().trim());
 
     if (hasPassedReal) {
       return {
@@ -1555,7 +1570,8 @@ export function renderTabellone(userKey) {
       "campione": 1
     };
 
-    if (realList.length === maxSizes[stage] && !hasPassedReal) {
+    // Mark as incorrect if the team is already eliminated from the tournament, OR if the stage is fully decided and they didn't make it
+    if (isEliminated || (realList.length === maxSizes[stage] && !hasPassedReal)) {
       return {
         classes: "team-predicted-incorrect",
         icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'

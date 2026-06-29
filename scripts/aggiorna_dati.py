@@ -319,12 +319,76 @@ def aggiorna_risultati_partite():
             
         team1 = match.get("team1")
         team2 = match.get("team2")
+        num = match.get("num")
         
         # If team names are real and not placeholder indicators, they qualified
         if team1 and not is_placeholder_team(team1):
             qualificazioni_rilevate[fase_key].add(normalize_team_name(team1))
         if team2 and not is_placeholder_team(team2):
             qualificazioni_rilevate[fase_key].add(normalize_team_name(team2))
+            
+        # Determine winner and loser from the API match score (including extra time & penalties)
+        winner_name = None
+        loser_name = None
+        
+        score = match.get("score")
+        if score:
+            home_g, away_g = None, None
+            for score_key in ["p", "pen", "aet", "et", "ft"]:
+                if score_key in score:
+                    parts = score[score_key]
+                    if isinstance(parts, list) and len(parts) >= 2:
+                        home_g, away_g = parts[0], parts[1]
+                        break
+            if home_g is not None and away_g is not None:
+                if home_g != away_g:
+                    raw_winner = team1 if home_g > away_g else team2
+                    raw_loser = team2 if home_g > away_g else team1
+                    if raw_winner and not is_placeholder_team(raw_winner):
+                        winner_name = normalize_team_name(raw_winner)
+                    if raw_loser and not is_placeholder_team(raw_loser):
+                        loser_name = normalize_team_name(raw_loser)
+        
+        # Add dynamically calculated winner to target phase qualifications
+        if winner_name and fase_key:
+            # Map the match's round to the phase of qualification it grants:
+            # - Round of 32 (sedicesimi) winner qualifies for Ottavi
+            # - Round of 16 (ottavi) winner qualifies for Quarti
+            # - Quarter-final (quarti) winner qualifies for Semifinali
+            # - Semi-final (semifinali) winner qualifies for Finale
+            qualified_phase_map = {
+                "sedicesimi": "ottavi",
+                "ottavi": "quarti",
+                "quarti": "semifinali",
+                "semifinali": "finale"
+            }
+            next_fase_key = qualified_phase_map.get(fase_key)
+            if next_fase_key:
+                qualificazioni_rilevate[next_fase_key].add(winner_name)
+        
+        # Automatically replace bracket placeholders (W{num} and L{num}) in matches database
+        if num and num >= 73 and (winner_name or loser_name):
+            for local_match in local_data.get("partite", []):
+                # Replace winner placeholder
+                if winner_name:
+                    if local_match.get("home") == f"W{num}":
+                        local_match["home"] = winner_name
+                        updated = True
+                        print(f"Sostituito segnaposto W{num} con {winner_name} come Home in Partita {local_match['id']}")
+                    if local_match.get("away") == f"W{num}":
+                        local_match["away"] = winner_name
+                        updated = True
+                        print(f"Sostituito segnaposto W{num} con {winner_name} come Away in Partita {local_match['id']}")
+                # Replace loser placeholder
+                if loser_name:
+                    if local_match.get("home") == f"L{num}":
+                        local_match["home"] = loser_name
+                        updated = True
+                        print(f"Sostituito segnaposto L{num} con {loser_name} come Home in Partita {local_match['id']}")
+                    if local_match.get("away") == f"L{num}":
+                        local_match["away"] = loser_name
+                        updated = True
+                        print(f"Sostituito segnaposto L{num} con {loser_name} come Away in Partita {local_match['id']}")
             
         # Determine winner if it's the Final match or Match for third place
         if round_name in ["Final", "Match for third place"]:
