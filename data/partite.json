@@ -884,9 +884,9 @@
       "gruppo": null,
       "home": "Germania",
       "away": "Paraguay",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 75,
@@ -1062,7 +1062,7 @@
       "data": "2026-07-04T23:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W74",
+      "home": "Paraguay",
       "away": "W77",
       "home_score": null,
       "away_score": null,
@@ -1286,7 +1286,8 @@
     ],
     "ottavi": [
       "Brasile",
-      "Canada"
+      "Canada",
+      "Paraguay"
     ],
     "quarti": [],
     "semifinali": [],

@@ -256,6 +256,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Leandro Micelli",
+    "punti": 52,
+    "risultati_esatti": 6,
+    "prono_esatti": 32,
+    "punti_tabellone": 2,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Matteo Birilli",
     "punti": 50,
     "risultati_esatti": 5,
@@ -268,14 +276,6 @@
     "punti": 50,
     "risultati_esatti": 4,
     "prono_esatti": 36,
-    "punti_tabellone": 2,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Leandro Micelli",
-    "punti": 49,
-    "risultati_esatti": 5,
-    "prono_esatti": 32,
     "punti_tabellone": 2,
     "punti_speciali": 0
   },
