@@ -1304,7 +1304,10 @@ export function getWinnerLoser(m, homeResolved, awayResolved, userKey, userDati)
         "semifinali": "finale",
         "finale": "vincitore"
       };
-      const nextPhaseKey = realNextPhaseMap[m.fase];
+      let nextPhaseKey = realNextPhaseMap[m.fase];
+      if (m.fase === "finale" && m.id === 103) {
+        nextPhaseKey = "terzo_posto";
+      }
       if (nextPhaseKey && realPassaggio[nextPhaseKey]) {
         const nextList = (Array.isArray(realPassaggio[nextPhaseKey]) ? realPassaggio[nextPhaseKey] : [realPassaggio[nextPhaseKey]]).map(t => t.toLowerCase().trim());
         if (nextList.includes(homeResolved.toLowerCase().trim())) {
@@ -1528,9 +1531,7 @@ export function renderTabellone(userKey) {
 
     if (userKey === "reale") {
       if (m.conclusa) {
-        const isRealWinner = (m.real_home_score > m.real_away_score && team === m.home) || 
-                             (m.real_away_score > m.real_home_score && team === m.away) ||
-                             (m.real_home_score === m.real_away_score && (realPassaggio[m.fase] || []).map(t=>t.toLowerCase().trim()).includes(team.toLowerCase().trim()));
+        const isRealWinner = resolved[m.id] && resolved[m.id].winner === team;
         return {
           classes: isRealWinner ? "winner-highlight" : "loser-dimmed",
           icon: isRealWinner ? '<i class="fa-solid fa-check" style="font-size: 0.75rem; margin-right: 4px;"></i>' : ""
