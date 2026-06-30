@@ -932,9 +932,9 @@
       "gruppo": null,
       "home": "Costa d'Avorio",
       "away": "Norvegia",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 79,
@@ -1087,7 +1087,7 @@
       "fase": "ottavi",
       "gruppo": null,
       "home": "Brasile",
-      "away": "W78",
+      "away": "Norvegia",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1288,6 +1288,7 @@
       "Brasile",
       "Canada",
       "Marocco",
+      "Norvegia",
       "Paraguay"
     ],
     "quarti": [],
