@@ -896,9 +896,9 @@
       "gruppo": null,
       "home": "Olanda",
       "away": "Marocco",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 76,
@@ -1075,7 +1075,7 @@
       "fase": "ottavi",
       "gruppo": null,
       "home": "Canada",
-      "away": "W75",
+      "away": "Marocco",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1287,6 +1287,7 @@
     "ottavi": [
       "Brasile",
       "Canada",
+      "Marocco",
       "Paraguay"
     ],
     "quarti": [],
