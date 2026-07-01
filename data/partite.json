@@ -956,9 +956,9 @@
       "gruppo": null,
       "home": "Inghilterra",
       "away": "RD Congo",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 81,
@@ -1099,7 +1099,7 @@
       "fase": "ottavi",
       "gruppo": null,
       "home": "Messico",
-      "away": "W80",
+      "away": "Inghilterra",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1288,6 +1288,7 @@
       "Brasile",
       "Canada",
       "Francia",
+      "Inghilterra",
       "Marocco",
       "Messico",
       "Norvegia",
