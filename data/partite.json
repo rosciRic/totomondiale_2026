@@ -980,9 +980,9 @@
       "gruppo": null,
       "home": "Belgio",
       "away": "Senegal",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 83,
@@ -1123,7 +1123,7 @@
       "fase": "ottavi",
       "gruppo": null,
       "home": "W81",
-      "away": "W82",
+      "away": "Belgio",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1285,6 +1285,7 @@
       "Svizzera"
     ],
     "ottavi": [
+      "Belgio",
       "Brasile",
       "Canada",
       "Francia",
