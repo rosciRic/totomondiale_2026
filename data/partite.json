@@ -968,9 +968,9 @@
       "gruppo": null,
       "home": "Stati Uniti",
       "away": "Bosnia ed Erzegovina",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 82,
@@ -1122,7 +1122,7 @@
       "data": "2026-07-07T02:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W81",
+      "home": "Stati Uniti",
       "away": "Belgio",
       "home_score": null,
       "away_score": null,
@@ -1293,7 +1293,8 @@
       "Marocco",
       "Messico",
       "Norvegia",
-      "Paraguay"
+      "Paraguay",
+      "Stati Uniti"
     ],
     "quarti": [],
     "semifinali": [],
