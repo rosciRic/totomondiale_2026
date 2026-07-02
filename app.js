@@ -13,7 +13,7 @@ import {
   initFaseFinale,
   renderUserPredictions,
   setLeaderboardSort
-} from './js/ui.js?v=3.0.3';
+} from './js/ui.js?v=3.1.0';
 
 document.addEventListener("DOMContentLoaded", async () => {
   // DOM Elements
