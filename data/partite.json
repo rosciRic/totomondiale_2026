@@ -1052,9 +1052,9 @@
       "gruppo": null,
       "home": "Australia",
       "away": "Egitto",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 89,
@@ -1135,7 +1135,7 @@
       "fase": "ottavi",
       "gruppo": null,
       "home": "W86",
-      "away": "W88",
+      "away": "Egitto",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1288,6 +1288,7 @@
       "Belgio",
       "Brasile",
       "Canada",
+      "Egitto",
       "Francia",
       "Inghilterra",
       "Marocco",
