@@ -1016,9 +1016,9 @@
       "gruppo": null,
       "home": "Svizzera",
       "away": "Algeria",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 86,
@@ -1146,7 +1146,7 @@
       "data": "2026-07-07T22:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W85",
+      "home": "Svizzera",
       "away": "W87",
       "home_score": null,
       "away_score": null,
@@ -1296,7 +1296,8 @@
       "Paraguay",
       "Portogallo",
       "Spagna",
-      "Stati Uniti"
+      "Stati Uniti",
+      "Svizzera"
     ],
     "quarti": [],
     "semifinali": [],
