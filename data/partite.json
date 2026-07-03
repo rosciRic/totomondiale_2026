@@ -992,9 +992,9 @@
       "gruppo": null,
       "home": "Portogallo",
       "away": "Croazia",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 84,
@@ -1110,7 +1110,7 @@
       "data": "2026-07-06T21:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W83",
+      "home": "Portogallo",
       "away": "Spagna",
       "home_score": null,
       "away_score": null,
@@ -1294,6 +1294,7 @@
       "Messico",
       "Norvegia",
       "Paraguay",
+      "Portogallo",
       "Spagna",
       "Stati Uniti"
     ],
