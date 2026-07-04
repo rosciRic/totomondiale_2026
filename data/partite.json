@@ -1028,9 +1028,9 @@
       "gruppo": null,
       "home": "Argentina",
       "away": "Capo Verde",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 87,
@@ -1040,9 +1040,9 @@
       "gruppo": null,
       "home": "Colombia",
       "away": "Ghana",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 88,
@@ -1134,7 +1134,7 @@
       "data": "2026-07-07T18:00:00",
       "fase": "ottavi",
       "gruppo": null,
-      "home": "W86",
+      "home": "Argentina",
       "away": "Egitto",
       "home_score": null,
       "away_score": null,
@@ -1147,7 +1147,7 @@
       "fase": "ottavi",
       "gruppo": null,
       "home": "Svizzera",
-      "away": "W87",
+      "away": "Colombia",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1285,9 +1285,11 @@
       "Svizzera"
     ],
     "ottavi": [
+      "Argentina",
       "Belgio",
       "Brasile",
       "Canada",
+      "Colombia",
       "Egitto",
       "Francia",
       "Inghilterra",
