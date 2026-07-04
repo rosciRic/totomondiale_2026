@@ -1076,9 +1076,9 @@
       "gruppo": null,
       "home": "Canada",
       "away": "Marocco",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 91,
@@ -1159,7 +1159,7 @@
       "fase": "quarti",
       "gruppo": null,
       "home": "W89",
-      "away": "W90",
+      "away": "Marocco",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1302,7 +1302,9 @@
       "Stati Uniti",
       "Svizzera"
     ],
-    "quarti": [],
+    "quarti": [
+      "Marocco"
+    ],
     "semifinali": [],
     "finale": []
   },
