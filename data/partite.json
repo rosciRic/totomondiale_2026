@@ -1064,9 +1064,9 @@
       "gruppo": null,
       "home": "Paraguay",
       "away": "Francia",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 90,
@@ -1158,7 +1158,7 @@
       "data": "2026-07-09T22:00:00",
       "fase": "quarti",
       "gruppo": null,
-      "home": "W89",
+      "home": "Francia",
       "away": "Marocco",
       "home_score": null,
       "away_score": null,
@@ -1303,6 +1303,7 @@
       "Svizzera"
     ],
     "quarti": [
+      "Francia",
       "Marocco"
     ],
     "semifinali": [],
