@@ -41,10 +41,10 @@
   },
   {
     "nome": "Tony Pindinello",
-    "punti": 98,
+    "punti": 99,
     "risultati_esatti": 12,
     "prono_esatti": 46,
-    "punti_tabellone": 16,
+    "punti_tabellone": 17,
     "punti_speciali": 0
   },
   {
@@ -80,19 +80,19 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Marco Lala",
+    "punti": 95,
+    "risultati_esatti": 11,
+    "prono_esatti": 46,
+    "punti_tabellone": 16,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Andrea Quarto",
     "punti": 95,
     "risultati_esatti": 10,
     "prono_esatti": 49,
     "punti_tabellone": 16,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Marco Lala",
-    "punti": 94,
-    "risultati_esatti": 11,
-    "prono_esatti": 46,
-    "punti_tabellone": 15,
     "punti_speciali": 0
   },
   {
@@ -184,6 +184,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Matteo Birilli",
+    "punti": 85,
+    "risultati_esatti": 10,
+    "prono_esatti": 39,
+    "punti_tabellone": 16,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Daniele Garzya",
     "punti": 85,
     "risultati_esatti": 7,
@@ -197,14 +205,6 @@
     "risultati_esatti": 10,
     "prono_esatti": 41,
     "punti_tabellone": 13,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Matteo Birilli",
-    "punti": 84,
-    "risultati_esatti": 10,
-    "prono_esatti": 39,
-    "punti_tabellone": 15,
     "punti_speciali": 0
   },
   {
@@ -248,19 +248,19 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Stefano De Giorgi",
+    "punti": 80,
+    "risultati_esatti": 10,
+    "prono_esatti": 38,
+    "punti_tabellone": 12,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Andrea Pellè",
     "punti": 80,
     "risultati_esatti": 8,
     "prono_esatti": 41,
     "punti_tabellone": 15,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Stefano De Giorgi",
-    "punti": 79,
-    "risultati_esatti": 10,
-    "prono_esatti": 38,
-    "punti_tabellone": 11,
     "punti_speciali": 0
   },
   {
@@ -297,10 +297,10 @@
   },
   {
     "nome": "Mattia Nicolau",
-    "punti": 66,
+    "punti": 68,
     "risultati_esatti": 3,
-    "prono_esatti": 43,
-    "punti_tabellone": 14,
+    "prono_esatti": 44,
+    "punti_tabellone": 15,
     "punti_speciali": 0
   }
 ]

@@ -1088,9 +1088,9 @@
       "gruppo": null,
       "home": "Brasile",
       "away": "Norvegia",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 92,
@@ -1182,7 +1182,7 @@
       "data": "2026-07-11T23:00:00",
       "fase": "quarti",
       "gruppo": null,
-      "home": "W91",
+      "home": "Norvegia",
       "away": "W92",
       "home_score": null,
       "away_score": null,
@@ -1304,7 +1304,8 @@
     ],
     "quarti": [
       "Francia",
-      "Marocco"
+      "Marocco",
+      "Norvegia"
     ],
     "semifinali": [],
     "finale": []
