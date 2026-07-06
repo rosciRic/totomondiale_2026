@@ -1112,9 +1112,9 @@
       "gruppo": null,
       "home": "Portogallo",
       "away": "Spagna",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 94,
@@ -1170,7 +1170,7 @@
       "data": "2026-07-10T21:00:00",
       "fase": "quarti",
       "gruppo": null,
-      "home": "W93",
+      "home": "Spagna",
       "away": "W94",
       "home_score": null,
       "away_score": null,
@@ -1306,7 +1306,8 @@
       "Francia",
       "Inghilterra",
       "Marocco",
-      "Norvegia"
+      "Norvegia",
+      "Spagna"
     ],
     "semifinali": [],
     "finale": []
