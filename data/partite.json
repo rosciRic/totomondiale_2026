@@ -1100,9 +1100,9 @@
       "gruppo": null,
       "home": "Messico",
       "away": "Inghilterra",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 3,
+      "conclusa": true
     },
     {
       "id": 93,
@@ -1183,7 +1183,7 @@
       "fase": "quarti",
       "gruppo": null,
       "home": "Norvegia",
-      "away": "W92",
+      "away": "Inghilterra",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1304,6 +1304,7 @@
     ],
     "quarti": [
       "Francia",
+      "Inghilterra",
       "Marocco",
       "Norvegia"
     ],
