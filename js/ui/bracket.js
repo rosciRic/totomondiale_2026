@@ -256,6 +256,76 @@ export function renderTabellone(userKey) {
 
   const eliminatedTeams = new Set();
   if (state.globalPartiteData && state.globalPartiteData.partite) {
+    const allTeamsInWorldCup = new Set();
+    state.globalPartiteData.partite.forEach(pm => {
+      if (pm.home) allTeamsInWorldCup.add(pm.home.trim());
+      if (pm.away) allTeamsInWorldCup.add(pm.away.trim());
+    });
+
+    const getNormList = (stageKey) => (realPassaggio[stageKey] || []).map(t => t.toLowerCase().trim());
+    const sedicesimiList = getNormList("sedicesimi");
+    const ottaviList = getNormList("ottavi");
+    const quartiList = getNormList("quarti");
+    const semifinaliList = getNormList("semifinali");
+    const finaleList = getNormList("finale");
+    const vincitoreList = getNormList("vincitore");
+
+    // 1. Elimina le squadre uscite ai gironi (se i sedicesimi sono definiti, es. >= 32 squadre)
+    if (sedicesimiList.length >= 32) {
+      allTeamsInWorldCup.forEach(team => {
+        const normTeam = team.toLowerCase().trim();
+        if (!isPlaceholder(normTeam) && !sedicesimiList.includes(normTeam)) {
+          eliminatedTeams.add(normTeam);
+        }
+      });
+    }
+
+    // 2. Elimina le squadre uscite ai sedicesimi
+    if (ottaviList.length >= 16) {
+      sedicesimiList.forEach(team => {
+        if (!ottaviList.includes(team)) {
+          eliminatedTeams.add(team);
+        }
+      });
+    }
+
+    // 3. Elimina le squadre uscite agli ottavi
+    if (quartiList.length >= 8) {
+      ottaviList.forEach(team => {
+        if (!quartiList.includes(team)) {
+          eliminatedTeams.add(team);
+        }
+      });
+    }
+
+    // 4. Elimina le squadre uscite ai quarti
+    if (semifinaliList.length >= 4) {
+      quartiList.forEach(team => {
+        if (!semifinaliList.includes(team)) {
+          eliminatedTeams.add(team);
+        }
+      });
+    }
+
+    // 5. Elimina le squadre uscite alle semifinali
+    if (finaleList.length >= 2) {
+      semifinaliList.forEach(team => {
+        if (!finaleList.includes(team)) {
+          eliminatedTeams.add(team);
+        }
+      });
+    }
+
+    // 6. Elimina la finalista perdente
+    if (vincitoreList.length >= 1) {
+      finaleList.forEach(team => {
+        if (!vincitoreList.includes(team)) {
+          eliminatedTeams.add(team);
+        }
+      });
+    }
+
+    // 7. Controllo di fallback in tempo reale in base alle partite concluse (es. in caso di pareggi risolti da rigori o aggiornamenti in corso)
     state.globalPartiteData.partite.forEach(pm => {
       if (pm.fase !== 'gironi' && pm.conclusa) {
         const homeScore = pm.home_score;
@@ -266,7 +336,6 @@ export function renderTabellone(userKey) {
           } else if (awayScore > homeScore) {
             eliminatedTeams.add(pm.home.toLowerCase().trim());
           } else {
-            const realPassaggioVal = state.globalPartiteData.passaggio_turno || {};
             const realNextPhaseMap = {
               "sedicesimi": "ottavi",
               "ottavi": "quarti",
@@ -275,8 +344,8 @@ export function renderTabellone(userKey) {
               "finale": "vincitore"
             };
             const nextKey = realNextPhaseMap[pm.fase];
-            if (nextKey && realPassaggioVal[nextKey]) {
-              const nextList = (Array.isArray(realPassaggioVal[nextKey]) ? realPassaggioVal[nextKey] : [realPassaggioVal[nextKey]]).map(t => t.toLowerCase().trim());
+            if (nextKey && realPassaggio[nextKey]) {
+              const nextList = (Array.isArray(realPassaggio[nextKey]) ? realPassaggio[nextKey] : [realPassaggio[nextKey]]).map(t => t.toLowerCase().trim());
               if (nextList.includes(pm.home.toLowerCase().trim())) {
                 eliminatedTeams.add(pm.away.toLowerCase().trim());
               } else if (nextList.includes(pm.away.toLowerCase().trim())) {
@@ -346,6 +415,12 @@ export function renderTabellone(userKey) {
 
   function getTeamStatus(team, stage, m, isWinner) {
     if (userKey !== "reale" && m && m.id === 103) {
+      if (team && eliminatedTeams.has(team.toLowerCase().trim())) {
+        return {
+          classes: "team-predicted-incorrect",
+          icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+        };
+      }
       const uThird = userPassaggio.terzo_posto;
       const rThird = realPassaggio.terzo_posto;
       if (uThird && team.toLowerCase().trim() === uThird.toLowerCase().trim()) {
