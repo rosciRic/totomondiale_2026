@@ -1148,9 +1148,9 @@
       "gruppo": null,
       "home": "Svizzera",
       "away": "Colombia",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 0,
+      "conclusa": true
     },
     {
       "id": 97,
@@ -1195,7 +1195,7 @@
       "fase": "quarti",
       "gruppo": null,
       "home": "Argentina",
-      "away": "W96",
+      "away": "Svizzera",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1309,7 +1309,8 @@
       "Inghilterra",
       "Marocco",
       "Norvegia",
-      "Spagna"
+      "Spagna",
+      "Svizzera"
     ],
     "semifinali": [],
     "finale": []
