@@ -1136,9 +1136,9 @@
       "gruppo": null,
       "home": "Argentina",
       "away": "Egitto",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 3,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 96,
@@ -1194,7 +1194,7 @@
       "data": "2026-07-12T03:00:00",
       "fase": "quarti",
       "gruppo": null,
-      "home": "W95",
+      "home": "Argentina",
       "away": "W96",
       "home_score": null,
       "away_score": null,
@@ -1303,6 +1303,7 @@
       "Svizzera"
     ],
     "quarti": [
+      "Argentina",
       "Belgio",
       "Francia",
       "Inghilterra",
