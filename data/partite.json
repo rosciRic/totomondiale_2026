@@ -1124,9 +1124,9 @@
       "gruppo": null,
       "home": "Stati Uniti",
       "away": "Belgio",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 4,
+      "conclusa": true
     },
     {
       "id": 95,
@@ -1171,7 +1171,7 @@
       "fase": "quarti",
       "gruppo": null,
       "home": "Spagna",
-      "away": "W94",
+      "away": "Belgio",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1303,6 +1303,7 @@
       "Svizzera"
     ],
     "quarti": [
+      "Belgio",
       "Francia",
       "Inghilterra",
       "Marocco",
