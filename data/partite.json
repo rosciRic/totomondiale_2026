@@ -1172,9 +1172,9 @@
       "gruppo": null,
       "home": "Spagna",
       "away": "Belgio",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 2,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 99,
@@ -1207,7 +1207,7 @@
       "fase": "semifinali",
       "gruppo": null,
       "home": "Francia",
-      "away": "W98",
+      "away": "Spagna",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1313,7 +1313,8 @@
       "Svizzera"
     ],
     "semifinali": [
-      "Francia"
+      "Francia",
+      "Spagna"
     ],
     "finale": []
   },
