@@ -1184,9 +1184,9 @@
       "gruppo": null,
       "home": "Norvegia",
       "away": "Inghilterra",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 100,
@@ -1218,7 +1218,7 @@
       "data": "2026-07-15T21:00:00",
       "fase": "semifinali",
       "gruppo": null,
-      "home": "W99",
+      "home": "Inghilterra",
       "away": "W100",
       "home_score": null,
       "away_score": null,
@@ -1314,6 +1314,7 @@
     ],
     "semifinali": [
       "Francia",
+      "Inghilterra",
       "Spagna"
     ],
     "finale": []
