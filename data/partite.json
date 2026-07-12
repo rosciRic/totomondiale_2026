@@ -1196,9 +1196,9 @@
       "gruppo": null,
       "home": "Argentina",
       "away": "Svizzera",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 1,
+      "away_score": 1,
+      "conclusa": true
     },
     {
       "id": 101,
@@ -1219,7 +1219,7 @@
       "fase": "semifinali",
       "gruppo": null,
       "home": "Inghilterra",
-      "away": "W100",
+      "away": "Argentina",
       "home_score": null,
       "away_score": null,
       "conclusa": false
@@ -1313,6 +1313,7 @@
       "Svizzera"
     ],
     "semifinali": [
+      "Argentina",
       "Francia",
       "Inghilterra",
       "Spagna"
