@@ -18,19 +18,32 @@ export function renderLeaderboard() {
   // Clone and sort the standings array based on active leaderboardSortKey
   const sortedClassifica = [...state.globalClassifica].sort((a, b) => {
     if (leaderboardSortKey === 'punti') {
-      return (b.punti || 0) - (a.punti || 0) || a.nome.localeCompare(b.nome);
+      return (b.punti || 0) - (a.punti || 0) || 
+             (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || 
+             (b.prono_esatti || 0) - (a.prono_esatti || 0) || 
+             a.nome.localeCompare(b.nome);
     }
     if (leaderboardSortKey === 'nome') {
       return a.nome.localeCompare(b.nome);
     }
     if (leaderboardSortKey === 'esatti') {
-      return (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || (b.punti || 0) - (a.punti || 0);
+      return (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || 
+             (b.punti || 0) - (a.punti || 0) || 
+             (b.prono_esatti || 0) - (a.prono_esatti || 0) || 
+             a.nome.localeCompare(b.nome);
     }
     if (leaderboardSortKey === 'segni') {
-      return (b.prono_esatti || 0) - (a.prono_esatti || 0) || (b.punti || 0) - (a.punti || 0);
+      return (b.prono_esatti || 0) - (a.prono_esatti || 0) || 
+             (b.punti || 0) - (a.punti || 0) || 
+             (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || 
+             a.nome.localeCompare(b.nome);
     }
     if (leaderboardSortKey === 'tabellone') {
-      return (b.punti_tabellone || 0) - (a.punti_tabellone || 0) || (b.punti || 0) - (a.punti || 0);
+      return (b.punti_tabellone || 0) - (a.punti_tabellone || 0) || 
+             (b.punti || 0) - (a.punti || 0) || 
+             (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || 
+             (b.prono_esatti || 0) - (a.prono_esatti || 0) || 
+             a.nome.localeCompare(b.nome);
     }
     if (leaderboardSortKey === 'speciali') {
       const getPuntiPremi = (player) => {
@@ -39,7 +52,11 @@ export function renderLeaderboard() {
         const puntiTabellone = (player.punti_tabellone || 0);
         return player.punti_speciali !== undefined ? player.punti_speciali : (player.punti || 0) - (puntiRisultati + puntiSegni + puntiTabellone);
       };
-      return getPuntiPremi(b) - getPuntiPremi(a) || (b.punti || 0) - (a.punti || 0);
+      return getPuntiPremi(b) - getPuntiPremi(a) || 
+             (b.punti || 0) - (a.punti || 0) || 
+             (b.risultati_esatti || 0) - (a.risultati_esatti || 0) || 
+             (b.prono_esatti || 0) - (a.prono_esatti || 0) || 
+             a.nome.localeCompare(b.nome);
     }
     return 0;
   });
