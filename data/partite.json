@@ -1208,9 +1208,9 @@
       "gruppo": null,
       "home": "Francia",
       "away": "Spagna",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 0,
+      "away_score": 2,
+      "conclusa": true
     },
     {
       "id": 102,
@@ -1230,7 +1230,7 @@
       "data": "2026-07-18T23:00:00",
       "fase": "finale",
       "gruppo": null,
-      "home": "L101",
+      "home": "Francia",
       "away": "L102",
       "home_score": null,
       "away_score": null,
@@ -1242,7 +1242,7 @@
       "data": "2026-07-19T21:00:00",
       "fase": "finale",
       "gruppo": null,
-      "home": "W101",
+      "home": "Spagna",
       "away": "W102",
       "home_score": null,
       "away_score": null,
@@ -1318,7 +1318,9 @@
       "Inghilterra",
       "Spagna"
     ],
-    "finale": []
+    "finale": [
+      "Spagna"
+    ]
   },
   "premi_finali": {
     "vincitore": null,

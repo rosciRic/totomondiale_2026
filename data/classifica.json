@@ -24,19 +24,19 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Francesco Pastore",
+    "punti": 117,
+    "risultati_esatti": 17,
+    "prono_esatti": 44,
+    "punti_tabellone": 22,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Tony Pindinello",
     "punti": 117,
     "risultati_esatti": 15,
     "prono_esatti": 49,
     "punti_tabellone": 23,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Francesco Pastore",
-    "punti": 116,
-    "risultati_esatti": 17,
-    "prono_esatti": 44,
-    "punti_tabellone": 21,
     "punti_speciali": 0
   },
   {
@@ -57,17 +57,17 @@
   },
   {
     "nome": "Pino De Giorgi",
-    "punti": 112,
+    "punti": 113,
     "risultati_esatti": 15,
     "prono_esatti": 47,
-    "punti_tabellone": 20,
+    "punti_tabellone": 21,
     "punti_speciali": 0
   },
   {
     "nome": "Marco Lala",
-    "punti": 111,
+    "punti": 112,
     "risultati_esatti": 12,
-    "prono_esatti": 52,
+    "prono_esatti": 53,
     "punti_tabellone": 23,
     "punti_speciali": 0
   },
@@ -85,6 +85,14 @@
     "risultati_esatti": 14,
     "prono_esatti": 46,
     "punti_tabellone": 21,
+    "punti_speciali": 0
+  },
+  {
+    "nome": "Mattia Tramacere",
+    "punti": 109,
+    "risultati_esatti": 10,
+    "prono_esatti": 56,
+    "punti_tabellone": 23,
     "punti_speciali": 0
   },
   {
@@ -112,14 +120,6 @@
     "punti_speciali": 0
   },
   {
-    "nome": "Mattia Tramacere",
-    "punti": 108,
-    "risultati_esatti": 10,
-    "prono_esatti": 55,
-    "punti_tabellone": 23,
-    "punti_speciali": 0
-  },
-  {
     "nome": "Sergio Garzya",
     "punti": 106,
     "risultati_esatti": 12,
@@ -129,10 +129,10 @@
   },
   {
     "nome": "Carlo Fantasia",
-    "punti": 104,
+    "punti": 105,
     "risultati_esatti": 12,
     "prono_esatti": 47,
-    "punti_tabellone": 21,
+    "punti_tabellone": 22,
     "punti_speciali": 0
   },
   {
@@ -152,6 +152,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Filippo Marchello",
+    "punti": 102,
+    "risultati_esatti": 10,
+    "prono_esatti": 53,
+    "punti_tabellone": 19,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Daniele Bove",
     "punti": 102,
     "risultati_esatti": 10,
@@ -160,27 +168,19 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Jacopo De Giorgi",
+    "punti": 101,
+    "risultati_esatti": 13,
+    "prono_esatti": 43,
+    "punti_tabellone": 19,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Luigi Marchello",
     "punti": 101,
     "risultati_esatti": 11,
     "prono_esatti": 48,
     "punti_tabellone": 20,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Filippo Marchello",
-    "punti": 101,
-    "risultati_esatti": 10,
-    "prono_esatti": 52,
-    "punti_tabellone": 19,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Jacopo De Giorgi",
-    "punti": 100,
-    "risultati_esatti": 13,
-    "prono_esatti": 43,
-    "punti_tabellone": 18,
     "punti_speciali": 0
   },
   {
@@ -249,10 +249,10 @@
   },
   {
     "nome": "Stefano De Giorgi",
-    "punti": 90,
+    "punti": 92,
     "risultati_esatti": 10,
-    "prono_esatti": 41,
-    "punti_tabellone": 19,
+    "prono_esatti": 42,
+    "punti_tabellone": 20,
     "punti_speciali": 0
   },
   {
@@ -265,10 +265,10 @@
   },
   {
     "nome": "Edoardo Roscica",
-    "punti": 88,
+    "punti": 89,
     "risultati_esatti": 7,
     "prono_esatti": 44,
-    "punti_tabellone": 23,
+    "punti_tabellone": 24,
     "punti_speciali": 0
   },
   {
@@ -281,25 +281,25 @@
   },
   {
     "nome": "Daniele Sedile",
-    "punti": 83,
+    "punti": 84,
     "risultati_esatti": 8,
     "prono_esatti": 42,
-    "punti_tabellone": 17,
+    "punti_tabellone": 18,
     "punti_speciali": 0
   },
   {
     "nome": "Mattia Nicolau",
-    "punti": 83,
+    "punti": 84,
     "risultati_esatti": 4,
     "prono_esatti": 49,
-    "punti_tabellone": 22,
+    "punti_tabellone": 23,
     "punti_speciali": 0
   },
   {
     "nome": "Matteo Serafino",
-    "punti": 80,
+    "punti": 81,
     "risultati_esatti": 7,
-    "prono_esatti": 40,
+    "prono_esatti": 41,
     "punti_tabellone": 19,
     "punti_speciali": 0
   }
