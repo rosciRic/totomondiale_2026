@@ -565,6 +565,40 @@ def calcola_classifica():
                 if user_third_place.strip().lower() == real_third_place.strip().lower():
                     punti_tabellone += 1
 
+            # Punti per le finaliste del 3° e 4° posto (perdenti delle semifinali)
+            # Le finaliste del 3°/4° previste dall'utente sono i team in 'quarti' (4 semifinaliste) ma non in 'semifinali' (2 finaliste)
+            user_quarti = user_passaggio.get("quarti", [])
+            user_semifinali = user_passaggio.get("semifinali", [])
+            user_3rd_4th_clean = {t.strip().lower() for t in user_quarti if t and t not in user_semifinali}
+
+            # Le finaliste reali del 3°/4° sono i perdenti delle semifinali concluse (ID 101, 102)
+            real_3rd_4th_clean = set()
+            for sem_id in [101, 102]:
+                sem_match = partite_map.get(sem_id)
+                if sem_match and sem_match.get("conclusa"):
+                    h_score = sem_match.get("home_score")
+                    a_score = sem_match.get("away_score")
+                    if h_score is not None and a_score is not None:
+                        if h_score > a_score:
+                            loser = sem_match.get("away")
+                        elif a_score > h_score:
+                            loser = sem_match.get("home")
+                        else:
+                            # Se finisce in pareggio nei 90' (aet o pen), verifichiamo chi NON si è qualificato alla finale reale
+                            team_h = sem_match.get("home")
+                            team_a = sem_match.get("away")
+                            real_finale_lower = {t.strip().lower() for t in real_passaggio.get("finale", [])}
+                            if team_h and team_h.strip().lower() in real_finale_lower:
+                                loser = team_a
+                            else:
+                                loser = team_h
+                        if loser:
+                            real_3rd_4th_clean.add(loser.strip().lower())
+
+            if user_3rd_4th_clean and real_3rd_4th_clean:
+                correct_3rd_4th_picks = user_3rd_4th_clean.intersection(real_3rd_4th_clean)
+                punti_tabellone += len(correct_3rd_4th_picks)
+
         # Add bracket points to total points
         punti += punti_tabellone
 

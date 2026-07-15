@@ -25,10 +25,10 @@
   },
   {
     "nome": "Francesco Pastore",
-    "punti": 117,
+    "punti": 118,
     "risultati_esatti": 17,
     "prono_esatti": 44,
-    "punti_tabellone": 22,
+    "punti_tabellone": 23,
     "punti_speciali": 0
   },
   {
@@ -48,19 +48,19 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Pino De Giorgi",
+    "punti": 114,
+    "risultati_esatti": 15,
+    "prono_esatti": 47,
+    "punti_tabellone": 22,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Leonardo Piras",
     "punti": 114,
     "risultati_esatti": 14,
     "prono_esatti": 48,
     "punti_tabellone": 24,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Pino De Giorgi",
-    "punti": 113,
-    "risultati_esatti": 15,
-    "prono_esatti": 47,
-    "punti_tabellone": 21,
     "punti_speciali": 0
   },
   {
@@ -129,10 +129,10 @@
   },
   {
     "nome": "Carlo Fantasia",
-    "punti": 105,
+    "punti": 106,
     "risultati_esatti": 12,
     "prono_esatti": 47,
-    "punti_tabellone": 22,
+    "punti_tabellone": 23,
     "punti_speciali": 0
   },
   {
@@ -240,6 +240,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Stefano De Giorgi",
+    "punti": 93,
+    "risultati_esatti": 10,
+    "prono_esatti": 42,
+    "punti_tabellone": 21,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Manuel Farlò",
     "punti": 93,
     "risultati_esatti": 9,
@@ -248,27 +256,19 @@
     "punti_speciali": 0
   },
   {
-    "nome": "Stefano De Giorgi",
-    "punti": 92,
-    "risultati_esatti": 10,
-    "prono_esatti": 42,
-    "punti_tabellone": 20,
-    "punti_speciali": 0
-  },
-  {
     "nome": "Andrea Pellè",
-    "punti": 90,
+    "punti": 91,
     "risultati_esatti": 9,
     "prono_esatti": 43,
-    "punti_tabellone": 20,
+    "punti_tabellone": 21,
     "punti_speciali": 0
   },
   {
     "nome": "Edoardo Roscica",
-    "punti": 89,
+    "punti": 90,
     "risultati_esatti": 7,
     "prono_esatti": 44,
-    "punti_tabellone": 24,
+    "punti_tabellone": 25,
     "punti_speciali": 0
   },
   {
@@ -281,18 +281,18 @@
   },
   {
     "nome": "Daniele Sedile",
-    "punti": 84,
+    "punti": 85,
     "risultati_esatti": 8,
     "prono_esatti": 42,
-    "punti_tabellone": 18,
+    "punti_tabellone": 19,
     "punti_speciali": 0
   },
   {
     "nome": "Mattia Nicolau",
-    "punti": 84,
+    "punti": 85,
     "risultati_esatti": 4,
     "prono_esatti": 49,
-    "punti_tabellone": 23,
+    "punti_tabellone": 24,
     "punti_speciali": 0
   },
   {

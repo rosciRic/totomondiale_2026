@@ -415,23 +415,82 @@ export function renderTabellone(userKey) {
 
   function getTeamStatus(team, stage, m, isWinner) {
     if (userKey !== "reale" && m && m.id === 103) {
-      if (team && eliminatedTeams.has(team.toLowerCase().trim())) {
+      if (!team || isPlaceholder(team)) {
+        return { classes: "", icon: "" };
+      }
+      
+      const normTeam = team.toLowerCase().trim();
+      const realSemifinalists = (realPassaggio.semifinali || []).map(t => t.toLowerCase().trim());
+      const realFinalists = (realPassaggio.finale || []).map(t => t.toLowerCase().trim());
+      
+      // 1. Caso: Valutazione dei partecipanti alla finale 3°/4° posto (stage = "finale")
+      if (stage !== "campione") {
+        // Se le semifinali reali sono note e il team non ci è arrivato, allora è errato
+        if (realSemifinalists.length >= 4 && !realSemifinalists.includes(normTeam)) {
+          return {
+            classes: "team-predicted-incorrect",
+            icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+          };
+        }
+        
+        // Se il team si è qualificato per la finale reale (1°/2° posto), allora non può essere nel 3°/4° posto
+        if (realFinalists.includes(normTeam)) {
+          return {
+            classes: "team-predicted-incorrect",
+            icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+          };
+        }
+        
+        // Determina se il team ha perso la sua semifinale reale
+        let playedSemConcluded = false;
+        let wonSem = false;
+        for (const semId of [101, 102]) {
+          const sem = state.globalPartiteData.partite.find(p => p.id === semId);
+          if (sem && (sem.home.toLowerCase().trim() === normTeam || sem.away.toLowerCase().trim() === normTeam)) {
+            if (sem.conclusa) {
+              playedSemConcluded = true;
+              wonSem = realFinalists.includes(normTeam);
+            }
+          }
+        }
+        
+        if (playedSemConcluded) {
+          if (!wonSem) {
+            // Ha perso la semifinale, quindi gioca nel 3°/4° posto. Predizione corretta!
+            return {
+              classes: "team-predicted-correct",
+              icon: '<i class="fa-solid fa-circle-check" style="color: var(--color-mexico); margin-right: 4px;"></i>'
+            };
+          }
+        }
+        
+        return { classes: "", icon: "" };
+      }
+      
+      // 2. Caso: Valutazione del vincitore della finale 3°/4° posto (stage = "campione")
+      const rThird = realPassaggio.terzo_posto;
+      if (rThird) {
+        const isCorrect = normTeam === rThird.toLowerCase().trim();
+        return {
+          classes: isCorrect ? "team-predicted-correct" : "team-predicted-incorrect",
+          icon: isCorrect ? '<i class="fa-solid fa-circle-check" style="color: var(--color-mexico); margin-right: 4px;"></i>' : '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+        };
+      }
+      
+      // Se il vincitore reale non è ancora deciso, verifichiamo se il team è già matematicamente fuori dai giochi per il 3° posto
+      if (realSemifinalists.length >= 4 && !realSemifinalists.includes(normTeam)) {
         return {
           classes: "team-predicted-incorrect",
           icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
         };
       }
-      const uThird = userPassaggio.terzo_posto;
-      const rThird = realPassaggio.terzo_posto;
-      if (uThird && team.toLowerCase().trim() === uThird.toLowerCase().trim()) {
-        if (rThird) {
-          const isCorrect = uThird.toLowerCase().trim() === rThird.toLowerCase().trim();
-          return {
-            classes: isCorrect ? "team-predicted-correct" : "team-predicted-incorrect",
-            icon: isCorrect ? '<i class="fa-solid fa-circle-check" style="color: var(--color-mexico); margin-right: 4px;"></i>' : '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
-          };
-        }
+      if (realFinalists.includes(normTeam)) {
+        return {
+          classes: "team-predicted-incorrect",
+          icon: '<i class="fa-solid fa-circle-xmark" style="color: var(--color-canada); margin-right: 4px;"></i>'
+        };
       }
+      
       return { classes: "", icon: "" };
     }
 
