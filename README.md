@@ -10,6 +10,8 @@
 
 Una web application moderna a **costo zero** costruita con architettura **GitOps / Serverless** per gestire ed elaborare i pronostici dei mondiali di calcio USA-Messico-Canada 2026.
 
+🤖 Realizzato, programmato e aggiornato con **Google Antigravity 2.0** e **Gemini Flash 3.5 Medium**.
+
 Il sistema gestisce **38 partecipanti**, l'intero torneo da **104 partite** (formato a 48 squadre) e la fase a eliminazione diretta a partire dai Sedicesimi di finale.
 
 ---
