@@ -1232,9 +1232,9 @@
       "gruppo": null,
       "home": "Francia",
       "away": "Inghilterra",
-      "home_score": null,
-      "away_score": null,
-      "conclusa": false
+      "home_score": 4,
+      "away_score": 6,
+      "conclusa": true
     },
     {
       "id": 104,
