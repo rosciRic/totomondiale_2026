@@ -409,6 +409,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -871,6 +879,14 @@
         "102": {
           "home_score": 1,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -1333,6 +1349,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -1793,6 +1817,14 @@
           "away_score": 2
         },
         "102": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "104": {
           "home_score": 1,
           "away_score": 1
         }
@@ -2257,6 +2289,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -2718,6 +2758,14 @@
         },
         "102": {
           "home_score": 0,
+          "away_score": 0
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
           "away_score": 0
         }
       },
@@ -3643,6 +3691,14 @@
         "102": {
           "home_score": 1,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -4105,6 +4161,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -4565,6 +4629,14 @@
           "away_score": 2
         },
         "102": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
           "home_score": 2,
           "away_score": 1
         }
@@ -5029,6 +5101,14 @@
         "102": {
           "home_score": 1,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 3
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -5491,6 +5571,14 @@
         "102": {
           "home_score": 1,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -5952,6 +6040,14 @@
         },
         "102": {
           "home_score": 1,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 2,
           "away_score": 1
         }
       },
@@ -6415,6 +6511,14 @@
         "102": {
           "home_score": 1,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 3
         }
       },
       "premi_finali": {
@@ -6877,6 +6981,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 3,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -7339,6 +7451,14 @@
         "102": {
           "home_score": 1,
           "away_score": 3
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -7801,6 +7921,14 @@
         "102": {
           "home_score": 1,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -8263,6 +8391,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 3
         }
       },
       "premi_finali": {
@@ -8725,6 +8861,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -9187,6 +9331,14 @@
         "102": {
           "home_score": 3,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 0
         }
       },
       "premi_finali": {
@@ -9649,6 +9801,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 0
+        },
+        "104": {
+          "home_score": 3,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -10109,6 +10269,14 @@
           "away_score": 2
         },
         "102": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
           "home_score": 1,
           "away_score": 2
         }
@@ -10573,6 +10741,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -11035,6 +11211,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -11497,6 +11681,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -11957,6 +12149,14 @@
           "away_score": 0
         },
         "102": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "104": {
           "home_score": 2,
           "away_score": 1
         }
@@ -12421,6 +12621,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 2
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -12882,6 +13090,14 @@
         },
         "102": {
           "home_score": 0,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
           "away_score": 1
         }
       },
@@ -13345,6 +13561,14 @@
         "102": {
           "home_score": 1,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 0
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -13805,6 +14029,14 @@
           "away_score": 2
         },
         "102": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "103": {
+          "home_score": 1,
+          "away_score": 2
+        },
+        "104": {
           "home_score": 1,
           "away_score": 2
         }
@@ -14269,6 +14501,14 @@
         "102": {
           "home_score": 1,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -14729,6 +14969,14 @@
           "away_score": 0
         },
         "102": {
+          "home_score": 0,
+          "away_score": 0
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "104": {
           "home_score": 0,
           "away_score": 0
         }
@@ -15193,6 +15441,14 @@
         "102": {
           "home_score": 2,
           "away_score": 2
+        },
+        "103": {
+          "home_score": 0,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -15654,6 +15910,14 @@
         },
         "102": {
           "home_score": 1,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
           "away_score": 1
         }
       },
@@ -16117,6 +16381,14 @@
         "102": {
           "home_score": 1,
           "away_score": 3
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -16579,6 +16851,14 @@
         "102": {
           "home_score": 1,
           "away_score": 3
+        },
+        "103": {
+          "home_score": 1,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 2,
+          "away_score": 2
         }
       },
       "premi_finali": {
@@ -17041,6 +17321,14 @@
         "102": {
           "home_score": 2,
           "away_score": 1
+        },
+        "103": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "104": {
+          "home_score": 1,
+          "away_score": 1
         }
       },
       "premi_finali": {
@@ -17493,6 +17781,14 @@
           "away_score": 2
         },
         "100": {
+          "home_score": 2,
+          "away_score": 1
+        },
+        "103": {
+          "home_score": 3,
+          "away_score": 2
+        },
+        "104": {
           "home_score": 2,
           "away_score": 1
         }

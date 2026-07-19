@@ -128,6 +128,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Jacopo De Giorgi",
+    "punti": 106,
+    "risultati_esatti": 14,
+    "prono_esatti": 44,
+    "punti_tabellone": 20,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Carlo Fantasia",
     "punti": 106,
     "risultati_esatti": 12,
@@ -144,14 +152,6 @@
     "punti_speciali": 0
   },
   {
-    "nome": "Jacopo De Giorgi",
-    "punti": 105,
-    "risultati_esatti": 14,
-    "prono_esatti": 43,
-    "punti_tabellone": 20,
-    "punti_speciali": 0
-  },
-  {
     "nome": "Andrea Sedile",
     "punti": 104,
     "risultati_esatti": 12,
@@ -161,9 +161,9 @@
   },
   {
     "nome": "Matteo Birilli",
-    "punti": 102,
+    "punti": 103,
     "risultati_esatti": 12,
-    "prono_esatti": 42,
+    "prono_esatti": 43,
     "punti_tabellone": 24,
     "punti_speciali": 0
   },
@@ -216,6 +216,14 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Manuel Farlò",
+    "punti": 96,
+    "risultati_esatti": 9,
+    "prono_esatti": 49,
+    "punti_tabellone": 20,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Carmine Apollonio",
     "punti": 96,
     "risultati_esatti": 7,
@@ -229,14 +237,6 @@
     "risultati_esatti": 6,
     "prono_esatti": 55,
     "punti_tabellone": 23,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Manuel Farlò",
-    "punti": 95,
-    "risultati_esatti": 9,
-    "prono_esatti": 48,
-    "punti_tabellone": 20,
     "punti_speciali": 0
   },
   {
@@ -280,19 +280,19 @@
     "punti_speciali": 0
   },
   {
+    "nome": "Mattia Nicolau",
+    "punti": 87,
+    "risultati_esatti": 4,
+    "prono_esatti": 50,
+    "punti_tabellone": 25,
+    "punti_speciali": 0
+  },
+  {
     "nome": "Daniele Sedile",
     "punti": 86,
     "risultati_esatti": 8,
     "prono_esatti": 43,
     "punti_tabellone": 19,
-    "punti_speciali": 0
-  },
-  {
-    "nome": "Mattia Nicolau",
-    "punti": 86,
-    "risultati_esatti": 4,
-    "prono_esatti": 49,
-    "punti_tabellone": 25,
     "punti_speciali": 0
   },
   {
