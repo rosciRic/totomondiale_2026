@@ -74,15 +74,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     await fetchDatabases();
     
-    // Trigger onDataReady logic
-    renderDashboardMetrics();
-    renderLeaderboard();
-    renderMatches();
-    populateUserSelector();
-    renderMontepremi();
-    initCalendar();
-    renderGlobalStats();
-    initFaseFinale();
+    // Trigger onDataReady logic with independent try-catch blocks
+    try { renderDashboardMetrics(); } catch (e) { console.error("renderDashboardMetrics error:", e); }
+    try { renderLeaderboard(); } catch (e) { console.error("renderLeaderboard error:", e); }
+    try { renderMatches(); } catch (e) { console.error("renderMatches error:", e); }
+    try { populateUserSelector(); } catch (e) { console.error("populateUserSelector error:", e); }
+    try { renderMontepremi(); } catch (e) { console.error("renderMontepremi error:", e); }
+    try { initCalendar(); } catch (e) { console.error("initCalendar error:", e); }
+    try { renderGlobalStats(); } catch (e) { console.error("renderGlobalStats error:", e); }
+    try { initFaseFinale(); } catch (e) { console.error("initFaseFinale error:", e); }
 
     if (lastUpdateText) {
       lastUpdateText.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Aggiornato in tempo reale`;
