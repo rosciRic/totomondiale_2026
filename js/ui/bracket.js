@@ -15,6 +15,7 @@ function isPlaceholder(name) {
 }
 
 export function initFaseFinale() {
+  state.renderTabelloneRef = renderTabellone;
   const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
   const fasefinaleBracketContainer = document.getElementById("fasefinale-bracket-container");
   if (!tabelloneUserSelector) return;
