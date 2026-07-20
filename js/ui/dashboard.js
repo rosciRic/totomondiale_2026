@@ -53,18 +53,18 @@ export function renderTournamentConcluded() {
       <div class="concluded-title" style="margin-bottom: 16px;">🏆 PODIO FINALE 🏆</div>
 
       <div class="podium-grid" style="margin-bottom: 0;">
-        <div class="podium-box rank-2">
-          <div class="podium-icon">🥈</div>
-          <div class="podium-name">${p2.nome}</div>
-          <div class="podium-pts">${p2.punti} Punti</div>
-          <div class="podium-prize">Premio: 100 €</div>
-        </div>
-
         <div class="podium-box rank-1">
           <div class="podium-icon">🥇</div>
           <div class="podium-name">${p1.nome}</div>
           <div class="podium-pts">${p1.punti} Punti</div>
           <div class="podium-prize">Premio: 250 €</div>
+        </div>
+
+        <div class="podium-box rank-2">
+          <div class="podium-icon">🥈</div>
+          <div class="podium-name">${p2.nome}</div>
+          <div class="podium-pts">${p2.punti} Punti</div>
+          <div class="podium-prize">Premio: 100 €</div>
         </div>
 
         <div class="podium-box rank-3">

@@ -49,6 +49,9 @@ export function initFaseFinale() {
     renderTabellone(val);
   });
 
+  // Render initial real bracket on load
+  renderTabellone("reale");
+
   // Setup Mobile Navigation Scroll-Sync for the Bracket
   const mobileBtns = document.querySelectorAll(".bracket-nav-btn");
   if (mobileBtns.length > 0 && fasefinaleBracketContainer) {
