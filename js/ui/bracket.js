@@ -15,7 +15,6 @@ function isPlaceholder(name) {
 }
 
 export function initFaseFinale() {
-  state.renderTabelloneRef = renderTabellone;
   const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
   const fasefinaleBracketContainer = document.getElementById("fasefinale-bracket-container");
   if (!tabelloneUserSelector) return;
@@ -49,9 +48,6 @@ export function initFaseFinale() {
     const val = e.target.value;
     renderTabellone(val);
   });
-
-  // Render initial real bracket on load
-  renderTabellone("reale");
 
   // Setup Mobile Navigation Scroll-Sync for the Bracket
   const mobileBtns = document.querySelectorAll(".bracket-nav-btn");

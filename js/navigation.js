@@ -47,15 +47,10 @@ export function switchTab(targetTabId) {
     document.querySelector(".content-area")?.scrollIntoView({ behavior: "smooth" });
   }
 
-  // If switching to Tabellone, render bracket and redraw lines
-  if (targetTabId === "tab-fasefinale") {
-    if (state.renderTabelloneRef) {
-      state.renderTabelloneRef(state.currentTabelloneUserKey || "reale");
-    }
-    if (state.drawBracketLinesRef) {
-      setTimeout(() => {
-        state.drawBracketLinesRef();
-      }, 50);
-    }
+  // If switching to Tabellone, redraw bracket lines
+  if (targetTabId === "tab-fasefinale" && state.drawBracketLinesRef) {
+    setTimeout(() => {
+      state.drawBracketLinesRef();
+    }, 50);
   }
 }
