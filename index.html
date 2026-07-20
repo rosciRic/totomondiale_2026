@@ -59,12 +59,16 @@
 
       <!-- TAB: HOME -->
       <section class="tab-content active" id="tab-home">
-        <!-- TOURNAMENT CONCLUDED CELEBRATION CONTAINER -->
-        <div id="tournament-concluded-container"></div>
-
         <!-- METRICS DASHBOARD -->
-        <section class="dashboard-stats" style="margin-bottom: 20px; grid-template-columns: 1fr;">
-          <div class="stat-card card-matches" style="grid-column: 1 / -1;">
+        <section class="dashboard-stats" style="margin-bottom: 20px;">
+          <div class="stat-card card-leader">
+            <div class="stat-icon gold-bg"><i class="fa-solid fa-crown"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Leader Attuale</span>
+              <h3 id="stat-leader">-</h3>
+            </div>
+          </div>
+          <div class="stat-card card-matches">
             <div class="stat-icon cyan-bg"><i class="fa-solid fa-circle-play"></i></div>
             <div class="stat-info">
               <span class="stat-label">Partite Concluse</span>

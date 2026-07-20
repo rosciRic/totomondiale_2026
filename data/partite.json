@@ -1244,9 +1244,9 @@
       "gruppo": null,
       "home": "Spagna",
       "away": "Argentina",
-      "home_score": 0,
-      "away_score": 0,
-      "conclusa": true
+      "home_score": null,
+      "away_score": null,
+      "conclusa": false
     }
   ],
   "passaggio_turno": {
@@ -1321,16 +1321,14 @@
     "finale": [
       "Argentina",
       "Spagna"
-    ],
-    "vincitore": "Spagna",
-    "terzo_posto": "Inghilterra"
+    ]
   },
   "premi_finali": {
-    "vincitore": "Spagna",
-    "finalista": "Argentina",
-    "capocannoniere": ["Mbappe", "Mbappé"],
-    "mvp": ["Rodri", "Rodrigo"],
-    "portiere": ["Simon", "Unai Simon", "Unai Simón"],
-    "giovane": ["Cubarsi", "Pau Cubarsi", "Pau Cubarsí"]
+    "vincitore": null,
+    "finalista": null,
+    "capocannoniere": null,
+    "mvp": null,
+    "portiere": null,
+    "giovane": null
   }
 }
