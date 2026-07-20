@@ -28,6 +28,87 @@ export function renderDashboardMetrics() {
 
   const totalPts = state.globalClassifica.reduce((sum, item) => sum + item.punti, 0);
   if (statPoints) statPoints.textContent = totalPts;
+
+  renderTournamentConcluded();
+}
+
+export function renderTournamentConcluded() {
+  const container = document.getElementById("tournament-concluded-container");
+  if (!container) return;
+
+  const completedCount = state.globalPartiteData.partite.filter(p => p.conclusa).length;
+  const totalMatches = state.globalPartiteData.partite.length;
+
+  if (completedCount < totalMatches || totalMatches === 0 || state.globalClassifica.length < 3) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const p1 = state.globalClassifica[0];
+  const p2 = state.globalClassifica[1];
+  const p3 = state.globalClassifica[2];
+
+  const premi = state.globalPartiteData.premi_finali || {};
+  const winnerTeam = Array.isArray(premi.vincitore) ? premi.vincitore.join(", ") : (premi.vincitore || "Spagna");
+  const capocannoniere = Array.isArray(premi.capocannoniere) ? premi.capocannoniere.join(", ") : (premi.capocannoniere || "-");
+  const mvp = Array.isArray(premi.mvp) ? premi.mvp.join(", ") : (premi.mvp || "-");
+  const portiere = Array.isArray(premi.portiere) ? premi.portiere.join(", ") : (premi.portiere || "-");
+  const giovane = Array.isArray(premi.giovane) ? premi.giovane.join(", ") : (premi.giovane || "-");
+
+  container.innerHTML = `
+    <div class="tournament-concluded-card animate-fade-in">
+      <div class="concluded-title">🏆 TOTOMONDIALE 2026 CONCLUSO 🏆</div>
+      <div class="concluded-subtitle">
+        Campione del Mondo: <strong>🇪🇸 ${winnerTeam}</strong> | Tutte le 104 partite sono state giocate!
+      </div>
+
+      <div class="podium-grid">
+        <div class="podium-box rank-2">
+          <div class="podium-icon">🥈</div>
+          <div class="podium-name">${p2.nome}</div>
+          <div class="podium-pts">${p2.punti} Punti</div>
+          <div class="podium-prize">Premio: 100 €</div>
+        </div>
+
+        <div class="podium-box rank-1">
+          <div class="podium-icon">🥇</div>
+          <div class="podium-name">${p1.nome}</div>
+          <div class="podium-pts">${p1.punti} Punti</div>
+          <div class="podium-prize">Premio: 250 €</div>
+        </div>
+
+        <div class="podium-box rank-3">
+          <div class="podium-icon">🥉</div>
+          <div class="podium-name">${p3.nome}</div>
+          <div class="podium-pts">${p3.punti} Punti</div>
+          <div class="podium-prize">Premio: 30 €</div>
+        </div>
+      </div>
+
+      <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+        🎖️ Vincitori Premi Ufficiali Mondiale 2026
+      </div>
+
+      <div class="awards-summary-grid">
+        <div class="award-summary-item">
+          <span class="award-summary-label">⚽ Capocannoniere</span>
+          <span class="award-summary-val">${capocannoniere}</span>
+        </div>
+        <div class="award-summary-item">
+          <span class="award-summary-label">🎖️ Miglior Giocatore (MVP)</span>
+          <span class="award-summary-val">${mvp}</span>
+        </div>
+        <div class="award-summary-item">
+          <span class="award-summary-label">🧤 Miglior Portiere</span>
+          <span class="award-summary-val">${portiere}</span>
+        </div>
+        <div class="award-summary-item">
+          <span class="award-summary-label">💎 Miglior Giovane</span>
+          <span class="award-summary-val">${giovane}</span>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 export function renderMontepremi() {
