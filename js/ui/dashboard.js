@@ -28,6 +28,54 @@ export function renderDashboardMetrics() {
 
   const totalPts = state.globalClassifica.reduce((sum, item) => sum + item.punti, 0);
   if (statPoints) statPoints.textContent = totalPts;
+
+  renderTournamentConcluded();
+}
+
+export function renderTournamentConcluded() {
+  const container = document.getElementById("tournament-concluded-container");
+  if (!container) return;
+
+  const completedCount = state.globalPartiteData.partite.filter(p => p.conclusa).length;
+  const totalMatches = state.globalPartiteData.partite.length;
+
+  if (completedCount < totalMatches || totalMatches === 0 || state.globalClassifica.length < 3) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const p1 = state.globalClassifica[0];
+  const p2 = state.globalClassifica[1];
+  const p3 = state.globalClassifica[2];
+
+  container.innerHTML = `
+    <div class="tournament-concluded-card animate-fade-in" style="margin-bottom: 20px;">
+      <div class="concluded-title" style="margin-bottom: 16px;">🏆 PODIO FINALE 🏆</div>
+
+      <div class="podium-grid" style="margin-bottom: 0;">
+        <div class="podium-box rank-1">
+          <div class="podium-icon">🥇</div>
+          <div class="podium-name">${p1.nome}</div>
+          <div class="podium-pts">${p1.punti} Punti</div>
+          <div class="podium-prize">Premio: 250 €</div>
+        </div>
+
+        <div class="podium-box rank-2">
+          <div class="podium-icon">🥈</div>
+          <div class="podium-name">${p2.nome}</div>
+          <div class="podium-pts">${p2.punti} Punti</div>
+          <div class="podium-prize">Premio: 100 €</div>
+        </div>
+
+        <div class="podium-box rank-3">
+          <div class="podium-icon">🥉</div>
+          <div class="podium-name">${p3.nome}</div>
+          <div class="podium-pts">${p3.punti} Punti</div>
+          <div class="podium-prize">Premio: 30 €</div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 export function renderMontepremi() {

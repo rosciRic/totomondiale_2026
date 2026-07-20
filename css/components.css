@@ -1599,3 +1599,121 @@
 .classifica-mobile-metric {
   display: none !important;
 }
+
+/* Tournament Concluded Celebration Banner */
+.tournament-concluded-card {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(168, 85, 247, 0.15) 100%);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(234, 179, 8, 0.1);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.concluded-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fef08a, #eab308, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.podium-grid {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.podium-box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease;
+}
+
+.podium-box:hover {
+  transform: translateY(-3px);
+}
+
+.podium-box.rank-1 {
+  order: 2;
+  border-color: rgba(234, 179, 8, 0.6);
+  background: linear-gradient(180deg, rgba(234, 179, 8, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%);
+  padding: 18px 14px;
+}
+
+.podium-box.rank-2 {
+  order: 1;
+  border-color: rgba(203, 213, 225, 0.4);
+  background: linear-gradient(180deg, rgba(203, 213, 225, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.podium-box.rank-3 {
+  order: 3;
+  border-color: rgba(217, 119, 6, 0.4);
+  background: linear-gradient(180deg, rgba(217, 119, 6, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+@media (max-width: 600px) {
+  .tournament-concluded-card {
+    padding: 16px;
+  }
+  .concluded-title {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+  .podium-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .podium-box.rank-1 {
+    order: 1;
+    padding: 14px;
+  }
+  .podium-box.rank-2 {
+    order: 2;
+  }
+  .podium-box.rank-3 {
+    order: 3;
+  }
+}
+
+.podium-icon {
+  font-size: 1.8rem;
+}
+
+.podium-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+}
+
+.podium-pts {
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.podium-prize {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent-green);
+  font-weight: 700;
+}
