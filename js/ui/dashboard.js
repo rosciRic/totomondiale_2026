@@ -61,7 +61,11 @@ export function renderTournamentConcluded() {
 
     container.innerHTML = `
       <div class="tournament-concluded-card animate-fade-in" style="margin-bottom: 20px;">
-        <div class="concluded-title" style="margin-bottom: 16px;">🏆 PODIO FINALE 🏆</div>
+        <div class="concluded-title" style="margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <img src="world_cup_cup.webp" alt="Coppa" style="height: 32px; width: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.6));">
+          <span>PODIO</span>
+          <img src="world_cup_cup.webp" alt="Coppa" style="height: 32px; width: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.6));">
+        </div>
 
         <div class="podium-grid" style="margin-bottom: 0;">
           <div class="podium-box rank-1">

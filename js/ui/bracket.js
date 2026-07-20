@@ -15,6 +15,7 @@ function isPlaceholder(name) {
 }
 
 export function initFaseFinale() {
+  state.renderTabelloneRef = renderTabellone;
   const tabelloneUserSelector = document.getElementById("tabellone-user-selector");
   const fasefinaleBracketContainer = document.getElementById("fasefinale-bracket-container");
   if (!tabelloneUserSelector) return;
@@ -48,6 +49,9 @@ export function initFaseFinale() {
     const val = e.target.value;
     renderTabellone(val);
   });
+
+  // Render initial real bracket on startup
+  renderTabellone("reale");
 
   // Setup Mobile Navigation Scroll-Sync for the Bracket
   const mobileBtns = document.querySelectorAll(".bracket-nav-btn");
@@ -250,9 +254,10 @@ export function renderTabellone(userKey) {
     }
   }
 
-  const userDati = userKey !== "reale" ? state.globalPronostici.partecipanti[userKey] : null;
+  const partecipantiMap = (state.globalPronostici && state.globalPronostici.partecipanti) ? state.globalPronostici.partecipanti : {};
+  const userDati = userKey !== "reale" ? partecipantiMap[userKey] : null;
   const userPassaggio = userDati ? (userDati.passaggio_turno || {}) : {};
-  const realPassaggio = state.globalPartiteData.passaggio_turno || {};
+  const realPassaggio = (state.globalPartiteData && state.globalPartiteData.passaggio_turno) ? state.globalPartiteData.passaggio_turno : {};
 
   const eliminatedTeams = new Set();
   if (state.globalPartiteData && state.globalPartiteData.partite) {
@@ -262,7 +267,11 @@ export function renderTabellone(userKey) {
       if (pm.away) allTeamsInWorldCup.add(pm.away.trim());
     });
 
-    const getNormList = (stageKey) => (realPassaggio[stageKey] || []).map(t => t.toLowerCase().trim());
+    const getNormList = (stageKey) => {
+      const val = realPassaggio[stageKey];
+      const arr = Array.isArray(val) ? val : (val ? [val] : []);
+      return arr.map(t => typeof t === 'string' ? t.toLowerCase().trim() : String(t).toLowerCase().trim());
+    };
     const sedicesimiList = getNormList("sedicesimi");
     const ottaviList = getNormList("ottavi");
     const quartiList = getNormList("quarti");
